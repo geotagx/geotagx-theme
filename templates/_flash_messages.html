@@ -3,7 +3,9 @@
     {% with messages = get_flashed_messages(with_categories=True) %}
     {%if messages %}
       {% for category, message in messages %}
-      <div id="msg_{{category}}" class="alert alert-{{category}} fade in">
+        <!-- Fix for depreciation of alert-error and replacing the category name with danger in all such cases -->
+        {% set bootstrap_category = dict(error="danger").get(category, category) %}
+      <div id="msg_{{bootstrap_category}}" class="alert alert-{{bootstrap_category}} fade in">
             <a class="close" data-dismiss="alert" href="#">&times;</a>
           {{ message | safe}}
         </div>

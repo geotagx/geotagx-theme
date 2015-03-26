@@ -2,108 +2,184 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{url_for('static', filename='geotagx-img/favicon.png')}}">
+
     {% if brand == title %}
     <title>{{ title }}</title>
     {% else %}
     <title>{{ brand }} &middot; {{ title | safe}}</title>
     {% endif %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="{{url_for('static', filename='vendor/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/fonts/stylesheet.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='geotagx-css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='geotagx-css/theme.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='geotagx-css/bootstrap-reset.css')}}" rel="stylesheet">
+    <!-- <link href="{{url_for('static', filename='geotagx-css/bootstrap.min.css')}}" rel="stylesheet">-->
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <!--external css-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
 
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/flexslider.css')}}"/>
+    <link href="{{url_for('static', filename='geotagx-assets/bxslider/jquery.bxslider.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/animate.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.theme.css')}}">
 
-    <!-- Le javascript -->
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap/2.2.1/js/bootstrap.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='vendor/modernizr.min.js')}}"></script>
+    <link href="{{url_for('static', filename='geotagx-css/superfish.css')}}" rel="stylesheet" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/component.css')}}">
+    <link href="{{url_for('static', filename='geotagx-css/style.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='geotagx-css/style-responsive.css')}}" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/parallax-slider/parallax-slider.css')}}" />
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/modernizr.custom.28468.js')}}">    
+    </script>
     <!-- Google Analytics or similar solutions -->
     {% include '_ga.html' ignore missing %}
     <!-- Google Custom Search -->
     {% include '_gcs.html' ignore missing %}
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static', filename='geotagx-js/html5shiv.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-js/respond.min.js')}}">
+    </script>
+    <![endif]-->
   </head>
 
   <body>
     {% if not current_user.is_anonymous() %}
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
-
-
     {% set active_page = active_page | default('index') -%}
-    {% set active_app  = active_app | default('none') -%}
-    {% include "_navbar.html" %}
+    {% set active_app  = active_app | default('none') -%}    
 
-    <div class="container" style="min-height:400px;">
+    {% include '_navbar.html' %}  
 
-    {% include "_flash_messages.html" %}
-
-    {% block content %}{% endblock %}
-
-    </div> <!-- /container -->
-    {% if show_cookies_warning %}
-    <div id="cookies_warning">
-        <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-mini btn-success" onclick="accept_cookies()"><i class="icon-thumbs-up"></i> OK</button> <a class="btn btn-mini" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></p>
-    </div>
+    {% if request['path'] == "/" %}
+        {% include "_slider.html" %}    
+    {% else %}
+        {% include "_breadcrumbs.html" %}        
     {% endif %}
-    <footer>
-    {% if not enforce_privacy %}
-    <div id="footer_links" class="container">
-        <div class="row">
-            <div class="span3">
-                <ul>
-                    <li><strong>{{ _('Resources') }}</strong></li>
-                    <li><i class="icon-link"></i> <a href="http://docs.pybossa.com">{{ _('Docs') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.api')}}">API</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.tos')}}">{{ _('Terms of Use') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.cookies_policy')}}">{{ _('Cookies Policy') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('stats.index')}}">{{ _('Stats') }}</a></li>
-                </ul>
-            </div>
-            <div class="span3">
-                <ul>
-                    <li><strong>{{ _('Licenses') }}</strong></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.license')}}">{{ _('Overview') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.license', _anchor='applications')}}">{{ _('Projects') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.license', _anchor='data')}}">{{ _('Data') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="{{url_for('help.license', _anchor='content')}}">{{ _('Content') }}</a></li>
-                </ul>
-            </div>
-            <div class="span3">
-                <ul>
-                    <li><strong>{{ _('Technologies') }}</strong></li>
-                    <li><i class="icon-link"></i> <a href="http://ckan.org">{{ _('CKAN') }}</a></li>
-                    <li><i class="icon-link"></i> <a href="http://www.epicollect.net">{{ _('EpiCollect') }}</a></li>
-                </ul>
-            </div>
-            <div class="span3">
-                <ul>
-                    <li><strong>{{ _('Contact') }}</strong></li>
-                    <li><i class="icon-envelope"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>
-                    <li><i class="icon-twitter"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>
-                </ul>
-            </div>
+
+        <div class="container" style="min-height:400px;">
+
+        {% include "_flash_messages.html" %}
+        {% block content %}{% endblock %}
+    
         </div>
-    </div>
-    {% endif %}
-    {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-    </footer>
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+        <!--container end-->
+
+    {% include '_footer.html' %}
+
+    <!-- js placed at the end of the document so the pages load faster
+<script src="{{url_for('static', filename='geotagx-js/jquery.js')}}">
+</script>
+-->
+    <script src="{{url_for('static', filename='geotagx-js/jquery-1.8.3.min.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-js/bootstrap.min.js')}}">
+    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/hover-dropdown.js')}}">
+    </script>
+    <script defer src="{{url_for('static', filename='geotagx-js/jquery.flexslider.js')}}">
+    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-assets/bxslider/jquery.bxslider.js')}}">
+    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/jquery.parallax-1.1.3.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-js/wow.min.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.carousel.js')}}">
+    </script>
+
+    <script src="{{url_for('static', filename='geotagx-js/jquery.easing.min.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-js/link-hover.js')}}">
+    </script>
+    <script src="{{url_for('static', filename='geotagx-js/superfish.js')}}">
+    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
+    </script>
+    <script type="text/javascript">
+      $(function() {
+
+        $('#da-slider').cslider({
+          autoplay    : true,
+          bgincrement : 100
+        });
+
+      });
+    </script>
+
+
+
+    <!--common script for all pages-->
+    <script src="{{url_for('static', filename='geotagx-js/common-scripts.js')}}">
+    </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+
+
+        $('.bxslider1').bxSlider({
+          minSlides: 5,
+          maxSlides: 6,
+          slideWidth: 360,
+          slideMargin: 2,
+          moveSlides: 1,
+          responsive: true,
+          nextSelector: '#slider-next',
+          prevSelector: '#slider-prev',
+          nextText: 'Onward →',
+          prevText: '← Go back'
+        });
+
+      });
+
+
+    </script>
+
+
     <script>
-    {% include 'cookies.js' %}
+      $('a.info').tooltip();
+
+      $(window).load(function() {
+        $('.flexslider').flexslider({
+          animation: "slide",
+          start: function(slider) {
+            $('body').removeClass('loading');
+          }
+        });
+      });
+
+      $(document).ready(function() {
+
+        $("#owl-demo").owlCarousel({
+
+          items : 4
+
+        });
+
+      });
+
+      jQuery(document).ready(function(){
+        jQuery('ul.superfish').superfish();
+      });
+
+      new WOW().init();
+
+
     </script>
   </body>
 </html>

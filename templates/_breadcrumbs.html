@@ -1,0 +1,33 @@
+<div class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4">
+            <h1>
+              {% if request['path'] == "/account/forgot-password" %}
+                Reset Password
+              {% endif %}
+              {% if request['path'] == "/account/register" %}
+                Create New Account
+              {% endif %}                 
+            </h1>
+          </div>
+          <div class="col-lg-8 col-sm-8">
+            <ol class="breadcrumb pull-right">
+              {% if request['path'] == "/account/signin" %}
+                <li><a href="/">Home</a></li>
+                <li class="active">Login</li>
+              {% endif %}    
+              {% if request['path'] == "/account/forgot-password" %}
+                <li><a href="/">Home</a></li>
+                <li class="active">Reset Password</li>
+              {% endif %}      
+              {% if request['path'] == "/account/register" %}
+                <li><a href="/">Home</a></li>              
+                <li class="active">Register</li>
+              {% endif %}   
+                                  
+            </ol>
+          </div>          
+        </div>
+      </div>
+</div>

@@ -40,3 +40,19 @@
     {{ field.label(class="control-label") }}
     {% endif %}
 {% endmacro %}
+
+
+{% macro geotagx_render_field(field, id, title, type) %}
+              <div class="form-group {% if field.errors %} has-error {% endif %}">
+                  <div>
+                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}">
+                      {% if field.errors %}
+                        <ul style="list-style-position:inside;">
+                          {% for error in field.errors %}
+                          <li><span class="help-block">{{ error }}</span></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}                    
+                  </div>
+              </div>
+{% endmacro %}

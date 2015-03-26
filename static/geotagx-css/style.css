@@ -153,7 +153,7 @@ ul.dropdown-menu { border: none }
     transition: all .3s ease;
     border: 1px solid #fff;
     box-shadow: none;
-    background: url("../img/search-icon.jpg") no-repeat 10px 8px;
+    background: url("/static/geotagx-img/search-icon.jpg") no-repeat 10px 8px;
     padding: 0 5px 0 35px;
     color: #fff;
     margin-left: 10px;
@@ -794,7 +794,7 @@ ul.about-flex-slides { margin-left: 0 }
     background: #34495e;
     color: #fff;
     padding: 30px 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .breadcrumb {
     margin-bottom: 0;
@@ -1710,7 +1710,7 @@ ul#filters > .active > span {
 /*faq*/
 #newsletter-faq {
     padding: 72px 0;
-    background: url("../img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
+    background: url("/static/geotagx-img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
     height: 200px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -2765,7 +2765,7 @@ p { text-align: left }
 .bg-purple { background-color: #932ab6 !important }
 .bg-maroon { background-color: #85144b !important }
 .tag-line-section {
-    background: url("../img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
+    background: url("/static/geotagx-img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
     height: 300px;
     margin-bottom: 30px;
 }
@@ -2920,7 +2920,7 @@ p { text-align: left }
     -webkit-border-radius:2px;
     -moz-border-radius:2px;
     border-radius:2px;
-    background-image:url(../img/triangle.png);
+    background-image:url(/static/geotagx-img/triangle.png);
     background-position: 12px 16px;
     background-repeat:no-repeat;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
@@ -2970,4 +2970,133 @@ div.header h3{
     position: absolute;
     left:50%;
     top:-4px;
+}
+
+/* GeoTag-X */
+.navbar-brand {
+  margin-right : 30px;
+}
+
+.vertical-offset-100{
+    padding-top:100px;
+}
+.vertical-offset-50{
+    padding-top:50px;
+}
+
+.alert-messages {
+    padding-top:10px;
+}
+
+.partners .row .col-sm-2 a img.img-thumbnail{
+    height : 100px !important;
+    border : none;
+}
+
+.partners {
+    margin-top :75px;
+    padding-bottom : 30px;
+    padding-top : 30px;
+}
+
+.partners-wrapper {
+    background: #f4f4f4;
+}
+
+/*.centered-form-panel {
+    margin-bottom : 150px;
+}
+*/
+
+/* Social Login **/
+@media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.omb_login .omb_authTitle {
+    text-align: center;
+    line-height: 300%;
+}
+    
+.omb_login .omb_socialButtons a {
+    color: white; // In yourUse @body-bg 
+    opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+    color: white;
+    opacity:1;      
+}
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+
+.omb_login .omb_loginOr {
+    position: relative;
+    font-size: 1.5em;
+    color: #aaa;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -0.6em;
+    margin-left: -1.5em;
+    background-color: white;
+    width: 3em;
+    text-align: center;
+}           
+
+.omb_login .omb_loginForm .input-group.i {
+    width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+    color: red;
+}
+
+    
+@media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+        margin-top:10px;
+    }       
+}
+
+
+.social-icon {
+    padding-left : 10px;
+}
+
+
+/**Signing form focus **/
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+/** Big Icon series to play with the size of font-awesome icons **/
+.big-icon-1{font-size: 1em;} .big-icon-2{font-size: 2em;} .big-icon-3{font-size: 3em;} .big-icon-4{font-size: 4em;} .big-icon-5{font-size: 5em;} .big-icon-6{font-size: 6em;} .big-icon-7{font-size: 7em;} .big-icon-8{font-size: 8em;} .big-icon-9{font-size: 9em;} .big-icon-10{font-size: 10em;} .big-icon-11{font-size: 11em;} .big-icon-12{font-size: 12em;} .big-icon-13{font-size: 13em;} .big-icon-14{font-size: 14em;} .big-icon-15{font-size: 15em;} .big-icon-16{font-size: 16em;} .big-icon-17{font-size: 17em;} .big-icon-18{font-size: 18em;} .big-icon-19{font-size: 19em;} .big-icon-20{font-size: 20em;} .big-icon-21{font-size: 21em;} .big-icon-22{font-size: 22em;} .big-icon-23{font-size: 23em;} .big-icon-24{font-size: 24em;} .big-icon-25{font-size: 25em;} .big-icon-26{font-size: 26em;} .big-icon-27{font-size: 27em;} .big-icon-28{font-size: 28em;} .big-icon-29{font-size: 29em;} .big-icon-30{font-size: 30em;} .big-icon-31{font-size: 31em;} .big-icon-32{font-size: 32em;} .big-icon-33{font-size: 33em;} .big-icon-34{font-size: 34em;} .big-icon-35{font-size: 35em;} .big-icon-36{font-size: 36em;} .big-icon-37{font-size: 37em;} .big-icon-38{font-size: 38em;} .big-icon-39{font-size: 39em;} .big-icon-40{font-size: 40em;} .big-icon-41{font-size: 41em;} .big-icon-42{font-size: 42em;} .big-icon-43{font-size: 43em;} .big-icon-44{font-size: 44em;} .big-icon-45{font-size: 45em;} .big-icon-46{font-size: 46em;} .big-icon-47{font-size: 47em;} .big-icon-48{font-size: 48em;} .big-icon-49{font-size: 49em;} .big-icon-50{font-size: 50em;} .big-icon-51{font-size: 51em;} .big-icon-52{font-size: 52em;} .big-icon-53{font-size: 53em;} .big-icon-54{font-size: 54em;} .big-icon-55{font-size: 55em;} .big-icon-56{font-size: 56em;} .big-icon-57{font-size: 57em;} .big-icon-58{font-size: 58em;} .big-icon-59{font-size: 59em;} .big-icon-60{font-size: 60em;} .big-icon-61{font-size: 61em;} .big-icon-62{font-size: 62em;} .big-icon-63{font-size: 63em;} .big-icon-64{font-size: 64em;} .big-icon-65{font-size: 65em;} .big-icon-66{font-size: 66em;} .big-icon-67{font-size: 67em;} .big-icon-68{font-size: 68em;} .big-icon-69{font-size: 69em;} .big-icon-70{font-size: 70em;} .big-icon-71{font-size: 71em;} .big-icon-72{font-size: 72em;} .big-icon-73{font-size: 73em;} .big-icon-74{font-size: 74em;} .big-icon-75{font-size: 75em;} .big-icon-76{font-size: 76em;} .big-icon-77{font-size: 77em;} .big-icon-78{font-size: 78em;} .big-icon-79{font-size: 79em;} .big-icon-80{font-size: 80em;} .big-icon-81{font-size: 81em;} .big-icon-82{font-size: 82em;} .big-icon-83{font-size: 83em;} .big-icon-84{font-size: 84em;} .big-icon-85{font-size: 85em;} .big-icon-86{font-size: 86em;} .big-icon-87{font-size: 87em;} .big-icon-88{font-size: 88em;} .big-icon-89{font-size: 89em;} .big-icon-90{font-size: 90em;} .big-icon-91{font-size: 91em;} .big-icon-92{font-size: 92em;} .big-icon-93{font-size: 93em;} .big-icon-94{font-size: 94em;} .big-icon-95{font-size: 95em;} .big-icon-96{font-size: 96em;} .big-icon-97{font-size: 97em;} .big-icon-98{font-size: 98em;} .big-icon-99{font-size: 99em;}
+
+
+.input-lg {
+    padding : 12px 15px;
+    border-radius: 5px;
+}
+
+.geotagx-panel {
+    background-color : #ffffff;
 }
