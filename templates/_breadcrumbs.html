@@ -1,14 +1,26 @@
+
 <div class="breadcrumbs">
       <div class="container">
         <div class="row">
+
+
+        {% if (not current_user.is_anonymous()) and ( request['path'] == "/account/"+current_user.name+"/" or request['path'] == "/account/"+current_user.name+"/update" ) %}
+
+          {% import "account/_helpers.html" as helper %}
+          {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+
+
+        {% else %}
+
           <div class="col-lg-4 col-sm-4">
             <h1>
               {% if request['path'] == "/account/forgot-password" %}
                 Reset Password
               {% endif %}
+              
               {% if request['path'] == "/account/register" %}
                 Create New Account
-              {% endif %}                 
+              {% endif %}                                 
             </h1>
           </div>
           <div class="col-lg-8 col-sm-8">
@@ -24,10 +36,14 @@
               {% if request['path'] == "/account/register" %}
                 <li><a href="/">Home</a></li>              
                 <li class="active">Register</li>
-              {% endif %}   
-                                  
+              {% endif %}                                     
             </ol>
-          </div>          
+          </div>  
+
+        {% endif %}
+        
         </div>
+
+
       </div>
 </div>

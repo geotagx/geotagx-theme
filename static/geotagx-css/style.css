@@ -3100,3 +3100,15 @@ div.header h3{
 .geotagx-panel {
     background-color : #ffffff;
 }
+
+.profile_param_link {
+    color:white;
+}
+.profile_param_link:hover;{
+    color:#48cfad;
+}
+
+.user-profile-values {
+    color:#999;
+    margin-left : 10px;
+}
