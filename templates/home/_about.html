@@ -1,38 +1,345 @@
-    <div class="row">
-        <div class="span11">
-            <h1>{{ _('About') }}</h1>
-            <p>
-            {{ _('PyBossa is a free, open-source crowd-sourcing and micro-tasking platform. It enables people to create and run projects that utilise online assistance in performing tasks that require human cognition such as image classification, transcription, geocoding and more. PyBossa is there to help researchers, civic hackers and developers to create projects where anyone around the world with some time, interest and an internet connection can contribute.') }}</p>
-
-            <p>
-            {{ _('PyBossa is different to existing efforts:') }}
-            <ul>
-                <li>{{ _("It's a 100%% open-source") }}</li>
-                <li>{{ _('Unlike, say, “mechanical turk” style projects, PyBossa is not designed to handle payment or money — it is designed to support volunteer-driven projects.') }}
-                </li>
-                <li>{{ _("It's designed as a platform and framework for developing deploying crowd-sourcing and microtasking project rather than being a crowd-sourcing project itself. Individual crowd-sourcing projects are written as simple snippets of Javascript and HTML which are then deployed on a PyBossa instance (such as") }}  <a href="http://crowdcrafting.org">CrowdCrafting.org</a>). {{ _('This way one can easily develop custom projects while using the PyBossa platform to store your data, manage users, and handle workflow') }}.</li>
-            </ul> 
-            </p>
-
-            <p>
-            {{ _('You can read more about the architecture in the') }} <a href="http://docs.pybossa.com/">{{ _('PyBossa Documentation') }}</a> {{ _('and follow the') }} <a href="http://docs.pybossa.com/en/latest/user/tutorial.html">{{ _('step-by-step tutorial to create your own projects') }}.</a>.
-            </p>
-
-            <h1>{{ _('Statistics') }}</h1>
-            <p>
-           {{ _(' PyBossa provides individual statistics for every project in the system, as well as a') }} <a href="{{url_for('stats.index')}}">{{ _('general overview about the system like total number of users, tasks, etc') }}</a>. 
-            </p>
-            <a href="{{url_for('stats.index')}}" class="btn btn-primary"><i class="icon-dashboard"></i> {{ _('Check the global statistics') }}</a>
-
-            <h1 id="contact">{{ _('Contact information') }}</h1>
-            <ul>
-                <li>{{ _('For more info, send us an e-mail to: ') }}<a href="mailto:info@pybossa.com">info@pybossa.com</a> or <a class="btn" href="http://twitter.com/pybossa"><i class="icon-twitter"></i>{{ _('Follow us on Twitter!') }}</a></li>
-                <li>{{ _('E-mail list: ') }}<a href="http://lists.okfn.org/mailman/listinfo/okfn-labs">okfn-labs@lists.okfn.org</a>.</li>                
-                <li><p>{{ _('Report any bug, issue or improvement:') }} 
-                    <a class="btn" href="http://github.com/PyBossa/pybossa/issues">
-                        <i class="icon-github"></i>{{ _('Github Issues') }}
-                    </a>
-                    </li>            
-            </ul>
+<div class="row">
+        <div class="col-lg-5">
+          <div class="about-carousel wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <div id="myCarousel" class="carousel slide">
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+                <div class="item">
+                  <img src="/static/geotagx-img/service3.jpg" alt="">
+                  <div class="carousel-caption">
+                    <p>
+                      Sample Image Caption 1
+                    </p>
+                  </div>
+                </div>
+                <div class="item">
+                  <img src="/static/geotagx-img/service2.jpg" alt="">
+                  <div class="carousel-caption">
+                    <p>
+                      Sample Image Caption 2
+                    </p>
+                  </div>
+                </div>
+                <div class="item active">
+                  <img src="/static/geotagx-img/service5.jpg" alt="">
+                  <div class="carousel-caption">
+                    <p>
+                      Sample Image Caption 3
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                <i class="fa fa-angle-left">
+                </i>
+              </a>
+              <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                <i class="fa fa-angle-right">
+                </i>
+              </a>
+            </div>
+          </div>
         </div>
+        <div class="col-lg-7 about wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+            <p class="text-center">
+            <strong class="big-icon-2"><a href="#geotagx_what"> The GeoTag-X pilot project</a>  </strong> will  teach volunteers to perform in-depth analysis of 
+            <br/><br/>
+                <i class="fa fa-picture-o fa-2x ml-5"></i> <i>photos</i>  ,
+                <i class="fa fa-video-camera fa-2x ml-5"></i> <i>video</i>  and 
+                <i class="fa fa-volume-up fa-2x ml-5"></i> <i>audio</i>  <i style="padding-left:5px"></i>  coming out of a disaster.
+            </p>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+        <p class="text-center">
+        <br/>
+        This pilot project calls out to all <strong class="big-icon-2"> <a href="#citizenscience_what">Citizen Scientists</a></strong> to help <i class="fa fa-filter fa-2x ml-5"></i> <i>filter</i>  , 
+                <i class="fa fa-database fa-2x ml-5"></i> <i>categorise</i>  and 
+                <i class="fa fa-globe fa-2x ml-5"></i><i>map</i> <i style="padding-left:5px"></i> this data.
+        </p>
+        </div>
+        </div>    
     </div>
+
+    <br/>
+      <blockquote>
+        <p>
+          Disaster response efforts have to analyse <strong class="ml-5">massive amounts of data</strong> that are produced during a crisis. <strong class="ml-5"><i>An overwhelmingly difficult task.</i></strong>
+        </p>
+      </blockquote>    
+
+
+</div> <!-- end div of outer block container -->
+
+
+<div class="property gray-bg" id="geotagx_what">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <p class="big-icon-3 text-right">
+              What is <strong class="ml-5" style="color:#444e67">GeoTag-X</strong> ?
+            </p>
+            <hr>
+            <p class="text-justify">
+            <i class="ml-5">Geotag-X</i> is a research project that will assess if we can <i class="ml-5">teach you</i>, our volunteers, to recognise the important information in a photo and <i class="ml-5"> create relevant, structured datasets </i> that can be used by those working on the ground in the response. In the end, we want to know if Geotag-X could be a <strong style="color:#444e67">useful tool in an operational context</strong>.
+              <br/> <br/>
+            In order to assess this we have set up a <i class="ml-5">series of pilot projects</i> covering different disaster related events. Disasters could include <strong style="color:#444e67"> earthquakes </strong> , <strong style="color:#444e67">floods</strong>, and <strong style="color:#444e67"> hurricanes </strong>, along with more slow moving events such as <strong style="color:#444e67">drought </strong>, <strong style="color:#444e67"> climate change </strong>, and <strong style="color:#444e67"> pollution </strong>. Analysis in our pilot projects therefore could cover topics as diverse as <strong style="color:#444e67"> environmental conditions </strong>, <strong style="color:#444e67">health</strong>, <strong>agriculture</strong>, and <strong style="color:#444e67">engineering</strong>.
+            </p>
+            <hr>
+          </div>
+          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <i class="fa fa-question big-icon-20"></i>
+          </div>          
+        </div>
+      </div>
+</div>
+
+
+<div class="property_white" id="citizenscience_what">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <i class="fa fa-users big-icon-15"></i>
+          </div>             
+          <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <p class="big-icon-3 text-justified">
+              What is <strong class="ml-5" style="color:#444e67">Citizen Science</strong> ?
+            </p>
+            <hr>
+            <p class="text-justify">
+                <i class="ml-5">Citizen science</i> is the active contribution of people who are not professional scientists to science. It provides volunteers with the <strong style="color:#444e67">opportunity to contribute intellectually</strong> to the research of others, to <i class="ml-5">share resources or tools</i> at their disposal, or even to start their own research projects. Volunteers provide <strong style="color:#444e67">real value to ongoing research</strong> while they themselves acquire a better understanding of the scientific method.
+                <br/><br/>
+                Citizen science opens the doors of laboratories and <i>makes science accessible to all</i>. It facilitates <strong style="color:#444e67">a direct conversation between scientists and enthusiasts</strong> who wish to contribute to scientific endeavour.
+            </p>
+            <hr>
+          </div>         
+        </div>
+      </div>
+</div>
+
+<div class="property gray-bg" id="geotagx_what">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <p class="big-icon-3 text-center">
+              How do I <strong class="ml-5" style="color:#444e67">get started</strong> ?
+            </p>
+            <hr>
+            <p class="text-center">
+            <i class="ml-5">Geotag-X</i> is still under development, however there are two ways you can volunteer.
+              <br/><br/><br/>
+            </p>
+            <div class="container" id="find_photos">
+                <div class="row">
+
+                  <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                    <i class="fa fa-binoculars big-icon-15" style="color:#444e67"></i>
+                  </div>             
+                  <div class="col-lg-6 col-sm-6 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                    <p class="big-icon-2 text-center">
+                      <strong class="ml-5" style="color:#444e67">Find</strong> Photos
+                    </p>
+                    <p class="text-justified" style="text-align:justify">
+
+                        Without photos, the applications on this website are not going to give us much information.
+                        We need <i class="ml-5">your help</i> to find photos for the different projects that are currently on the website.<br/>
+                        To help you do this we are working on an add-on for firefox that will allow you to send photos directly to our server while you are browsing the web<br/><br/>
+                        In the meantime...<br/>
+                        If you find <i class="ml-5">Flickr albums</i> containing <i class="ml-5">relevant photos</i> send them to us at <a href="mailto:unosat@unitar.org">UNOSAT@UNITAR.ORG</a> and we will load them in for analysis.
+
+                    </p>
+                  </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row">         
+                  <div class="col-lg-6 col-sm-6 col-lg-offset-2 col-sm-offset-2 wow fadeInRight animated text-justify" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                    <p class="big-icon-2 text-center">
+                      <strong class="ml-5" style="color:#444e67">Analyse</strong> Photos
+                    </p>
+                    <p>
+
+                        Help us extract information from the photos being collected by contributing to the different applications on <i class="ml-5">Geotag-X</i><br/>
+                        It's easy...
+                        <ul class="unstyled">
+                            <li><i class="fa fa-check fa-lg pr-10"></i>On the homepage choose the project you want to work on.</li>
+                            <li><i class="fa fa-check fa-lg pr-10"></i>On the project page, select the application you like and get started!</li>
+                        </ul>
+                        <!-- TO-DO : Increase readability by including more text coloring and links-->
+                         <i class="ml-5">If you are not sure what you are doing</i> Start with the application’s tutorial. And don’t worry if you are not sure about your answers, each photo is presented to at least 30 people and we take the majority answer, so it is ok to make mistakes.
+                        <br/><br/>
+                         <i class="ml-5">There are lots of resources available on the internet</i> to help you answer the questions. There is no time limit on the applications so you can take time to search for clarification if you are not sure what you are looking at.
+                        <br/><br/>
+                        What now? <br/>
+                        <a href="/">Pick a project on the homepage</a> – or – <a href="#find_photos">Find photos</a>
+                        
+                    </p>
+                  </div>
+                  <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                    <br/>
+                    <i class="fa fa-flask big-icon-20" style="color:#444e67"></i>
+                  </div>                      
+                </div>
+            </div>
+    <hr>
+<p>
+Remember most of these projects are works in progress so you will probably  <i class="ml-5">find bugs</i> or things that  <i class="ml-5">you don't really like</i>. So we would  <i class="ml-5">love to hear what you think </i>, your feedback helps us to improve Geotag-X and the projects. You can <a href="https://github.com/geotagx" target="_blank" >post it on <i class="fa fa-github"></i>GitHub</a> or use the <a href="http://tecfalabs.unige.ch/survey/index.php/471228/lang-en" target="_blank">feedback form</a>.
+</p>
+            <hr>
+          </div>        
+        </div>
+      </div>
+</div>
+
+
+<div class="container-fluid"> <!-- resume div of outer block container -->
+
+
+<div class="container" id="tourpackages-carousel">
+
+      <div class="row">
+        <div class="profile">
+          <h2>
+            OUR TEAM
+          </h2>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="thumbnail wow fadeInUp animated" data-wow-delay=".1s" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-delay: 0.1s; -webkit-animation-name: none;">
+              <img src="/static/geotagx-img/team/member2.jpg" alt="">
+              <div class="caption text-center">
+                <h4>
+                  Name Surname
+                </h4>
+                <p class="text-justify">
+                  bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh                </p>
+                <div class="team-social-link">
+                  <a href="#">
+                    <i class="fa fa-facebook">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-twitter">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-linkedin">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-github">
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="thumbnail wow fadeInUp animated" data-wow-delay=".3s" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-delay: 0.3s; -webkit-animation-name: none;">
+              <img src="/static/geotagx-img/team/member3.jpg" alt="">
+              <div class="caption text-center">
+                <h4>
+                  Name Surname
+                </h4>
+                <p class="text-justify">
+                  bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh                 </p>
+                <div class="team-social-link">
+                  <a href="#">
+                    <i class="fa fa-facebook">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-twitter">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-linkedin">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-github">
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="thumbnail wow fadeInUp animated" data-wow-delay=".5s" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-delay: 0.5s; -webkit-animation-name: none;">
+              <img src="/static/geotagx-img/team/member2.jpg" alt="">
+              <div class="caption text-center">
+                <h4>
+                  Name Surname
+                </h4>
+                <p class="text-justify">
+                  bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh 
+                </p>
+                <div class="team-social-link">
+                  <a href="#">
+                    <i class="fa fa-facebook">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-twitter">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-linkedin">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-github">
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="thumbnail wow fadeInUp animated" data-wow-delay=".7s" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-delay: 0.7s; -webkit-animation-name: none;">
+              <img src="/static/geotagx-img/team/member4.jpg" alt="">
+              <div class="caption text-center">
+                <h4>
+                  Name Surname
+                </h4>
+                <p class="text-justify">
+                  bleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh bleh bleh bleh bleh bleh bleh blehbleh bleh bleh bleh             </p>
+                <div class="team-social-link">
+                  <a href="#">
+                    <i class="fa fa-facebook">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-twitter">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-linkedin">
+                    </i>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-github">
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- End row -->
+
+      </div>
+      <!-- End container -->
+    </div>
+
+

@@ -20,7 +20,11 @@
               
               {% if request['path'] == "/account/register" %}
                 Create New Account
-              {% endif %}                                 
+              {% endif %}   
+
+              {% if request['path'] == "/about" %}
+                About
+              {% endif %}   
             </h1>
           </div>
           <div class="col-lg-8 col-sm-8">
@@ -36,12 +40,17 @@
               {% if request['path'] == "/account/register" %}
                 <li><a href="/">Home</a></li>              
                 <li class="active">Register</li>
-              {% endif %}                                     
+              {% endif %}    
+
+              {% if request['path'] == "/about" %}
+                <li><a href="/">Home</a></li>              
+                <li class="active">About</li>
+              {% endif %}                                                 
             </ol>
           </div>  
 
         {% endif %}
-        
+
         </div>
 
 
