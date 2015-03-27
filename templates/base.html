@@ -19,7 +19,7 @@
     <link href="{{url_for('static', filename='geotagx-css/bootstrap-reset.css')}}" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet">
-    
+
     <!-- <link href="{{url_for('static', filename='geotagx-css/bootstrap.min.css')}}" rel="stylesheet">-->
 
     <!--external css-->
@@ -103,9 +103,9 @@
     </script>
     <script src="{{url_for('static', filename='geotagx-js/wow.min.js')}}">
     </script>
+    </script>
     <script src="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.carousel.js')}}">
     </script>
-
     <script src="{{url_for('static', filename='geotagx-js/jquery.easing.min.js')}}">
     </script>
     <script src="{{url_for('static', filename='geotagx-js/link-hover.js')}}">
@@ -116,75 +116,19 @@
     </script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
     <script type="text/javascript">
       $(function() {
-
         $('#da-slider').cslider({
           autoplay    : true,
           bgincrement : 100
         });
-
       });
     </script>
-
-
 
     <!--common script for all pages-->
     <script src="{{url_for('static', filename='geotagx-js/common-scripts.js')}}">
     </script>
 
-    <script type="text/javascript">
-      jQuery(document).ready(function() {
-
-
-        $('.bxslider1').bxSlider({
-          minSlides: 5,
-          maxSlides: 6,
-          slideWidth: 360,
-          slideMargin: 2,
-          moveSlides: 1,
-          responsive: true,
-          nextSelector: '#slider-next',
-          prevSelector: '#slider-prev',
-          nextText: 'Onward →',
-          prevText: '← Go back'
-        });
-
-      });
-
-
-    </script>
-
-
-    <script>
-      $('a.info').tooltip();
-
-      $(window).load(function() {
-        $('.flexslider').flexslider({
-          animation: "slide",
-          start: function(slider) {
-            $('body').removeClass('loading');
-          }
-        });
-      });
-
-      $(document).ready(function() {
-
-        $("#owl-demo").owlCarousel({
-
-          items : 4
-
-        });
-
-      });
-
-      jQuery(document).ready(function(){
-        jQuery('ul.superfish').superfish();
-      });
-
-      new WOW().init();
-
-
-    </script>
   </body>
 </html>
