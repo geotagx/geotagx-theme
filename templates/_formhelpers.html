@@ -42,10 +42,10 @@
 {% endmacro %}
 
 
-{% macro geotagx_render_field(field, id, title, type) %}
+{% macro geotagx_render_field(field, id, title, type, value) %}
               <div class="form-group {% if field.errors %} has-error {% endif %}">
                   <div>
-                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}">
+                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}", value="{{ value }}" >
                       {% if field.errors %}
                         <ul style="list-style-position:inside;">
                           {% for error in field.errors %}
@@ -54,5 +54,27 @@
                         </ul>
                       {% endif %}                    
                   </div>
+              </div>
+{% endmacro %}
+
+{% macro geotagx_render_checkbox(field, id, checked_unchecked, value) %}
+              <div class="form-group {% if field.errors %} has-error {% endif %}">
+                  <div>
+                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg" autofocus="autofocus" {{ checked_unchecked }} type="checkbox" data-toggle="toggle" value="{{ value }}" >
+                      {% if field.errors %}
+                        <ul style="list-style-position:inside;">
+                          {% for error in field.errors %}
+                          <li><span class="help-block">{{ error }}</span></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}                    
+                  </div>
+              </div>
+{% endmacro %}
+
+
+{% macro geotagx_render_selectlist(field, id, current_value) %}
+              <div class="form-group {% if field.errors %} has-error {% endif %}">
+                {{ field(class_="selectpicker", value=current_value) }}
               </div>
 {% endmacro %}
