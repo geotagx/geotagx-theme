@@ -50,6 +50,9 @@
                             <center>
                             <h2 {% if form.errors %}name="profile"{%endif%}>Your profile</h2>
                             </center>
+                            <center>
+                            <i class="fa fa-user big-icon-11"></i>
+                            </center>
                         {{ form.id }}
                         {{ form.hidden_tag() }}
 
@@ -129,7 +132,7 @@
 
                             <center>
                             <h2 {% if form.errors %}name="profile"{%endif%}>Update Profile Picture</h2>
-                            </center>
+                            </center>                       
                             <br/>
                             <div class="span2">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -158,6 +161,10 @@
                                     <center>
                                     <h2 {% if form.errors %} name="password" {%endif%}> Change Your Password </h2>
                                     </center>
+                                    <center>
+                                    <i class="fa fa-user-secret big-icon-11"></i>
+                                    </center>   
+
                                     {{ password_form.id }}
                                     {{ password_form.hidden_tag() }}
                                     {{ geotagx_render_field(password_form.current_password,"current_password", "Current Password", "password" ) }}
@@ -197,9 +204,13 @@
                                     <center>
                                     <h2 {% if form.errors %} name="password" {%endif%}> CKAN API Key </h2>
                                     </center>
-                                    {{ password_form.id }}
-                                    {{ password_form.hidden_tag() }}
 
+                                    <center>
+                                    <i class="fa fa-cogs big-icon-11"></i>
+                                    </center>     
+                                    <br/>
+                                    <br/>
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                     <div class="form-actions">
 
                                         <div class="container-fluid">
@@ -212,6 +223,8 @@
                                                 {% endif %}
                                             </div>    
                                             </div>
+                                            <br/>
+                                            <br/>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <center>
@@ -242,6 +255,13 @@
                                     <center>
                                     <h2 {% if form.errors %} name="password" {%endif%}> {{ _('Do you want to reset your personal API Key?') }} </h2>
                                     </center>
+                                    <center>
+                                    <i class="fa fa-key big-icon-11"></i>
+                                    </center>     
+                                    <br/>
+                                    <br/>
+
+
                                     <div class="form-actions">
                                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                         <div class="container-fluid">
