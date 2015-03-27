@@ -74,7 +74,8 @@
 
 
 {% macro geotagx_render_selectlist(field, id, current_value) %}
-              <div class="form-group {% if field.errors %} has-error {% endif %}">
+              <div class="form-group {% if field.errors %} has-error {% endif %} geotagx_profile_select_box">
                 {{ field(class_="selectpicker", value=current_value) }}
               </div>
+
 {% endmacro %}
