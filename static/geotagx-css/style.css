@@ -3140,4 +3140,100 @@ div.header h3{
     border-bottom:0px;
 }
 
+/** Frontpage portfolio CSS**/
+.portfolio div{
+    border-radius : 3%;
+}
+.portfolio-wrapper {
+    border:1px solid #eee;    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
+}
 
+.portfolio div:hover {
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);    
+}
+
+.portfolio-anchors {
+    margin-bottom: 20px;
+}
+
+.portfolio-anchors div {
+    font-family:"courier";
+    text-align:center;
+    font-weight:500;
+}
+.portfolio-anchors div:hover{
+    cursor:pointer;
+}
+
+.portfolio-anchors div{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.portfolio-anchor-thumbnail{
+    border-radius:50%;
+    width:70px;
+    height:70px;
+    display:block;
+    margin-bottom:10px;
+}
+
+.portfolio-anchors div{
+    padding-top:30px;
+    border-radius:10px;
+}
+
+.portfolio-anchors div:hover center img{
+        border:2px solid #475168;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+}
+
+.portfolio-anchors div:hover{
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+        background-color: #f9f9f3;
+}
+
+.portfolio-anchors div:hover span{
+    color : #48cfad;     
+}
+
+.portfolio-anchors div {
+    height: 190px;
+}
+
+.portfolio-anchors div .badge {
+    margin-left:100px;
+}
+.portfolio-anchors div:hover .badge {
+
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+}
+
+.portfolio-label {
+    background-color: white;
+    text-align:center;
+    padding-top:15px;
+    padding-bottom:15px;
+    position:relative;
+    top:-75px;
+    color:#48cfad;
+    opacity:0.9;
+}

@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/animate.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='geotagx-assets/owlcarousel/owl.theme.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/mixitup.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/magnific-popup.css')}}">
 
     <link href="{{url_for('static', filename='geotagx-css/superfish.css')}}" rel="stylesheet" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -44,7 +46,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/parallax-slider/parallax-slider.css')}}" />
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/modernizr.custom.28468.js')}}">    
-    </script>
+    </script>  
     <!-- Google Analytics or similar solutions -->
     {% include '_ga.html' ignore missing %}
     <!-- Google Custom Search -->
@@ -108,15 +110,20 @@
     </script>
     <script src="{{url_for('static', filename='geotagx-js/jquery.easing.min.js')}}">
     </script>
-    <script src="{{url_for('static', filename='geotagx-js/link-hover.js')}}">
+    <script src="{{url_for('static', filename='geotagx-js/mixitup.js')}}">
     </script>
+    <script src="{{url_for('static', filename='geotagx-js/link-hover.js')}}">
+    </script>    
     <script src="{{url_for('static', filename='geotagx-js/superfish.js')}}">
     </script>
+    <script src="{{url_for('static', filename='geotagx-js/jquery.magnific-popup.js')}}">
+    </script>    
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
     </script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/geotagx.js')}}">    
+    </script>  
     <script type="text/javascript">
       $(function() {
         $('#da-slider').cslider({

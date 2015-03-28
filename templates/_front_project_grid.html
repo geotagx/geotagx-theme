@@ -1,0 +1,83 @@
+{% macro render_geotagx_project_portfolio_element(category, image_link, info_link, tutorial_link, contributing_link, percentage_complete, label) %}
+
+            <div class="portfolio {{category}}" data-cat="{{category}}">
+                <div class="portfolio-wrapper">
+                    <div class="portfolio-hover">
+                        <div class="image-caption">
+                            <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
+                            <a href="{{tutorial_link}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="{{contributing_link}}" class="label label-success icon" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play"></i></a>
+
+                            <span style="margin-left:5px">{{percentage_complete}}% Complete</span>
+
+                        </div>
+                        <img src="{{image_link}}" alt="" />
+                    </div>
+                </div>
+                <h4 class="portfolio-label">{{label}} </h4>                
+            </div>
+
+{% endmacro %}
+
+<div class="container ">
+        <div class="row portfolio-anchors">
+                    <div class="col-md-2 filter active" data-filter="app card icon logo web">
+                        <span class="badge bg-green">31</span>
+                        <center><img class="portfolio-anchor-thumbnail" src="http://geotagx.org/static/img/default_logo.png"/></center>
+                        <span>All</span>
+                    </div>
+                    <div class="col-md-2 filter" data-filter="app">
+                        <span class="badge bg-green">5</span>                        
+                        <center><img class="portfolio-anchor-thumbnail" src="https://farm4.staticflickr.com/3780/13445252764_6a969b0e93_m.jpg"/></center>
+                        <span>Somali Drought</span>
+                    </div>
+                    <div class="col-md-2 filter" data-filter="card">
+                        <span class="badge bg-green">4</span>                        
+                        <center><img class="portfolio-anchor-thumbnail" src="https://dl.dropboxusercontent.com/u/46576246/India/DSCI0091.jpg"/></center>
+                        <span>Yamuna Monsoon Flood 2013</span>
+                    </div>
+                    <div class="col-md-2 filter" data-filter="icon">
+                        <span class="badge bg-green">5</span>                        
+                        <center><img class="portfolio-anchor-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Yemen_-_Location_Map_%282013%29_-_YEM_-_UNOCHA.svg"/></center>
+                        <span>Yemeni Agricultural Water Assesment</span>
+                    </div>
+                    <div class="col-md-2 filter" data-filter="logo">
+                        <span class="badge bg-green">5</span>                        
+                        <center><img class="portfolio-anchor-thumbnail" src="http://farm4.staticflickr.com/3912/14770269674_63a555e566_z.jpg"/></center>
+                        <span>Ebola Response</span>
+                    </div>
+                    <div class="col-md-2 filter" data-filter="web">
+                        <span class="badge bg-green">9</span>                        
+                        <center><img class="portfolio-anchor-thumbnail" src="https://farm8.staticflickr.com/7419/16208614030_6d3b70b7a3_b.jpg"/></center>
+                        <span>Emergency Shelter Assesment in the Middle East</span>
+                    </div>
+        </div>
+</div>
+
+<hr
+
+    <div class="container">
+        <div class="row  mar-b-30">
+        <div id="portfoliolist-three">
+            <div class="col-md-12">
+
+            {{ render_geotagx_project_portfolio_element(category="logo", image_link="/static/geotagx-img/portfolios/logo/5.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="app", image_link="/static/geotagx-img/portfolios/app/5.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="card", image_link="/static/geotagx-img/portfolios/card/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="icon", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="logo", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="web", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="app", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="icon", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="logo", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="web", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="app", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="icon", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="logo", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="web", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+            {{ render_geotagx_project_portfolio_element(category="app", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
+
+            </div>
+        </div>
+    </div>
+</div>
