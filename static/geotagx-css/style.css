@@ -3132,8 +3132,12 @@ div.header h3{
 .property_white {
     padding : 50px 0px;
 }
-
-
 .geotagx_profile_select_box .btn-group {
     width : auto !important;
 }
+
+#da-slider {
+    border-bottom:0px;
+}
+
+
