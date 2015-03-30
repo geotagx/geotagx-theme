@@ -17,18 +17,23 @@
 		<center>
 			<img src="{{ url_for('static', filename='geotagx-img/binocular.png') }}" width="80px"/>
 		</center>
-	<a href="/about#find_photos" class="btn btn-purchase"><i class="fa fa-binoculars"></i> Find photos </a>
+	<a href="#find_photos" class="btn btn-purchase"><i class="fa fa-binoculars"></i> Find photos </a>
 	</div>
 
 <div class="col-md-3 text-center">
 	<center>
 		<img src="{{ url_for('static', filename='geotagx-img/flask.png') }}" width="80px"/>
 	</center>	
-	<a href="/about#analyze_photos" class="btn btn-purchase"><i class="fa fa-flask"></i> Analyze Photos </a>
+	<a href="#analyze_photos" class="btn btn-purchase"><i class="fa fa-flask"></i> Analyze Photos </a>
 </div>
 </div>
 <br/>
 <br/>
 <hr>
 {% include '_front_project_grid.html' %}
+</div>
+<div class="container-fluid">
+{% include 'home/_get_started.html' %}
+</div>
+<div class="container">
 {% endblock %}
