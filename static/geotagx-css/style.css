@@ -3237,3 +3237,12 @@ div.header h3{
     color:#48cfad;
     opacity:0.9;
 }
+
+.portfolio-anchors div.active center img{
+        border:2px solid #475168;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+}
+
+
