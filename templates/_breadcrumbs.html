@@ -25,6 +25,11 @@
               {% if request['path'] == "/about" %}
                 About
               {% endif %}   
+
+              {% if request['path'] == "/app/new" %}
+              {{ _('Create New Project') }}
+              {% endif %}  
+
             </h1>
           </div>
           <div class="col-lg-8 col-sm-8">
@@ -45,7 +50,14 @@
               {% if request['path'] == "/about" %}
                 <li><a href="/">Home</a></li>              
                 <li class="active">About</li>
-              {% endif %}                                                 
+              {% endif %}  
+
+              {% if request['path'] == "/app/new" %}
+                <li><a href="/">Home</a></li>              
+                <li class="active">{{ _('Create New Project') }}</li>
+              {% endif %}  
+
+
             </ol>
           </div>  
 

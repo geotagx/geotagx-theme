@@ -4,32 +4,44 @@
 {% import "account/_helpers.html" as helper %}
 
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
-<div id="app-form" class="row"> 
-    <div class="span3">
-        {{ helper.render_account_local_nav(current_user, active_link) }}
-    </div>
-    <div class="span9">
-        <h1><strong>{{ _('Project') }}</strong>: {{ _('Create a new project') }}</h1>
+{% from "_formhelpers.html" import render_field , geotagx_render_field %}
+
+<div class="container">
         <form class="form-horizontal" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data"}}>
         {{ form.hidden_tag() }}
-        <fieldset>
-            {{ render_field(form.name, class_="span4", placeholder=_('The name of the project')) }}
-            {{ render_field(form.short_name, class_="span4", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-            {{ render_field(form.long_description, class_="span4", rows="13", placeholder=_('Explain your project                                                             
-                · Why? Why you are creating this project, what you want to achieve with it                                                             
-                · How? Explain how your project works                                                             
-                · How you can help: Explain to the volunteers how they can help and contribute to the goal of your project                                                             
-                · Will you help make a difference? Explain to the volunteers why their contribution is essential and how the result of your project can help change things!                                                             
-            (you can use Markdown to give format to your description!)')) }}
-            <div class="form-actions">
-                <input type="submit" value={{_('Create the project')}} class="btn btn-primary" />
-                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn">{{_('Cancel')}}</a>
-            </div>
-        </fieldset>
-    </form>
-    </div>
+            <fieldset>
+                {{ geotagx_render_field(field=form.name, id="name", title=_('The name of the project') , type="text") }}
+                {{ geotagx_render_field(field=form.short_name, id="short_name", title=_('Short name or slug for the project') , type="text") }}
+                <div class="form-group">
+                    <textarea id="long_description" name="long_description" autofocus="autofocus" rows="13" class="form-control input-lg" placeholder="
+                    {{
+                        _('Explain your project                                                             
+                        · Why? Why you are creating this project, what you want to achieve with it                                                             
+                        · How? Explain how your project works                                                             
+                        · How you can help: Explain to the volunteers how they can help and contribute to the goal of your project                                                             
+                        · Will you help make a difference? Explain to the volunteers why their contribution is essential and how the result of your project can help change things!                                                             
+                    (you can use Markdown to give format to your description!)')
+                    }} "></textarea>
+                </div>
+
+                <div class="form-actions">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" name='btn' value={{_('Create the project')}} class="btn btn-primary col-md-4 btn-large input-lg"/> {{ _('Create') }} </button> 
+                                <center>
+                                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-large  col-md-4 col-md-offset-1 col-md-offset-1 btn-danger input-lg">{{ _('Cancel') }}</a>    
+                                </center>
+                            </div>
+                        </div>
+                    </div>                           
+                </div>
+            </fieldset>
+        </form>
 </div>
+
+
 <script>
     $("span[rel='tooltip']").tooltip();
     $("i[rel='tooltip']").tooltip();
