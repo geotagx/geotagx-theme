@@ -126,31 +126,29 @@
                     </form>
 
                 </div>
-                <div id="upload_profile_picture" class="tab-pane fade col-md-4 col-md-offset-3">
-                    <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}" >
-                        <fieldset>
-
-                            <center>
-                            <h2 {% if form.errors %}name="profile"{%endif%}>Update Profile Picture</h2>
-                            </center>                       
-                            <br/>
-                            <div class="span2">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                            {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle")}}
-                            </div>
-
-                            {{ upload_form.avatar(onchange="previewImage()", class="col-md-offset-2 geotag-x-file-selector") }}
-                            {{ upload_form.x1 }}
-                            {{ upload_form.y1 }}
-                            {{ upload_form.x2 }}
-                            {{ upload_form.y2 }}
-                            <img id="uploadPreview" class="img-circle" style="max-width:512px;max-height:512px">
-                            <div class="form-actions">
-                                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-large col-md-6 col-md-offset-3 input-lg" style="margin-top:10px;" />{{ _('Upload') }}</button>
-                            </div>
-                        </fieldset>
-                    </form>                
-
+                <div id="upload_profile_picture" class="tab-pane fade col-md-4 col-md-offset-4">
+                        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="span2 img-polaroid">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                {{ helper.render_user_thumbnail(current_user, upload_method)}}
+                                </div>
+                                <br/>
+                                <input class="form-control input-lg" id="avatar" name="avatar" onchange="previewImage()" type="file">
+                                <br/>
+                                {{ upload_form.x1 }}
+                                {{ upload_form.y1 }}
+                                {{ upload_form.x2 }}
+                                {{ upload_form.y2 }}
+                                <!-- TO-DO : Add image cropper -->
+                                <!-- TO-DO : Fix geotagx_render_field helper function to render file uplaod input fields correctly -->
+                                <img id="uploadPreview" name="uploadPreview" style="max-width:512px;max-height:512px">
+                                <br/><br/>
+                                <div class="form-actions">
+                                    <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-large col-md-6 col-md-offset-3 input-lg" />{{ _('Upload') }}</button>
+                                </div>
+                            </fieldset>
+                        </form>
                 </div>
 
                 <div id="change_password" class="tab-pane fade">
