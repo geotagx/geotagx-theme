@@ -35,7 +35,7 @@
 {% macro geotagx_render_app_tile(app, upload_method, draft=False) %}
             <div class="portfolio {% if draft %} draft {% else %} published {% endif %} " data-cat="{% if draft %} draft {% else %} published {% endif %} " onclick="javascript:document.location='/app/{{app.short_name}}'">
             	{% if draft %}
-					<h2 class="portfolio-ribbon">{{ _('Draft') }}</h2>
+					<h2 class="portfolio-ribbon" style="color:#34495e">{{ _('Draft') }}</h2>
             	{% endif %}
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
