@@ -1,23 +1,4 @@
-{% macro render_geotagx_project_portfolio_element(category, image_link, info_link, tutorial_link, contributing_link, percentage_complete, label) %}
-
-            <div class="portfolio {{category}}" data-cat="{{category}}">
-                <div class="portfolio-wrapper">
-                    <div class="portfolio-hover">
-                        <div class="image-caption">
-                            <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="{{tutorial_link}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
-                            <a href="{{contributing_link}}" class="label label-success icon" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play"></i></a>
-
-                            <span style="margin-left:5px">{{percentage_complete}}% Complete</span>
-
-                        </div>
-                        <img src="{{image_link}}" alt="" />
-                    </div>
-                </div>
-                <h4 class="portfolio-label">{{label}} </h4>                
-            </div>
- 
-{% endmacro %}
+{% from "_helpers.html" import render_geotagx_project_portfolio_element %}
 
 <div class="container" id="project_grid">
     <h3 class="text-center"><strong style="color:#444e67">Categories</strong></h3>
@@ -57,8 +38,8 @@
 
 <hr>
 
-    <div class="container">
-        <div class="row  mar-b-30">
+<div class="container">
+    <div class="row  mar-b-30">
         <div id="portfoliolist-three">
             <div class="col-md-12">
 

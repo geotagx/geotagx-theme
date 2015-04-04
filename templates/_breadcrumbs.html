@@ -30,6 +30,11 @@
               {{ _('Create New Project') }}
               {% endif %}  
 
+
+              {% if request['path'] == "/account/"+current_user.name+"/applications" %}
+              {{ current_user.fullname+"'s #"+_("projects") }}
+              {% endif %}  
+
             </h1>
           </div>
           <div class="col-lg-8 col-sm-8">
@@ -57,6 +62,10 @@
                 <li class="active">{{ _('Create New Project') }}</li>
               {% endif %}  
 
+              {% if request['path'] == "/account/"+current_user.name+"/applications" %}
+                <li><a href="/account/{{current_user.name}}/">My Account</a></li>              
+                <li class="active">{{ _('Projects') }}</li>
+              {% endif %}  
 
             </ol>
           </div>  

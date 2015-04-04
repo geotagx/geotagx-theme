@@ -3151,7 +3151,8 @@ div.header h3{
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;    
+    user-select: none; 
+    overflow : hidden;   
 }
 
 .portfolio div:hover {
@@ -3202,6 +3203,10 @@ div.header h3{
         -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
 }
 
+.portfolio-anchors div:hover center i{
+    color : #48cfad;       
+}
+
 .portfolio-anchors div:hover{
         box-shadow: 0 0 8px rgba(0, 0, 0, .8);
         -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
@@ -3244,5 +3249,28 @@ div.header h3{
         -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
         -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
 }
+
+.portfolio-anchors div.active center i{
+    color : #444e67;     
+}
+
+.portfolio-ribbon {
+    background-color: white;
+    text-align:center;
+
+    position:relative;
+    opacity:0.8;
+    color:grey;
+    z-index : 10000000;
+    top : 65px;
+    font-weight:bold;
+    right : -150px;
+    width : 300px;
+
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);   
+}
+
 
 
