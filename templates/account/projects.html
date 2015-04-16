@@ -31,21 +31,21 @@
     <div class="row  mar-b-30">
         <div id="portfoliolist-three">
             <div class="col-md-12">
-            {% if apps_published or apps_draft %}
-                {% if apps_published %}
-                {% for app in apps_published %}
+            {% if projects_published or projects_draft %}
+                {% if projects_published %}
+                {% for app in projects_published %}
                     {{ geotagx_render_app_tile(app, upload_method , draft=False) }}
                 {% endfor %}
                 {% endif %}
-                {% if apps_draft %}
-                {% for app in apps_draft %}
+                {% if projects_draft %}
+                {% for app in projects_draft %}
                     {{ geotagx_render_app_tile(app, upload_method , draft=True) }}
                 {% endfor %}
                 {% endif %}
             {% else %}
             <center>
                 <h2>{{ _('You have not created a project') }}</h2>
-                <a href="{{url_for('app.new')}}" class="btn btn-primary input-lg">{{ _('Create a Project') }}</a>
+                <a href="{{url_for('project.new')}}" class="btn btn-primary input-lg">{{ _('Create a Project') }}</a>
             </center>
             {% endif %}          
             </div>

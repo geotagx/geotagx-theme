@@ -33,16 +33,16 @@
 
 
 {% macro geotagx_render_app_tile(app, upload_method, draft=False) %}
-            <div class="portfolio {% if draft %} draft {% else %} published {% endif %} " data-cat="{% if draft %} draft {% else %} published {% endif %} " onclick="javascript:document.location='/app/{{app.short_name}}'">
+            <div class="portfolio {% if draft %} draft {% else %} published {% endif %} " data-cat="{% if draft %} draft {% else %} published {% endif %} " onclick="javascript:document.location='/project/{{app.short_name}}'">
             	{% if draft %}
 					<h2 class="portfolio-ribbon" style="color:#34495e">{{ _('Draft') }}</h2>
             	{% endif %}
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
                         <div class="image-caption">
-                            <a href="/app/{{app.short_name}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="/app/{{app.short_name}}/newtask" class="label label-success icon" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play"></i></a>
-                            <a href="/app/{{app.short_name}}/settings" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
+                            <a href="/project/{{app.short_name}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
+                            <a href="/project/{{app.short_name}}/newtask" class="label label-success icon" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play"></i></a>
+                            <a href="/project/{{app.short_name}}/settings" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
 
                             <span style="margin-left:5px">{{app.overall_progress}}% Complete</span>
 
