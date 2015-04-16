@@ -269,3 +269,53 @@ function imgError(image) {
 {{url_for('static', filename='img/placeholder.project.png')}}"
 {% endif %}
 {% endmacro %}
+
+
+
+{% macro render_application_profile(app, upload_method, settings, private=True, n_tasks, overall_progress ) %}
+{{ app.keys()}}
+<div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+
+            <a href="/app/{{app.short_name}}">
+              <img src="{{render_url_thumbnail(app, upload_method)}}" class="img-circle col-md-12"/>
+            </a>
+            
+          </div>
+
+<div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <h1>
+            <a href="/app/{{app.short_name}}" class="profile_param_link">
+                {{ app.name }}
+              </a>
+            </h1>
+            <hr>
+            <p>
+              <h3>
+              <i class="fa fa-user fa-lg pr-10">
+              </i>
+              <i>{{ _('Tasks')}}</i>   :   <strong class="user-profile-values">{{ app.long_tasks }}</strong> </h3>
+            </p>     
+            <p>
+              <h3>
+              <i class="fa fa-user fa-lg pr-10">
+              </i>
+              <i>{{ _('Completed')}}</i>   :   <strong class="user-profile-values">{{ app.overall_progress }}</strong> </h3>
+            </p>       
+            <p>
+            </p>              
+            
+
+            <hr>
+            <a href="/app/{{app.short_name}}/settings" class="btn btn-purchase pull-right">
+              <i class="fa fa-wrench"></i>
+             {{ _('Edit Profile') }}
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+</div>
+{% endmacro %}

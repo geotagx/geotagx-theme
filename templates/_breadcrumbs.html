@@ -3,11 +3,17 @@
       <div class="container">
         <div class="row">
 
-
         {% if (not current_user.is_anonymous()) and ( request['path'] == "/account/"+current_user.name+"/" or request['path'] == "/account/"+current_user.name+"/update" ) %}
 
           {% import "account/_helpers.html" as helper %}
           {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+
+        {% elif active_page == "applications" %}
+
+          {% if not request['path' ] == "/app/"+app.short_name+"/newtask" %}
+            {% import "applications/_helpers.html" as app_helper %}
+                    {{ app_helper.render_overall_progress(app, n_tasks, overall_progress) }}
+          {% endif %}
 
 
         {% else %}
@@ -31,7 +37,7 @@
               {% endif %}  
 
 
-              {% if request['path'] == "/account/"+current_user.name+"/applications" %}
+              {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
               {{ current_user.fullname+"'s #"+_("projects") }}
               {% endif %}  
 
@@ -62,7 +68,7 @@
                 <li class="active">{{ _('Create New Project') }}</li>
               {% endif %}  
 
-              {% if request['path'] == "/account/"+current_user.name+"/applications" %}
+              {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
                 <li><a href="/account/{{current_user.name}}/">My Account</a></li>              
                 <li class="active">{{ _('Projects') }}</li>
               {% endif %}  
