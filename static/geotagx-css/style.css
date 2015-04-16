@@ -3273,4 +3273,12 @@ div.header h3{
 }
 
 
-
+#questionnaire-rewind {
+  color: white;
+}
+#questionnaire-rewind:hover {
+  color: #34495e;
+}
+#questionnaire-submit {
+  color:white!important;
+}
