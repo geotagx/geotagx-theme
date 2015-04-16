@@ -7,6 +7,8 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {% from "_formhelpers.html" import geotagx_render_field , geotagx_render_checkbox , geotagx_render_selectlist %}
+
+<!-- TO-DO :: Handle Form errors properlu -->
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 
@@ -48,14 +50,13 @@
                     <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
                             <center>
-                            <h2 {% if form.errors %}name="profile"{%endif%}>Your profile</h2>
+                            <h2 {% if form.errors %}name="profile" class="has-error" {%endif%}>Your profile</h2>
                             </center>
                             <center>
                             <i class="fa fa-user big-icon-11"></i>
                             </center>
                         {{ form.id }}
                         {{ form.hidden_tag() }}
-
                         {{ geotagx_render_field(form.fullname,"fullname", "", "text", current_user.fullname ) }}
                         {{ geotagx_render_field(form.name,"name",  current_user.name, "text" , current_user.name) }}
                         {{ geotagx_render_field(form.email_addr,"email_addr", "", "text", current_user.email_addr) }}
@@ -162,7 +163,6 @@
                                     <center>
                                     <i class="fa fa-user-secret big-icon-11"></i>
                                     </center>   
-
                                     {{ password_form.id }}
                                     {{ password_form.hidden_tag() }}
                                     {{ geotagx_render_field(password_form.current_password,"current_password", "Current Password", "password" ) }}
@@ -200,7 +200,7 @@
                         <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                                 <fieldset>
                                     <center>
-                                    <h2 {% if form.errors %} name="password" {%endif%}> CKAN API Key </h2>
+                                    <h2> CKAN API Key </h2>
                                     </center>
 
                                     <center>
@@ -250,7 +250,7 @@
                         <form method="post" class="form-horizontal" action="{{ url_for('account.reset_api_key', name=current_user.name)}}">
                                 <fieldset>
                                     <center>
-                                    <h2 {% if form.errors %} name="password" {%endif%}> {{ _('Do you want to reset your personal API Key?') }} </h2>
+                                    <h2> {{ _('Do you want to reset your personal API Key?') }} </h2>
                                     </center>
                                     <center>
                                     <i class="fa fa-key big-icon-11"></i>
