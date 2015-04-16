@@ -11,7 +11,6 @@
 {% endmacro %}
 
 {% macro render_geotagx_project_portfolio_element(category, image_link, info_link, tutorial_link, contributing_link, percentage_complete, label) %}
-
             <div class="portfolio {{category}}" data-cat="{{category}}">
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
@@ -23,10 +22,55 @@
                             <span style="margin-left:5px">{{percentage_complete}}% Complete</span>
 
                         </div>
-                        <img src="{{image_link}}" alt="" />
+                        <img src="{{image_link}}" style="width:100%" alt="" />
                     </div>
                 </div>
                 <h4 class="portfolio-label">{{label}} </h4>                
+            </div>
+
+{% endmacro %}
+
+{% macro render_geotagx_project_portfolio_element_with_stats(category, image_link, info_link, tutorial_link, contributing_link, percentage_complete, label, app) %}
+
+            <div class="portfolio {{category}}" data-cat="{{category}}">
+                <div class="portfolio-wrapper">
+                    <div class="portfolio-hover">
+                        <div class="image-caption">
+                            <br/>
+                            <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
+                            <a href="{{tutorial_link}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="{{contributing_link}}" class="label label-success icon" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play"></i></a>
+
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_tasks }}
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-tasks"></i> {{_('Tasks')}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_volunteers }}
+                            </div>
+                            <div class="portfolio-stat-label">                            
+                            <i class="fa fa-users"></i> 
+                            {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            {{ app.overall_progress }} %
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-check-square-o"></i> {{_('Complete')}}
+                            </div>
+                        </div>                          
+                        <img src="{{image_link}}" style="width:100%" alt="" />
+                    </div>
+                </div>                     
+                <h4 class="portfolio-label">{{label}} </h4>                                           
             </div>
  
 {% endmacro %}

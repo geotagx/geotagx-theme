@@ -266,6 +266,6 @@ function imgError(image) {
 {% elif project.info.thumbnail %}
     {{project.info.thumbnail}}"
 {% else %}
-{{url_for('static', filename='img/placeholder.project.png')}}"
+{{url_for('static', filename='img/placeholder.project.png')}}
 {% endif %}
 {% endmacro %}
