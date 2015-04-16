@@ -3254,25 +3254,6 @@ div.header h3{
     color : #444e67;     
 }
 
-.portfolio-ribbon {
-    background-color: white;
-    text-align:center;
-
-    position:relative;
-    opacity:0.8;
-    color:grey;
-    z-index : 10000000;
-    top : 65px;
-    font-weight:bold;
-    right : -150px;
-    width : 300px;
-
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-    transform: rotate(45deg);   
-}
-
-
 #questionnaire-rewind {
   color: white;
 }
