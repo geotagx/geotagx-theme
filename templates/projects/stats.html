@@ -30,17 +30,17 @@
         <br/>
 
             {% if private %}
-            <div class="row-fluid">
+            <div class="col">
                 <div class="alert alert-info">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>{{_('Important')}}:</strong> {{_('Data have been')}} <strong>{{_('anonymized')}}!</strong>
                 </div>
             </div>
             {% endif %}
-
+        <div class="row">
             <!-- Hour Stats CARD -->
-            <div id="card" class="row-fluid">
-                <div class="span12  well">
+            <div id="card" class="col">
+                <div class="col-md-5 col-sm-5 col-lg-5  well">
                     <h2>{{_('Distribution of Answers per Hour')}}</h2>
                     <div id="hourStats" style="margin:0;height:500px;">
                     </div>
@@ -69,8 +69,8 @@
             <!-- END Hour Stats CARD -->
 
             <!-- Day Stats Total CARD -->
-            <div id="card" class="row-fluid">
-                <div  class="span12  well">
+            <div id="card" class="col">
+                <div  class="col-md-5 col-sm-5 col-lg-5 col-md-offset-1 col-sm-offset-1 col-lg-offset-1 well">
                     <h2>{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
                     <div id="dayStatsTotal" style="margin:0;height:500px;"></div>
                     <script>
@@ -138,10 +138,9 @@
             </div>
             <!-- END Day Stats CARD -->
 
-
             <!-- Day Stats CARD -->
-            <div id="card" class="row-fluid">
-                <div  class="span12  well">
+            <div id="card" class="col">
+                <div  class="col-md-5 col-sm-5 col-lg-5  well">
                     <h2>{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
                     <div id="dayStats" style="margin:0;height:500px;"></div>
                     <script>
@@ -210,10 +209,10 @@
 
 
             <!-- Number of answers CARD -->
-            <div id="card" class="row-fluid">
-                <div id="dist-answers" class="span12  well">
+            <div id="card" class="col">
+                <div id="dist-answers" class="col-md-5 col-sm-5 col-lg-5 col-md-offset-1 col-sm-offset-1 col-lg-offset-1 well">
                     <h2>{{_('Distribution of Answers')}}</h2>
-                    <div class="row-fluid">
+                    <div class="col">
                         <div class="span6">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
@@ -255,13 +254,13 @@
                 </div>
             </div>
             <!-- END Number of Answers Stats CARD -->
-
+        </div>
             <!-- Anon User Stats CARD -->
-            <div id="card" class="row-fluid">
-                <div id="dist-anon" class="span12  well">
+            <div id="card" class="col">
+                <div id="dist-anon" class="col-md-5 col-sm-5 col-lg-5  well">
                     <h2>{{_('Details about Anonymous Users')}}</h2>
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <div class="col">
+                        <div class="col-md-5 col-sm-5 col-lg-5">
                             <p><i class="icon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
                             {% if userStats.anonymous.top5 and userStats.geo %}
                             <h3>Top 5 users</h3>
@@ -285,7 +284,7 @@
                             </table>
                             {% endif %}
                         </div>
-                        <div id="userAnonStats" class="span12"  style='height:400px'>
+                        <div id="userAnonStats" class="col-md-5 col-sm-5 col-lg-5"  style='height:400px'>
                         </div>
                         <script>
                         (function(){
@@ -308,8 +307,8 @@
                         </script>
                     </div>
                     {% if userStats.geo %}
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <div class="col">
+                        <div class="col-md-5 col-sm-5 col-lg-5">
                             <div id="map" style="height:250px;"></div>
                             <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
                             <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
@@ -347,12 +346,13 @@
             </div>
             <!-- END Anon User Stats CARD -->
 
+
             <!-- Auth User Stats CARD -->
-            <div id="card" class="row-fluid">
-                <div id="dist-auth" class="span12  well">
+            <div id="card" class="col">
+                <div id="dist-auth" class="col-md-5 col-sm-5 col-lg-5  col-md-offset-1 col-sm-offset-1 col-lg-offset-1 well">
                     <h2>{{_('Details about Authenticated Users')}}</h2>
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <div class="col">
+                        <div class="col-md-5 col-sm-5 col-lg-5">
                             <p><i class="icon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
                             {% if userStats.authenticated.top5 %}
                             <h3>{{_('Top 5 users')}}</h3>
@@ -374,7 +374,7 @@
                             </table>
                             {% endif %}
                         </div>
-                        <div id="userAuthStats" class="span12" style='height:400px'>
+                        <div id="userAuthStats" class="col-md-5 col-sm-5 col-lg-5" style='height:400px'>
                         </div>
                         <script>
                         (function(){

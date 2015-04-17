@@ -274,6 +274,37 @@ function imgError(image) {
 
 {% macro render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) %}
 <div class="container">
+        <div class="row" id="project_menu">
+            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-pencil-square-o"></i>
+             {{ _('Blog') }}
+            </a>
+            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
+            and current_user.pro) or current_user.admin %}            
+                <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+                  <i class="fa fa-file-text-o"></i>
+                 {{ _('Audit Logs') }}
+                </a>
+            {% endif %}  
+            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id ) or current_user.admin %}              
+                <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+                  <i class="fa fa-wrench"></i>
+                 {{ _('Settings') }}
+                </a>
+            {% endif %}            
+            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-bar-chart"></i>
+             {{ _('Statistics') }}
+            </a>   
+            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-book"></i>
+             {{ _('Tasks') }}
+            </a>
+            <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-info"></i>
+             {{ _('Info') }}
+            </a> 
+        </div>    
         <div class="row">
           <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
             <a href="#">
@@ -341,37 +372,6 @@ function imgError(image) {
                 <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>                  
             </div>                                            
           </div>
-        </div>
-        <div class="row">
-            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-              <i class="fa fa-pencil-square-o"></i>
-             {{ _('Blog') }}
-            </a>
-            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
-            and current_user.pro) or current_user.admin %}            
-                <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-                  <i class="fa fa-file-text-o"></i>
-                 {{ _('Audit Logs') }}
-                </a>
-            {% endif %}  
-            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id ) or current_user.admin %}              
-                <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-                  <i class="fa fa-wrench"></i>
-                 {{ _('Settings') }}
-                </a>
-            {% endif %}            
-            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-              <i class="fa fa-bar-chart"></i>
-             {{ _('Statistics') }}
-            </a>   
-            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-              <i class="fa fa-book"></i>
-             {{ _('Tasks') }}
-            </a>
-            <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
-              <i class="fa fa-info"></i>
-             {{ _('Info') }}
-            </a> 
         </div>
       </div>     
 {% endmacro %}
