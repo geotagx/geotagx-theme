@@ -9,7 +9,7 @@
     <div class="span9">
         {{ helper.render_project_title(project, subtitle=_('Import Tasks'))}}
         <div class="row-fluid">
-            <div class="span12">
+            <div class="col-md-12 col-sm-12 col-lg-12">
                 <p class="lead">{{_('Use one of the following available')}}
                 <strong>{{_('importers')}}</strong> {{_('to import tasks...')}}</p>
             </div>
@@ -17,21 +17,21 @@
             {% for row in available_importers|batch(2) %}
             <div class="row-fluid">
                 {% for importer in row %}
-                <div class="span6">
+                <div class="col-md-6 col-sm-6 col-lg-6">
                     {% include importer %}
                 </div>
                 {% endfor %}
             </div>
             {% endfor %}
         <div class="row-fluid">
-            <div class="span12">
+            <div class="col-md-12 col-sm-12 col-lg-12">
                 <p class="lead">{{_('... or import a set of') }} <strong>{{_('template tasks')}}</strong> {{ ('for any of the template projects.')}}</p>
             </div>
         </div>
         {% for row in task_tmpls|batch(2) %}
         <div class="row-fluid">
             {% for task_tmpl in row %}
-            <div class="span6">
+            <div class="col-md-6 col-sm-6 col-lg-6">
               {% include task_tmpl %}
             </div>
             {% endfor %}
