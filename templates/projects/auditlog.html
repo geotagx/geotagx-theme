@@ -6,9 +6,6 @@
 {% block content %}
 <div class="row">
     {% if project %}
-    <div class="span3">
-        {{ helper.render_project_local_nav(project, 'auditlog', current_user) }}
-    </div>
     <div class="span9" style="min-height:400px">
         {{ helper.render_project_title(project, upload_method) }}
         {% if logs %}

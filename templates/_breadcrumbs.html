@@ -4,9 +4,6 @@
         <div class="row">
 
 
-
-        
-
         {% if (not current_user.is_anonymous()) and ( request['path'] == "/account/"+current_user.name+"/" or request['path'] == "/account/"+current_user.name+"/update" ) %}
 
           {% import "account/_helpers.html" as account_helper %}
@@ -17,14 +14,13 @@
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(user, upload_method, "settings") }} 
 
-        {% elif active_page == "applications" %}
+        {% elif active_page == "projects" %}
 
-          {% if not request['path' ] == "/app/"+app.short_name+"/newtask" %}
-            {% import "applications/_helpers.html" as app_helper %}
-                    {{ app_helper.render_overall_progress(app, n_tasks, overall_progress) }}
+          {% if project and request['path' ] != "/project/"+project.short_name+"/newtask" %}
+            <!-- Project Page-->
+            {% import "projects/_helpers.html" as app_helper %}
+            {{ app_helper.render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) }}
           {% endif %}
-
-
         {% else %}
 
           <div class="col-lg-4 col-sm-4">

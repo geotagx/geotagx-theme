@@ -7,9 +7,6 @@
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 <div class="row">
-    <div class="span3">
-        {{ helper.render_project_local_nav(project, 'settings', current_user) }}
-    </div>
   <div class="span9">
       <legend><strong>{{project.name}}</strong>: {{_('Update the project')}}</legend>
       <!-- Update form for project thumbnail -->

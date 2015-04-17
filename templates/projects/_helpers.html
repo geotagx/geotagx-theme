@@ -256,7 +256,7 @@ function imgError(image) {
 {% endif %}
 {% endmacro %}
 
-{% macro render_url_thumbnail(project, upload_method) %}
+{% macro render_project_image_url(project, upload_method) %}
 {% if project.info.container %}
     {% if upload_method == 'rackspace'%}
     {{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}"
@@ -268,4 +268,110 @@ function imgError(image) {
 {% else %}
 {{url_for('static', filename='img/placeholder.project.png')}}
 {% endif %}
+{% endmacro %}
+
+
+
+{% macro render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) %}
+<div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <a href="#">
+                {{render_project_thumbnail(project, upload, class="img-circle col-md-12")}}
+            </a><br/><br/>
+            {{project.description}}
+          </div>
+          <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+
+            <h1>
+              <a href="#" class="profile_param_link">
+                {{ project.name }}
+              </a>
+            </h1>
+            <hr>
+            <div class="col-lg-6 col-sm-6">
+                  <h3>
+                  <i class="fa fa-book fa-lg pr-10">
+                  </i>
+                  <i></i>  <strong class="project-profile-values">{{ n_tasks }}</strong><strong class="project-profile-labels"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{ _('Tasks')}}</a></strong></h3>
+                  <h3>
+                  <i class="fa fa-users fa-lg pr-10">
+                  </i>
+                  <i></i>  <strong class="project-profile-values">{{ n_volunteers }}</strong><strong class="project-profile-labels">{{ _('Volunteers') if n_volunteers != 1 else _('Volunteer')}}</strong></h3>
+                  <h3>
+                  <i class="fa fa-check-square-o fa-lg pr-10">
+                  </i>
+                  <i></i>  <strong class="project-profile-values">{{ n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Tasks Completed')}}</strong></h3>
+                  <h3>
+                  <i class="fa fa-clock-o fa-lg pr-10">
+                  </i>
+
+                    {% if not n_tasks %}
+                        {% set n_tasks = 0 %}
+                    {% endif %}
+
+                    {% if not n_completed_tasks %}
+                        {% set n_completed_tasks = 0 %}
+                    {% endif %}
+
+
+                  <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
+                  <h3>
+                  <i class="fa fa-eye fa-lg pr-10">
+                  </i>
+                  <i></i>  <strong class="project-profile-values">{{ _('Not Visible to Others') if project.hidden else _('Visible to Others') }}</strong><strong class="project-profile-labels"></strong></h3>
+            </div>   
+            <div class="col-lg-6 col-sm-6">
+                <br/>
+                <a class="start-contributing noselect"  href="{{url_for('project.presenter', short_name=project.short_name)}}">
+                    <center>
+                    <i class="fa fa-play big-icon-10"></i>
+                    <br/>
+                    <div class="start-contributing-text">Start Contributing</div>
+                    </center>
+                </a>
+                <br/><br/><br/>
+                <!-- "THE LINE BELOW IS TO HELP DEBUG. HAS TO BE REMOVED FROM PRODUCTION CODE " -->
+                {% set overall_progress = 78 %}
+                <br/>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{overall_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{overall_progress}}%;">
+                  </div>
+                </div>
+                <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>                  
+            </div>                                            
+          </div>
+        </div>
+        <div class="row">
+            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-pencil-square-o"></i>
+             {{ _('Blog') }}
+            </a>
+            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
+            and current_user.pro) or current_user.admin %}            
+                <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+                  <i class="fa fa-file-text-o"></i>
+                 {{ _('Audit Logs') }}
+                </a>
+            {% endif %}  
+            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id ) or current_user.admin %}              
+                <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+                  <i class="fa fa-wrench"></i>
+                 {{ _('Settings') }}
+                </a>
+            {% endif %}            
+            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-bar-chart"></i>
+             {{ _('Statistics') }}
+            </a>   
+            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-book"></i>
+             {{ _('Tasks') }}
+            </a>
+            <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
+              <i class="fa fa-info"></i>
+             {{ _('Info') }}
+            </a> 
+        </div>
+      </div>     
 {% endmacro %}

@@ -3291,3 +3291,43 @@ div.header h3{
   white-space: nowrap;
   background-color: #f9f2f4;
   border-radius: 4px;}
+
+.project-profile-labels {
+    color:#999;
+    margin-left : 10px;
+    font-size : 16px;
+}
+.project-profile-values {
+    color:#48cfad;
+    margin-left : 10px;
+    font-size : 24px;
+}
+.project-profile-labels a{
+    color : #48cfad ;
+    font-size: 24px;
+}
+.project-profile-labels a:hover{
+    color : #3bafda ;
+    font-size: 24px;
+}
+.profile-menu-buttons{
+    margin-left: 5px;
+}
+.start-contributing-text {
+    font-size : 28px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;    
+}
+.start-contributing {
+    color: white;
+    cursor: pointer; cursor: hand;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
