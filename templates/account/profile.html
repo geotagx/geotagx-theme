@@ -6,7 +6,6 @@
 {% import "_helpers.html" as geotagx_helper %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
 
-
 {% block content %}
 <!-- NOTE :: A part of the profile page is rendered in the breadcrumb -->
 <!-- TO-DO : Fix this  -->
@@ -15,13 +14,12 @@
     <div class="span9">
         <hr>
         <h2>{{ _('Your Contributions') }}</h2>
-
         <br/><br/>
         <div class="container">
             <div class="row  mar-b-30">
                 <div id="portfoliolist-three">
                     <div class="col-md-12">
-                    {% for app in projects_contrib %}         
+                    {% for app in projects_contrib %}      
                         {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_url_thumbnail(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app) }}
                     {% endfor %}
                     </div>

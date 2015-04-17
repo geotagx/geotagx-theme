@@ -3,10 +3,19 @@
       <div class="container">
         <div class="row">
 
+
+
+        
+
         {% if (not current_user.is_anonymous()) and ( request['path'] == "/account/"+current_user.name+"/" or request['path'] == "/account/"+current_user.name+"/update" ) %}
 
-          {% import "account/_helpers.html" as helper %}
-          {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+          {% import "account/_helpers.html" as account_helper %}
+          {{ account_helper.render_user_profile(current_user, upload_method, "settings") }} 
+
+        {% elif request['path'][:9]=="/account/" and projects %}
+
+          {% import "account/_helpers.html" as account_helper %}
+          {{ account_helper.render_user_public_profile(user, upload_method, "settings") }} 
 
         {% elif active_page == "applications" %}
 

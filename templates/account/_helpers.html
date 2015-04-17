@@ -69,14 +69,14 @@
 
             {% if user.rank %}
             <p>
-              <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values">
+              <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values user-profile-rank-value">
                       {% if private %}
                       <a href="{{url_for('leaderboard.index')}}">
                       {% endif %}
                       {% if not settings %}
-                      {{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
+                      #{{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
                       {% else %}
-                      {{ user.rank }}
+                      #{{ user.rank }}
                       {% endif %}
                       {% if private %}</a>{% endif %}
                       </strong>
@@ -90,7 +90,7 @@
             {% endif %}  
 
             {% if not private %}
-            <h3><i class="fa fa-time fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
+            <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
             {% endif %}
             {% if settings %}
             <h3><i class="fa fa-key fa-lg pr-10"></i> {{ _('API key') }}: <strong class="user-profile-values"><code>{{ user.api_key }}</code></strong></h3>
@@ -101,6 +101,62 @@
               <i class="fa fa-wrench"></i>
              {{ _('Edit Profile') }}
             </a>
+          </div>
+        </div>
+      </div>
+{% endmacro %}
+
+
+{% macro render_user_public_profile(user, upload_method, settings, private=True) %}
+<div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+
+            <a href="{{url_for('account.profile', name=user.name)}}">
+              {{ render_user_thumbnail(user, upload_method, class="img-circle col-md-12") }}
+            </a>
+            
+          </div>
+          <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+            <h1>
+              <a href="{{url_for('account.profile', name=user.name)}}" class="profile_param_link">
+                {{ user.fullname }}
+              </a>
+            </h1>
+            <hr>
+            <p>
+              <h3>
+              <i class="fa fa-user fa-lg pr-10">
+              </i>
+              <i>{{ _('Username')}}</i>   :   <strong class="user-profile-values">{{ user.name }}</strong> </h3>
+            </p>
+            
+
+            {% if user.rank %}
+            <p>
+              <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values user-profile-rank-value">
+                      {% if private %}
+                      <a href="{{url_for('leaderboard.index')}}">
+                      {% endif %}
+                      {% if not settings %}
+                      #{{ user.rank }} {{_('of')}} {{user.total}} {{ _('with a Score of')}} {{user.score}} {{ _('contributed tasks')}}
+                      {% else %}
+                      #{{ user.rank }}
+                      {% endif %}
+                      {% if private %}</a>{% endif %}
+                      </strong>
+              </h3>
+            </p>
+            {% else %}
+            <p>
+              <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values"> {{ _('The user has not contributed to any tasks yet') }} </strong>
+              </h3>
+            </p>
+            {% endif %}  
+            <h3><i class="fa fa-dashboard fa-lg pr-10"></i> {{ _('Contributed Tasks') }}: <strong class="user-profile-values">{{ user.score }}</strong></h3>
+
+            <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
+
           </div>
         </div>
       </div>

@@ -3280,3 +3280,14 @@ div.header h3{
    font-family: 'Lato', sans-serif !important;
    text-transform: uppercase;
 }
+
+.user-profile-rank-value a{
+    color : #48cfad!important;
+}
+.user-profile-rank-value a:hover{
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e!important;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;}

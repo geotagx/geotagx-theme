@@ -1,31 +1,35 @@
 {% extends "base.html" %}
-{% set active_page = "account" %}
+{% set active_page = "profile" %}
+{% set active_link = "profile" %}
 {% import "account/_helpers.html" as helper %}
-{% from "projects/_helpers.html" import render_grid_apps, broken_image %}
-{% import "privacy/locked.html" as privacy %}
+{% import "projects/_helpers.html" as app_helper %}
+{% import "_helpers.html" as geotagx_helper %}
+{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
 
 {% block content %}
-<div class="row">
-    <div class="span12">
-        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-        {% else %}
-        <section id="user-data">
-            <h1><strong>{{user.fullname}}</strong></h1>
-            {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
-        </section>
-        {% if apps_created %}
-        <section id="created-apps" style="margin-top:10px;">
-            {{render_grid_apps(apps_created, "Created Projects", upload_method)}}
-        </section>
-        {% endif %}
-        {% if apps %}
-        <section id="contributed-apps" style="margin-top:10px;">
-            {{render_grid_apps(apps, "Contributions", upload_method)}}
-        </section>
-        {% endif %}
-        {% endif %}
-    </div>
+<!-- NOTE :: A part of the profile page is rendered in the breadcrumb -->
+<!-- TO-DO : Fix this  -->
+
+<div class="row-fluid">
+    <div class="span9">
+        <hr>
+        <h2><b style="color:#34495e">{{ user.fullname}}'s</b>{{_(' Contributions') }}</h2>
+        <br/><br/>
+        <div class="container">
+            <div class="row  mar-b-30">
+                <div id="portfoliolist-three">
+                    <div class="col-md-12">
+                    {% for app in projects %}  
+                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_url_thumbnail(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app) }}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div><!-- end span9 -->
 </div>
-{{ broken_image() }}
+
+{{ app_helper.broken_image() }}
 {% endblock %}
