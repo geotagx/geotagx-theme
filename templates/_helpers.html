@@ -32,7 +32,7 @@
 
 {% macro render_geotagx_project_portfolio_element_with_stats(category, image_link, info_link, tutorial_link, contributing_link, percentage_complete, label, app, isAdmin) %}
 
-            <div class="portfolio {{category}}" data-cat="{{category}}">
+            <div class="portfolio {{category}}" data-cat="{{category}}" onclick="javascript:document.location='{{info_link}}'">
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
                         <div class="image-caption">
