@@ -13,27 +13,27 @@
             <div id="csv" class="col-md-5 col-sm-5 col-lg-5 well" style="margin-left:7px; margin-right:7px;">
                 <h2>{{_('Export in CSV format')}}</h2>
                 {% if n_tasks != 0 %}
-                <a href={{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}} rel="nofollow" class="btn btn-purchase" download>{{ _('Tasks') }}</a>
+                <a href={{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}} rel="nofollow" class="btn btn-primary" download>{{ _('Tasks') }}</a>
                 {% else %}
-                <a href='#' rel="nofollow" class="btn btn-purchase disabled" download>{{ _('Tasks') }}</a>
+                <a href='#' rel="nofollow" class="btn btn-primary disabled" download>{{ _('Tasks') }}</a>
                 {% endif %}
                 {% if n_task_runs != 0 %}
-                <a href={{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}} rel="nofollow" class="btn btn-purchase" download>{{ _('Task Runs') }}</a>
+                <a href={{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}} rel="nofollow" class="btn btn-primary" download>{{ _('Task Runs') }}</a>
                 {% else %}
-                <a href='#' rel="nofollow" class="btn btn-purchase disabled" download>{{ _('Task Runs') }}</a>
+                <a href='#' rel="nofollow" class="btn btn-primary disabled" download>{{ _('Task Runs') }}</a>
                 {% endif %}
             </div>
             <div id="json" class="col-md-5 col-sm-5 col-lg-5 well" style="margin-left:7px; margin-right:7px;">
                 <h2>{{_('Export in JSON format')}}</h2>
                 {% if n_tasks != 0 %}
-                <a href={{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}} rel="nofollow" class="btn btn-purchase" download>{{ _('Tasks') }}</a>
+                <a href={{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}} rel="nofollow" class="btn btn-primary" download>{{ _('Tasks') }}</a>
                 {% else %}
-                <a href='#' rel="nofollow" class="btn btn-purchase disabled" download>{{ _('Tasks') }}</a>
+                <a href='#' rel="nofollow" class="btn btn-primary disabled" download>{{ _('Tasks') }}</a>
                 {% endif %}
                 {% if n_task_runs != 0 %}
-                <a href={{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}} rel="nofollow" class="btn btn-purchase" download>{{ _('Task Runs') }}</a>
+                <a href={{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}} rel="nofollow" class="btn btn-primary" download>{{ _('Task Runs') }}</a>
                 {% else %}
-                <a href='#' rel="nofollow" class="btn btn-purchase disabled" download>{{ _('Task Runs') }}</a>
+                <a href='#' rel="nofollow" class="btn btn-primary disabled" download>{{ _('Task Runs') }}</a>
                 {% endif %}
             </div>
         </div>
@@ -47,8 +47,8 @@
                 {% endif %}
                 <p><span class="label label-danger"><i class="icon-bullhorn"></i> {{ _('IMPORTANT') }}</span> {{ _('This export option stills in beta mode and may fail in the')}}<br/>{{_(' CKAN server. If you get an error, please send an e-mail to info@pybossa.com') }}</p>
                 {% if current_user.ckan_api %}
-                <a id="ckan_task" href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='ckan')}}" rel="nofollow" class="btn btn-purchase">{{_('Tasks')}}</a>
-                <a id="ckan_task_run" href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='ckan')}}" rel="nofollow" class="btn btn-purchase">{{_('Task Runs')}}</a>
+                <a id="ckan_task" href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='ckan')}}" rel="nofollow" class="btn btn-primary">{{_('Tasks')}}</a>
+                <a id="ckan_task_run" href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='ckan')}}" rel="nofollow" class="btn btn-primary">{{_('Task Runs')}}</a>
                 {% else %}
                 <p id="ckan_warning">{{ _("You don't have a Datahub.io API key in your") }} {{BRAND}} {{ _('account. Please,') }} <br/><a href="http://datahub.io/user/register">{{ _('create an account') }}</a> {{ _('and copy/paste the API key in your profile in order to')}}<br/>{{_(' use this exporter') }}.</p>
                 {% endif %}
