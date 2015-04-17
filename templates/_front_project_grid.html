@@ -1,64 +1,63 @@
 {% from "_helpers.html" import render_geotagx_project_portfolio_element %}
+{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
+
+
+
+{% set category_image_dict = {'somalidrought':"https://farm4.staticflickr.com/3780/13445252764_6a969b0e93_m.jpg", 'yamunamonsoonflooding2013':"https://dl.dropboxusercontent.com/u/46576246/India/DSCI0091.jpg", 'yemeniagriculturalwaterassessment':"https://upload.wikimedia.org/wikipedia/commons/6/6b/Yemen_-_Location_Map_%282013%29_-_YEM_-_UNOCHA.svg", 'ebolaresponse':"http://farm4.staticflickr.com/3912/14770269674_63a555e566_z.jpg",'emergencyshelterassessmentinthemiddleeast':"https://farm8.staticflickr.com/7419/16208614030_6d3b70b7a3_b.jpg"} %}
+
+{% set category_label_dict = {'somalidrought':"Somali Drought", 'yamunamonsoonflooding2013':"Yamuna Monsoon Flooding 2013", 'yemeniagriculturalwaterassessment':"Yemeni Agricultural Water Assessment", 'ebolaresponse':"Ebola response",'emergencyshelterassessmentinthemiddleeast':"Emergency Shelter Assessment in the Middle East"} %}
+
+
+<!-- Voodoo for a simple counter :( -->
+{% set count = {'value': 0} %}
+{% for value in categories_projects.values(): %}
+        {% if count.update({'value': (count.value + value|length)}) %} {% endif %}
+{% endfor %}
 
 <div class="container" id="project_grid">
     <h3 class="text-center"><strong style="color:#444e67">Categories</strong></h3>
         <div class="row portfolio-anchors">
-                    <div class="col-md-2 filter active" data-filter="somali_drought yamuna_monsoon_flood yemeni_agricultural_water_assesment ebola_response emergency_shelter_assesment_in_middle_east">
-                        <span class="badge bg-green">31</span>
-                        <center><img class="portfolio-anchor-thumbnail" src="http://geotagx.org/static/img/default_logo.png"/></center>
+                    <div class="col-md-2 filter active" data-filter="{% for category in category_image_dict.keys() %}{{category}}{% if not loop.last %}{{" "}}{% endif %}{% endfor %}">
+                        <span class="badge bg-green">{{count.value}}</span>
+                            <center><img class="portfolio-anchor-thumbnail" src="http://geotagx.org/static/img/default_logo.png"/></center>                        
                         <span>All</span>
                     </div>
-                    <div class="col-md-2 filter" data-filter="somali_drought">
-                        <span class="badge bg-green">5</span>                        
-                        <center><img class="portfolio-anchor-thumbnail" src="https://farm4.staticflickr.com/3780/13445252764_6a969b0e93_m.jpg"/></center>
-                        <span>Somali Drought</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="yamuna_monsoon_flood">
-                        <span class="badge bg-green">4</span>                        
-                        <center><img class="portfolio-anchor-thumbnail" src="https://dl.dropboxusercontent.com/u/46576246/India/DSCI0091.jpg"/></center>
-                        <span>Yamuna Monsoon Flood 2013</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="yemeni_agricultural_water_assesment">
-                        <span class="badge bg-green">5</span>                        
-                        <center><img class="portfolio-anchor-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Yemen_-_Location_Map_%282013%29_-_YEM_-_UNOCHA.svg"/></center>
-                        <span>Yemeni Agricultural Water Assesment</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="ebola_response">
-                        <span class="badge bg-green">5</span>                        
-                        <center><img class="portfolio-anchor-thumbnail" src="http://farm4.staticflickr.com/3912/14770269674_63a555e566_z.jpg"/></center>
-                        <span>Ebola Response</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="emergency_shelter_assesment_in_middle_east">
-                        <span class="badge bg-green">9</span>                        
-                        <center><img class="portfolio-anchor-thumbnail" src="https://farm8.staticflickr.com/7419/16208614030_6d3b70b7a3_b.jpg"/></center>
-                        <span>Emergency Shelter Assesment in the Middle East</span>
-                    </div>
+                    {% for category in category_image_dict.keys() %}
+                        <div class="col-md-2 filter" data-filter="{{category}}">
+                            <span class="badge bg-green">{% if category in categories_projects.keys() %}{{categories_projects[category].__len__()}}{%else%} 0 {% endif %}</span>                        
+                            <center><img class="portfolio-anchor-thumbnail" src="{{category_image_dict[category]}}"/></center>
+                            <span>{{category_label_dict[category]}}</span>
+                        </div>
+                    {% endfor %}
         </div>
 </div>
 
 <hr>
-
+{% set app_list = [] %}
+{% set app_list_indices = [] %}
 <div class="container">
     <div class="row  mar-b-30">
         <div id="portfoliolist-three">
             <div class="col-md-12">
-
-            {{ render_geotagx_project_portfolio_element(category="somali_drought", image_link="/static/geotagx-img/portfolios/logo/5.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="yamuna_monsoon_flood", image_link="/static/geotagx-img/portfolios/app/5.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="yemeni_agricultural_water_assesment", image_link="/static/geotagx-img/portfolios/card/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="ebola_response", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="somali_drought", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="emergency_shelter_assesment_in_middle_east", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="yamuna_monsoon_flood", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="ebola_response", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="somali_drought", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="emergency_shelter_assesment_in_middle_east", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="yamuna_monsoon_flood", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="ebola_response", image_link="/static/geotagx-img/portfolios/icon/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="somali_drought", image_link="/static/geotagx-img/portfolios/logo/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="emergency_shelter_assesment_in_middle_east", image_link="/static/geotagx-img/portfolios/web/3.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-            {{ render_geotagx_project_portfolio_element(category="yamuna_monsoon_flood", image_link="/static/geotagx-img/portfolios/app/1.jpg",  info_link="/", tutorial_link="/", contributing_link="/", percentage_complete="57", label="Test App") }}
-
+            <!-- This block collects all the known apps and categories as a list of tuples -->
+            {% for category in  categories_projects.keys() %}
+                {% if category in category_image_dict.keys() %}
+                    {% for app in categories_projects[category] %}
+                        {% if app_list.append((app,category)) %}{% endif %}                        
+                        {% if app_list_indices.append(app.short_name) %}{% endif %}                        
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            <!-- This block randomly shuffles the whole list -->
+            <!-- Sadly jinja2 doesnt have a shuffle filter :(, so we hack one using whatever tools we have
+            This hack is necessary as we DO-NOT want to touch the code outside the geotagx-theme repository, 
+            so that we dont have any major conflicts while we regularly upgrade pybosse -->
+            {% for i in range(app_list|length) %}
+            {% set temp_selection = app_list|random %} <!-- Randomly select one element from the list -->
+            {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(temp_selection[0], temp_selection[1], current_user.admin) }}<!-- Render the element -->       
+            {% if app_list.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list -->                   
+            {% if app_list_indices.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list_indices -->                          
+            {% endfor %}
             </div>
         </div>
     </div>

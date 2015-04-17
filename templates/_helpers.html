@@ -80,6 +80,56 @@
  
 {% endmacro %}
 
+{% macro render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method) %}
+
+            <div class="portfolio {{category}}" data-cat="{{category}}" onclick="javascript:document.location='{{info_link}}'">
+                <div class="portfolio-wrapper">
+                    <div class="portfolio-hover">
+                        <div class="image-caption">
+                            <br/>
+                            <a href="{{url_for('project.details', short_name=app.short_name)}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
+                            <a href="#" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            {% if isAdmin %}
+                            <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
+                            {% endif %}
+
+                            <br/><br/><br/>
+                            <a href="{{url_for('project.presenter', short_name=app.short_name)}}" class="label label-success icon fa-3x" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play" style="padding:10px"></i></a>
+
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_tasks }}
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-tasks"></i> {{_('Tasks')}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_volunteers }}
+                            </div>
+                            <div class="portfolio-stat-label">                            
+                            <i class="fa fa-users"></i> 
+                            {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            {{ app.overall_progress }} %
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-check-square-o"></i> {{_('Complete')}}
+                            </div>
+                        </div>  
+                        <img src="{{geotagx_app_thumbnail_url(app, upload_method)}}" style="width:100%;height:300px"  alt="" />
+                    </div>
+                </div>                     
+                <h4 class="portfolio-label">{{app.name}} </h4>                                           
+            </div>
+ 
+{% endmacro %}
+
 
 {% macro geotagx_render_app_tile(app, upload_method, draft=False) %}
             <div class="portfolio {% if draft %} draft {% else %} published {% endif %} " data-cat="{% if draft %} draft {% else %} published {% endif %} " onclick="javascript:document.location='/project/{{app.short_name}}'">
@@ -121,4 +171,3 @@
 	    {{url_for('static', filename='img/placeholder.project.png')}}
 	{% endif %}
 {% endmacro %}
-

@@ -3237,9 +3237,17 @@ div.header h3{
     text-align:center;
     padding-top:15px;
     padding-bottom:15px;
+
+    border-top : 0px;
+    border-left : 1px;
+    border-right : 1px;
+    border-bottom : 0px;
+    border-style: solid;
+    border-color: #444e67;
+
     position:relative;
     top:-75px;
-    color:#48cfad;
+    color:#444e67;
     opacity:0.9;
 }
 
