@@ -89,12 +89,12 @@
             </p>
             {% endif %}  
 
-            {% if not private %}
-            <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
-            {% endif %}
+            <h3><i class="fa fa-dashboard fa-lg pr-10"></i> {{ _('Contributed Tasks') }}: <strong class="user-profile-values">{{ user.score }}</strong></h3>
+            
             {% if settings %}
             <h3><i class="fa fa-key fa-lg pr-10"></i> {{ _('API key') }}: <strong class="user-profile-values"><code>{{ user.api_key }}</code></strong></h3>
             {% endif %}       
+            <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
 
             <hr>
             <a href="{{url_for('account.update_profile', name=user.name)}}" class="btn btn-purchase pull-right">

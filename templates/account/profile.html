@@ -19,8 +19,13 @@
             <div class="row  mar-b-30">
                 <div id="portfoliolist-three">
                     <div class="col-md-12">
-                    {% for app in projects_contrib %}      
+                    {% for app in projects_contrib %}
+                    {% if app.owner_id == current_user.id %}
+                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_url_thumbnail(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True) }}                    
+                    {% else %}
                         {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_url_thumbnail(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app) }}
+                    {% endif %}
+
                     {% endfor %}
                     </div>
                 </div>
