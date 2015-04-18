@@ -137,9 +137,9 @@
                     <div class="portfolio-hover">
                         <div class="image-caption">                     
                             <span style="margin-left:5px;">{{app.overall_progress}}% Complete</span><br/><br/>
-                            <a href="/project/{{app.short_name}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
+                            <a href="{{url_for('project.details', short_name=app.short_name)}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
                             <a href="#" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>                            
-                            <a href="/project/{{app.short_name}}/settings" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
+                            <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
                             <br/><br/>
                             <a href="{{url_for('project.presenter', short_name=app.short_name)}}" class="label label-success icon fa-3x" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play" style="padding:10px"></i></a><br/>
 
