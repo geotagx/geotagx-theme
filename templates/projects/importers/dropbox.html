@@ -10,9 +10,6 @@
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="{{ config.get('DROPBOX_APP_KEY') }}"></script>
 
 <div class="row">
-    <div class="span3">
-        {{ helper.render_project_local_nav(project, 'tasks', current_user)}}
-    </div>
     <div class="span9">
        <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
        <h2>{{_('From your Dropbox account')}}</h2>
