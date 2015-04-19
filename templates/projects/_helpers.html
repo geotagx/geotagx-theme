@@ -340,7 +340,6 @@ function imgError(image) {
                   <h3>
                   <i class="fa fa-clock-o fa-lg pr-10">
                   </i>
-
                     {% if not n_tasks %}
                         {% set n_tasks = 0 %}
                     {% endif %}
@@ -348,13 +347,20 @@ function imgError(image) {
                     {% if not n_completed_tasks %}
                         {% set n_completed_tasks = 0 %}
                     {% endif %}
-
-
                   <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
                   <h3>
                   <i class="fa fa-eye fa-lg pr-10">
                   </i>
                   <i></i>  <strong class="project-profile-values">{{ _('Not Visible to Others') if project.hidden else _('Visible to Others') }}</strong><strong class="project-profile-labels"></strong></h3>
+                  <h3 style="display:inline">
+                  <i class="fa fa-calendar fa-lg pr-10">
+                  </i></h3><h4 style="display:inline">
+                  <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('created on')}}</strong>  {{ project.created[0:10] }}</h4>
+                  <br/><br/>
+                  <h3 style="display:inline">
+                  <i class="fa fa-history fa-lg pr-10">
+                  </i></h3><h4 style="display:inline">
+                  <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('last activity on')}}</strong>  {{ project.updated[0:10] }}</h4>
             </div>   
             <div class="col-lg-6 col-sm-6">
                 <br/>
