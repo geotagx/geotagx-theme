@@ -1,27 +1,46 @@
 {% macro render_field(field, addon, prepend, tooltip, label_text) %}
-    <div class="control-group {% if field.errors %} error {% endif %}">
-        {{ render_label(field, tooltip, label_text) }}
-        <div class="controls">
-            {% if addon %}
-            <div class="{% if prepend %}input-prepend{%else%}input-append{%endif%}">
-                {% if prepend %}
-                <span class="add-on">{{addon|safe}}</span>
-                {{field(**kwargs)}}
-                {% else %}
-                {{field(**kwargs)}}
-                <span class="add-on">{{addon|safe}}</span>
-                {% endif %}
+        {% if 'class_' in kwargs.keys() %}
+          {% if kwargs.update({'class_' : kwargs['class_']+ " input-lg form-control"}) %}{% endif %}
+        {% else %} 
+          {% if kwargs.update({'class_' : " input-lg form-control"}) %}{% endif %}
+        {% endif %}
+
+        <div class="row">
+          <div class="col-md-3 geotagx-field-label">
+            {{ render_label(field, tooltip, label_text) }}
+          </div>
+          {% if field.type != "FileField" %}
+          <div class="col-md-9 geotagx-field-value"> 
+          {% else %}
+          <div class="col-md-6 geotagx-field-value">           
+          {% endif %}
+              <div class="form-group {% if field.errors %} has-error {% endif %}">
+                    {% if addon %}
+                    <div class="{% if prepend %}input-prepend{%else%}input-append{%endif%}">
+                        {% if prepend %}
+                        <span class="add-on">{{addon|safe}}</span>
+                        {{field(**kwargs)}}
+                        {% else %}
+                        {{field(class_="input-lg form-control")}}
+                        <span class="add-on">{{addon|safe}}</span>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                        {{field(**kwargs)}}
+                        {% endif %}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                        <span class="help-inline">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}                 
+              </div>
             </div>
-            {% else %}
-                {{field(**kwargs)}}
-                {% endif %}
-            {% if field.errors %}
-                {% for error in field.errors %}
-                <span class="help-inline">{{ error }}</span>
-                {% endfor %}
-            {% endif %}
+          {% if field.type == "FileField" %}
+          <div id="{{field.name}}_upload_button" class="col-md-3 geotagx-field-value">
+            <button type="submit" name="btn" value="Upload" class="btn btn-primary input-lg">{{ _("Upload") }}</button>     
+          </div>
+          {% endif %}            
         </div>
-    </div>
 {% endmacro %}
 
 
@@ -45,16 +64,42 @@
 {% macro geotagx_render_field(field, id, title, type, value, class) %}
               <div class="form-group {% if field.errors %} has-error {% endif %}">
                   <div>
-                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg {% if class %} {{ class }} {% endif %}" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}", value="{{ value }}" >
+                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg {% if class %} {{ class }} {% endif %} {% if field.errors %} has-error {% endif %}" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}", value="{{ value }}" >
                       {% if field.errors %}
                         <ul style="list-style-position:inside;">
                           {% for error in field.errors %}
-                          <li><span class="help-block">{{ error }}</span></li>
+                          <li><span class="help-block danger">{{ error }}</span></li>
                           {% endfor %}
                         </ul>
                       {% endif %}                    
                   </div>
               </div>
+{% endmacro %}
+
+{% macro geotagx_render_field_with_label(field, label_text) %}
+        <div class="row">
+          <div class="col-md-3 geotagx-field-label">
+            {% if label_text %}
+              {{ label_text}}
+            {% else %}
+              {{field.label}}
+            {% endif %}
+          </div>
+          <div class="col-md-9 geotagx-field-value"> 
+              <div class="form-group {% if field.errors %} has-error {% endif %}">
+                  <div>                    
+                      {{field(class_="input-lg form-control")}}
+                      {% if field.errors %}
+                        <ul style="list-style-position:inside;">
+                          {% for error in field.errors %}
+                          <li><span class="help-block danger">{{ error }}</span></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}                    
+                  </div>
+              </div>
+            </div>
+        </div>
 {% endmacro %}
 
 {% macro geotagx_render_checkbox(field, id, checked_unchecked, value) %}

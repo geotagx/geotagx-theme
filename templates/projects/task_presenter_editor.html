@@ -31,9 +31,9 @@
             <fieldset>
                 {{ render_field(form.editor)}}
                 <div class="form-actions">
-                    <input type="submit" value={{ _('Update the project task presenter') }} class="btn btn-primary" />
-                    <a href="#" class="btn btn-preview" value="preview">{{ _('Preview the task presenter') }}</a>
-                    <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">{{ _('Cancel') }}</a>
+                    <input type="submit" value={{ _('Update the project task presenter') }} class="btn btn-primary input-lg" />
+                    <a href="#" class="btn btn-success input-lg" value="preview">{{ _('Preview the task presenter') }}</a>
+                    <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-danger input-lg">{{ _('Cancel') }}</a>
                 </div>
             </fieldset>
         </form>
@@ -49,7 +49,7 @@
         <div id="preview"></div>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{{ _('Close') }}</button>
+        <button class="btn btn-danger input-lg" data-dismiss="modal" aria-hidden="true">{{ _('Close') }}</button>
     </div>
 </div>
 <script>

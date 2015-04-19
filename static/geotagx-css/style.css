@@ -3360,3 +3360,12 @@ margin-bottom:10px;
 .geotagx-social-buttons {
     padding-top:20px;
 }
+.geotagx-field-label {
+    font-size : 24px;
+    font-weight : 500;
+    padding-top : 10px;
+    color : grey;
+}
+.geotagx-field-value .form-group .input-lg {
+    color : #34495e;
+}
