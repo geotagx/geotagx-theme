@@ -8,15 +8,23 @@
     {% if project %}
     <!-- Project -->
     <div class="span9">
-        <h1><strong>{{ project.name }}</strong>: {{ _('Settings') }}</h1>
-        {{ helper.render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) }}
         <h2>{{ _('Project Settings') }}</h2>
-        <div class="btn-group">
-            <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="icon-edit icon-white"></i> {{ _('Edit the project details') }}</a>
-            <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="icon-wrench icon-white"></i> {{ _('Task Settings') }}</a>
-            <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="icon-trash icon-white"></i> {{ _('Delete the project') }}</a>
-            <a class="btn" href="{{ url_for('project.new_blogpost', short_name = project.short_name) }}"><i class="icon-pencil icon-white"></i> {{ _('Write a blog post') }}</a>
+        <center>
+
+
+        <div class="btn-group btn-group-lg" role="group">
+            <a type="button" class="btn btn-primary" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit fa-white"></i> {{ _('Edit the project details') }}</a>
         </div>
+        <div class="btn-group btn-group-lg" role="group">
+            <a type="button" class="btn btn-warning" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="fa fa-wrench fa-white"></i> {{ _('Task Settings') }}</a>
+        </div>
+        <div class="btn-group btn-group-lg" role="group">
+            <a type="button" class="btn btn-danger" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="fa fa-trash fa-white"></i> {{ _('Delete the project') }}</a>
+        </div>
+        <div class="btn-group btn-group-lg" role="group">
+            <a type="button" class="btn btn-success" href="{{ url_for('project.new_blogpost', short_name = project.short_name) }}"><i class="fa fa-pencil fa-white"></i> {{ _('Write a blog post') }}</a>        
+        </div>                                
+        </center>
     </div>
     {% else %}
     <div class="page-header">
