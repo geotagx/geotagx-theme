@@ -362,6 +362,23 @@ function imgError(image) {
                   <i class="fa fa-history fa-lg pr-10">
                   </i></h3><h4 style="display:inline">
                   <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('last activity on')}}</strong>  {{ project.updated[0:10] }}</h4>
+                  <div class="row geotagx-social-buttons text-center">
+                        <a target="_blank" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}">
+                            <button class="btn btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </button>
+                        </a>
+                        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}">
+                            <button class="btn btn-facebook">
+                                <i class="fa fa-facebook"></i>
+                            </button>
+                        </a>                       
+                        <a target="_blank" href="https://plus.google.com/share?url={{request.url}}">
+                            <button class="btn btn-google-plus">
+                                <i class="fa fa-google-plus"></i>
+                            </button>
+                        </a>
+                  </div>
             </div>   
             <div class="col-lg-6 col-sm-6">
                 <br/>
