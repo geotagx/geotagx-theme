@@ -147,8 +147,33 @@
                             {% if draft %}
                             {{ _('DRAFT') }}<br/>
                             {% endif %}     
-                            </h2>  
+                            </h2>                            
                         </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_tasks }}
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-tasks"></i> {{_('Tasks')}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value">
+                            {{ app.n_volunteers }}
+                            </div>
+                            <div class="portfolio-stat-label">                            
+                            <i class="fa fa-users"></i> 
+                            {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
+                            </div>
+                        </div>
+                        <div class="text-center col-md-4 portfolio-stat-tile">
+                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            {{ app.overall_progress }} %
+                            </div>
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-check-square-o"></i> {{_('Complete')}}
+                            </div>
+                        </div>                          
                         <img src="{{ geotagx_app_thumbnail_url(app, upload_method) }}" alt="" width="100%" onerror="imgError(this);"/>
                         
                     </div>
