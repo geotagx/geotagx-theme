@@ -82,7 +82,7 @@
 
 {% macro render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method) %}
 
-            <div class="portfolio {{category}}" data-cat="{{category}}" onclick="javascript:document.location='{{info_link}}'">
+            <div class="portfolio {{category}}" data-cat="{{category}}" onclick="javascript:document.location='{{url_for('project.details', short_name=app.short_name)}}'">
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
                         <div class="image-caption">
