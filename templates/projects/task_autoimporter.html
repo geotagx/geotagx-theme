@@ -6,6 +6,7 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
+
 <div class="row">
     <div class="span9">
         <h1><strong>{{project.name}}</strong>: {{_('Currently configured autoimport')}}</h1>

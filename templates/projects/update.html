@@ -3,6 +3,8 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
+{{ helper.render_project_sublabel("Settings > Edit Project") }}
+
 {% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />

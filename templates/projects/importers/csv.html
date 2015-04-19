@@ -4,6 +4,8 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
+{% import "projects/_helpers.html" as helper %}
+{{ helper.render_project_sublabel("Import Tasks") }}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
 <div class="row">

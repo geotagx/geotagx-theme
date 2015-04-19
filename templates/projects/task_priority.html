@@ -5,6 +5,8 @@
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
+{% import "projects/_helpers.html" as helper %}
+{{ helper.render_project_sublabel("Tasks > Priority") }}
 {% if project %}
         <div class="row">
             <div class="span9">

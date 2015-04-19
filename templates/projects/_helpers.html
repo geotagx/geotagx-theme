@@ -322,6 +322,8 @@ function imgError(image) {
               <a href="#" class="profile_param_link">
                 {{ project.name }}
               </a>
+              <div class="profile_param_sublabel">
+              </div>
             </h1>
             <hr>
             <div class="col-lg-6 col-sm-6">
@@ -382,4 +384,11 @@ function imgError(image) {
           </div>
         </div>
       </div>     
+{% endmacro %}
+{% macro render_project_sublabel(sublabel) %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".profile_param_sublabel").html("{{sublabel}}");
+    });
+</script>
 {% endmacro %}

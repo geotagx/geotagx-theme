@@ -3347,3 +3347,11 @@ margin-bottom:10px;
 .breadcrumbs {
     padding-top:30px;
 }
+
+.profile_param_sublabel {
+    font-size : 22px;
+    color : grey;
+    display : inline;
+    text-transform:  none;
+    margin-left : 10px;
+}

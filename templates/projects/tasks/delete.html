@@ -4,6 +4,8 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
+{{ helper.render_project_sublabel("Tasks > Delete") }}
+
 <div class="row">
     <div class="span9">
         <h1><strong>{{project.name}}</strong>: {{ _('Delete all Tasks and Task Runs') }}</h1>
