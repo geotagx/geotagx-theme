@@ -2,6 +2,7 @@
 {% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 
+{% set active_page = 'home#index' %}
 {% block content %}
 
 
@@ -35,5 +36,6 @@
 <div class="container-fluid">
 {% include 'home/_get_started.html' %}
 </div>
-<div class="container">
 {% endblock %}
+
+

@@ -82,8 +82,10 @@
 
         {% include "_flash_messages.html" %}
         {% block content %}{% endblock %}
-    
+        
+        {% if active_page != "home#index" %}
         </div>
+        {% endif %}
         <!--container end-->
 
     {% include '_footer.html' %}
