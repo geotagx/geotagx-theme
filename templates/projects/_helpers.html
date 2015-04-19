@@ -185,7 +185,6 @@ function imgError(image) {
 
 {% macro render_project_title(project, upload_method, subtitle=None) %}
 <h1>
-    {{ render_project_thumbnail(project, upload_method, class="img-polaroid", style="max-width:60px") }}
     {% if subtitle %}
     <strong>{{ project.name }}</strong>: {{subtitle}}</h1>
     {% else %}

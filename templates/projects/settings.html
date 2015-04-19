@@ -10,9 +10,10 @@
     <!-- Project -->
     <div class="span9">
         <h2>{{ _('Project Settings') }}</h2>
+        <hr>
+        <hr>
+
         <center>
-
-
         <div class="btn-group btn-group-lg" role="group">
             <a type="button" class="btn btn-primary" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit fa-white"></i> {{ _('Edit the project details') }}</a>
         </div>
