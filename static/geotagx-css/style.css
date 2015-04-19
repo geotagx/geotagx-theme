@@ -2991,6 +2991,7 @@ div.header h3{
 .partners .row .col-sm-2 a img.img-thumbnail{
     height : 100px !important;
     border : none;
+    background-color: transparent;
 }
 
 .partners {
