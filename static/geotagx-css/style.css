@@ -3266,10 +3266,10 @@ div.header h3{
 }
 
 .portfolio-anchors div.active center img{
-        border:2px solid #475168;
-        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+        border:5px solid #475168;
+        box-shadow: 0 0 50px rgba(0, 0, 0, .9);
+        -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, .9);
+        -moz-box-shadow: 0 0 50px rgba(0, 0, 0, .9);    
 }
 
 .portfolio-anchors div.active center i{
