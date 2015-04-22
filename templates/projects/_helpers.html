@@ -279,13 +279,17 @@ function imgError(image) {
              {{ _('Blog') }}
             </a>
             {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
-            and current_user.pro) or current_user.admin %}            
+            and current_user.pro) or current_user.admin %}  
+              {% set privileged_user = True %}
+            {% endif %}   
+
+            {% if privileged_user %}       
                 <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
                   <i class="fa fa-file-text-o"></i>
                  {{ _('Audit Logs') }}
                 </a>
             {% endif %}  
-            {% if ( current_user.is_authenticated() and current_user.id == project.owner_id ) or current_user.admin %}              
+            {% if privileged_user %}       
                 <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
                   <i class="fa fa-wrench"></i>
                  {{ _('Settings') }}
@@ -350,6 +354,8 @@ function imgError(image) {
                             {% set n_completed_tasks = 0 %}
                         {% endif %}
                       <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
+
+                      {% if privileged_user %}                             
                       <h3>
                       <i class="fa fa-eye fa-lg pr-10">
                       </i>
@@ -363,6 +369,10 @@ function imgError(image) {
                       <i class="fa fa-history fa-lg pr-10">
                       </i></h3><h4 style="display:inline">
                       <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('last activity on')}}</strong>  {{ project.updated[0:10] }}</h4>
+                      {% else %}
+                      <br/><br/><br/>
+                      {% endif %}
+
                       <div class="row geotagx-social-buttons text-center">
                             <a target="_blank" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}">
                                 <button class="btn btn-twitter">
