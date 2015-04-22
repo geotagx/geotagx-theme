@@ -2,7 +2,7 @@
         {% if 'class_' in kwargs.keys() %}
           {% if kwargs.update({'class_' : kwargs['class_']+ " input-lg form-control"}) %}{% endif %}
         {% else %} 
-          {% if kwargs.update({'class_' : " input-lg form-control"}) %}{% endif %}
+          {% if field.type != "FileField" and field.type != "SelectField" and kwargs.update({'class_' : " input-lg form-control"}) %}{% endif %}
         {% endif %}
 
         <div class="row">
