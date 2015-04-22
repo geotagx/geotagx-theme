@@ -15,9 +15,6 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
               <li {% if active_page == 'about' %} class="active" {% endif %} class="menu-item"><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
-              {% if not current_user.is_anonymous() %}
-              <li {% if active_page == 'create' %} class="active" {% endif %} class="menu-item"><a href="{{ url_for('project.new') }}">{{ _('Create') }}</a></li>
-              {% endif %}
               <li {% if active_page == 'projects' %} class="active" {% endif %} class="menu-item"><a href="/#project_grid">{{ _('Projects') }}</a></li>
               <li class="menu-item"><a href="http://tecfalabs.unige.ch/survey/index.php/471228/lang-en" target="_blank">Feedback</a></li>
             </ul>
