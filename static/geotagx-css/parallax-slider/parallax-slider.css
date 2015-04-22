@@ -65,8 +65,8 @@
 	margin-left: -8%;
 }
 .da-slide p{
-	width: 45%;
-	top: 260px;
+	width: 60%;
+	top: 150px;
 	color: #ffffff;
 	font-size: 18px;
 	line-height: 26px;
@@ -81,13 +81,13 @@
 .da-slide .da-img{
 	text-align: center;
 	width: 30%;
-	top: 70px;
+	top: 30px;
 	height: 256px;
 	line-height: 320px;
 	left: 110%; /*60%*/
 }
 .da-slide .da-link{
-	top: 390px; /*depends on p height*/
+	top: 270px; /*depends on p height*/
 	border-radius: 3px;
 	box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 	color: #fff;
