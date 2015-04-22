@@ -3369,3 +3369,10 @@ margin-bottom:10px;
 .geotagx-field-value .form-group .input-lg {
     color : #34495e;
 }
+
+#questionnaire-conclusion a {
+    color : #48CFAD;
+}
+#questionnaire-conclusion a:hover {
+    text-decoration: underline;
+}
