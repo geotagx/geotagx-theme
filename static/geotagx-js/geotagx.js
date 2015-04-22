@@ -35,8 +35,6 @@ $( document ).ready(function() {
         // Run the show!
         filterList.init();
     });
-
-
     $('.magnefig').each(function(){
         $(this).magnificPopup({
             type:'image',
@@ -46,4 +44,5 @@ $( document ).ready(function() {
     });
 
 });
+
 

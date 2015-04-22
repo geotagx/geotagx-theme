@@ -271,7 +271,7 @@ function imgError(image) {
 
 
 
-{% macro render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) %}
+{% macro render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user, subpage) %}
 <div class="container">
         <div class="row" id="project_menu">
             <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
@@ -309,97 +309,108 @@ function imgError(image) {
             </a> 
         </div>    
         <div class="row">
-          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
-            <a href="#">
-                {{render_project_thumbnail(project, upload, class="img-circle col-md-12")}}
-            </a><br/><br/>
-            {{project.description}}
-          </div>
-          <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
-
-            <h1>
+        <div id="profile_page_accordion" class="col-md-12 col-sm-12 col-lg-12 profile_param" data-collapse>
+            <h1 class="profile_param_accordion_handle">
               <a href="#" class="profile_param_link">
                 {{ project.name }}
               </a>
               <div class="profile_param_sublabel">
               </div>
+              <hr>
             </h1>
-            <hr>
-            <div class="col-lg-6 col-sm-6">
-                  <h3>
-                  <i class="fa fa-book fa-lg pr-10">
-                  </i>
-                  <i></i>  <strong class="project-profile-values">{{ n_tasks }}</strong><strong class="project-profile-labels"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{ _('Tasks')}}</a></strong></h3>
-                  <h3>
-                  <i class="fa fa-users fa-lg pr-10">
-                  </i>
-                  <i></i>  <strong class="project-profile-values">{{ n_volunteers }}</strong><strong class="project-profile-labels">{{ _('Volunteers') if n_volunteers != 1 else _('Volunteer')}}</strong></h3>
-                  <h3>
-                  <i class="fa fa-check-square-o fa-lg pr-10">
-                  </i>
-                  <i></i>  <strong class="project-profile-values">{{ n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Tasks Completed')}}</strong></h3>
-                  <h3>
-                  <i class="fa fa-briefcase fa-lg pr-10">
-                  </i>
-                    {% if not n_tasks %}
-                        {% set n_tasks = 0 %}
-                    {% endif %}
+            <div class="accordion-container">
+              <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                <a href="#">
+                    {{render_project_thumbnail(project, upload, class="img-circle col-md-12")}}
+                </a><br/><br/>
+                {{project.description}}
+              </div>
+              <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+                <div class="col-lg-6 col-sm-6">
+                      <h3>
+                      <i class="fa fa-book fa-lg pr-10">
+                      </i>
+                      <i></i>  <strong class="project-profile-values">{{ n_tasks }}</strong><strong class="project-profile-labels"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{ _('Tasks')}}</a></strong></h3>
+                      <h3>
+                      <i class="fa fa-users fa-lg pr-10">
+                      </i>
+                      <i></i>  <strong class="project-profile-values">{{ n_volunteers }}</strong><strong class="project-profile-labels">{{ _('Volunteers') if n_volunteers != 1 else _('Volunteer')}}</strong></h3>
+                      <h3>
+                      <i class="fa fa-check-square-o fa-lg pr-10">
+                      </i>
+                      <i></i>  <strong class="project-profile-values">{{ n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Tasks Completed')}}</strong></h3>
+                      <h3>
+                      <i class="fa fa-briefcase fa-lg pr-10">
+                      </i>
+                        {% if not n_tasks %}
+                            {% set n_tasks = 0 %}
+                        {% endif %}
 
-                    {% if not n_completed_tasks %}
-                        {% set n_completed_tasks = 0 %}
-                    {% endif %}
-                  <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
-                  <h3>
-                  <i class="fa fa-eye fa-lg pr-10">
-                  </i>
-                  <i></i>  <strong class="project-profile-values">{{ _('Not Visible to Others') if project.hidden else _('Visible to Others') }}</strong><strong class="project-profile-labels"></strong></h3>
-                  <h3 style="display:inline">
-                  <i class="fa fa-calendar fa-lg pr-10">
-                  </i></h3><h4 style="display:inline">
-                  <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('created on')}}</strong>  {{ project.created[0:10] }}</h4>
-                  <br/><br/>
-                  <h3 style="display:inline">
-                  <i class="fa fa-history fa-lg pr-10">
-                  </i></h3><h4 style="display:inline">
-                  <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('last activity on')}}</strong>  {{ project.updated[0:10] }}</h4>
-                  <div class="row geotagx-social-buttons text-center">
-                        <a target="_blank" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}">
-                            <button class="btn btn-twitter">
-                                <i class="fa fa-twitter"></i>
-                            </button>
-                        </a>
-                        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}">
-                            <button class="btn btn-facebook">
-                                <i class="fa fa-facebook"></i>
-                            </button>
-                        </a>                       
-                        <a target="_blank" href="https://plus.google.com/share?url={{request.url}}">
-                            <button class="btn btn-google-plus">
-                                <i class="fa fa-google-plus"></i>
-                            </button>
-                        </a>
-                  </div>
-            </div>   
-            <div class="col-lg-6 col-sm-6">
-                <br/>
-                <a class="start-contributing noselect"  href="{{url_for('project.presenter', short_name=project.short_name)}}">
-                    <center>
-                    <i class="fa fa-play big-icon-10"></i>
+                        {% if not n_completed_tasks %}
+                            {% set n_completed_tasks = 0 %}
+                        {% endif %}
+                      <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
+                      <h3>
+                      <i class="fa fa-eye fa-lg pr-10">
+                      </i>
+                      <i></i>  <strong class="project-profile-values">{{ _('Not Visible to Others') if project.hidden else _('Visible to Others') }}</strong><strong class="project-profile-labels"></strong></h3>
+                      <h3 style="display:inline">
+                      <i class="fa fa-calendar fa-lg pr-10">
+                      </i></h3><h4 style="display:inline">
+                      <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('created on')}}</strong>  {{ project.created[0:10] }}</h4>
+                      <br/><br/>
+                      <h3 style="display:inline">
+                      <i class="fa fa-history fa-lg pr-10">
+                      </i></h3><h4 style="display:inline">
+                      <i></i> <strong class="project-profile-labels" style="margin-right:5px">{{_('last activity on')}}</strong>  {{ project.updated[0:10] }}</h4>
+                      <div class="row geotagx-social-buttons text-center">
+                            <a target="_blank" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}">
+                                <button class="btn btn-twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </button>
+                            </a>
+                            <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}">
+                                <button class="btn btn-facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </button>
+                            </a>                       
+                            <a target="_blank" href="https://plus.google.com/share?url={{request.url}}">
+                                <button class="btn btn-google-plus">
+                                    <i class="fa fa-google-plus"></i>
+                                </button>
+                            </a>
+                      </div>
+                </div>   
+                <div class="col-lg-6 col-sm-6">
                     <br/>
-                    <div class="start-contributing-text">Start Contributing</div>
-                    </center>
-                </a>
-                <br/><br/><br/>
-                <br/>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="{{overall_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{overall_progress}}%;">
-                  </div>
-                </div>
-                <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>                  
-            </div>                                            
+                    <a class="start-contributing noselect"  href="{{url_for('project.presenter', short_name=project.short_name)}}">
+                        <center>
+                        <i class="fa fa-play big-icon-10"></i>
+                        <br/>
+                        <div class="start-contributing-text">Start Contributing</div>
+                        </center>
+                    </a>
+                    <br/><br/><br/>
+                    <br/>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="{{overall_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{overall_progress}}%;">
+                      </div>
+                    </div>
+                    <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>                  
+                </div>                                            
+              </div>
+            </div>
           </div>
         </div>
-      </div>     
+      </div>
+      <script type="text/javascript">
+      $(document).ready(function(){
+        $("#profile_page_accordion").accordion({active:true, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});   
+        {% if request.path == "/project/"+ project.short_name+"/" %}        
+          $(".profile_param_accordion_handle").click();
+        {% endif %}
+      });
+      </script>   
 {% endmacro %}
 {% macro render_project_sublabel(sublabel) %}
 <script type="text/javascript">

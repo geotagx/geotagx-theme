@@ -3103,10 +3103,23 @@ div.header h3{
 }
 
 .profile_param_link {
-    color:white;
+    color:white !important;
 }
-.profile_param_link:hover;{
-    color:#48cfad;
+.profile_param_accordion_handle:hover .ui-accordion-header-icon{
+    color : #48cfad !important;
+}
+.profile_param_accordion_handle:hover .profile_param_link{
+    color : #48cfad !important;
+}
+
+.profile_param_accordion_handle {
+    cursor : pointer;
+    margin-bottom : 3px;
+    outline : none;
+}
+
+.accordion-container {
+    padding-top:3px;
 }
 
 .user-profile-values {
