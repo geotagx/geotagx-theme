@@ -5,7 +5,6 @@
 <div id="da-slider" class="da-slider" style="height:350px">
 
 {% for f in categories_projects['featured'] %}
-  
         <div class="da-slide">
         <div class="container">
           <div class="row">
@@ -14,10 +13,10 @@
             <i>{{f.short_name}}</i>
             <br>
           </h2>
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            {{ f.short_description }}
-          </div>
-          <a href="#" class="btn btn-info btn-lg da-link">
+          <p class="col-md-12 col-sm-12 col-lg-12">
+            {{ f.description }}
+          </p>
+          <a href="{{url_for('project.details', short_name=f.short_name)}}" class="btn btn-info btn-lg da-link">
             Analyse
           </a>
           <div class="da-img">
