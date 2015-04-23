@@ -10,7 +10,7 @@ body {
     /*font-family: 'Open Sans', sans-serif;*/
     padding: 0px !important;
     margin: 0px !important;
-    font-size: 14px;
+    font-size: 16px;
 }
 a,
 a:hover,
@@ -62,7 +62,7 @@ p { line-height: 22px }
 .head-section .nav li a,
 .head-section .nav li.active ul.dropdown-menu li a {
     color: #999;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     background: none;
 }
@@ -240,7 +240,7 @@ ul.dropdown-menu { border: none }
     font-weight: 400;
 }
 .f-text {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     padding-bottom: 10px;
     margin-bottom: 15px;
@@ -332,11 +332,11 @@ ul.dropdown-menu { border: none }
 .tab .nav-tabs.nav-justified > li:last-child { border-right: none }
 .p-head {
     color: #48cfad;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
 }
 .cmt-head {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
 }
 .p-thumb img {
@@ -1230,7 +1230,7 @@ ul.tag li a {
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-bottom: 1px solid #636F79;
-    font-size: 14px;
+    font-size: 16px;
 }
 .tweet-box:before {
     background-color: #505b71;
@@ -1349,11 +1349,11 @@ ul.page-footer-list li i { padding-right: 10px }
     padding: 5px;
     color: #fff;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 16px;
 }
 .slide_desc {
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     font-weight: lighter;
 }
@@ -1366,7 +1366,7 @@ ul.page-footer-list li i { padding-right: 10px }
     background: #48cfad;
     padding: 15px 20px;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -1376,7 +1376,7 @@ ul.page-footer-list li i { padding-right: 10px }
     background: #16a085;
     padding: 15px 20px;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: uppercase;
     cursor: pointer;
 }
