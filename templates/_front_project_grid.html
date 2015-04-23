@@ -14,6 +14,11 @@
         {% if count.update({'value': (count.value + value|length)}) %} {% endif %}
 {% endfor %}
 
+
+{% for f in categories_projects['featured'] %}
+{{ f }}
+{% endfor %}
+
 <div class="container" id="project_grid">
     <h3 class="text-center"><strong style="color:#444e67">Projects</strong></h3>
         <div class="row portfolio-anchors">
