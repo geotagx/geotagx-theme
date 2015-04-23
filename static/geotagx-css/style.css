@@ -3212,20 +3212,13 @@ div.header h3{
 
 .portfolio-anchors div:hover center img{
         border:2px solid #475168;
-        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
+        box-shadow: 0 0 40px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .8);        
 }
 
 .portfolio-anchors div:hover center i{
     color : #48cfad;       
-}
-
-.portfolio-anchors div:hover{
-        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);        
-        background-color: #f9f9f3;
 }
 
 .portfolio-anchors div:hover span{
