@@ -15,7 +15,7 @@
         {% elif request['path'][:18]=="/project/category/" %}
           
           {% import "projects/_helpers.html" as project_helper %}
-          {{ project_helper.render_category_profile(active_cat, pagination) }}]
+          {{ project_helper.render_category_profile(active_cat, pagination) }}
 
         {% elif active_page == "projects" %}
 
