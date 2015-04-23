@@ -3180,9 +3180,9 @@ div.header h3{
 }
 
 .portfolio-anchors div {
-    font-family:"courier";
     text-align:center;
     font-weight:500;
+    color : #444e67;
 }
 .portfolio-anchors div:hover{
     cursor:pointer;
