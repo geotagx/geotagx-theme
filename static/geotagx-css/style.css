@@ -3398,6 +3398,9 @@ opacity: 0.8;
 filter: alpha(opacity=80); /* For IE8 and earlier */
 position: absolute;
 }
+.ui-helper-hidden-accessible{
+    display:none;
+}
 
 .category_details a {
     color : #48cfad;
