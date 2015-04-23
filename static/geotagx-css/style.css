@@ -3390,4 +3390,20 @@ margin-bottom:10px;
     text-decoration: underline;
 }
 
+.ui-tooltip, .arrow:after {
+background: #34495e;
+width:auto;
+}
+.ui-tooltip {
+padding: 10px 20px;
+color: white;
+border-radius: 20px;
+box-shadow: 0 0 7px black;
+z-index: 9999;
+max-width: 300px;
+opacity: 0.8;
+filter: alpha(opacity=80); /* For IE8 and earlier */
+position: absolute;
+}
+
 

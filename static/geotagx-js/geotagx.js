@@ -43,6 +43,8 @@ $( document ).ready(function() {
         })
     });
 
+    $(".image-caption a").tooltip();
+
 });
 
 
