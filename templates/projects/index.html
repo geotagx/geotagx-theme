@@ -28,11 +28,8 @@
                 <i class="icon-wrench"></i> {{pagination.total_count}} {{ _('Draft Projects')}}</h1>
             <h2>{{ _('Work in progress projects') }}</h2>
             {% else %}
-            <h1>
-                <i class="icon-th"></i> {{pagination.total_count}} {{ active_cat.name }} Projects</h1>
-            <h2>{{ active_cat.description }}</h2>
+            <h1>Projects</h1>
             {% endif %}
-
 
             <div class="projects">
             {% for project in projects %}
@@ -44,7 +41,7 @@
             {% endif %}
         {% else %}
             <h1>
-                <i class="icon-th"></i> {{pagination.total_count}} {{ active_cat.name }} Projects</h1>
+                <i class="icon-th"></i> Projects</h1>
             <h2>{{_('Sorry, there are no published projects for this category yet')}}</h2>
         {% endif %}
     </div>

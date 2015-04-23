@@ -3399,4 +3399,12 @@ filter: alpha(opacity=80); /* For IE8 and earlier */
 position: absolute;
 }
 
+.category_details a {
+    color : #48cfad;
+}
+.category_details a:hover {
+    text-decoration: underline;
+}
+
+
 

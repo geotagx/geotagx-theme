@@ -44,7 +44,6 @@ $( document ).ready(function() {
     });
 
     $(".image-caption a").tooltip();
+    $(".geotagx-social-buttons a button").tooltip();
 
 });
-
-
