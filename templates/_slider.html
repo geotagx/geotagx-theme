@@ -1,81 +1,35 @@
 <!-- Sequence Modern Slider -->
+
+{% from 'projects/_helpers.html' import render_project_image_url %}
+
 <div id="da-slider" class="da-slider" style="height:350px">
 
+{% for f in categories_projects['featured'] %}
+  
         <div class="da-slide">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
           <h2>
-            <i>Project</i>
-            <i>One</i>
+            <i>{{f.short_name}}</i>
             <br>
           </h2>
-          <p>
-            <i>Project 1 small description</i>
-            <br />
-            <i>blleh bleh</i>
-          </p>
+          <div class="col-md-12 col-sm-12 col-lg-12">
+            {{ f.short_description }}
+          </div>
           <a href="#" class="btn btn-info btn-lg da-link">
             Analyse
           </a>
           <div class="da-img">
-            <img src="http://farm4.staticflickr.com/3912/14770269674_63a555e566_z.jpg')}}" alt="image01" width="100%"  />
+            <img src="{{render_project_image_url(f)}}" alt="{{f.short_name}}" width="100%" height="275px"  />
           </div>
         </div>
       </div>
     </div>
   </div>
 
+{% endfor %}
 
-        <div class="da-slide">
-        <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-          <h2>
-            <i>Project</i>
-            <i>Two</i>
-            <br>
-          </h2>
-          <p>
-            <i>Project 2 small description</i>
-            <br />
-            <i>blleh bleh</i>
-          </p>
-          <a href="#" class="btn btn-info btn-lg da-link">
-            Analyse
-          </a>
-    <div class="da-img">
-      <img src="https://farm8.staticflickr.com/7419/16208614030_6d3b70b7a3_b.jpg" alt="image01"  width="100%" />
-    </div>
-  </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="da-slide">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-          <h2>
-            <i>Project</i>
-            <i>Three</i>
-            <br>
-          </h2>
-          <p>
-            <i>Project 3 small description</i>
-            <br />
-            <i>blleh bleh</i>
-          </p>
-          <a href="#" class="btn btn-info btn-lg da-link">
-            Analyse
-          </a>
-    <div class="da-img">
-      <img src="https://farm4.staticflickr.com/3780/13445252764_6a969b0e93_m.jpg" alt="image01"  width="100%"  />
-    </div>
-  </div>
-  </div>
-  </div>
-  </div>
 
   <nav class="da-arrows">
     <span class="da-arrows-prev">
