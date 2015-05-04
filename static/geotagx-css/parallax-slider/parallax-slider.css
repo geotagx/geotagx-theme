@@ -5,7 +5,7 @@
 	position: relative;
 	margin: 0 auto;
 	overflow: hidden;
-	background: transparent url(/static/geotagx-img/parallax-slider/images/main-bg.jpg) repeat 0% 0%;
+	background: transparent url(/static/geotagx-img/geotagx-slider-background.gif) repeat 0% 0%;
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 	/*box-shadow: 0px 1px 1px rgba(0,0,0,0.2), 0px -2px 1px #fff;*/
@@ -56,7 +56,7 @@
 	color: #fff;
 	font-size: 40px;
 	/*width: 32%;*/
-	top: 60px;
+	top: 20px;
 	white-space: nowrap;
 	z-index: 10;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
@@ -66,7 +66,7 @@
 }
 .da-slide p{
 	width: 60%;
-	top: 150px;
+	top: 120px;
 	color: #ffffff;
 	font-size: 18px;
 	line-height: 26px;
@@ -81,13 +81,13 @@
 .da-slide .da-img{
 	text-align: center;
 	width: 30%;
-	top: 30px;
+	top: -8px;
 	height: 256px;
 	line-height: 320px;
 	left: 110%; /*60%*/
 }
 .da-slide .da-link{
-	top: 270px; /*depends on p height*/
+	top: 220px; /*depends on p height*/
 	border-radius: 3px;
 	box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 	color: #fff;
