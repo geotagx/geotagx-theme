@@ -3409,5 +3409,12 @@ position: absolute;
     text-decoration: underline;
 }
 
-
-
+.portfolio-tools-strip {
+    background : #444e67!important;
+    padding : 7px;
+}
+.portfolio-tools-strip:hover {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
