@@ -3418,3 +3418,7 @@ position: absolute;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
+
+.navbar {
+    border-bottom: 2px solid #34495e !important;
+}
