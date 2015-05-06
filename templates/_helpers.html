@@ -19,7 +19,7 @@
                             <div class="portfolio-tools-strip">
                             
                             <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="{{tutorial_link}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="{{info_link}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <br/>
                             <a href="{{contributing_link}}" class="label label-success icon fa-3x" data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play" style="padding:10px"></i></a>
@@ -43,7 +43,7 @@
                             <div class="portfolio-tools-strip">
 
                             <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="{{tutorial_link}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="{{info_link}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
                             {% if isAdmin %}
                             <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
                             {% endif %}
@@ -96,7 +96,7 @@
                             <div class="portfolio-tools-strip">
 
                             <a href="{{url_for('project.details', short_name=app.short_name)}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="#" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="{{url_for('project.details', short_name=app.short_name)}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
                             {% if isAdmin %}
                             <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
                             {% endif %}
@@ -148,7 +148,7 @@
                         <div class="image-caption">                     
                             <span style="margin-left:5px;">{{app.overall_progress}}% Complete</span><br/><br/>
                             <a href="{{url_for('project.details', short_name=app.short_name)}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="#" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>          {{ current_user }}    
+                            <a href="{{url_for('project.details', short_name=app.short_name)}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>          {{ current_user }}    
                             <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
                             <br/><br/><br/>
                             <a href="{{url_for('project.presenter', short_name=app.short_name)}}" class="fa-3x label label-success icon " data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play" style="padding:10px"></i></a><br/>
