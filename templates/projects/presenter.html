@@ -38,6 +38,9 @@ en
 
 
 {% if current_user.is_anonymous() %}
+
+    <button type="button" class="btn btn-primary btn-lg" style="display:block;" data-toggle="modal" data-target="#anonymousUserMessageModal">
+    </button>
     <div class="modal fade" id="anonymousUserMessageModal" tabindex="-1" role="dialog" aria-labelledby="anonymousUserMessageModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -51,15 +54,16 @@ en
           <div class="modal-footer">
             <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
             <a id="anonymousSignInButton" type="button" class="btn btn-primary">Sign In</a>
+            <a type="button" class="btn btn-success" href="/account/register">Create Account</a>
           </div>      
         </div>
       </div>
     </div>
     <script type="text/javascript">
     $(document).ready(function(){
+        $("#anonymousSignIn").attr("href", "/account/signin?next="+document.location);
+        $("#anonymousSignInButton").attr("href", "/account/signin?next="+document.location);
         $("#anonymousUserMessageModal").modal('show');
-        $("#anonymousSignIn").attr("href", $($("#msg_warning a")[1]).attr("href"));
-        $("#anonymousSignInButton").attr("href", $($("#msg_warning a")[1]).attr("href"));
     })
     </script>
 
