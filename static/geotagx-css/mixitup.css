@@ -22,13 +22,6 @@ h3{
 	font-weight: 600;
 }
 
-p{
-	width: 500px;
-	margin: 0 0 30px;
-	text-align: left;
-	line-height: 1.5;
-}
-
 .controls{
 	display: inline-block;
 	margin: 0 0 30px;
