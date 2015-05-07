@@ -17,6 +17,8 @@
           {% import "projects/_helpers.html" as project_helper %}
           {{ project_helper.render_category_profile(active_cat, pagination) }}
 
+        {% elif request['path'][:15] == "/geotagx/survey" %}
+          <h2> Participation Survey </h2>
         {% elif active_page == "projects" %}
 
           {% if project and request['path' ] != "/project/"+project.short_name+"/newtask" %}
