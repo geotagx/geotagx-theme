@@ -57,10 +57,12 @@
                             </center>
                         {{ form.id }}
                         {{ form.hidden_tag() }}
+                        <h4>Full Name</h4>
                         {{ geotagx_render_field(form.fullname,"fullname", "", "text", current_user.fullname ) }}
+                        <h4> User Name </h4>
                         {{ geotagx_render_field(form.name,"name",  current_user.name, "text" , current_user.name) }}
+                        <h4> Email </h4>
                         {{ geotagx_render_field(form.email_addr,"email_addr", "", "text", current_user.email_addr) }}
-
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
