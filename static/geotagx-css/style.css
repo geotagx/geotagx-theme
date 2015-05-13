@@ -3127,6 +3127,10 @@ div.header h3{
     margin-left : 10px;
 }
 
+.user-profile-values a{
+    background-color: #8cc152;
+}
+
 .geotag-x-file-selector {
     margin-top:10px;
     margin-bottom:10px;
