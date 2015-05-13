@@ -56,9 +56,9 @@
                 <i>{{ _('E-mail')}}</i>   :   <strong class="user-profile-values">{{ user.email_addr }}</strong> 
                                   {% if (user.valid_email == False) %}
                                     {% if (user.confirmation_email_sent == False) %}
-                                    <a href="{{ url_for('account.confirm_email')}}" class="btn btn-small">Validate email</a>
+                                    <a href="{{ url_for('account.confirm_email')}}" class="btn btn-small btn-success">Validate email</a>
                                     {% else %}
-                                    <a href="#" class="btn btn-small disabled">Email sent for
+                                    <a href="#" class="btn btn-small disabled btn-danger">Email sent for
                                         validation</a>
                                     {% endif %}
                                   {% endif %}
