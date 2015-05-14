@@ -4,7 +4,7 @@
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as app_helper %}
 {% import "_helpers.html" as geotagx_helper %}
-{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
+{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
 
 {% block content %}
 <!-- NOTE :: A part of the profile page is rendered in the breadcrumb -->
@@ -20,7 +20,9 @@
                 <div id="portfoliolist-three">
                     <div class="col-md-12">
                     {% for app in projects %}  
-                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_url_thumbnail(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app) }}
+
+                    {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method) }}
+
                     {% endfor %}
                     </div>
                 </div>
