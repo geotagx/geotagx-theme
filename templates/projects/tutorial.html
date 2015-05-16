@@ -1,19 +1,32 @@
 {% extends "/base.html" %}
-{% set active_page = "projects"  %}
+{% set active_page = "projects" %}
 {% set active_project = project.short_name %}
+{% set active_project_url = url_for("project.details", short_name = active_project) %}
+{% set active_project_newtask_url = url_for("project.presenter", short_name = active_project) %}
 
 {% block content %}
 
-{{ project.info.tutorial | safe}}
-
 <div class="row">
-    <div class="span12" style="text-align:center;padding-top:20px;">
-        <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
-           class="btn btn-primary btn-large"> 
-           <i class="icon-thumbs-up"></i> 
-           {{_('Start contributing')}}!</a>
-    </div>
+	<div class="col-xs-12"><h2><a href="{{active_project_url}}">{{project.name}}</a>  <small style="text-transform:uppercase">{{_('Tutorial')}}</small></h2></div>
+	{% if project.info.tutorial %}
+	<div class="col-xs-12" style="padding-right:0">
+		<div style="margin:0.75em 0 1em 0; padding:0.75em 1em 1em 1em; border-radius:3px; background:#F4F4F4">
+			<div class="row">
+				<div class="col-xs-12"><p>This is one of the tutorials designed to give you a better understanding of this project. It is highly recommended that you complete as many tutorials as you can before starting the project as they will teach you what to look for. However if you are familiar with this project, you can start contributing right away!</p></div>
+				<div class="col-xs-12"><a class="btn btn-primary btn-sm" href="{{active_project_newtask_url}}">{{_('Skip tutorials and start contributing')}}</a></div>
+			</div>
+		</div>
+	</div>
+	{% else %}
+	<div class="col-xs-12" style="padding-right:0">
+		<div class="row">
+			<div class="col-xs-12"><p>This project does not have any tutorials.</p></div>
+			<div class="col-xs-12"><a class="btn btn-primary btn-md" href="{{active_project_newtask_url}}">{{_('Start contributing')}}</a></div>
+		</div>
+	</div>
+	{% endif %}
 </div>
+{{ project.info.tutorial | safe}}
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
 {% if current_user.is_anonymous() %}
