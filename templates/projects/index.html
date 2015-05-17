@@ -2,7 +2,7 @@
 {% set active_page = "projects" %}
 
 {% import "projects/_helpers.html" as helper %}
-
+{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
 <div class="row">
@@ -32,10 +32,15 @@
             {% endif %}
 
             <div class="projects">
-            {% for project in projects %}
-            {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
-            {% endfor %}
+              <div id="portfoliolist-three">
+                  <div class="col-md-12">
+                      {% for project in projects %}
+                        {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(project, active_cat, isAdmin, upload_method) }}
+                      {% endfor %}
+                  </div>
+              </div>
             </div>
+
             {% if pagination.pages > 1 %}
                 {{ helper.render_pagination(pagination) }}
             {% endif %}
