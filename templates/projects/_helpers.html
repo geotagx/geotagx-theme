@@ -312,9 +312,9 @@ function imgError(image) {
              {{ _('Info') }}
             </a> 
         </div>    
-        {% if request['path' ] != "/project/"+project.short_name+"/tutorial" %}        
+        {% if request['path' ] != "/project/"+project.short_name+"/tutorial" and request['path' ] != "/project/"+project.short_name+"/newtask" %}        
           <div class="row">
-            <div id="profile_page_accordion" class="col-md-12 col-sm-12 col-lg-12 profile_param" data-collapse>
+              <div id="profile_page_accordion" class="col-md-12 col-sm-12 col-lg-12 profile_param" data-collapse>
               <h1 class="profile_param_accordion_handle">
                 <a href="#" class="profile_param_link">
                   {{ project.name }}
