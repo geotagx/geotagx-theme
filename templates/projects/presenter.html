@@ -15,8 +15,9 @@
 		<p>{{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}</p>
 	</div>
 </div>
-{% endif %}
+{% else %}
 {{ project.info.task_presenter|safe }}
+{% endif %}
 
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
