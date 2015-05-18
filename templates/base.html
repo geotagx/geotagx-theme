@@ -34,6 +34,11 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/component.css')}}">
     <link href="{{url_for('static', filename='geotagx-css/style.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='geotagx-css/style-responsive.css')}}" rel="stylesheet" />
+
+    <script src="{{url_for('static', filename='geotagx-js/jquery-1.8.3.min.js')}}">
+    </script>    
+    <script src="{{url_for('static', filename='geotagx-js/geotagx-surveys.js')}}">
+    </script> 
     {% if request['path'] == '/' %}
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/parallax-slider/parallax-slider.css')}}" />
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/modernizr.custom.28468.js')}}"> 
@@ -41,11 +46,7 @@
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
     </script>
     {% endif %}
-
-    <script src="{{url_for('static', filename='geotagx-js/jquery-1.8.3.min.js')}}">
-    </script>    
-    <script src="{{url_for('static', filename='geotagx-js/geotagx-surveys.js')}}">
-    </script>        
+           
     <!-- Google Analytics or similar solutions -->
     {% include '_ga.html' ignore missing %}
     <!-- Google Custom Search -->
