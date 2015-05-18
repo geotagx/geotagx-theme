@@ -45,6 +45,16 @@
     </script>
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
     </script>
+    <script type="text/javascript">
+      $(function() {
+        $('#da-slider').cslider({
+          autoplay    : true,
+          bgincrement : 0,
+          interval : 6000
+        });
+      });
+    </script>
+    
     {% endif %}
            
     <!-- Google Analytics or similar solutions -->
@@ -102,15 +112,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/geotagx.js')}}">    
     </script>  
-    <script type="text/javascript">
-      $(function() {
-        $('#da-slider').cslider({
-          autoplay    : true,
-          bgincrement : 0,
-          interval : 6000
-        });
-      });
-    </script>
 
     <!--common script for all pages-->
     <script src="{{url_for('static', filename='geotagx-js/common-scripts.js')}}">
