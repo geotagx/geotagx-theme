@@ -438,7 +438,7 @@ function imgError(image) {
 
 <!-- TO-DO : Use this macro for rendering urls in front_page_grid  -->
 {% macro render_category_image(category_short_name) %}
-{% set category_image_dict = {'somalidrought':"https://farm4.staticflickr.com/3780/13445252764_6a969b0e93_m.jpg", 'yamunamonsoonflooding2013':"https://dl.dropboxusercontent.com/u/46576246/India/DSCI0091.jpg", 'yemeniagriculturalwaterassessment':"https://upload.wikimedia.org/wikipedia/commons/6/6b/Yemen_-_Location_Map_%282013%29_-_YEM_-_UNOCHA.svg", 'ebolaresponse':"http://farm4.staticflickr.com/3912/14770269674_63a555e566_z.jpg",'emergencyshelterassessmentinthemiddleeast':"https://farm8.staticflickr.com/7419/16208614030_6d3b70b7a3_b.jpg"} %}
+{% set category_image_dict = {'somalidrought':'/static/geotagx-img/categories/somali_drought.png', 'yamunamonsoonflooding2013':"/static/geotagx-img/categories/yamuna_monsoon_flooding.png", 'yemeniagriculturalwaterassessment':"/static/geotagx-img/categories/yemeni_agricultural_water_assesment.png", 'ebolaresponse':"/static/geotagx-img/categories/ebola_response.png",'emergencyshelterassessmentinthemiddleeast':"/static/geotagx-img/categories/winter_shelter.png"} %}
 {% if category_short_name in category_image_dict.keys() %}
   {{ category_image_dict[category_short_name] }}
 {% else %}
