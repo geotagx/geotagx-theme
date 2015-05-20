@@ -3422,3 +3422,10 @@ position: absolute;
 .navbar {
     border-bottom: 2px solid #34495e !important;
 }
+.in-page-link:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -200px; 
+  height: 200px; 
+  visibility: hidden; 
+}
