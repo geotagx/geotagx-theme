@@ -36,12 +36,12 @@
     <link href="{{url_for('static', filename='geotagx-css/style-responsive.css')}}" rel="stylesheet" />
 
     <script src="{{url_for('static', filename='geotagx-js/jquery-1.8.3.min.js')}}">
-    </script>    
+    </script>
     <script src="{{url_for('static', filename='geotagx-js/geotagx-surveys.js')}}">
-    </script> 
+    </script>
     {% if request['path'] == '/' %}
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/parallax-slider/parallax-slider.css')}}" />
-    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/modernizr.custom.28468.js')}}"> 
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/modernizr.custom.28468.js')}}">
     </script>
     <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
     </script>
@@ -54,14 +54,10 @@
         });
       });
     </script>
-    
     {% endif %}
-           
-    <!-- Google Analytics or similar solutions -->
-    {% include '_ga.html' ignore missing %}
+
     <!-- Google Custom Search -->
     {% include '_gcs.html' ignore missing %}
-
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -72,26 +68,28 @@
     <![endif]-->
   </head>
 
-  <body>
+<body>
+    {%- include "_gtm.html" ignore missing -%}
+
     {% if not current_user.is_anonymous() %}
     <!-- checkpoint::logged-in::{{current_user.name}} -->
     {% endif %}
     {% set active_page = active_page | default('index') -%}
-    {% set active_app  = active_app | default('none') -%}    
+    {% set active_app  = active_app | default('none') -%}
 
-    {% include '_navbar.html' %}  
+    {% include '_navbar.html' %}
 
     {% if request['path'] == "/" %}
-        {% include "_slider.html" %}    
+        {% include "_slider.html" %}
     {% else %}
-        {% include "_breadcrumbs.html" %}        
+        {% include "_breadcrumbs.html" %}
     {% endif %}
 
         <div class="container" style="min-height:400px;">
 
         {% include "_flash_messages.html" %}
         {% block content %}{% endblock %}
-        
+
         {% if active_page != "home#index" %}
         </div>
         {% endif %}
@@ -110,14 +108,14 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/geotagx.js')}}">    
-    </script>  
+    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/geotagx.js')}}">
+    </script>
 
     <!--common script for all pages-->
     <script src="{{url_for('static', filename='geotagx-js/common-scripts.js')}}">
     </script>
     <script src="{{url_for('static', filename='geotagx-js/CCL_tracker.min.js')}}">
-    </script>    
+    </script>
 
 <!-- Modal -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
