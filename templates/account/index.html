@@ -5,13 +5,12 @@
 {% from "projects/_helpers.html" import broken_image %}
 
 {% block content %}
-
 <div class="row">
-  <div class="">
+  <div>
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('active registered users') }}</small></h1>
+      <h1>{{ _('Community') }} <small>{{total}} {{ _('active registered users') }}</small><a class="pull-right btn btn-primary input-lg" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy " style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
       {% if accounts %}
       <div class="container">
         <div class="row">

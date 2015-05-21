@@ -3464,6 +3464,19 @@ position: absolute;
     margin-top : 10px;    
 } 
 
+.user-profile-rank span.label {
+    font-weight : 900;
+    font-size : 16px;
+    color : #999;
+    margin-top : 10px;    
+}
+.user-profile-rank span.value {
+    font-weight : 900;
+    font-size : 26px;
+    color : #34495e;
+    margin-top : 10px;    
+} 
+
 .community-page-user-tile {
     padding : 10px;
     padding-top : 20px;
@@ -3476,4 +3489,11 @@ position: absolute;
     -webkit-box-shadow: 16px 0px 25px 5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    16px 0px 25px 5px rgba(50, 50, 50, 0.75);
     box-shadow:         16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+}
+.community-page-current_user-tile {
+    background-color : #00a65a;
+}
+
+.community-page-current_user-tile .user-profile-data .user-profile-task_runs span.label{
+    color : #34495e !important;
 }
