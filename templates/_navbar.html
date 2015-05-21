@@ -13,6 +13,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
               <li {% if active_page == 'about' %} class="active" {% endif %} class="menu-item"><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
+              <li {% if active_page == 'community' %} class="active" {% endif %} class="menu-item"><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
               <li {% if active_page == 'projects' %} class="active" {% endif %} class="menu-item"><a href="/#project_grid">{{ _('Projects') }}</a></li>
               {% if current_user.admin %}
               <li {% if active_page == 'create' %} class="active" {% endif %} class="menu-item"><a href="{{ url_for('project.new') }}">{{ _('Create') }}</a></li>

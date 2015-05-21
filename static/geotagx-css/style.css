@@ -3429,3 +3429,51 @@ position: absolute;
   height: 200px; 
   visibility: hidden; 
 }
+
+.user-profile-fullname {
+    font-weight : 900;
+    font-size : 20px;
+    color : #34495e;
+    margin-top : 10px;
+}
+.user-profile-data {
+    padding : 10px;
+}
+.user-profile-task_runs span.label {
+    font-weight : 900;
+    font-size : 16px;
+    color : #999;
+    margin-top : 10px;    
+}
+.user-profile-task_runs span.value {
+    font-weight : 900;
+    font-size : 16px;
+    color : #34495e;
+    margin-top : 10px;    
+}
+.user-profile-member_since span.label {
+    font-weight : 900;
+    font-size : 16px;
+    color : #999;
+    margin-top : 10px;    
+}
+.user-profile-member_since span.value {
+    font-weight : 900;
+    font-size : 16px;
+    color : #34495e;
+    margin-top : 10px;    
+} 
+
+.community-page-user-tile {
+    padding : 10px;
+    padding-top : 20px;
+    -moz-border-radius: 15px;    /* Firefox 3.6-, removed in Firefox 13 */
+    -webkit-border-radius: 15px; /* Safari 4-, Chrome 3- */
+    border-radius: 15px;     /* Firefox 4+, Safari 5+, Chrome 4+, Opera 10.5+, IE9+ */
+
+}
+.community-page-user-tile:hover {
+    -webkit-box-shadow: 16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+    box-shadow:         16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+}

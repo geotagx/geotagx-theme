@@ -7,35 +7,46 @@
 {% block content %}
 
 <div class="row">
-  <div class="span9 offset2">
+  <div class="">
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
       {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
+      <h1>{{ _('Community') }} <small>{{total}} {{ _('active registered users') }}</small></h1>
       {% if accounts %}
-      <ul class="thumbnails">
+      <div class="container">
+        <div class="row">
+      {% set count=0 %}
+
       {% for account in accounts %}
-          <li>
-              <a href="{{url_for('account.profile', name=account.name)}}" class="thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
-                      <ul style='list-style-type:none; margin-left:0px;'>
-                        <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
-                        <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
-                        {% if account.apps %}
-                        <li><strong><i class='icon-certificate'></i> Owner of</strong>
-                          <ul style='list-style-type:none'>
-                              {% for app in account.apps %}
-                              <li><i class='icon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
-                              {% endfor %}
-                          </ul>
-                        </li>
-                        {% endif %}
-                      </ul>
-                      ">
-                    {{ helper.render_user_thumbnail(account, upload_method, style="height:90px; width:90px;") }}
-            </a>
-          </li>
+      <a href="{{url_for('account.profile', name=account.name)}}">
+          <div class="col-xs-3 community-page-user-tile" style="margin-bottom:40px">
+                        <div class="user-profile-image">
+                          <center>
+                        {{ helper.render_user_thumbnail(account, upload_method, style="height:150px; width:150px;", class="img-circle") }}
+                          </center>
+                        </div>
+                        <div class="user-profile-data text-center">
+                          <div class="user-profile-fullname">
+                            {{ account.fullname }}
+                          </div>
+                          <div class="user-profile-task_runs">
+                            <span class="label"> {{ _('Contributed Tasks') }} : </span><span class="value">{{account.task_runs}}</span>
+                          </div>
+                          <div class="user-profile-member_since">
+                            <span class="label">{{ _('Joined') }} </span><span class="value">{{account.registered_ago}}</span>
+                          </div>                          
+                        </div>
+            </div>
+          </a>
+          {% set count = count + 1 %}
+          {% if count % 4 == 0 %}
+            </div> <!-- End Row div -->
+            <div class="row"> <!-- Start new Row div -->
+          {% endif %}
+            <!-- </a> -->
           {% endfor %}
-      </ul>
+        </div>
+      </div>
     {% endif %}
     <div class="span9">
         {% if pagination.pages > 1 %}
@@ -46,14 +57,5 @@
   </div>
 </div>
 
-<script>
-$("a[rel=popover]").popover({
-        html: true,
-        animate: true,
-        trigger: 'hover',
-        placement: 'bottom'
-                });
-
-</script>
 {{ broken_image() }}
 {% endblock %}
