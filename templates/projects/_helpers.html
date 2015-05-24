@@ -17,7 +17,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}
@@ -68,7 +68,7 @@
         {% if not current_user.is_anonymous() %}
         <li>{% if project.hidden == 1 %}
             <i class="icon icon-eye-close"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('Yes') }}
-        {% else %} 
+        {% else %}
             <i class="icon icon-eye-open"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('No') }}
         {% endif %}
         </li>
@@ -279,30 +279,30 @@ function imgError(image) {
              {{ _('Blog') }}
             </a>
             {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
-            and current_user.pro) or current_user.admin %}  
+            and current_user.pro) or current_user.admin %}
               {% set privileged_user = True %}
-            {% endif %}   
+            {% endif %}
 
-            {% if privileged_user %}       
+            {% if privileged_user %}
                 <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
                   <i class="fa fa-file-text-o"></i>
                  {{ _('Audit Logs') }}
                 </a>
-            {% endif %}  
-            {% if privileged_user %}       
+            {% endif %}
+            {% if privileged_user %}
                 <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
                   <i class="fa fa-wrench"></i>
                  {{ _('Settings') }}
                 </a>
-            {% endif %}            
+            {% endif %}
             <a href="{{url_for('project.show_stats', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
               <i class="fa fa-bar-chart"></i>
              {{ _('Statistics') }}
-            </a>   
+            </a>
             <a href="{{url_for('project.details', short_name=project.short_name)}}tutorial" class="btn btn-purchase pull-right profile-menu-buttons">
               <i class="fa fa-graduation-cap"></i>
              {{ _('Tutorial') }}
-            </a>             
+            </a>
             <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
               <i class="fa fa-book"></i>
              {{ _('Tasks') }}
@@ -310,9 +310,9 @@ function imgError(image) {
             <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
               <i class="fa fa-info"></i>
              {{ _('Info') }}
-            </a> 
-        </div>    
-        {% if request['path' ] != "/project/"+project.short_name+"/tutorial" and request['path' ] != "/project/"+project.short_name+"/newtask" %}        
+            </a>
+        </div>
+        {% if request['path' ] != "/project/"+project.short_name+"/tutorial" and request['path' ] != "/project/"+project.short_name+"/newtask" %}
           <div class="row">
               <div id="profile_page_accordion" class="col-md-12 col-sm-12 col-lg-12 profile_param" data-collapse>
               <h1 class="profile_param_accordion_handle">
@@ -356,7 +356,7 @@ function imgError(image) {
                           {% endif %}
                         <i></i>  <strong class="project-profile-values">{{ n_tasks - n_completed_tasks }}</strong><strong class="project-profile-labels">{{ _('Pending Tasks')}}</strong></h3>
 
-                        {% if privileged_user %}                             
+                        {% if privileged_user %}
                         <h3>
                         <i class="fa fa-eye fa-lg pr-10">
                         </i>
@@ -375,7 +375,7 @@ function imgError(image) {
                         {% endif %}
 
                         {{render_social_sharing_buttons()}}
-                  </div>   
+                  </div>
                   <div class="col-lg-6 col-sm-6">
                       <br/>
                       <a class="start-contributing noselect"  href="{{url_for('project.presenter', short_name=project.short_name)}}">
@@ -391,8 +391,8 @@ function imgError(image) {
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{overall_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{overall_progress}}%;">
                         </div>
                       </div>
-                      <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>                  
-                  </div>                                            
+                      <center><h5 style="color:#48cfad;font-size:28px;">{{overall_progress}}%<h5> complete</center>
+                  </div>
                 </div>
               </div>
             </div>
@@ -401,12 +401,12 @@ function imgError(image) {
       </div>
       <script type="text/javascript">
       $(document).ready(function(){
-        $("#profile_page_accordion").accordion({active:true, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});   
-        {% if request.path == "/project/"+ project.short_name+"/" %}        
+        $("#profile_page_accordion").accordion({active:true, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});
+        {% if request.path == "/project/"+ project.short_name+"/" %}
           $(".profile_param_accordion_handle").click();
         {% endif %}
       });
-      </script>   
+      </script>
 {% endmacro %}
 {% macro render_project_sublabel(sublabel) %}
 <script type="text/javascript">
@@ -427,13 +427,13 @@ function imgError(image) {
           <button class="btn btn-facebook">
               <i class="fa fa-facebook"></i>
           </button>
-      </a>                       
+      </a>
       <a target="_blank" href="https://plus.google.com/share?url={{request.url}}" data-toggle="tooltip" data-placement="middle" title="Share this Page via Google Plus">
           <button class="btn btn-google-plus">
               <i class="fa fa-google-plus"></i>
           </button>
       </a>
-</div>  
+</div>
 {% endmacro %}
 
 <!-- TO-DO : Use this macro for rendering urls in front_page_grid  -->
@@ -464,7 +464,7 @@ function imgError(image) {
             </div>
             <strong>Total Number of Projects   : </strong> <span class="big-icon-2" style="margin-left:10px"> {{pagination.total_count}}</span>
           </div>
-          {{render_social_sharing_buttons()}}        
+          {{render_social_sharing_buttons()}}
         </div>
         <a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
       </div>
