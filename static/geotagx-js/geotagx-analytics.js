@@ -27,13 +27,10 @@
 				onVisitProject(projectId);
 		}
 
-
-
-
-		// TODO Implement me.
-
 		$("html").on("click", onInvalidClick);
 		$(".project-category-selector").on("click", onSelectCategory);
+		$("#share-category > a").on("click", onShareCategory);
+		$("#share-project > a").on("click", onShareProject);
 	});
 	/**
 	 * Sets the user identifier, i.e. the username.
@@ -126,8 +123,8 @@
 	function onShareCategory(e){
 		stopEventPropagation(e);
 		var data = {
-			"categoryId":null,
-			"elementUrl":null
+			"categoryId":$("#share-category").data("name"),
+			"elementUrl":$(this).attr("href")
 		};
 		analytics.fireEvent("action.shareCategory", data);
 	}
@@ -137,8 +134,8 @@
 	function onShareProject(e){
 		stopEventPropagation(e);
 		var data = {
-			"projectId":null,
-			"elementUrl":null
+			"projectId":$("#share-project").data("name"),
+			"elementUrl":$(this).attr("href")
 		};
 		analytics.fireEvent("action.shareProject", data);
 	}

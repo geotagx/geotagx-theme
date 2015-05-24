@@ -373,8 +373,7 @@ function imgError(image) {
                         {% else %}
                         <br/><br/><br/>
                         {% endif %}
-
-                        {{render_social_sharing_buttons()}}
+                        {{ render_social_sharing_buttons("project", project.short_name) }}
                   </div>
                   <div class="col-lg-6 col-sm-6">
                       <br/>
@@ -416,23 +415,11 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_social_sharing_buttons() %}
-<div class="row geotagx-social-buttons text-center">
-      <a target="_blank" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}">
-          <button class="btn btn-twitter" data-toggle="tooltip" data-placement="middle" title="Share this Page via Twitter">
-              <i class="fa fa-twitter"></i>
-          </button>
-      </a>
-      <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}" data-toggle="tooltip" data-placement="middle" title="Share this Page via Facebook">
-          <button class="btn btn-facebook">
-              <i class="fa fa-facebook"></i>
-          </button>
-      </a>
-      <a target="_blank" href="https://plus.google.com/share?url={{request.url}}" data-toggle="tooltip" data-placement="middle" title="Share this Page via Google Plus">
-          <button class="btn btn-google-plus">
-              <i class="fa fa-google-plus"></i>
-          </button>
-      </a>
+{% macro render_social_sharing_buttons(content_type, content_short_name) %}
+<div id="share-{{ content_type }}" class="text-center" data-name="{{ content_short_name }}">
+    <a target="_blank" title="Share this page via Twitter"  href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}" class="btn btn-twitter" data-toggle="tooltip" data-placement="middle"><i class="fa fa-twitter"></i></a>
+    <a target="_blank" title="Share this page via Facebook" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}"   class="btn btn-facebook" data-toggle="tooltip" data-placement="middle"><i class="fa fa-facebook"></i></a>
+    <a target="_blank" title="Share this page via Google+"  href="https://plus.google.com/share?url={{request.url}}"          class="btn btn-google-plus" data-toggle="tooltip" data-placement="middle"><i class="fa fa-google-plus"></i></a>
 </div>
 {% endmacro %}
 
@@ -448,25 +435,22 @@ function imgError(image) {
 
 {% macro render_category_profile(category, pagination) %}
 <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
-            <div class="img-circle col-md-12 col-lg-12 col-sm-12">
-            <a href="#">
-              <img src="{{ render_category_image(category.short_name) }}" style="width:100%;border-radius:10px;margin-top:40px"></img>
-            </a>
-            </div>
-          </div>
-          <div class="category_details col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
-            <h1> <a href="#" style="color:white;">{{ category.name }}</a></h1>
-            <hr>
+	<div class="row">
+		<div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+			<div class="img-circle col-md-12 col-lg-12 col-sm-12">
+				<a href="#"><img src="{{ render_category_image(category.short_name) }}" style="width:100%;border-radius:10px;margin-top:40px"></img></a>
+			</div>
+		</div>
+        <div class="category_details col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+			<h1><a href="#" style="color:white;">{{ category.name }}</a></h1>
+			<hr>
             <div style="text-align: justify;text-justify: inter-word;">
-              {{ category.description | safe }}
+				{{ category.description | safe }}
             </div>
-            <strong>Total Number of Projects   : </strong> <span class="big-icon-2" style="margin-left:10px"> {{pagination.total_count}}</span>
-          </div>
-          {{render_social_sharing_buttons()}}
-        </div>
-        <a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
-      </div>
+            <strong>Total Number of Projects: </strong> <span class="big-icon-2" style="margin-left:10px"> {{pagination.total_count}}</span>
+		</div>
+		{{ render_social_sharing_buttons("category", category.short_name) }}
+	</div>
+	<a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
+</div>
 {% endmacro %}
-
