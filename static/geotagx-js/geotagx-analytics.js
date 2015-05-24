@@ -5,11 +5,35 @@
 	"use strict";
 
 	$(document).ready(function(){
+		// If analytics is not enabled, do nothing.
+		if (!window.analyticsListener)
+			return;
+
+		var path = window.location.pathname;
+
+		// Are we currently viewing a category page?
+		if (!path.indexOf("/project/category/")){
+			var categoryId = path.substr(18, path.indexOf("/", 18) - 18);
+			onVisitCategory(categoryId);
+		}
+		else if (!path.indexOf("/project/")){
+			var projectId = path.substr(9, path.indexOf("/", 9) - 9);
+
+			// If this is the project's landing page, fire an action.visitProject event. The
+			// project's landing page is found at "/project/projectId/" so we compare the
+			// current path's length with the expected landing page's path length to make sure
+			// we're on the landing page.
+			if ((9 + projectId.length + 1) == path.length)
+				onVisitProject(projectId);
+		}
+
+
+
+
 		// TODO Implement me.
 
 		$("html").on("click", onInvalidClick);
-
-
+		$(".project-category-selector").on("click", onSelectCategory);
 	});
 	/**
 	 * Sets the user identifier, i.e. the username.
@@ -48,20 +72,38 @@
 		analytics.fireEvent("action.invalidClick", data);
 	}
 	/**
-	 * Fires an event when a user visits a category.
+	 * Fires an event when a user selects a category from the project grid.
 	 */
-	function onVisitCategory(){
+	function onSelectCategory(e){
+		stopEventPropagation(e);
+
+		var $element = $(e.target);
+		var categoryId = $element.data("filter");
+		while (!categoryId){
+			$element = $element.parent();
+			categoryId = $element.data("filter");
+		}
+
 		var data = {
-			"categoryId":null
+			"categoryId":categoryId
+		};
+		analytics.fireEvent("action.selectCategory", data);
+	}
+	/**
+	 * Fires an event when a user visits a category's page.
+	 */
+	function onVisitCategory(categoryId){
+		var data = {
+			"categoryId":categoryId
 		};
 		analytics.fireEvent("action.visitCategory", data);
 	}
 	/**
 	 * Fires an event when a user visits a project.
 	 */
-	function onVisitProject(){
+	function onVisitProject(projectId){
 		var data = {
-			"projectId":null
+			"projectId":projectId
 		};
 		analytics.fireEvent("action.visitProject", data);
 	}
