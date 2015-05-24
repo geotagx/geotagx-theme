@@ -76,16 +76,8 @@
 	 */
 	function onSelectCategory(e){
 		stopEventPropagation(e);
-
-		var $element = $(e.target);
-		var categoryId = $element.data("filter");
-		while (!categoryId){
-			$element = $element.parent();
-			categoryId = $element.data("filter");
-		}
-
 		var data = {
-			"categoryId":categoryId
+			"categoryId":$(this).data("filter")
 		};
 		analytics.fireEvent("action.selectCategory", data);
 	}
