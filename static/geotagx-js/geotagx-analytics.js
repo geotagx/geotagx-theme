@@ -9,6 +9,8 @@
 		if (!window.analyticsListener)
 			return;
 
+		analytics.setGlobal("userId", $("body").data("user-id"));
+
 		var path = window.location.pathname;
 
 		// Are we currently viewing a category page?
@@ -32,13 +34,6 @@
 		$("#share-category > a").on("click", onShareCategory);
 		$("#share-project > a").on("click", onShareProject);
 	});
-	/**
-	 * Sets the user identifier, i.e. the username.
-	 * @param userId the user's identifier.
-	 */
-	function setUserId(userId){
-		analytics.setGlobal("userId", userId ? userId : "anonymous");
-	};
 	/**
 	 * Stops the specified event from bubbling up.
 	 * @param e the event to stop.
