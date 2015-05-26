@@ -33,6 +33,7 @@
 		$(".project-category-selector").on("click.analytics", onSelectCategory);
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
+		$("a[href!=]").on("click.analytics", onLinkClicked);
 	});
 	/**
 	 * Fires an event when a user clicks the browser's "Back" button.
@@ -99,23 +100,23 @@
 		analytics.fireEvent("action.visitProject", data);
 	}
 	/**
-	 * Fires an event when a user clicks on one of the various internal links,
-	 * e.g. find photos, my profile, etc.
+	 * Fires an action.onInternalLinkClicked event when the user clicks on one of
+	 * of the various internal links e.g. Find photos, my profile, etc., otherwise
+	 * fires an action.onExternalLinkClicked event.
 	 */
-	function onInternalLinkClicked(){
+	function onLinkClicked(){
+		var url = $(this).attr("href");
+		var isInternalLink =
+			url.charAt(0) === "#" ||
+			url.charAt(0) === "/" ||
+			!url.indexOf("http://geotagx.org") ||
+			!url.indexOf("https://geotagx.org");
+
+		var eventName = isInternalLink ? "action.internalLinkClicked" : "action.externalLinkClicked";
 		var data = {
-			"elementUrl":null
+			"elementUrl":url
 		};
-		analytics.fireEvent("action.internalLinkClicked", data);
-	}
-	/**
-	 * Fires an event when a user clicks on an external link.
-	 */
-	function onExternalLinkClicked(){
-		var data = {
-			"elementUrl":null
-		};
-		analytics.fireEvent("action.externalLinkClicked", data);
+		analytics.fireEvent(eventName, data);
 	}
 	/**
 	 * Fires an event when a user shares a category (on social media).
