@@ -29,45 +29,52 @@
 				onVisitProject(projectId);
 		}
 
-		$("html").on("click.analytics", onInvalidClick);
+		$("html").on("click.analytics", onElementClicked);
 		$(".project-category-selector").on("click.analytics", onSelectCategory);
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 	});
 	/**
-	 * Stops the specified event from bubbling up.
-	 * @param e the event to stop.
-	 */
-	function stopEventPropagation(e){
-		if (e.stopPropagation)
-			e.stopPropagation();
-		else
-			e.cancelBubble = true; // For IE < 9.
-	}
-	/**
 	 * Fires an event when a user clicks the browser's "Back" button.
 	 */
-	function onGoingBackButtonClicked(e){
+	function onGoingBackButtonClicked(){
 		var data = {
 			"url":null
 		};
 		analytics.fireEvent("action.goingBackButtonClicked", data);
 	}
 	/**
-	 * Fires an event when a user clicks an element that is not clickable.
+	 * Determines if the element that triggered this event is clickable. If it isn't
+	 * then the action.invalidClick event is fired, otherwise no operation is performed.
 	 */
-	function onInvalidClick(e){
-		var data = {
-			"elementClass":$(e.target).attr("class"),
-			"url":window.location.href
-		};
-		analytics.fireEvent("action.invalidClick", data);
+	function onElementClicked(e){
+		var $target = $(e.target);
+		var elementClass = $target.attr("class");
+		if (elementClass){
+			var isClickable =
+				$target.is("div.modal.fade") || // A modal underlay which can be used to close a modal.
+				$target.is("input:enabled") || // Enabled input fields.
+				$target.is("label.illustration-label") || // Illustration labels in multi-choice answers are clickable ...
+				$target.is("img.illustration-img") || // ... as well as the images.
+				$target.is("canvas") || // A canvas can be interacted with, e.g. the canvas used by the OpenLayers map.
+				$target.is("input:enabled") || // Enabled input fields can be selected when clicked on.
+				$target.is("#questionnaire-rewind") || // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
+				$target.is("button:enabled") || // Enabled buttons.
+				$target.is("a[href!=]"); // Anchors with valid links.
+
+			if (!isClickable){
+				var data = {
+					"elementClass":elementClass,
+					"url":window.location.href
+				};
+				analytics.fireEvent("action.invalidClick", data);
+			}
+		}
 	}
 	/**
 	 * Fires an event when a user selects a category from the project grid.
 	 */
-	function onSelectCategory(e){
-		stopEventPropagation(e);
+	function onSelectCategory(){
 		var data = {
 			"categoryId":$(this).data("filter")
 		};
@@ -95,8 +102,7 @@
 	 * Fires an event when a user clicks on one of the various internal links,
 	 * e.g. find photos, my profile, etc.
 	 */
-	function onInternalLinkClicked(e){
-		stopEventPropagation(e);
+	function onInternalLinkClicked(){
 		var data = {
 			"elementUrl":null
 		};
@@ -105,8 +111,7 @@
 	/**
 	 * Fires an event when a user clicks on an external link.
 	 */
-	function onExternalLinkClicked(e){
-		stopEventPropagation(e);
+	function onExternalLinkClicked(){
 		var data = {
 			"elementUrl":null
 		};
@@ -115,8 +120,7 @@
 	/**
 	 * Fires an event when a user shares a category (on social media).
 	 */
-	function onShareCategory(e){
-		stopEventPropagation(e);
+	function onShareCategory(){
 		var data = {
 			"categoryId":$("#share-category").data("name"),
 			"elementUrl":$(this).attr("href")
@@ -126,8 +130,7 @@
 	/**
 	 * Fires an event when a user shares a project (on social media).
 	 */
-	function onShareProject(e){
-		stopEventPropagation(e);
+	function onShareProject(){
 		var data = {
 			"projectId":$("#share-project").data("name"),
 			"elementUrl":$(this).attr("href")
@@ -137,8 +140,7 @@
 	/**
 	 * Fires an event when a user starts a project.
 	 */
-	function onStartProject(e){
-		stopEventPropagation(e);
+	function onStartProject(){
 		var data = {
 			"projectId":null,
 			"elementUrl":null
