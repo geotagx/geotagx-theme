@@ -29,10 +29,10 @@
 				onVisitProject(projectId);
 		}
 
-		$("html").on("click", onInvalidClick);
-		$(".project-category-selector").on("click", onSelectCategory);
-		$("#share-category > a").on("click", onShareCategory);
-		$("#share-project > a").on("click", onShareProject);
+		$("html").on("click.analytics", onInvalidClick);
+		$(".project-category-selector").on("click.analytics", onSelectCategory);
+		$("#share-category > a").on("click.analytics", onShareCategory);
+		$("#share-project > a").on("click.analytics", onShareProject);
 	});
 	/**
 	 * Stops the specified event from bubbling up.
