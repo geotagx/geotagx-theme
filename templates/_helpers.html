@@ -17,7 +17,7 @@
                         <div class="image-caption">
                             <span style="margin-left:5px">{{percentage_complete}}% Complete</span><br/><br/>
                             <div class="portfolio-tools-strip">
-                            
+
                             <a href="{{info_link}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
                             <a href="{{info_link}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>
                             </div>
@@ -28,7 +28,7 @@
                         <img src="{{image_link}}" style="width:100%" alt="" />
                     </div>
                 </div>
-                <h4 class="portfolio-label">{{label}} </h4>                
+                <h4 class="portfolio-label">{{label}}</h4>
             </div>
 
 {% endmacro %}
@@ -65,25 +65,25 @@
                             <div class="portfolio-stat-value">
                             {{ app.n_volunteers }}
                             </div>
-                            <div class="portfolio-stat-label">                            
-                            <i class="fa fa-users"></i> 
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-users"></i>
                             {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
                             </div>
                         </div>
                         <div class="text-center col-md-4 portfolio-stat-tile">
-                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            <div class="portfolio-stat-value" style="color:#48cfad;">
                             {{ app.overall_progress }} %
                             </div>
                             <div class="portfolio-stat-label">
                             <i class="fa fa-check-square-o"></i> {{_('Complete')}}
                             </div>
-                        </div>                          
+                        </div>
                         <img src="{{image_link}}" style="width:100%" alt="" />
                     </div>
-                </div>                     
-                <h4 class="portfolio-label">{{label}} </h4>                                           
+                </div>
+                <h4 class="portfolio-label">{{label}}</h4>
             </div>
- 
+
 {% endmacro %}
 
 {% macro render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method) %}
@@ -118,25 +118,25 @@
                             <div class="portfolio-stat-value">
                             {{ app.n_volunteers }}
                             </div>
-                            <div class="portfolio-stat-label">                            
-                            <i class="fa fa-users"></i> 
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-users"></i>
                             {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
                             </div>
                         </div>
                         <div class="text-center col-md-4 portfolio-stat-tile">
-                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            <div class="portfolio-stat-value" style="color:#48cfad;">
                             {{ app.overall_progress }} %
                             </div>
                             <div class="portfolio-stat-label">
                             <i class="fa fa-check-square-o"></i> {{_('Complete')}}
                             </div>
-                        </div>  
+                        </div>
                         <img src="{{geotagx_app_thumbnail_url(app, upload_method)}}" style="width:100%;height:300px"  alt="" />
                     </div>
-                </div>                     
-                <h4 class="portfolio-label">{{app.name}} </h4>                                           
+                </div>
+                <h4 class="portfolio-label">{{app.name}}</h4>
             </div>
- 
+
 {% endmacro %}
 
 <!--TO-DO :: Refactor the project/app tile rendering functions into one single function -->
@@ -145,10 +145,10 @@
             <div class="portfolio {% if draft %} draft {% else %} published {% endif %} " data-cat="{% if draft %} draft {% else %} published {% endif %} " onclick="javascript:document.location='/project/{{app.short_name}}'">
                 <div class="portfolio-wrapper">
                     <div class="portfolio-hover">
-                        <div class="image-caption">                     
+                        <div class="image-caption">
                             <span style="margin-left:5px;">{{app.overall_progress}}% Complete</span><br/><br/>
                             <a href="{{url_for('project.details', short_name=app.short_name)}}" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Info"><i class="fa fa-info"></i></a>
-                            <a href="{{url_for('project.details', short_name=app.short_name)}}tutorial" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>          {{ current_user }}    
+                            <a href="{{url_for('project.details', short_name=app.short_name)}}tutorial" class="label label-primary icon project-launcher" data-toggle="tooltip" data-placement="middle" title="Take Tutorial"><i class="fa fa-graduation-cap"></i></a>          {{ current_user }}
                             <a href="{{url_for('project.settings', short_name=app.short_name)}}" class="label label-primary icon" data-toggle="tooltip" data-placement="middle" title="Settings"><i class="fa fa-cog"></i></a>
                             <br/><br/><br/>
                             <a href="{{url_for('project.presenter', short_name=app.short_name)}}" class="fa-3x label label-success icon " data-toggle="tooltip" data-placement="right" title="Start Contributing"><i class="fa fa-play" style="padding:10px"></i></a><br/>
@@ -156,8 +156,8 @@
                             <h2 style="background-color:#34495e">
                             {% if draft %}
                             {{ _('DRAFT') }}<br/>
-                            {% endif %}     
-                            </h2>                            
+                            {% endif %}
+                            </h2>
                         </div>
                         <div class="text-center col-md-4 portfolio-stat-tile">
                             <div class="portfolio-stat-value">
@@ -171,24 +171,24 @@
                             <div class="portfolio-stat-value">
                             {{ app.n_volunteers }}
                             </div>
-                            <div class="portfolio-stat-label">                            
-                            <i class="fa fa-users"></i> 
+                            <div class="portfolio-stat-label">
+                            <i class="fa fa-users"></i>
                             {{_('Volunteers' if app.n_volunteers != 1 else _('Volunteer'))}}
                             </div>
                         </div>
                         <div class="text-center col-md-4 portfolio-stat-tile">
-                            <div class="portfolio-stat-value" style="color:#48cfad;">                            
+                            <div class="portfolio-stat-value" style="color:#48cfad;">
                             {{ app.overall_progress }} %
                             </div>
                             <div class="portfolio-stat-label">
                             <i class="fa fa-check-square-o"></i> {{_('Complete')}}
                             </div>
-                        </div>                          
+                        </div>
                         <img src="{{ geotagx_app_thumbnail_url(app, upload_method) }}" alt="" width="100%" onerror="imgError(this);"/>
-                        
+
                     </div>
                 </div>
-                <h4 class="portfolio-label">{{app.name}} </h4>  
+                <h4 class="portfolio-label">{{app.name}}</h4>
             </div>
 {% endmacro %}
 
