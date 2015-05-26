@@ -1,39 +1,21 @@
-<!-- Sequence Modern Slider -->
-
-{% from 'projects/_helpers.html' import render_project_image_url %}
-
-<div id="da-slider" class="da-slider" style="height:300px; margin-top:110px;">
-
-{% for f in categories_projects['featured'] %}
-        <div class="da-slide">
+{%- from 'projects/_helpers.html' import render_project_image_url %}
+<div id="featured-projects" class="da-slider" style="height:300px; margin-top:110px;">
+    {%- for f in categories_projects['featured'] %}
+    <div class="da-slide">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-          <h2>
-            <i>{{f.name}}</i>
-            <br>
-          </h2>
-          <p class="col-md-12 col-sm-12 col-lg-12">
-            {{ f.description }}
-          </p>
-          <a href="{{url_for('project.details', short_name=f.short_name)}}" class="btn btn-info btn-lg da-link">
-            Analyse
-          </a>
-          <div class="da-img">
-            <img src="{{render_project_image_url(f)}}" alt="{{f.short_name}}" width="100%" height="275px" style="border:0px solid;border-radius:10px;"  />
-          </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2  class="featured-project-name"><em>{{ f.name }}</em></h2>
+                    <p   class="featured-project-description">{{ f.description }}</p>
+                    <a   class="featured-project-analyse project-launcher da-link" href="{{url_for('project.details', short_name=f.short_name)}}">Analyse</a>
+                    <div class="featured-project-image da-img"><img src="{{ render_project_image_url(f) }}" alt="{{ f.short_name }}" width="100%" height="275px"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
-{% endfor %}
-
-
-  <nav class="da-arrows">
-    <span class="da-arrows-prev">
-    </span>
-    <span class="da-arrows-next">
-    </span>
-  </nav>
+    {%- endfor %}
+    <nav class="da-arrows">
+        <span class="da-arrows-prev"></span>
+        <span class="da-arrows-next"></span>
+    </nav>
 </div>

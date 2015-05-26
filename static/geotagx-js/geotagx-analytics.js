@@ -34,6 +34,7 @@
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=]").on("click.analytics", onLinkClicked);
+		$("a.project-launcher").on("click", onStartProject);
 	});
 	/**
 	 * Fires an event when a user clicks the browser's "Back" button.
@@ -139,12 +140,13 @@
 		analytics.fireEvent("action.shareProject", data);
 	}
 	/**
-	 * Fires an event when a user starts a project.
+	 * Fires an event when a user clicks an element that starts a project.
 	 */
 	function onStartProject(){
+		var url  = $(this).attr("href");
 		var data = {
-			"projectId":null,
-			"elementUrl":null
+			"projectId":url.substr(9, url.indexOf("/", 9) - 9),
+			"elementUrl":window.location.origin + url
 		};
 		analytics.fireEvent("action.startProject", data);
 	}
