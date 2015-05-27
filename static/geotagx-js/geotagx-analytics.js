@@ -4,11 +4,32 @@
 ;(function($, undefined){
 	"use strict";
 
+	// When the script is loaded, we have to make sure the GTM script is
+	// fully loaded and to do so, we check whether the window.analyticsListener
+	// variable is defined. If it isn't we keep checking at intervals of 450ms
+	// until the variable gets defined, or we ultimately give up after ~10 seconds.
+	// When the GTM script is ready, we trigger the 'gtmready' custom event
+	// which starts page-agnostic, as well as project-specific analytics.
 	$(document).ready(function(){
-		// If analytics is not enabled, do nothing.
-		if (!window.analyticsListener)
-			return;
+		var maxWaitPeriod = 10000;
+		var dt = 450;
+		var timer = setInterval(function(){
+			if (maxWaitPeriod <= 0)
+				clearInterval(timer);
+			else {
+				if (window.analyticsListener){
+					clearInterval(timer);
+					$(document).trigger("gtmready");
+				}
+				else
+					maxWaitPeriod -= dt;
+			}
+		}, dt);
+	});
 
+	// The analytics begins only when the Google Tag Manager (GTM) script is
+	// ready, i.e. when the "gtmready" custom event has been fired.
+	$(document).on("gtmready", function(){
 		analytics.setGlobal("userId", $("body").data("user-id"));
 
 		var path = window.location.pathname;
@@ -34,7 +55,7 @@
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=]").on("click.analytics", onLinkClicked);
-		$("a.project-launcher").on("click", onStartProject);
+		$("a.project-launcher").on("click.analytics", onStartProject);
 	});
 	/**
 	 * Fires an event when a user clicks the browser's "Back" button.
