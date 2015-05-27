@@ -74,6 +74,7 @@
 		var elementClass = $target.attr("class");
 		if (elementClass){
 			var isClickable =
+				$target.is(".clickable") || // A set of elements that aren't usually clickable but have been made so (e.g. when an event handler has been attached to them).
 				$target.is("div.modal.fade") || // A modal underlay which can be used to close a modal.
 				$target.is("input:enabled") || // Enabled input fields.
 				$target.is("label.illustration-label") || // Illustration labels in multi-choice answers are clickable ...
