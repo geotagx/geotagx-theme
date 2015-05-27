@@ -51,7 +51,6 @@
 		}
 
 		$("html").on("click.analytics", onElementClicked);
-		$(".project-category-selector").on("click.analytics", onSelectCategory);
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=]").on("click.analytics", onLinkClicked);
@@ -93,15 +92,6 @@
 				analytics.fireEvent("action.invalidClick", data);
 			}
 		}
-	}
-	/**
-	 * Fires an event when a user selects a category from the project grid.
-	 */
-	function onSelectCategory(){
-		var data = {
-			"categoryId":$(this).data("filter")
-		};
-		analytics.fireEvent("action.selectCategory", data);
 	}
 	/**
 	 * Fires an event when a user visits a category's page.
