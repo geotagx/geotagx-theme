@@ -68,7 +68,7 @@
     <![endif]-->
   </head>
 
-<body data-user-id="{{ '' if current_user.is_anonymous() else current_user.get_id() }}">
+<body data-user-id="{{ 'anonymous' if current_user.is_anonymous() else current_user.get_id() }}">
     {%- include "_gtm.html" ignore missing -%}
 
     {% if not current_user.is_anonymous() %}
