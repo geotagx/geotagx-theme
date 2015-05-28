@@ -114,14 +114,22 @@
 		var isInternalLink =
 			url.charAt(0) === "#" ||
 			url.charAt(0) === "/" ||
-			!url.indexOf("http://geotagx.org") ||
-			!url.indexOf("https://geotagx.org");
+			url.indexOf("http://geotagx.org") === 0 ||
+			url.indexOf("https://geotagx.org") === 0;
 
-		var eventName = isInternalLink ? "action.internalLinkClicked" : "action.externalLinkClicked";
 		var data = {
 			"elementUrl":url
 		};
-		analytics.fireEvent(eventName, data);
+		if (isInternalLink)
+			analytics.fireEvent("action.internalLinkClicked", data);
+		else {
+			// Clicks to external pages are only interesting if we're viewing a project's profile page.
+			var $projectProfile = $("#project-profile[data-short-name!=]");
+			if ($projectProfile.length > 0){
+				data.projectId = $projectProfile.data("short-name");
+				analytics.fireEvent("action.externalLinkClicked", data);
+			}
+		}
 	}
 	/**
 	 * Fires an event when a user shares a category (on social media).
