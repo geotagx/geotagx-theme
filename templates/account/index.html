@@ -5,6 +5,8 @@
 {% from "projects/_helpers.html" import broken_image %}
 
 {% block content %}
+{{ broken_image() }}
+
 <div class="row">
   <div>
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
@@ -56,5 +58,4 @@
   </div>
 </div>
 
-{{ broken_image() }}
 {% endblock %}
