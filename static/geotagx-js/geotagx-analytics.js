@@ -32,23 +32,15 @@
 	$(document).on("gtmready", function(){
 		analytics.setGlobal("userId", $("body").data("user-id"));
 
-		var path = window.location.pathname;
+		// Are we viewing a category's profile page?
+		var $categoryProfile = $("#category-profile[data-short-name!=]");
+		if ($categoryProfile.length > 0)
+			onVisitCategory($categoryProfile.data("short-name"));
 
-		// Are we currently viewing a category page?
-		if (!path.indexOf("/project/category/")){
-			var categoryId = path.substr(18, path.indexOf("/", 18) - 18);
-			onVisitCategory(categoryId);
-		}
-		else if (!path.indexOf("/project/")){
-			var projectId = path.substr(9, path.indexOf("/", 9) - 9);
-
-			// If this is the project's landing page, fire an action.visitProject event. The
-			// project's landing page is found at "/project/projectId/" so we compare the
-			// current path's length with the expected landing page's path length to make sure
-			// we're on the landing page.
-			if ((9 + projectId.length + 1) == path.length)
-				onVisitProject(projectId);
-		}
+		// Or is it a project's profile page?
+		var $projectProfile = $("#project-profile[data-short-name!=]");
+		if ($projectProfile.length > 0)
+			onVisitProject($projectProfile.data("short-name"));
 
 		$("html").on("click.analytics", onElementClicked);
 		$("#share-category > a").on("click.analytics", onShareCategory);

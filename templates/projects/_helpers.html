@@ -272,7 +272,7 @@ function imgError(image) {
 
 
 {% macro render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user, subpage) %}
-<div class="container">
+<div id="project-profile" data-short-name="{{ project.short_name }}" class="container">
         <div class="row" id="project_menu">
             <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn btn-purchase pull-right profile-menu-buttons">
               <i class="fa fa-pencil-square-o"></i>
@@ -434,20 +434,18 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_category_profile(category, pagination) %}
-<div class="container">
+<div class="container" id="category-profile" data-short-name="{{ category.short_name }}">
 	<div class="row">
 		<div class="col-lg-4 col-sm-4 text-center wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
 			<div class="img-circle col-md-12 col-lg-12 col-sm-12">
 				<a href="#"><img src="{{ render_category_image(category.short_name) }}" style="width:100%;border-radius:10px;margin-top:40px"></img></a>
 			</div>
 		</div>
-        <div class="category_details col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
+		<div class="category_details col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
 			<h1><a href="#" style="color:white;">{{ category.name }}</a></h1>
 			<hr>
-            <div style="text-align: justify;text-justify: inter-word;">
-				{{ category.description | safe }}
-            </div>
-            <strong>Total Number of Projects: </strong> <span class="big-icon-2" style="margin-left:10px"> {{pagination.total_count}}</span>
+			<div style="text-align: justify;text-justify: inter-word;">{{ category.description | safe }}</div>
+			<strong>Total Number of Projects: </strong> <span class="big-icon-2" style="margin-left:10px"> {{ pagination.total_count }}</span>
 		</div>
 		{{ render_social_sharing_buttons("category", category.short_name) }}
 	</div>
