@@ -33,19 +33,19 @@
 		analytics.setGlobal("userId", $("body").data("user-id"));
 
 		// Are we viewing a category's profile page?
-		var $categoryProfile = $("#category-profile[data-short-name!=]");
+		var $categoryProfile = $("#category-profile[data-short-name!=][data-short-name]");
 		if ($categoryProfile.length > 0)
 			onVisitCategory($categoryProfile.data("short-name"));
 
 		// Or is it a project's profile page?
-		var $projectProfile = $("#project-profile[data-short-name!=]");
+		var $projectProfile = $("#project-profile[data-short-name!=][data-short-name]");
 		if ($projectProfile.length > 0)
 			onVisitProject($projectProfile.data("short-name"));
 
 		$("html").on("click.analytics", onElementClicked);
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
-		$("a[href!=]").on("click.analytics", onLinkClicked);
+		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("a.project-launcher").on("click.analytics", onStartProject);
 	});
 	/**
