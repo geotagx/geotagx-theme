@@ -50,6 +50,13 @@
                     {{ _('Manage') }} <i class="icon-chevron-right"></i>
                 </a>
             </div>
+            <div id="users-list" class="col-md-5 col-sm-5 col-lg-5 well" style="margin-right:5px">
+                <h2><i class="icon-list"></i> {{_('Users Management')}}</h2>
+                <p>{{_('Manage all registered Users')}}</p>
+                <a href="{{url_for('geotagx.users_page')}}" class="btn btn-primary">
+                    {{ _('Manage') }}
+                </a>
+            </div>
         </div>
     </div>
 </div>

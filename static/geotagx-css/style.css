@@ -3462,8 +3462,19 @@ position: absolute;
     font-size : 16px;
     color : #34495e;
     margin-top : 10px;    
-} 
-
+}
+.user-profile-delete-button a {
+    margin-top: 10px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+.user-profile-delete-button a:hover {
+    -webkit-box-shadow: 16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+    box-shadow:         16px 0px 25px 5px rgba(50, 50, 50, 0.75);
+}
 .user-profile-rank span.label {
     font-weight : 900;
     font-size : 16px;

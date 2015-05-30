@@ -8,7 +8,6 @@
           {{ account_helper.render_user_profile(current_user, upload_method, "settings") }} 
 
         {% elif request['path'][:9]=="/account/" and projects %}
-
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(user, upload_method, "settings") }} 
 
@@ -19,6 +18,11 @@
 
         {% elif request['path'][:15] == "/geotagx/survey" %}
           <h2> Participation Survey </h2>
+        {% elif request['path'][:21] == "/geotagx/users/delete" %}
+
+          {% import "account/_helpers.html" as account_helper %}
+          {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }} 
+
         {% elif active_page == "projects" %}
 
           {% if project %}
@@ -26,6 +30,7 @@
             {% import "projects/_helpers.html" as app_helper %}
             {{ app_helper.render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) }}
           {% endif %}
+
         {% else %}
 
           <div class="col-lg-4 col-sm-4">
