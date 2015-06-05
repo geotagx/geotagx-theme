@@ -1,3 +1,42 @@
 [submodule "static/js/pybossa"]
 	path = static/js/pybossa
 	url = git://github.com/PyBossa/pybossa.js.git
+[submodule "projects/geotagx-project-ebola"]
+	path = projects/geotagx-project-ebola
+	url = https://github.com/geotagx/geotagx-project-ebola.git
+[submodule "projects/geotagx-project-middle-east-winter-shelters"]
+	path = projects/geotagx-project-middle-east-winter-shelters
+	url = https://github.com/geotagx/geotagx-project-middle-east-winter-shelters.git
+[submodule "projects/geotagx-project-somalia-animal-identification"]
+	path = projects/geotagx-project-somalia-animal-identification
+	url = https://github.com/geotagx/geotagx-project-somalia-animal-identification.git
+[submodule "projects/geotagx-project-middle-east-reach-geotag"]
+	path = projects/geotagx-project-middle-east-reach-geotag
+	url = https://github.com/geotagx/geotagx-project-middle-east-reach-geotag.git
+[submodule "projects/geotagx-project-yamuna-people-2013"]
+	path = projects/geotagx-project-yamuna-people-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-people-2013.git
+[submodule "projects/geotagx-project-yamuna-floodwaters-2013"]
+	path = projects/geotagx-project-yamuna-floodwaters-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-floodwaters-2013.git
+[submodule "projects/geotagx-project-yamuna-animals-2013"]
+	path = projects/geotagx-project-yamuna-animals-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-animals-2013.git
+[submodule "projects/geotagx-project-yamuna-shelter-2013"]
+	path = projects/geotagx-project-yamuna-shelter-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-shelter-2013.git
+[submodule "projects/geotagx-project-somalia-crop-identification"]
+	path = projects/geotagx-project-somalia-crop-identification
+	url = https://github.com/geotagx/geotagx-project-somalia-crop-identification.git
+[submodule "projects/geotagx-project-ebola-geotag"]
+	path = projects/geotagx-project-ebola-geotag
+	url = https://github.com/geotagx/geotagx-project-ebola-geotag.git
+[submodule "projects/geotagx-project-yamuna-geotag-2013"]
+	path = projects/geotagx-project-yamuna-geotag-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-geotag-2013.git
+[submodule "projects/geotagx-project-yemen-geotag"]
+	path = projects/geotagx-project-yemen-geotag
+	url = https://github.com/geotagx/geotagx-project-yemen-geotag.git
+[submodule "projects/geotagx-project-yamuna-pollution-2013"]
+	path = projects/geotagx-project-yamuna-pollution-2013
+	url = https://github.com/geotagx/geotagx-project-yamuna-pollution-2013.git

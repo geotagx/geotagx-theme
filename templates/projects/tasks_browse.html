@@ -44,10 +44,16 @@
                             <a id="fulldownload" class="btn btn-success" href="{{ url_for('project.export', 
                                 short_name=project.short_name,
                                 task_id=t.id) }}"><i class="icon-cloud-download"></i> {{_('Download Task Results')}}</a>
+                            <a id="seeSummary" class="btn btn-primary" href="{{ url_for('geotagx.visualize', 
+                                short_name=project.short_name,
+                                task_id=t.id) }}"><i class=""></i> {{_('See Summary of Task Runs')}}</a>                                
                         {% elif task_pct > 0 and task_pct < 100 %}
                             <a id="partialdownload" class="btn btn-info" href="{{ url_for('project.export', 
                                 short_name=project.short_name,
                                 task_id=t.id) }}"><i class="icon-cloud-download"></i> {{_('Download Partial results')}}</a>
+                            <a id="seeSummary" class="btn btn-primary" href="{{ url_for('geotagx.visualize', 
+                                short_name=project.short_name,
+                                task_id=t.id) }}"><i class=""></i> {{_('See Summary of Task Runs')}}</a>
 
                          {% else %}
                             <a id="nothingtodownload" class="btn btn-info disabled" href="#"><i class="icon-cloud-download"></i> {{_('Nothing to download yet')}}</a>
