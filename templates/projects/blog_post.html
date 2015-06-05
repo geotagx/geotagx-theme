@@ -28,7 +28,7 @@
         <form class="form-horizontal" method="post" action="{{ url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id) }}" onsubmit="return confirm('Do you really want to delete the blog post?');">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="form-actions">
-                <input type="submit" value={{_('Delete')}} class="btn btn-danger" />
+                <input type="submit" value="{{_('Delete')}}" class="btn btn-danger" />
                 <a href="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="btn">{{_('Edit')}}</a>
             </div>
         </form>

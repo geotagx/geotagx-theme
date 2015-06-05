@@ -31,7 +31,7 @@
                         {{ render_field(form.sched, class_="span4", 
                         placeholder="Task scheduler for your rpoject")}}
                         <div class="form-actions">
-                            <input type="submit" value={{_('Set redundancy')}} class="btn btn-primary input-lg" />
+                            <input type="submit" value="{{_('Set redundancy')}}" class="btn btn-primary input-lg" />
                             <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-danger input-lg">{{_('Cancel')}}</a>
                         </div>
                     </fieldset>

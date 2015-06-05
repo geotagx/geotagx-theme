@@ -17,7 +17,7 @@
                 {{ render_field(form.title, class_="span4", placeholder= _('The title of your post')) }}
                 {{ render_field(form.body, class_="span4", placeholder= _('Write your post here. You can use Markdown!')) }}
                 <div class="form-actions">
-                    <input type="submit" value={{_('Update')}} class="btn btn-primary" />
+                    <input type="submit" value="{{_('Update')}}" class="btn btn-primary" />
                     <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
                 </div>
             </fieldset>

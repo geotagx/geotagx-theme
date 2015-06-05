@@ -215,7 +215,7 @@ function imgError(image) {
             <div class="span8">
               <ul class="featured">
                   {% for project in projects %}
-                  <li><a href={{ url_for('project.details', short_name=project.short_name)}}>
+                  <li><a href="{{ url_for('project.details', short_name=project.short_name)}}">
                       {{ render_project_thumbnail(project, upload_method, class='img-polaroid', style="min-height:100px; min-width:100px;")}}
                       <h3>{{project.name}}</h3>
                       <span class="label label-info">{{ _('Info') }}</span>
