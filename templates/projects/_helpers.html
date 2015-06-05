@@ -400,9 +400,10 @@ function imgError(image) {
       </div>
       <script type="text/javascript">
       $(document).ready(function(){
-        $("#profile_page_accordion").accordion({active:true, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});
         {% if request.path == "/project/"+ project.short_name+"/" or request.path.startswith("/geotagx/project/"+ project.short_name+"/")  %}
-          $(".profile_param_accordion_handle").click();
+          $("#profile_page_accordion").accordion({active:0, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});
+        {% else %}
+          $("#profile_page_accordion").accordion({active:false, collapsible:true, icons : { "header": "fa fa-plus-circle", "activeHeader": "fa fa-minus-circle" }});
         {% endif %}
       });
       </script>
