@@ -50,10 +50,10 @@
             <div id="users-list" class="col-md-6 well">
                 <h2><i class="icon-list"></i> {{_('Users')}}</h2>
                 <p>{{_('Export a list of users')}}</p>
-                <a href="{{url_for('admin.export_users', format='json')}}" class="btn btn-primary">
+                <a href="{{url_for('geotagx.export_users', format='json')}}" class="btn btn-primary">
                     {{ _('JSON') }}
                 </a>
-                <a href="{{url_for('admin.export_users', format='csv')}}" class="btn btn-primary">
+                <a href="{{url_for('geotagx.export_users', format='csv')}}" class="btn btn-primary">
                     {{ _('CSV') }}
                 </a>
             </div>
