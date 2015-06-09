@@ -67,8 +67,11 @@
     </script>
     <![endif]-->
   </head>
-
-<body data-user-id="{{ '#geotagx_anonymous' if current_user.is_anonymous() else current_user.get_id() }}">
+  {%- if current_user.is_anonymous() %}
+  <body data-user-id="0" data-user-name="#geotagx-anonymous">
+  {% else %}
+  <body data-user-id="{{ current_user.id }}" data-user-name="{{ current_user.get_id() }}">
+  {% endif %}
     {%- include "_gtm.html" ignore missing -%}
 
     {% if not current_user.is_anonymous() %}
