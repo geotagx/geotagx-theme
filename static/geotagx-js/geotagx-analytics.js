@@ -31,6 +31,7 @@
 	// ready, i.e. when the "gtmready" custom event has been fired.
 	$(document).on("gtmready", function(){
 		analytics.setGlobal("userId", $("body").data("user-id"));
+		analytics.setGlobal("userRemoteAddr", window.client_remote_addr);
 
 		if(ga){
 		var ga_clientIds = []
