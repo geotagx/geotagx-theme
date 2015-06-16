@@ -1,6 +1,6 @@
 {% from "_helpers.html" import render_geotagx_project_portfolio_element %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
-
+<script type="text/javascript" src="{{url_for('static', filename='geotagx-js/jquery.md5.js')}}"></script>
 
 <!-- TO-DO:: Use url_for('static',...) -->
 {% set category_image_dict = {'somalidrought':'/static/geotagx-img/categories/somali_drought.png', 'yamunamonsoonflooding2013':"/static/geotagx-img/categories/yamuna_monsoon_flooding.png", 'yemeniagriculturalwaterassessment':"/static/geotagx-img/categories/yemeni_agricultural_water_assesment.png", 'ebolaresponse':"/static/geotagx-img/categories/ebola_response.png",'emergencyshelterassessmentinthemiddleeast':"/static/geotagx-img/categories/winter_shelter.png"} %}
@@ -70,3 +70,40 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
+
+<div id="disqus_thread" style="display:none"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'geotagx-projects'; // Required - Replace example with your forum shortname
+    var disqus_identifier = "all-categories-hidden-form";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    $(document).ready(function(){
+        $(".portfolio_category_div").click(function(){
+            if($(this).attr('data-filter').split(" ").length > 1){
+                $("#disqus_thread").css("display","none");
+            }else{
+                $("#disqus_thread").css("display","block");
+                // Use category hash instead of category short names, as they are pretty long in some cases
+                // and that causes disqus to not consider them as valid identifiers in those cases.
+                var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
+
+                DISQUS.reset({
+                  reload: true,
+                  config: function () {
+                    this.page.identifier = category_hash;
+                    this.page.url = "http://geotagx.org/#!"+category_hash;
+                  }
+                });
+
+            }
+        })
+    })
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
