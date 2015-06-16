@@ -32,6 +32,19 @@
 	$(document).on("gtmready", function(){
 		analytics.setGlobal("userId", $("body").data("user-id"));
 
+		if(ga){
+		var ga_clientIds = []
+			$(ga.getAll()).each(function(){
+				ga_clientIds.push($(this).get(0).get('clientId'));
+			})
+			analytics.setGlobal("ga_clientIds", JSON.stringify(ga_clientIds));
+
+			// In case of anonymous users, set the userId param as `anonymous_ga_clientIds`
+			if($("body").data("user-id") == 0){ //user-id = 0 for anonymous users
+				analytics.setGlobal("userId", "#geotagx_anonymous_"+JSON.stringify(ga_clientIds));
+			}
+		}
+
 		// Are we viewing a category's profile page?
 		var $categoryProfile = $("#category-profile[data-short-name!=][data-short-name]");
 		if ($categoryProfile.length > 0)
