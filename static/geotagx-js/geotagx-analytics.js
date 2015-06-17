@@ -34,7 +34,7 @@
 		analytics.setGlobal("userRemoteAddr", window.client_remote_addr);
 
 		if(ga){
-		var ga_clientIds = []
+			var ga_clientIds = []
 			$(ga.getAll()).each(function(){
 				ga_clientIds.push($(this).get(0).get('clientId'));
 			})
@@ -61,7 +61,20 @@
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("a.project-launcher").on("click.analytics", onStartProject);
+		$("#signin button").on("click.analytics", onSignInButtonClicked);
 	});
+	/**
+	 * Fires an event when a user signs in, also passes in the user email address the user tried to sign in with
+	 */
+	function onSignInButtonClicked(){
+		var tentative_email_addr = $("#email").val();
+		if(tentative_email_addr){
+			var data = {
+				"email" : tentative_email_addr
+			};
+			analytics.fireEvent("action.signInButtonClicked", data);
+		}
+	}
 	/**
 	 * Fires an event when a user clicks the browser's "Back" button.
 	 */
