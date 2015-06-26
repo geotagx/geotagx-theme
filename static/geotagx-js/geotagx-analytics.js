@@ -161,12 +161,17 @@
 		var data = {
 			"elementUrl":url
 		};
-		if (isInternalLink)
+		if (isInternalLink){
 			if(data.elementUrl == "#"){
 				return;
 			}
+			//Determines if its a SkipTutorialLink 
+			// TODO : Probably, this should be implemented in the geotagx-project-template ?
+			if( $(this).html() == "Skip tutorials and start contributing" ){
+				data.elementUrl = data.elementUrl + "#SkipTuorial";
+			}
 			analytics.fireEvent("action.internalLinkClicked", data);
-		else {
+		}else {
 			// Clicks to external pages are only interesting if we're viewing a project's profile page.
 			var $projectProfile = $("#project-profile[data-short-name!=]");
 			if ($projectProfile.length > 0){
