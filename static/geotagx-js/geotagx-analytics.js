@@ -115,7 +115,8 @@
 				$target.is("a[href!=]") || // Anchors with valid links.
 				$target.is(".fa.fa-play") || //Start Contributing buttons
 				$target.is(".image-caption") || //Image Caption element on grid panels
-				$target.is("#questionnaire-submit") ; // Submit Task Response Button
+				$target.is("#questionnaire-submit") || // Submit Task Response Button
+				$target.is(".img-circle.geotagx_profile_picture_placeholder") ;; //Profile Image on communite page
 
 			if (!isClickable){
 				var data = {
