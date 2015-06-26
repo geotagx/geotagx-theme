@@ -62,6 +62,7 @@
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("a.project-launcher").on("click.analytics", onStartProject);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
+		$("#questionnaire-submit").on("click.analytics", onTaskResponseSubmitButtonClicked);
 	});
 	/**
 	 * Fires an event when a user signs in, also passes in the user email address the user tried to sign in with
@@ -85,6 +86,15 @@
 		analytics.fireEvent("action.goingBackButtonClicked", data);
 	}
 	/**
+	  * Fires an event when user submits a task response
+	  */
+	function onTaskResponseSubmitButtonClicked(){
+                var data = {
+                        "elementUrl":"/#task_response_submitted"
+                };
+                        analytics.fireEvent("action.internalLinkClicked", data);	
+	}
+	/**
 	 * Determines if the element that triggered this event is clickable. If it isn't
 	 * then the action.invalidClick event is fired, otherwise no operation is performed.
 	 */
@@ -104,7 +114,8 @@
 				$target.is("button:enabled") || // Enabled buttons.
 				$target.is("a[href!=]") || // Anchors with valid links.
 				$target.is(".fa.fa-play") || //Start Contributing buttons
-				$target.is(".image-caption");
+				$target.is(".image-caption") || //Image Caption element on grid panels
+				$target.is("#questionnaire-submit") ; // Submit Task Response Button
 
 			if (!isClickable){
 				var data = {
