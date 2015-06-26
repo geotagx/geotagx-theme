@@ -162,6 +162,9 @@
 			"elementUrl":url
 		};
 		if (isInternalLink)
+			if(data.elementUrl == "#"){
+				return;
+			}
 			analytics.fireEvent("action.internalLinkClicked", data);
 		else {
 			// Clicks to external pages are only interesting if we're viewing a project's profile page.
