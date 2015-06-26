@@ -103,7 +103,8 @@
 				$target.is("#questionnaire-rewind") || // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
 				$target.is("button:enabled") || // Enabled buttons.
 				$target.is("a[href!=]") || // Anchors with valid links.
-				$target.is(".fa.fa-play");//Start Contributing buttons
+				$target.is(".fa.fa-play") || //Start Contributing buttons
+				$target.is(".image-caption");
 
 			if (!isClickable){
 				var data = {
