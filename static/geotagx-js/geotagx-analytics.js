@@ -63,6 +63,20 @@
 		$("a.project-launcher").on("click.analytics", onStartProject);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
 		$("#questionnaire-submit").on("click.analytics", onTaskResponseSubmitButtonClicked);
+		
+		//Add surveyModal specific events
+		$("#surveyModal").on("shown.bs.modal", function(){
+			var data = {};
+			data.surveyType = window.geotagxSurveyType;
+			data.surveyState = "OPEN";
+			analytics.fireEvent("action.surveyEvent", data);
+		});
+		$("#surveyModal").on("hidden.bs.modal", function(){
+			var data = {};
+			data.surveyType = window.geotagxSurveyType;
+			data.surveyState = "CLOSE";
+			analytics.fireEvent("action.surveyEvent", data);
+		});
 	});
 	/**
 	 * Fires an event when a user signs in, also passes in the user email address the user tried to sign in with
