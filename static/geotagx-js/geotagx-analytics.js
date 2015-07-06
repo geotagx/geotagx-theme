@@ -103,8 +103,11 @@
 	  * Fires an event when user submits a task response
 	  */
 	function onTaskResponseSubmitButtonClicked(){
+		//Quick hack to get the project short_name from the URL
+		// TODO : Fix this, come up with a more cleaner implementation
+		var project_short_name = document.location.pathname.split("/")[2];
                 var data = {
-                        "elementUrl":"/#task_response_submitted"
+                        "elementUrl":project_short_name+"#task_response_submitted"
                 };
                         analytics.fireEvent("action.internalLinkClicked", data);	
 	}
@@ -183,6 +186,13 @@
 			// TODO : Probably, this should be implemented in the geotagx-project-template ?
 			if( $(this).html() == "Skip tutorials and start contributing" ){
 				data.elementUrl = data.elementUrl + "#SkipTuorial";
+			}
+
+			// if this node is a child of the questionnaire-tutorial-complete
+			// When the user completes a tutorial
+			// TODO : Probably, this should be implemented in the geotagx-project-template ?
+			if($("#questionnaire-tutorial-complete").has($(this)).length){
+				data.elementUrl = data.elementUrl + "#CompleteTutorial";
 			}
 			analytics.fireEvent("action.internalLinkClicked", data);
 		}else {
