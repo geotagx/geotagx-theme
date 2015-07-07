@@ -62,8 +62,8 @@
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("a.project-launcher").on("click.analytics", onStartProject);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
-		$("#questionnaire-submit").on("click.analytics", onTaskResponseSubmitButtonClicked);
-		
+		$("#submit-analysis").on("click.analytics", onTaskResponseSubmitButtonClicked);
+
 		//Add surveyModal specific events
 		$("#surveyModal").on("shown.bs.modal", function(){
 			var data = {};
@@ -109,7 +109,7 @@
                 var data = {
                         "elementUrl":project_short_name+"#task_response_submitted"
                 };
-                        analytics.fireEvent("action.internalLinkClicked", data);	
+                        analytics.fireEvent("action.internalLinkClicked", data);
 	}
 	/**
 	 * Determines if the element that triggered this event is clickable. If it isn't
@@ -132,7 +132,7 @@
 				$target.is("a[href!=]") || // Anchors with valid links.
 				$target.is(".fa.fa-play") || //Start Contributing buttons
 				$target.is(".image-caption") || //Image Caption element on grid panels
-				$target.is("#questionnaire-submit") || // Submit Task Response Button
+				$target.is("#submit-analysis") || // Submit Task Response Button
 				$target.is(".img-circle.geotagx_profile_picture_placeholder") ;; //Profile Image on communite page
 
 			if (!isClickable){
@@ -182,7 +182,7 @@
 			if(data.elementUrl == "#"){
 				return;
 			}
-			//Determines if its a SkipTutorialLink 
+			//Determines if its a SkipTutorialLink
 			// TODO : Probably, this should be implemented in the geotagx-project-template ?
 			if( $(this).html() == "Skip tutorials and start contributing" ){
 				data.elementUrl = data.elementUrl + "#SkipTuorial";
