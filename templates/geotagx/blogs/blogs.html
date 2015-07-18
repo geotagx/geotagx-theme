@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% set active_page = "blog_posts" %}
+{% import "projects/_helpers.html" as helper %}
+
+{% block content %}
+
+
+
+
+<div class="container">
+
+<center>
+  <h3> Latest Blog Posts....</h3>
+</center>
+
+{% for blogpost in blogposts %}
+
+        <div class="col-md-6">
+          <div class="blog-left wow fadeInLeft animated" data-wow-animation-name="fadeInLeft" style="visibility: visible; animation-name: fadeInLeft; -webkit-animation-name: fadeInLeft;">
+            <div class="blog-img">
+              <img src="{{ blogpost.body | geotagx_blog_image(default_image=helper.render_project_image_url(blogpost.project, upload_method)) }}" alt="">
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="blog-two-info">
+                    <i class="fa fa-user">
+                    </i>
+                    by
+                    <a href="/account/{{blogpost.owner.name}}" target="_blank">
+                      {{ blogpost.owner.fullname }}
+                    </a>
+                    <span class="pull-right">
+                      <i class="fa fa-calendar">
+                      </i>
+                      {{ blogpost.created[0:10] }}
+                    </span>
+                </div>
+              </div>
+            </div>
+            <div class="blog-content">
+              <h3>
+                {{ blogpost.title }}
+              </h3>
+              <p>
+                {{ blogpost.body | geotagx_blog_trim_body | markdown }}
+              </p>
+            </div>
+            <a class="btn btn-primary" href="/project/{{blogpost.project.short_name}}/{{blogpost.id}}">
+              Read More
+            </a>
+
+          </div>
+        </div>
+
+
+{% endfor %}
+
+</div>
+
+
+
+{% endblock %}
