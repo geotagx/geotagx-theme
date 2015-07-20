@@ -25,7 +25,7 @@
 
         {% elif active_page == "projects" %}
 
-          {% if project %}
+          {% if project and project.short_name != "geotagxblog" %}
             <!-- Project Page-->
             {% import "projects/_helpers.html" as app_helper %}
             {{ app_helper.render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) }}
