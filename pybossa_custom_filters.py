@@ -21,3 +21,10 @@ def geotagx_blog_trim_body(body):
 		return body
 	else:
 		return body[:CHARACTERS_IN_SHORT_DESCRIPTION]+"..."
+
+def geotagx_remove_images_from_markdown(body):
+	import re
+	links = re.findall('(!\[.*\]\(.*\))', body)
+	for _link in links:
+		body = body.replace(_link, '')
+	return body

@@ -42,7 +42,7 @@
                 {{ blogpost.title }}
               </h3>
               <p>
-                {{ blogpost.body | geotagx_blog_trim_body | markdown }}
+                {{ blogpost.body | geotagx_remove_images_from_markdown | geotagx_blog_trim_body | markdown }}
               </p>
             </div>
             <a class="btn btn-primary" href="/project/{{blogpost.project.short_name}}/{{blogpost.id}}">
