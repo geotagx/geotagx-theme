@@ -32,18 +32,27 @@
 	$(document).on("gtmready", function(){
 		analytics.setGlobal("userId", $("body").data("user-id"));
 		analytics.setGlobal("userRemoteAddr", window.client_remote_addr);
+		try {
+			if(ga){
+				var ga_clientIds = []
+				$(ga.getAll()).each(function(){
+					ga_clientIds.push($(this).get(0).get('clientId'));
+				})
+				analytics.setGlobal("ga_clientIds", JSON.stringify(ga_clientIds));
 
-		if(ga){
-			var ga_clientIds = []
-			$(ga.getAll()).each(function(){
-				ga_clientIds.push($(this).get(0).get('clientId'));
-			})
-			analytics.setGlobal("ga_clientIds", JSON.stringify(ga_clientIds));
-
-			// In case of anonymous users, set the userId param as `anonymous_ga_clientIds`
-			if($("body").data("user-id") == 0){ //user-id = 0 for anonymous users
-				analytics.setGlobal("userId", "#geotagx_anonymous_"+JSON.stringify(ga_clientIds));
+				// In case of anonymous users, set the userId param as `anonymous_ga_clientIds`
+				if($("body").data("user-id") == 0){ //user-id = 0 for anonymous users
+					analytics.setGlobal("userId", "#geotagx_anonymous_"+JSON.stringify(ga_clientIds));
+				}
 			}
+		}
+		catch(error){
+			// The code above generates a ReferenceError when 'ga' is undefined
+			// which can happen when the script is being run in an environment
+			// where Google Analytics has been purposely disabled, e.g. on a
+			// development server.
+			// While the ReferenceError is expected behavior, not handling it
+			// prevents the rest of the script from being executed.
 		}
 
 		// Are we viewing a category's profile page?
