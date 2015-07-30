@@ -4,6 +4,10 @@
 ;(function($, undefined){
 	"use strict";
 
+	// This selector is used to determine whether or not an item is clickable.
+	// Please refer to the onElementClicked method for more information.
+	var isClickableSelector_ = null;
+
 	// When the script is loaded, we have to make sure the GTM script is
 	// fully loaded and to do so, we check whether the window.analyticsListener
 	// variable is defined. If it isn't we keep checking at intervals of 450ms
@@ -128,21 +132,26 @@
 		var $target = $(e.target);
 		var elementClass = $target.attr("class");
 		if (elementClass){
-			var isClickable =
-				$target.is(".clickable, .clickable *") || // A set of elements that aren't usually clickable but have been made so (e.g. when an event handler has been attached to them). See the project grid categories for an example of clickable divs.
-				$target.is("div.modal.fade") || // A modal underlay which can be used to close a modal.
-				$target.is("label.illustration-label") || // Illustration labels in multi-choice answers are clickable ...
-				$target.is("img.illustration-img") || // ... as well as the images.
-				$target.is("canvas") || // A canvas can be interacted with, e.g. the canvas used by the OpenLayers map.
-				$target.is("input:enabled") || // Enabled input fields can be selected when clicked on.
-				$target.is("textarea") || // Long text input fields can be selected when clicked on.
-				$target.is("#questionnaire-rewind, #questionnaire-rewind *") || // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
-				$target.is("button:enabled, button:enabled *") || // Enabled buttons.
-				$target.is("a[href!=], a[href!=] *") || // Anchors with valid links.
-				$target.is(".image-caption") || //Image Caption element on grid panels
-				$target.is("#submit-analysis, #submit-analysis *"); // Submit Task Response Button
+			if (isClickableSelector_ == null){
+				isClickableSelector_ = [
+					".clickable, .clickable *", // A set of elements that aren't usually clickable but have been made so (e.g. when an event handler has been attached to them). See the project grid categories for an example of clickable divs.
+					"div.modal.fade", // A modal underlay which can be used to close a modal.
+					"label.illustration-label", // Illustration labels in multi-choice answers are clickable ...
+					"img.illustration-img", // ... as well as the images.
+					"canvas", // A canvas can be interacted with, e.g. the canvas used by the OpenLayers map.
+					"input:enabled", // Enabled input fields can be selected when clicked on.
+					"textarea", // Long text input fields can be selected when clicked on.
+					"#questionnaire-rewind, #questionnaire-rewind *", // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
+					"button:enabled, button:enabled *", // Enabled buttons.
+					"a[href!=], a[href!=] *", // Anchors with valid links.
+					".image-caption", //Image Caption element on grid panels
+					"#submit-analysis, #submit-analysis *" // Submit Task Response Button
+				].join(", ");
+			}
 
-			if (!isClickable){
+			// If the target is not clickable, i.e. does not match with the
+			// clickable selector, an invalidClick action is generated.
+			if (!$target.is(isClickableSelector_)){
 				var data = {
 					"elementClass":elementClass,
 					"url":window.location.href
