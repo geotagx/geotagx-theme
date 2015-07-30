@@ -206,8 +206,8 @@
 
 			// if this node is a child of the questionnaire-tutorial-complete
 			// When the user completes a tutorial
-			// TODO : Probably, this should be implemented in the geotagx-project-template ?
-			if($("#questionnaire-tutorial-complete").has($(this)).length){
+			// TODO : This should be implemented in the geotagx-project-template
+			else if($(this).html() === "<strong>START CONTRIBUTING</strong>"){
 				data.elementUrl = data.elementUrl + "#CompleteTutorial";
 			}
 			analytics.fireEvent("action.internalLinkClicked", data);
