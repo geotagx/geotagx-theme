@@ -65,7 +65,7 @@
 		if ($projectProfile.length > 0)
 			onVisitProject($projectProfile.data("short-name"));
 
-		$("html").on("click.analytics", onElementClicked);
+		$("body").on("click.analytics", onElementClicked);
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
@@ -129,20 +129,18 @@
 		var elementClass = $target.attr("class");
 		if (elementClass){
 			var isClickable =
-				$target.is(".clickable") || // A set of elements that aren't usually clickable but have been made so (e.g. when an event handler has been attached to them).
+				$target.is(".clickable, .clickable *") || // A set of elements that aren't usually clickable but have been made so (e.g. when an event handler has been attached to them). See the project grid categories for an example of clickable divs.
 				$target.is("div.modal.fade") || // A modal underlay which can be used to close a modal.
-				$target.is("input:enabled") || // Enabled input fields.
 				$target.is("label.illustration-label") || // Illustration labels in multi-choice answers are clickable ...
 				$target.is("img.illustration-img") || // ... as well as the images.
 				$target.is("canvas") || // A canvas can be interacted with, e.g. the canvas used by the OpenLayers map.
 				$target.is("input:enabled") || // Enabled input fields can be selected when clicked on.
-				$target.is("#questionnaire-rewind") || // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
-				$target.is("button:enabled") || // Enabled buttons.
-				$target.is("a[href!=]") || // Anchors with valid links.
-				$target.is(".fa.fa-play") || //Start Contributing buttons
+				$target.is("textarea") || // Long text input fields can be selected when clicked on.
+				$target.is("#questionnaire-rewind, #questionnaire-rewind *") || // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
+				$target.is("button:enabled, button:enabled *") || // Enabled buttons.
+				$target.is("a[href!=], a[href!=] *") || // Anchors with valid links.
 				$target.is(".image-caption") || //Image Caption element on grid panels
-				$target.is("#submit-analysis") || // Submit Task Response Button
-				$target.is(".img-circle.geotagx_profile_picture_placeholder") ;; //Profile Image on communite page
+				$target.is("#submit-analysis, #submit-analysis *"); // Submit Task Response Button
 
 			if (!isClickable){
 				var data = {
