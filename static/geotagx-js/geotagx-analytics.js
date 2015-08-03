@@ -76,7 +76,6 @@
 		$("#share-category > a").on("click.analytics", onShareCategory);
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
-		$("a.project-launcher").on("click.analytics", onStartProject);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
 		$("#submit-analysis").on("click.analytics", onTaskResponseSubmitButtonClicked);
 
@@ -242,16 +241,5 @@
 			"elementUrl":$(this).attr("href")
 		};
 		analytics.fireEvent("action.shareProject", data);
-	}
-	/**
-	 * Fires an event when a user clicks an element that starts a project.
-	 */
-	function onStartProject(){
-		var url  = $(this).attr("href");
-		var data = {
-			"projectId":url.substr(9, url.indexOf("/", 9) - 9),
-			"elementUrl":window.location.origin + url
-		};
-		analytics.fireEvent("action.startProject", data);
 	}
 })(jQuery);
