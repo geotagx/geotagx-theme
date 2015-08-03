@@ -64,10 +64,13 @@
 		if ($categoryProfile.length > 0)
 			onVisitCategory($categoryProfile.data("short-name"));
 
-		// Or is it a project's profile page?
-		var $projectProfile = $("#project-profile[data-short-name!=][data-short-name]");
-		if ($projectProfile.length > 0)
-			onVisitProject($projectProfile.data("short-name"));
+		// Or is it a project's profile page? If it is, we are only interested
+		// when the user visits the information page.
+		if ($("#project-info").length > 0){
+			var shortName = $.trim($("#project-profile").data("short-name"));
+			if (shortName.length > 0)
+				onVisitProject(shortName);
+		}
 
 		$("body").on("click.analytics", onElementClicked);
 		$("#share-category > a").on("click.analytics", onShareCategory);
