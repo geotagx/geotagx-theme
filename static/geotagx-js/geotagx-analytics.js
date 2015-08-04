@@ -18,8 +18,10 @@
 		var maxWaitPeriod = 10000;
 		var dt = 450;
 		var timer = setInterval(function(){
-			if (maxWaitPeriod <= 0)
+			if (maxWaitPeriod <= 0){
 				clearInterval(timer);
+				$(document).trigger("geotagx-analytics-disabled");
+			}
 			else {
 				if (window.analyticsListener){
 					clearInterval(timer);
@@ -58,6 +60,10 @@
 			// While the ReferenceError is expected behavior, not handling it
 			// prevents the rest of the script from being executed.
 		}
+		// With the analytics configured, we can properly start tracking our
+		// events. The "geotagx-analytics-configured" event is fired to notify
+		// the project-specific analytics script that it is OK to begin tracking.
+		$(document).trigger("geotagx-analytics-configured");
 
 		// Are we viewing a category's profile page?
 		var $categoryProfile = $("#category-profile[data-short-name!=][data-short-name]");
