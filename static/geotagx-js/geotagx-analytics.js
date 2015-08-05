@@ -180,38 +180,27 @@
 	 */
 	function onLinkClicked(){
 		var url = $(this).attr("href");
-		var isInternalLink =
-			url.charAt(0) === "#" ||
-			url.charAt(0) === "/" ||
-			url.indexOf("http://geotagx.org") === 0 ||
-			url.indexOf("https://geotagx.org") === 0;
+		if (url !== "#"){
+			var isInternalLink =
+				url.charAt(0) === "#" ||
+				url.charAt(0) === "/" ||
+				url.indexOf("http://geotagx.org") === 0 ||
+				url.indexOf("https://geotagx.org") === 0;
+			var data = {
+				"elementUrl":url
+			};
 
-		var data = {
-			"elementUrl":url
-		};
-		if (isInternalLink){
-			if(data.elementUrl == "#"){
-				return;
-			}
-			//Determines if its a SkipTutorialLink
-			// TODO : Probably, this should be implemented in the geotagx-project-template ?
-			if( $(this).html() == "Skip tutorials and start contributing" ){
-				data.elementUrl = data.elementUrl + "#SkipTuorial";
-			}
-
-			// if this node is a child of the questionnaire-tutorial-complete
-			// When the user completes a tutorial
-			// TODO : This should be implemented in the geotagx-project-template
-			else if($(this).html() === "<strong>START CONTRIBUTING</strong>"){
-				data.elementUrl = data.elementUrl + "#CompleteTutorial";
-			}
-			analytics.fireEvent("action.internalLinkClicked", data);
-		}else {
-			// Clicks to external pages are only interesting if we're viewing a project's profile page.
-			var $projectProfile = $("#project-profile[data-short-name!=]");
-			if ($projectProfile.length > 0){
-				data.projectId = $projectProfile.data("short-name");
-				analytics.fireEvent("action.externalLinkClicked", data);
+			if (isInternalLink){
+				var buttonId = $(this).attr("id");
+				if (buttonId !== "start-contributing" && buttonId !== "skip-tutorial")
+					analytics.fireEvent("action.internalLinkClicked", data);
+			}else {
+				// Clicks to external pages are only interesting if we're viewing a project's profile page.
+				var $projectProfile = $("#project-profile[data-short-name!=]");
+				if ($projectProfile.length > 0){
+					data.projectId = $projectProfile.data("short-name");
+					analytics.fireEvent("action.externalLinkClicked", data);
+				}
 			}
 		}
 	}
