@@ -83,7 +83,6 @@
 		$("#share-project > a").on("click.analytics", onShareProject);
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
-		$("#submit-analysis").on("click.analytics", onTaskResponseSubmitButtonClicked);
 
 		//Add surveyModal specific events
 		$("#surveyModal").on("shown.bs.modal", function(){
@@ -119,18 +118,6 @@
 			"url":null
 		};
 		analytics.fireEvent("action.goingBackButtonClicked", data);
-	}
-	/**
-	  * Fires an event when user submits a task response
-	  */
-	function onTaskResponseSubmitButtonClicked(){
-		//Quick hack to get the project short_name from the URL
-		// TODO : Fix this, come up with a more cleaner implementation
-		var project_short_name = document.location.pathname.split("/")[2];
-                var data = {
-                        "elementUrl":project_short_name+"#task_response_submitted"
-                };
-                        analytics.fireEvent("action.internalLinkClicked", data);
 	}
 	/**
 	 * Determines if the element that triggered this event is clickable. If it isn't
