@@ -29,6 +29,9 @@
                             {{_('Task')}} <span class="label label-info">#{{ t.id }}</span>
                             {% endif %}
                             {{ t.n_task_runs }} {{_('of')}} {{ t.n_answers }}
+                            {% if task_pct > 0 and task_pct < 100 %}
+                                <h4> (Task not complete) </h4>
+                             {% endif %}
                         </div>
                         {% if task_pct >= 100 %}
                         <div class="progress progress-success progress-striped span5"> 
@@ -48,17 +51,11 @@
                                 short_name=project.short_name,
                                 task_id=t.id) }}"><i class=""></i> {{_('See Summary of Task Runs')}}</a>                                
                         {% elif task_pct > 0 and task_pct < 100 %}
-                            <a id="partialdownload" class="btn btn-info" href="{{ url_for('project.export', 
-                                short_name=project.short_name,
-                                task_id=t.id) }}"><i class="icon-cloud-download"></i> {{_('Download Partial results')}}</a>
-                            <a id="seeSummary" class="btn btn-primary" href="{{ url_for('geotagx.visualize', 
-                                short_name=project.short_name,
-                                task_id=t.id) }}"><i class=""></i> {{_('See Summary of Task Runs')}}</a>
-
                          {% else %}
                             <a id="nothingtodownload" class="btn btn-info disabled" href="#"><i class="icon-cloud-download"></i> {{_('Nothing to download yet')}}</a>
                          {% endif %}
                         </div>
+                        <br/><hr>
                 </div>
                 {% endfor %}
             </div><!-- span9 -->
