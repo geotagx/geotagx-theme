@@ -15,7 +15,7 @@
 {% endfor %}
 
 
-<div class="container" id="project_grid">
+<div class="container" id="project_grid" style="padding-top: 135px; margin-top: -135px;">
     <h3 class="text-center"><strong style="color:#444e67">Projects</strong></h3>
 	<div class="row portfolio-anchors">
 		<div class="col-md-2 filter active clickable" data-filter="{% for category in category_image_dict.keys() %}{{category}}{% if not loop.last %}{{" "}}{% endif %}{% endfor %}">
