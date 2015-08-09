@@ -3508,3 +3508,17 @@ position: absolute;
 .community-page-current_user-tile .user-profile-data .user-profile-task_runs span.label{
     color : #34495e !important;
 }
+
+.sourcerer-dashboard-row {
+    padding : 10px;
+    margin : 10px;
+
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 1px solid #34495e;
+}
+
+.sourcerer-dashboard-labels {
+    color : #34495e;
+}

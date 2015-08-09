@@ -31,6 +31,9 @@
             {{ app_helper.render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) }}
           {% endif %}
 
+        {% elif active_page == "sourcerer-dashboard" %}
+          GeoTag-X Sourcerer Dashboard
+
         {% else %}
 
           <div class="col-lg-4 col-sm-4">

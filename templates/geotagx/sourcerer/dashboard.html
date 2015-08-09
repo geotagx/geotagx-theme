@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% set active_page = "sourcerer-dashboard"  %}
+{% from "projects/_helpers.html" import broken_image %}
+
+{% block content %}
+{{ broken_image() }}
+<script type="text/javascript">
+    var csrftoken = "{{ csrf_token() }}"
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+</script>
+
+<div class="container">
+  <button class="btn btn-success" id="approve_all"><i class="fa fa-thumbs-up"></i> Approve </button>
+  <button class="btn btn-danger" id="trash_all"><i class="fa fa-thumbs-down"></i> Trash </button>
+  <br/><br/><br/>
+  <button class="btn btn-primary" id="check_all">Check All </button>
+  <button class="btn btn-primary" id="uncheck_all"> Uncheck All </button>
+  
+  {% for image_url in queue.keys() %}
+  <div class="row sourcerer-dashboard-row" data-image_url="{{image_url}}" id="{{queue[image_url]['id']}}">
+    <input type="checkbox"  class="row-checkbox" data-image_url="{{image_url}}" data-source_uri="{{queue[image_url]["source"]}}" name="{{queue[image_url]['id']}}" value="{{queue[image_url]['id']}}" checked > <br>
+    <img class="col-lg-4 col-md-4 col-sm-4 col-xs-4 img-responsive" src="{{image_url}}"/>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 sourcerer-dashboard-row-description">
+      <div class="container">
+        <div class="row">
+          <strong class="sourcerer-dashboard-labels"> Source </strong> : {{ queue[image_url]["source"]}} 
+        </div>
+        <div class="row">
+          <strong class="sourcerer-dashboard-labels"> Time  </strong> : {{ queue[image_url]["timestamp"]}} 
+        </div> 
+        <div class="row">
+          <strong class="sourcerer-dashboard-labels"> Categories  </strong> : 
+          <ul>
+          {% for _category in queue[image_url]["categories"] %} 
+            <!-- <li style="margin-left:20px">  {{ _category }} </li> -->
+            <input type="checkbox" class="category-checkbox" name="{{_category}}" value="{{_category}}" checked > {{_category}}<br>
+          {% endfor %}
+          </ul>
+        </div>            
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 sourcerer-dashboard-row-buttons">
+      <div class="container">
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script type="text/javascript">
+
+var positive_results = [];
+var rejects = []
+var final_results = {}
+$("#approve_all").click(function(){
+  positive_results = [];
+  rejects = []
+  $(".row-checkbox:checked").each(function(){
+    var id = $(this).attr("id");
+    var corresponding_image = $(this).data('image_url');
+    var source_uri = $(this).data("source_uri");
+
+    var _categories = $(this).parent().find(".category-checkbox:checked");
+    var categories = []
+    $(_categories).each(function(){
+      categories.push($(this).val());
+    })
+    var object = {
+      "image_url" : corresponding_image,
+      "source_uri" : source_uri,
+      "categories" : categories
+    }
+    positive_results.push(object);;
+  });  
+
+  final_results = {
+    "approve" : positive_results,
+  }
+
+  $("input").prop("disabled", "true");
+
+  console.log(btoa(JSON.stringify(final_results)));  
+  $.post("/geotagx/sourcerer/commands", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
+    if(d.result == "SUCCESS"){
+      alert("All checked entries inserted into the database for analysis.");
+    }else{
+      alert("There was some error, please try again in sometime.");
+    }
+    location.reload();    
+  })
+
+});
+
+$("#trash_all").click(function(){
+  rejects = []
+  $(".row-checkbox:checked").each(function(){
+    var id = $(this).attr("id");
+    var corresponding_image = $(this).data('image_url');
+    var object = {
+      "image_url" : corresponding_image
+    }
+    rejects.push(object);;
+  });  
+
+  final_results = {
+    "reject" : rejects,
+  }
+
+  $("input").prop("disabled", "true");
+  $.post("/geotagx/sourcerer/commands", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
+    if(d.result == "SUCCESS"){
+      alert("All checked entries successfully rejected.");
+    }else{
+      alert("There was some error, please try again in sometime.");
+    };
+    location.reload();
+  })
+
+})
+
+
+//Check All
+$("#check_all").click(function(){
+  $(".row-checkbox").each(function(){
+    if($(this).attr('checked') != true){
+      $(this).attr('checked', true);
+    }
+  })
+})
+//UnCheck All
+$("#uncheck_all").click(function(){
+  $(".row-checkbox:checked").each(function(){
+    $(this).attr('checked', false);
+  })
+})
+
+</script>
+
+{% endblock %}
