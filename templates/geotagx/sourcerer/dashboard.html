@@ -24,7 +24,7 @@
   
   {% for image_url in queue.keys() %}
   <div class="row sourcerer-dashboard-row" data-image_url="{{image_url}}" id="{{queue[image_url]['id']}}">
-    <input type="checkbox"  class="row-checkbox" data-image_url="{{image_url}}" data-source_uri="{{queue[image_url]["source"]}}" name="{{queue[image_url]['id']}}" value="{{queue[image_url]['id']}}" checked > <br>
+    <input type="checkbox"  class="row-checkbox" data-image_url="{{image_url}}" data-source_uri="{{queue[image_url]["source_uri"]}}" name="{{queue[image_url]['id']}}" value="{{queue[image_url]['id']}}" checked > <br>
     <img class="col-lg-4 col-md-4 col-sm-4 col-xs-4 img-responsive" src="{{image_url}}"/>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 sourcerer-dashboard-row-description">
       <div class="container">
