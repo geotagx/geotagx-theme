@@ -5,23 +5,17 @@
 {% block content %}
 
 
-
-
-<div class="container">
-
-<center>
-  <h3> Latest Blog Posts....</h3>
-</center>
-
-{% for blogpost in blogposts %}
-
-        <div class="col-md-6">
+{% macro render_blog_strip(blogposts) %}
+      <div class="col-md-6 col-xs-6">
+        <div class="container">
+        {% for blogpost in blogposts %}
+          <div class="col-md-12 col-xs-12">
           <div class="blog-left wow fadeInLeft animated" data-wow-animation-name="fadeInLeft" style="visibility: visible; animation-name: fadeInLeft; -webkit-animation-name: fadeInLeft;">
             <div class="blog-img">
               <img src="{{ blogpost.body | geotagx_blog_image(default_image=helper.render_project_image_url(blogpost.project, upload_method)) }}" alt="">
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-xs-12">
                 <div class="blog-two-info">
                     <i class="fa fa-user">
                     </i>
@@ -48,12 +42,21 @@
             <a class="btn btn-primary" href="/project/{{blogpost.project.short_name}}/{{blogpost.id}}">
               Read More
             </a>
-
           </div>
+          </div>
+        {% endfor %}
         </div>
+      </div>
+{% endmacro %}
 
+<div class="container">
 
-{% endfor %}
+<center>
+  <h3> Latest Blog Posts....</h3>
+</center>
+
+{{ render_blog_strip(left_column) }}
+{{ render_blog_strip(right_column) }}
 
 </div>
 
