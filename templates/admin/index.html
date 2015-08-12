@@ -66,6 +66,13 @@
                     {{ _('Manage') }}
                 </a>
             </div>
+            <div id="users-list" class="col-md-6 well">
+                <h2><i class="icon-list"></i> {{_('Send Newsletter')}}</h2>
+                <p>{{_('Send newsletter to all registered users.')}}</p>
+                <a href="{{url_for('geotagx.newsletter')}}" class="btn btn-primary">
+                    {{ _('Go') }}
+                </a>
+            </div>            
         </div>
     </div>
 </div>

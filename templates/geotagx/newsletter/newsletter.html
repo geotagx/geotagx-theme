@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% set active_page = "newsletter" %}
+
+
+class NewsletterForm(Form):
+  subject = TextField("Subject")
+  debug_mode = BooleanField("Debug Mode")
+  message = TextAreaField("Message")
+  submit = SubmitField("Send")
+
+
+{% block content %}
+
+  <h2>GeoTag-X Newsletter</h2>
+  <form action="{{ url_for('geotagx.newsletter') }}" method=post>
+    <input name="_csrf_token" type=hidden value="{{ csrf_token() }}">
+ 
+
+                        <fieldset>
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <center><h4>{{ form.subject.label }}</h4></center>
+                                </div>
+                                <div class="col-md-9 class-md-offset-3">
+                                      {{ form.subject(class_="input-lg", size="85") }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <center><h4>{{ form.debug_mode.label }}</h4></center>
+                                </div>
+                                <div class="col-md-9 class-md-offset-3">
+                                      {{ form.debug_mode(class_="input-lg", checked="checked") }}
+                                      (Note : In Debug mode, the email will be only sent to the emails specified in <strong>GEOTAGX_NEWSLETTER_DEBUG_EMAIL_LIST</strong> key in <strong>settings_local.py</strong>) <br/> (Current List : {{ debug_emails }})
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <center><h4>{{ form.message.label }}</h4></center>
+                                </div>
+                                <div class="col-md-9 class-md-offset-3">
+                                      {{ form.message(class_="input-lg", cols="85", rows="15") }}
+                                </div>
+                            </div>
+                        </div>                        
+                        <br/>
+                        <div class="form-actions">
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-10">
+                                            {{ form.submit(class="btn btn-primary input-lg", style="width:100%") }}
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                        </fieldset>
+ 
+  </form>
+
+{% endblock %}
