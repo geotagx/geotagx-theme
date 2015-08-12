@@ -1,17 +1,35 @@
 {% from "_helpers.html" import render_geotagx_project_portfolio_element %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
+{% from "projects/_helpers.html" import render_project_image_url %}
+
 <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/jquery.md5.js')}}"></script>
 
-<!-- TO-DO:: Use url_for('static',...) -->
-{% set category_image_dict = {'somalidrought':'/static/geotagx-img/categories/somali_drought.png', 'yamunamonsoonflooding2013':"/static/geotagx-img/categories/yamuna_monsoon_flooding.png", 'yemeniculturalheritageatrisk':"/static/geotagx-img/categories/yemeni_agricultural_water_assesment.png", 'ebolaresponse':"/static/geotagx-img/categories/ebola_response.png",'emergencyshelterassessmentinthemiddleeast':"/static/geotagx-img/categories/winter_shelter.png"} %}
-
-{% set category_label_dict = {'somalidrought':"Somali Drought", 'yamunamonsoonflooding2013':"Yamuna Monsoon Flooding 2013", 'yemeniculturalheritageatrisk':"Yemeni Cultural Heritage at Risk", 'ebolaresponse':"Ebola response",'emergencyshelterassessmentinthemiddleeast':"Emergency Shelter Assessment in the Middle East"} %}
-
-
 <!-- Voodoo for a simple counter :( -->
-{% set count = {'value': 0} %}
 {% for value in categories_projects.values(): %}
-        {% if count.update({'value': (count.value + value|length)}) %} {% endif %}
+
+{% endfor %}
+
+{% set category_image_dict = {} %}
+{% set category_label_dict = {} %}
+{% set count = {'value': 0} %}
+
+
+{% for _category in categories_projects: %}
+    {% if _category not in ['featured', 'underdevelopment'] %}
+        {% if count.update({'value': (count.value + categories_projects[_category]|length)}) %} {% endif %}
+
+        {% if categories_projects[_category].__len__() > 0 %}
+            {% set _temp = category_image_dict.update( {_category : render_project_image_url(categories_projects[_category][0], upload_method)}) %}
+        {% else %}
+            {% set _temp = category_image_dict.update( {_category : "" } ) %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for _category in categories %}
+    {% if _category['short_name'] not in ['featured', 'underdevelopment'] %}
+        {% set _temp = category_label_dict.update({ _category['short_name'] : _category['name']}) %}
+    {% endif %}
 {% endfor %}
 
 
