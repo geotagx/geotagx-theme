@@ -3522,3 +3522,13 @@ position: absolute;
 .sourcerer-dashboard-labels {
     color : #34495e;
 }
+
+#sign-in-button {
+    background-color : #48cfad!important;
+    color:white;
+}
+#sign-in-button:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+
+}

@@ -42,8 +42,8 @@
               {% endif %}   
 
               {% if current_user.is_anonymous() %}
-              <ul class="nav navbar-nav pull-right">
-                <li><a href="{{ url_for('account.signin') }}"><i class="icon icon-white icon-signin"></i> {{ _('Sign in') }}</a></li>
+              <ul class="nav navbar-nav pull-right" >
+                <li><a href="{{ url_for('account.signin') }}" id="sign-in-button">{{ _('Sign in') }}</a></li>
               </ul>
               {% endif %}                         
         </div>
