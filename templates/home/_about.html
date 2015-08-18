@@ -1,14 +1,31 @@
+<style type="text/css">
+  .panel-heading {
+    background-color : #34495e!important;
+    color:white !important;
+  }
+  .panel-body {
+    background-color : #34495e!important;
+    color:white !important;
+  }
+
+  .panel-body a {
+    color:#48cfad !important;
+  }
+  .panel-body a:hover {
+    color: #9ACD32 !important;
+  }
+  .panel {
+    margin-top:0px;
+  }
+</style>
 <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2 about wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
-        <br/>
-        <br/>
-        <br/>
         <div class="row">
             <p class="text-center">
-            <strong class="big-icon-2"><a>GeoTag-X </a>  </strong> is a crowdsourcing research project set up by
-the United Nations Institute for Training and Research’s Operational Satellite Applications Programme (UNITAR-UNOSAT) as part of the Citizen Cyberlab project.
+            <strong class="big-icon-1">GeoTag-X</strong> is a crowdsourcing research project set up by
+the <a href="http://www.unitar.org/unosat/">United Nations Institute for Training and Research’s Operational Satellite Applications Programme (UNITAR-UNOSAT)</a> as part of the <a href="http://citizencyberlab.eu/">Citizen Cyberlab project</a>.
             <br/><br/>
-            <strong class="big-icon-1">GeoTag-X</strong> aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse photos taken in disaster-affected areas.
+            <strong class="big-icon-1">GeoTag-X</strong> aims to <strong style="font-size:18px">help disaster</strong> relief efforts on the ground to plan a response by asking <strong style="font-size:18px">volunteers</strong> to <strong style="font-size:18px">analyse</strong> <strong style="font-size:18px">photos taken in disaster-affected areas</strong>.
             </p>
             <center>
             <img src="{{url_for('static', filename='geotagx-img/wordle.png')}}" style="width:60%"></img>
@@ -56,29 +73,12 @@ the United Nations Institute for Training and Research’s Operational Satellite
     </div>
     <br/> 
 </div> <!-- end div of outer block container -->
-
-<style type="text/css">
-  .panel-heading {
-    background-color : #34495e!important;
-    color:white !important;
-  }
-  .panel-body {
-    background-color : #34495e!important;
-    color:white !important;
-  }
-
-  .panel-body a {
-    color:#48cfad !important;
-  }
-  .panel-body a:hover {
-    color: #9ACD32 !important;
-  }  
-</style>
+<br/>
 <div class="property blue-bg in-page-link">
 <div class="container">
 <div class="row">
 
-<div class="panel-group" id="accordion" style="padding-top:135px; margin-top:-135px">
+<div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -92,26 +92,26 @@ the United Nations Institute for Training and Research’s Operational Satellite
 
 
 There are two ways to volunteer for <strong>GeoTag-X</strong>: you can either analyse photos or find photos.<br/><br/>
-<strong>What do I need?</strong><br/>
-The only things required to start contributing is a pc or tablet with an Internet connection, and some spare time.
-This means that anyone can do it wherever they want, whenever they want. <br/><br/>
+<h4>What do I need?</h4><br/>
+The only things required to start contributing is a pc or tablet with an Internet connection, and some spare time.<br/>
+This means that anyone can do it wherever they want, whenever they want. <br/><br/><br/>
 
-<h3 id="analyse_photos" style="padding-top:135px;margin-top:-135px"><img src="{{url_for('static',filename='geotagx-img/flask.png')}}" width="100"></img>Analyse photos</h3>
+<h4 id="analyse_photos" style="padding-top:135px;margin-top:-135px"><img src="{{url_for('static',filename='geotagx-img/flask.png')}}" width="50"></img>Analyse photos</h4>
 Help us extract information from the photos being collected by contributing to the different applications on <strong>GeoTag-X</strong>.<br/><br/>
 It’s easy. Just follow these steps:<br/>
 ✓ Sign up for an <a href="{{url_for('account.register')}}">account</a>.<br/>
-<i>Note: is that mandatory? No, but it would be very helpful for us as we would like to build our community of experienced volunteers.</i><br/>
+<i style="margin-left:11px;color:white">Note: is that mandatory? No, but it would be very helpful for us as we would like to build our community of experienced volunteers.</i><br/>
 ✓ Choose a project from the different applications on the <a href="/#project_grid">Project page</a>.<br/>
 ✓ Start contributing and analyse as many photos as you feel like.<br/><br/>
 Don’t worry: it will take no longer than 2 minutes to register and between (less than) 1 to 3 minutes to analyse each photo.<br/>
-If you are not sure what you are doing, you can take the project’s tutorial. It will teach you what to look for.<br/>
+If you are not sure what you are doing, you can take the project’s tutorial. It will teach you what to look for.<br/><br/><br/>
 
-<h3 id="find_photos" style="padding-top:135px;margin-top:-135px"><img src="{{url_for('static',filename='geotagx-img/binocular.png')}}" width="100"></img>Find photos</h3>
+<h4 id="find_photos" style="padding-top:135px;margin-top:-135px"><img src="{{url_for('static',filename='geotagx-img/binocular.png')}}" width="50"></img>Find photos</h4>
 Photos are our main source of information. We need you to help us find photos for the different projects that are on the website.<br/><br/>
-When it has been enabled for a project, you can use the <a href="https://chrome.google.com/webstore/detail/geotag-x-photo-collector/objndpnfdmjgiaadijpcfbobahbdomjp?hl=en">GeoTag-X Photo Collector extension</a> for Google Chrome <i class="fa fa-chrome"></i> to send us photos as you browse.<br/> To do so, simply right-click the photo you want to send and select <i>“Upload image URL to GeoTag-X”</i>.<br/><br/>
-If you find albums containing relevant photos <a href="mailto:geotagx@cern.ch">send</a> them to us and we will load them in for analysis.<a href="mailto:geotagx@cern.ch"><i class="fa fa-envelope-o fa-2x" style="padding-left:30px"></i></a>
-<hr>
-<i>Note: most of these projects are a work in progress.</i><br/>
+When it has been enabled for a project, you can use the <a href="https://chrome.google.com/webstore/detail/geotag-x-photo-collector/objndpnfdmjgiaadijpcfbobahbdomjp?hl=en">GeoTag-X Photo Collector extension</a> for Google Chrome <i class="fa fa-chrome"></i> to send us photos as you browse.<br/> To do so, simply right-click the photo you want to send and select <i style="color:white">Upload image URL to GeoTag-X</i>.<br/>
+If you find albums containing relevant photos <a href="mailto:geotag-x@cern.ch">send</a> them to us and we will load them in for analysis.<a href="mailto:geotag-x@cern.ch"><i class="fa fa-envelope-o fa-2x" style="padding-left:30px"></i></a>
+<hr style="margin-bottom:5px;margin-top:20px">
+<i style="color:white">Note: most of these projects are a work in progress.</i><br/>
 If you find bugs or things that you don’t really like, or if you want to give us your feedback, you can post it on <a href="https://github.com/geotagx/geotagx-theme/issues">GitHub <i class="fa fa-github"></i>
 </a> or use the <a href="http://geotagx.org/geotagx/feedback">Feedback form</a>.<br/>
 We would love to hear what you think.
@@ -119,7 +119,7 @@ We would love to hear what you think.
       </div>
     </div>
   </div>
-  <hr>
+  <hr style="margin:0px;padding:0px;">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -140,7 +140,7 @@ The analysis questions are closely linked to the questions in assessments undert
       </div>
     </div>
   </div>
-  <hr>
+  <hr style="margin:0px;padding:0px;">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -154,7 +154,7 @@ The analysis questions are closely linked to the questions in assessments undert
 
 
 We welcome collaborators for new GeoTag-X projects, such as organisations or researchers addressing a particular crisis. <br/>
-If you have an idea for a project on GeoTag-X send us an email at <i>geotagx@cern.ch</i>. <br/><br/>
+If you have an idea for a project on GeoTag-X send us an email at <a href="mailto:geotagx-x@cern.ch">geotag-x@cern.ch</a>. <br/><br/>
 We are also researching how visitors learn through their interaction with GeoTag-X and the projects on it. To be part of this research make sure you sign up for an account and accept to be part of the research project. <br/>
 You can learn more at <a href="http://citizencyberlab.eu/" target="_blank">Citizen Cyberlab</a>.
 
