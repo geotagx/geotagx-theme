@@ -5,7 +5,11 @@
 {% set active_page = 'home#index' %}
 {% block content %}
 
-
+<style type="text/css">
+div {
+	color : black;
+}
+</style>
 
 <div class="row" style="margin-top:40px">
 	<p class="text-center big-icon-3">
@@ -14,20 +18,22 @@
 	</p>
 </div>
 <div class="row" style="margin-top:10px">
-
-	<div class="col-md-3 text-center col-md-offset-3">
+	<br/>
+	<div class="col-md-8 text-center col-md-offset-2">
 		<center>
-			<img src="{{ url_for('static', filename='geotagx-img/binocular.png') }}" width="80px"/>
+			GeoTag-X aims to <b style="font-size:17px">help disaster relief efforts</b> on the ground to plan a response by asking <b style="font-size:17px">volunteers</b> to <b style="font-size:17px"> analyse photos taken in disaster-affected areas</b>.
+			<br/>
+			There are <b style="font-size:17px">no particular skills required</b> to participate and it <b style="font-size:17px">only takes a few minutes</b> or less to analyse each photo.
+			<br/>
+			<br/>
+			<a href="/about#image_anchor">
+				<div class="col-md-4 col-md-offset-4" style="background-color:#34495e">
+					<h4 style="color:white">How to get started ?<i class="indicator fa fa-plus-circle" style="padding-left:10px;color:#48cfad"></i></h4>
+				</div>
+			</a>
 		</center>
-	<a href="/about#find_photos" class="btn btn-purchase"><i class="fa fa-binoculars"></i> Find photos </a>
 	</div>
 
-<div class="col-md-3 text-center">
-	<center>
-		<img src="{{ url_for('static', filename='geotagx-img/flask.png') }}" width="80px"/>
-	</center>	
-	<a href="/about#analyse_photos" class="btn btn-purchase"><i class="fa fa-flask"></i> Analyze Photos </a>
-</div>
 </div>
 <br/>
 <br/>

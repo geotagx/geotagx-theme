@@ -40,7 +40,7 @@ the <a href="http://www.unitar.org/unosat/">United Nations Institute for Trainin
         </div>
         </div>    
     </div>
-    <div class="row" style="z-index:1000!important  ">
+    <div class="row" style="z-index:1000!important  " id="image_anchor">
       <div class="col-md-3">
         <a href="https://www.flickr.com/photos/faoswalim/13444934795/in/album-72157642992734333/" target="_blank">
         <img src="{{url_for('static', filename='geotagx-img/about_page_images/intro_1.jpg')}}" style="width:100%;height:197px"></img>
@@ -80,6 +80,7 @@ the <a href="http://www.unitar.org/unosat/">United Nations Institute for Trainin
 <div class="property blue-bg in-page-link" style="padding-top:1px;padding-bottom:1px;">
 <div class="container">
 <div class="row">
+  <div class="col-md-10 col-md-offset-1">
 
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
@@ -95,11 +96,13 @@ the <a href="http://www.unitar.org/unosat/">United Nations Institute for Trainin
 
 
 There are two ways to volunteer for GeoTag-X: you can either analyse photos or find photos.<br/><br/>
-<center><h4>What do I need?</h4></center><br/>
-The only things required to start contributing is a pc or tablet with an Internet connection, and some spare time.<br/>
+<center><h4><i class="fa fa-hand-spock-o fa-2x" style="padding-right:10px"></i>What do I need?</h4></center>
+<hr>
+The only things required to start contributing is a PC or tablet with an Internet connection, and some spare time.<br/>
 This means that anyone can do it wherever they want, whenever they want. <br/><br/><br/>
 
 <center><h4 id="analyse_photos" style="padding-top:135px;margin-top:-135px;"><img src="{{url_for('static',filename='geotagx-img/flask.png')}}" style="margin-right:10px" width="50"></img>Analyse photos</h4></center>
+<hr>
 Help us extract information from the photos being collected by contributing to the different applications on <strong>GeoTag-X</strong>.<br/><br/>
 It’s easy. Just follow these steps:<br/>
 ✓ Sign up for an <a href="{{url_for('account.register')}}">account</a>.<br/>
@@ -110,9 +113,10 @@ Don’t worry: it will take no longer than 2 minutes to register and between (le
 If you are not sure what you are doing, you can take the project’s tutorial. It will teach you what to look for.<br/><br/><br/>
 
 <center><h4 id="find_photos" style="padding-top:135px;margin-top:-135px"><img src="{{url_for('static',filename='geotagx-img/binocular.png')}}" style="margin-right:10px" width="50"></img>Find photos</h4></center>
+<hr>
 Photos are our main source of information. We need you to help us find photos for the different projects that are on the website.<br/><br/>
 When it has been enabled for a project, you can use the <a href="https://chrome.google.com/webstore/detail/geotag-x-photo-collector/objndpnfdmjgiaadijpcfbobahbdomjp?hl=en">GeoTag-X Photo Collector extension</a> for Google Chrome <i class="fa fa-chrome"></i> to send us photos as you browse.<br/> To do so, simply right-click the photo you want to send and select <i style="color:white">Upload image URL to GeoTag-X</i>.<br/>
-If you find albums containing relevant photos <a href="mailto:geotag-x@cern.ch">send</a> them to us and we will load them in for analysis.<a href="mailto:geotag-x@cern.ch"><i class="fa fa-envelope-o fa-2x" style="padding-left:30px"></i></a>
+If you find albums containing relevant photos <a href="mailto:geotag-x@cern.ch">send</a> them to us and we will load them in for analysis.<a href="mailto:geotag-x@cern.ch"><i class="fa fa-envelope-o fa-2x" style="padding-left:30px"></i></a><br/><br/><br/>
 <hr style="margin-bottom:5px;margin-top:20px">
 <i style="color:white">Note: most of these projects are a work in progress.</i><br/>
 If you find bugs or things that you don’t really like, or if you want to give us your feedback, you can post it on <a href="https://github.com/geotagx/geotagx-theme/issues">GitHub <i class="fa fa-github"></i>
@@ -177,6 +181,12 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 $('.accordion-toggle').on('click', function(e){
       evt.preventDefault();//Fix this. This statement causes error as evt is not defined. but if this statement is removed the target element scrolls away from the view because of the "#id" href
 })
+
+if(document.location.hash == "#image_anchor"){
+  $("#collapseOne").toggle();
+  console.log("Find photos");
+window.scrollTo(0, $("#image_anchor").offset().top);
+}
 if(document.location.hash == "#find_photos"){
   $("#collapseOne").toggle();
   console.log("Find photos");
@@ -189,6 +199,7 @@ window.scrollTo(0, $("#analyse_photos").offset().top);
 }
 </script>
 
+</div>
 </div>
 </div>
 </div>
