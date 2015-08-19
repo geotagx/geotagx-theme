@@ -21,8 +21,10 @@ $(project_schema.questions).each(function(){
 var response;
 $(project_task_runs).each(function(){
   var task_run = $(this).get(0);
+  console.log(task_run);
     $(project_schema.questions).each(function(){
       // (this.answer.saved_as)
+      try{
       response = task_run.info[this.answer.saved_as];
       if(response == undefined){
         // not answered this field
@@ -37,6 +39,9 @@ $(project_task_runs).each(function(){
         global_summary[this.answer.saved_as][response] = 0;
       }
       global_summary[this.answer.saved_as][response] += 1;
+     }catch(err){
+		//pass silently in case of errors
+     }
     })
   });
 
