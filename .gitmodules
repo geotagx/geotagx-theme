@@ -40,3 +40,6 @@
 [submodule "projects/geotagx-project-yamuna-pollution-2013"]
 	path = projects/geotagx-project-yamuna-pollution-2013
 	url = https://github.com/geotagx/geotagx-project-yamuna-pollution-2013.git
+[submodule "projects/geotagx-project-yemen-culture"]
+	path = projects/geotagx-project-yemen-culture
+	url = https://github.com/geotagx/geotagx-project-yemen-culture.git
