@@ -1,7 +1,15 @@
 {% from "_helpers.html" import render_user_thumbnail  %}
-  <!--header start-->
   <header class="head-section">
     <div class="navbar navbar-default navbar-fixed-top container-fluid" style="padding-left:10px; border-bottom:10px">
+        <div id="incompatible-browser-message" class="show-on-incompatible-browser collapse in">
+            <button type="button" class="close" data-toggle="collapse" data-target="#incompatible-browser-message" aria-label="Close" aria-expanded="false" aria-controls="incompatible-browser-message"><span aria-hidden="true">&times;</span></button>
+            <h4><big>Incompatible Web Browser</big></h4>
+            <p>We have detected the use of a browser that is not currently supported by the GeoTag-X platform.<br>
+            GeoTag-X requires the following HTML5 feature(s), present on all modern browsers but undetectable on yours:</p>
+            <ul id="incompatible-browser-missing-requirements"></ul>
+            <p>We highly recommend upgrading your browser or switching to one that has support for the aforementioned feature(s).<br>
+            However, if you choose to proceed, please note that you will run into usability issues currently beyond our control.</p>
+        </div>
         <div class="navbar-header">
             <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
               <span class="icon-bar"></span>
@@ -21,11 +29,12 @@
               {% endif %}
               <li class="menu-item"><a href="{{url_for('geotagx.feedback')}}">Feedback</a></li>
             </ul>
-              {% if current_user.is_authenticated() %}
-                <ul class="nav navbar-nav pull-right">             
-                  <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding-left:5px">
-                    {{ render_user_thumbnail(current_user, upload_method, 'smallAvatar', 'img-circle', 'width:30px' ) }}
-                    {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
+            <ul class="nav navbar-nav pull-right">
+                <li id="incompatible-browser-icon" class="show-on-incompatible-browser"><a class="clickable" title="Incompatible Web Browser" data-toggle="collapse" data-target="#incompatible-browser-message" aria-expanded="false" aria-controls="incompatible-browser-message"><i class="fa fa-2x fa-warning"></i></a></li>
+                {% if current_user.is_authenticated() %}
+                <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding-left:5px">
+                {{ render_user_thumbnail(current_user, upload_method, 'smallAvatar', 'img-circle', 'width:30px' ) }}
+                {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon icon-user"></i>   {{ _('My Profile') }}</a></li>
                         <li><a href="{{ url_for('account.projects', name=current_user.name) }}"><i class="icon icon-th-large"></i>   {{ _('My Projects') }}</a></li>
@@ -35,18 +44,13 @@
                         <li><a href="{{ url_for('admin.index') }}"><i class="icon icon-cog"></i> {{ _('Admin Site') }}</a></li>
                         {% endif %}
                         <li><br/></li>
-                      <li><a href="{{ url_for('account.signout') }}"><i class="icon icon-off"></i> {{ _('Sign Out') }}</a></li>
+                        <li><a href="{{ url_for('account.signout') }}"><i class="icon icon-off"></i> {{ _('Sign Out') }}</a></li>
                     </ul>
-                  </li>
-                </ul>
-              {% endif %}   
-
-              {% if current_user.is_anonymous() %}
-              <ul class="nav navbar-nav pull-right" >
+                </li>
+                {% elif current_user.is_anonymous() %}
                 <li><a href="{{ url_for('account.signin') }}" id="sign-in-button">{{ _('Sign in') }}</a></li>
-              </ul>
-              {% endif %}                         
+                {% endif %}
+            </ul>
         </div>
     </div>
   </header>
-  <!--header end--> 
