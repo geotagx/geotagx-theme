@@ -85,7 +85,7 @@ function _debounce(func, wait, immediate){
 }
 
 $(document).ready(function(){
-	checkBrowserCompatibility();
+	// checkBrowserCompatibility();
 
 	// Initialize Bootstrap's opt-in javascript components.
 	$("[data-toggle='tooltip']").tooltip();
