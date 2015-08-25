@@ -72,7 +72,9 @@ function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
 		}
 
 		//Draw a new imaginary polygon with the polygon centroids as edges, and compute a new centroid
-		var marker = L.marker(compute_centroid_of_polygon(polygon_centroids)).addTo(map);
+		var coords = compute_centroid_of_polygon(polygon_centroids);
+		var marker = L.marker([coords[1], coords[0]]).addTo(map);
+
 		marker.image_index = feature_index;
 
 		marker.on("mouseover", function(e){
