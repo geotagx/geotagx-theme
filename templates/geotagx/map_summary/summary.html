@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% set active_page = "summary"  %}
+
+
+{% block content %}
+
+ </div>
+ <div class="container-fluid">
+
+ <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+ <script src="http://code.highcharts.com/highcharts.js"></script>
+ <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+ <style type="text/css">
+ #map { height:780px; }
+
+ .modal .modal-dialog { width: 80%; }
+
+ </style>
+
+ <div id="map"></div>
+
+<script type="text/javascript">
+
+var CATEGORY_NAME = "{{category_name}}";
+
+var geoJSON_URL = "/geotagx/export/category/"+CATEGORY_NAME+"/GeoJSON";
+
+$.get(geoJSON_URL, function(d){
+	window.geoJSON = d;
+	init();
+})
+
+$(".container").each(function(){$(this).css("min-height","0px")});
+
+var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+var map = L.map('map').setView([51.505, 0.00], 2);
+
+//Iterate through all features
+
+map.addLayer(OpenStreetMap_Mapnik);
+
+function compute_centroid_of_polygon(polygon){
+	var mean_x = 0;
+	var mean_y = 0;
+	for(var i=0; i < polygon.length; i++){
+		mean_x += polygon[i][0];
+		mean_y += polygon[i][1];
+	}
+
+	mean_x /= polygon.length;
+	mean_y /= polygon.length;
+
+	return [mean_x, mean_y]
+}
+
+window.multiPolygonMarkers = [];
+window.polygonRenderings = {};
+
+function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
+	for(var i=0; i<multiPolygon.geometry.coordinates.length; i++){
+
+		//Iterate over all multiPolygons 
+		var polygon_centroids = []
+		for(var k = 0; k<multiPolygon.geometry.coordinates[i].length; k++){
+			polygon_centroids.push(compute_centroid_of_polygon(multiPolygon.geometry.coordinates[i][k]));
+		}
+
+		//Draw a new imaginary polygon with the polygon centroids as edges, and compute a new centroid
+		var marker = L.marker(compute_centroid_of_polygon(polygon_centroids)).addTo(map);
+		marker.image_index = feature_index;
+
+		marker.on("mouseover", function(e){
+			//map.addLayer(window.multiPolygonMarkers[e.target.image_index]);
+			window.temp = L.geoJson(window.multiPolygonMarkers[e.target.image_index]).addTo(map);
+			window.polygonRenderings[e.target.image_index+""] = window.temp;
+		});
+		marker.on("mouseout", function(e){	
+			map.removeLayer(window.polygonRenderings[e.target.image_index+""]);
+		});
+
+
+		marker.on('click', function(e) {
+		  $("#myModal").modal('hide');
+
+		  var marker_index = e.target.image_index;
+		  console.log(marker_index);
+		  var image_url = false;
+		  var question_objects = [];
+
+		  for(var key in window.geoJSON.features[marker_index].properties){
+		  	if(window.geoJSON.features[marker_index].properties.hasOwnProperty(key)){
+		  		if(key == "GEOTAGX_IMAGE_URL"){
+		  			image_url = window.geoJSON.features[marker_index].properties["GEOTAGX_IMAGE_URL"];
+		  		}else if(key.indexOf("::GEOTAGX_TOTAL") != -1 ){
+		  			//do not consider for now, as only holds the total number of responses for that question
+		  		}else{
+		  				var data_object = []
+		  				for(var answer_key in window.geoJSON.features[marker_index].properties[key].answer_summary){
+		  					if(window.geoJSON.features[marker_index].properties[key].answer_summary.hasOwnProperty(answer_key)){
+		  						data_object.push({name:answer_key, y:window.geoJSON.features[marker_index].properties[key].answer_summary[answer_key]});
+		  					}
+		  				}
+
+						var question_object = {
+						        chart: {
+						            plotBackgroundColor: null,
+						            plotBorderWidth: null,
+						            plotShadow: false,
+						            type: 'pie'
+						        },
+						        title: {
+						            text: window.geoJSON.features[marker_index].properties[key].question_text
+						        },
+						        tooltip: {
+						            pointFormat: '<b>{point.percentage:.1f}%</b>'
+						        },
+						        plotOptions: {
+						            pie: {
+						                allowPointSelect: true,
+						                cursor: 'pointer',
+						                dataLabels: {
+						                    enabled: true,
+						                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+						                    style: {
+						                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+						                    }
+						                }
+						            }
+						        },
+						        series: [{
+						            name: "",
+						            colorByPoint: true,
+						            data: data_object
+						        }]
+						    };
+						question_objects.push(question_object);
+		  		}
+		  	}
+		  }
+		  console.log(question_objects);
+		  window.question_objects = question_objects;
+
+		  $(".summary-image").attr("src", image_url);
+
+		  $(".questions").html("");
+		  for(var i=0;i<question_objects.length; i++){
+		  	$(".questions").append("<div id='charts"+i+"'></div><br/>");
+		  	$("#charts"+i).highcharts(question_objects[i]);
+		  }
+		  $("#myModal").modal('show');
+
+		});
+
+		//marker.bindPopup("<div class='summary-image'>IMAGE</div><br/><div class='questions'>QUESTIONS</div>");
+
+		window.multiPolygonMarkers.push(multiPolygon);
+		};
+}
+
+function init(){
+	for(var _features_i = 0; _features_i < window.geoJSON.features.length; _features_i++){
+		window.feature = window.geoJSON.features[_features_i];
+		compute_centroid_of_multiPolygon(window.feature, _features_i);
+	}
+}
+</script>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal large fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Summary</h4>
+      </div>
+      <div class="modal-body">
+		<div id="summary-modal">
+			<center>
+				<img class='summary-image' style="width:80%"></img><br/>
+			</center>
+			<center>
+				<div class='questions'>QUESTIONS</div>
+			</center>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -451,6 +451,7 @@ function imgError(image) {
 		{{ render_social_sharing_buttons("category", category.short_name) }}
 	</div>
   <a href="{{url_for('geotagx.export_category_results_as_geoJSON', category_name = category.short_name )}}" class="btn btn-purchase pull-right" style="margin-left:10px" target="_blank"><i class="fa fa-globe"></i> Export Summary as GeoJSON </a>
+  <a href="{{url_for('geotagx.map_summary', category_name = category.short_name )}}" class="btn btn-purchase pull-right" style="margin-left:10px" target="_blank"><i class="fa fa-map"></i> Visualize Summary on Map </a>
 	<a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
 </div>
 {% endmacro %}
