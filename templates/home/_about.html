@@ -139,7 +139,7 @@ We would love to hear what you think.
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-           <center><h3>How will the analysis help?<i class="indicator fa fa-plus-circle" style="padding-left:20px"></i></h3></center>
+           <center><h3 id="how_will_the_analysis_help" style="padding-top:135px;margin-top:-135px">How will the analysis help?<i class="indicator fa fa-plus-circle" style="padding-left:20px"></i></h3></center>
         </a>
       </h4>
     </div>
@@ -197,9 +197,14 @@ window.scrollTo(0, $("#image_anchor").offset().top);
 }
 if(document.location.hash == "#find_photos"){
   $("#collapseOne").toggle();
-  console.log("Find photos");
 window.scrollTo(0, $("#find_photos").offset().top);
 }
+if(document.location.hash == "#how_will_the_analysis_help"){
+  $("#collapseTwo").toggle();
+window.scrollTo(0, $("#how_will_the_analysis_help").offset().top);
+}
+
+
 if(document.location.hash == "#analyse_photos"){
   $("#collapseOne").toggle();
   console.log("Find photos");
@@ -213,3 +218,4 @@ window.scrollTo(0, $("#analyse_photos").offset().top);
 </div>
 
 <div class="container-fluid"> <!-- resume div of outer block container -->
+
