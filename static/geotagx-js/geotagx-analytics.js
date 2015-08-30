@@ -137,6 +137,7 @@
 					"input:enabled", // Enabled input fields can be selected when clicked on.
 					"textarea", // Long text input fields can be selected when clicked on.
 					"#questionnaire-rewind, #questionnaire-rewind *", // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
+					"#questionnaire-no-photo, #questionnaire-no-photo *", // The "I don not see a photo" button behaves just like the "Go to previous question"" button.
 					"button:enabled, button:enabled *", // Enabled buttons.
 					"a[href!=], a[href!=] *", // Anchors with valid links.
 					".image-caption", //Image Caption element on grid panels
