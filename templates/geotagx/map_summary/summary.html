@@ -9,6 +9,8 @@
 
  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
  <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
  <script src="http://code.highcharts.com/highcharts.js"></script>
  <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
@@ -60,7 +62,24 @@ function compute_centroid_of_polygon(polygon){
 }
 
 window.multiPolygonMarkers = [];
+window.markerStack = [];
 window.polygonRenderings = {};
+
+window.temp = false; 
+
+window.previousMarker = false;
+
+window.redIcon = L.AwesomeMarkers.icon({
+    prefix: 'fa', //font awesome rather than bootstrap
+    markerColor: 'red', // see colors above
+    icon: 'circle' //http://fortawesome.github.io/Font-Awesome/icons/
+});
+
+window.blueIcon = L.AwesomeMarkers.icon({
+    prefix: 'fa', //font awesome rather than bootstrap
+    markerColor: 'blue', // see colors above
+    icon: 'circle' //http://fortawesome.github.io/Font-Awesome/icons/
+});
 
 function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
 	for(var i=0; i<multiPolygon.geometry.coordinates.length; i++){
@@ -74,18 +93,34 @@ function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
 		//Draw a new imaginary polygon with the polygon centroids as edges, and compute a new centroid
 		var coords = compute_centroid_of_polygon(polygon_centroids);
 		var marker = L.marker([coords[1], coords[0]]).addTo(map);
-
 		marker.image_index = feature_index;
+		window.markerStack.push(marker);
+		marker.setIcon(window.blueIcon);
 
 		marker.on("mouseover", function(e){
+			if(window.temp){
+				map.removeLayer(window.temp);
+			}
+			if(window.previousMarker){
+				if(window.previousMarker.marker_color != "blue" && window.previousMarker._leaflet_id != window.markerStack[e.target.image_index]._leaflet_id){
+					window.previousMarker.setIcon(window.blueIcon);
+					window.previousMarker.marker_color = "blue";
+					console.log("Setting previous marker as blue !!");
+				}
+			}
+
 			//map.addLayer(window.multiPolygonMarkers[e.target.image_index]);
 			window.temp = L.geoJson(window.multiPolygonMarkers[e.target.image_index]).addTo(map);
 			window.polygonRenderings[e.target.image_index+""] = window.temp;
-		});
-		marker.on("mouseout", function(e){	
-			map.removeLayer(window.polygonRenderings[e.target.image_index+""]);
-		});
 
+			if(window.markerStack[e.target.image_index].marker_color != "red"){
+				window.markerStack[e.target.image_index].setIcon(window.redIcon);
+				window.markerStack[e.target.image_index].marker_color = "red";
+				window.previousMarker = window.markerStack[e.target.image_index];
+				console.log("Setting current marker as red !!");
+
+			}
+		});
 
 		marker.on('click', function(e) {
 		  $("#myModal").modal('hide');
