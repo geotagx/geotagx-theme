@@ -104,7 +104,7 @@ the <a href="http://www.unitar.org/unosat/">United Nations Institute for Trainin
 
 
 There are two ways to volunteer for GeoTag-X: you can either analyse photos or find photos.<br/><br/>
-<center><h4><img src="{{url_for('static',filename='geotagx-img/desktop.png')}}" style="margin-right:10px" width="50"></img>What do I need?</h4></center>
+<center><h4 id="what_do_i_need"><img src="{{url_for('static',filename='geotagx-img/desktop.png')}}" style="margin-right:10px" width="50"></img>What do I need?</h4></center>
 <hr>
 The only things required to start contributing is a PC or tablet with an Internet connection, and some spare time.<br/>
 This means that anyone can do it wherever they want, whenever they want. <br/><br/><br/>
@@ -160,7 +160,7 @@ The analysis questions are closely linked to the questions in assessments undert
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          <center><h3>Other ways to contribute <i class="indicator fa fa-plus-circle" style="padding-left:20px"></i></h3></center>
+          <center><h3 id="other_ways_to_contribute">Other ways to contribute <i class="indicator fa fa-plus-circle" style="padding-left:20px"></i></h3></center>
         </a>
       </h4>
     </div>
@@ -190,26 +190,41 @@ $('.accordion-toggle').on('click', function(e){
       evt.preventDefault();//Fix this. This statement causes error as evt is not defined. but if this statement is removed the target element scrolls away from the view because of the "#id" href
 })
 
-if(document.location.hash == "#image_anchor"){
-  $("#collapseOne").toggle();
-  console.log("Find photos");
-window.scrollTo(0, $("#image_anchor").offset().top);
-}
-if(document.location.hash == "#find_photos"){
-  $("#collapseOne").toggle();
-window.scrollTo(0, $("#find_photos").offset().top);
-}
-if(document.location.hash == "#how_will_the_analysis_help"){
-  $("#collapseTwo").toggle();
-window.scrollTo(0, $("#how_will_the_analysis_help").offset().top);
-}
+
+$(document).ready(function(){
+
+  if(document.location.hash == "#image_anchor"){
+    $("#collapseOne").toggle();
+    console.log("Find photos");
+  window.scrollTo(0, $("#image_anchor").offset().top);
+  }
+  if(document.location.hash == "#find_photos"){
+    $("#collapseOne").toggle();
+  window.scrollTo(0, $("#find_photos").offset().top);
+  }
+  if(document.location.hash == "#how_will_the_analysis_help"){
+    $("#collapseTwo").toggle();
+  window.scrollTo(0, $("#how_will_the_analysis_help").offset().top);
+  }
+
+  if(document.location.hash == "#what_do_i_need"){
+    $("#collapseOne").toggle();
+  window.scrollTo(0, $("#what_do_i_need").offset().top - 120);
+  }
+
+  if(document.location.hash == "#other_ways_to_contribute"){
+    $("#collapseThree").toggle();
+  window.scrollTo(0, $("#other_ways_to_contribute").offset().top);
+  }
+
+  if(document.location.hash == "#analyse_photos"){
+    $("#collapseOne").toggle();
+    console.log("Find photos");
+  window.scrollTo(0, $("#analyse_photos").offset().top);
+  }
 
 
-if(document.location.hash == "#analyse_photos"){
-  $("#collapseOne").toggle();
-  console.log("Find photos");
-window.scrollTo(0, $("#analyse_photos").offset().top);
-}
+})
 </script>
 
 </div>
