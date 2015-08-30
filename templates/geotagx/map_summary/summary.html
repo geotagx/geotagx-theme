@@ -184,6 +184,7 @@ function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
 		  window.question_objects = question_objects;
 
 		  $(".summary-image").attr("src", image_url);
+		  $(".image-source").html("Image Source :  <a href='"+image_url+"' target='_blank'>"+image_url+"</a>");
 
 		  $(".questions").html("");
 		  for(var i=0;i<question_objects.length; i++){
@@ -222,7 +223,10 @@ function init(){
       <div class="modal-body">
 		<div id="summary-modal">
 			<center>
-				<img class='summary-image' style="width:80%"></img><br/>
+				<img class='summary-image' style="max-width:60%"></img><br/>
+			</center>
+			<center>
+				<div class="image-source"></div>
 			</center>
 			<center>
 				<div class='questions'>QUESTIONS</div>
