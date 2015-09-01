@@ -208,8 +208,9 @@ $(document).ready(function(){
   }
 
   if(document.location.hash == "#what_do_i_need"){
-    $("#collapseOne").toggle();
-  window.scrollTo(0, $("#what_do_i_need").offset().top - 120);
+    $("#collapseOne").toggle(function(){
+	window.scrollBy(0, -250);
+	});
   }
 
   if(document.location.hash == "#other_ways_to_contribute"){
@@ -223,8 +224,7 @@ $(document).ready(function(){
   window.scrollTo(0, $("#analyse_photos").offset().top);
   }
 
-
-})
+});
 </script>
 
 </div>
