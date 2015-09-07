@@ -3533,3 +3533,7 @@ position: absolute;
     filter: alpha(opacity=80); /* For IE8 and earlier */
 
 }
+
+i {
+    text-rendering: optimizeLegibility; /* Needed for font-awesome compatibility on Safari and iOS */
+}
