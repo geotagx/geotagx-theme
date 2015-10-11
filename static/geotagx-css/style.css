@@ -37,6 +37,10 @@ h6 {
 }
 a { color: #444e67 }
 a:hover { color: #48cfad }
+
+.blogs a { color:#48cfad !important; }
+.blogs a:hover { color: #9ACD32 !important;}
+
 p { line-height: 22px }
 /*header*/
 .head-section { border-bottom: 1px solid #eee }
