@@ -104,6 +104,25 @@
 <script src="{{url_for('static', filename='geotagx-js/jquery.js')}}">
 </script>
 -->
+    {% if show_cookies_warning %}
+    <div id="cookie-consent" style="position:fixed; z-index:32; width:100%; left:0; right:0; bottom:0; padding:1em; color:#FFF; background:#34495E">
+        Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.
+        <button id="accept-cookies" class="close" style="color:#FFF; opacity:1" aria-label="Close" aria-controls="cookie-consent"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <script>
+        $("#accept-cookies").click(function(){
+            var cookie_name = "{{brand}}_accept_cookies";
+            var exdays = 120;
+            var exdate = new Date();
+
+            exdate.setDate(exdate.getDate() + exdays);
+            var cookie_value = escape("Yes") + ((exdays==null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = cookie_name + "=" + cookie_value + ";path=/";
+
+            $("#cookie-consent").fadeOut(75);
+        });
+    </script>
+    {% endif %}
     <script src="{{url_for('static', filename='geotagx-js/bootstrap.min.js')}}">
     </script>
     <script src="{{url_for('static', filename='geotagx-js/mixitup.js')}}">
