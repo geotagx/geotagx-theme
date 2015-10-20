@@ -106,8 +106,12 @@
 -->
     {% if show_cookies_warning %}
     <div id="cookie-consent" style="position:fixed; z-index:32; width:100%; left:0; right:0; bottom:0; padding:1em; color:#FFF; background:#34495E">
-        Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.
-        <button id="accept-cookies" class="close" style="color:#FFF; opacity:1" aria-label="Close" aria-controls="cookie-consent"><span aria-hidden="true">&times;</span></button>
+     <div class="col-md-8">
+	   Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.
+     </div>
+     <div class="col-md-4">
+        <button id="accept-cookies" class="btn-success" style="border-radius: 3px;-webkit-border-radius: 3px;">Accept</button>
+     </div>
     </div>
     <script>
         $("#accept-cookies").click(function(){
