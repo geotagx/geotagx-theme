@@ -415,14 +415,6 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_social_sharing_buttons(content_type, content_short_name) %}
-<div id="share-{{ content_type }}" class="text-center" data-name="{{ content_short_name }}">
-    <a target="_blank" title="Share this page via Twitter"  href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}" class="btn btn-twitter" data-toggle="tooltip" data-placement="middle"><i class="fa fa-twitter"></i></a>
-    <a target="_blank" title="Share this page via Facebook" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}"   class="btn btn-facebook" data-toggle="tooltip" data-placement="middle"><i class="fa fa-facebook"></i></a>
-    <a target="_blank" title="Share this page via Google+"  href="https://plus.google.com/share?url={{request.url}}"          class="btn btn-google-plus" data-toggle="tooltip" data-placement="middle"><i class="fa fa-google-plus"></i></a>
-</div>
-{% endmacro %}
-
 <!-- TO-DO : Use this macro for rendering urls in front_page_grid  -->
 {% macro render_category_image(category_short_name) %}
 {% set category_image_dict = {'somalidrought':'/static/geotagx-img/categories/somali_drought.png', 'yamunamonsoonflooding2013':"/static/geotagx-img/categories/yamuna_monsoon_flooding.png", 'yemeniculturalheritageatrisk':"/static/geotagx-img/categories/yemeni_agricultural_water_assesment.png", 'ebolaresponse':"/static/geotagx-img/categories/ebola_response.png",'emergencyshelterassessmentinthemiddleeast':"/static/geotagx-img/categories/winter_shelter.png"} %}
@@ -446,8 +438,8 @@ function imgError(image) {
 			<hr>
 			<div style="text-align: justify;text-justify: inter-word;">{{ category.description | safe }}</div>
 			<strong>Total Number of Projects: </strong> <span class="big-icon-2" style="margin-left:10px"> {{ pagination.total_count }}</span>
+			<div style="font-size:1.5em; margin-top:0.5em">{{render_share_buttons("category", request.url)}}</div>
 		</div>
-		{{ render_social_sharing_buttons("category", category.short_name) }}
 	</div>
   <a href="{{url_for('geotagx.export_category_results_as_geoJSON', category_name = category.short_name )}}" class="btn btn-purchase pull-right" style="margin-left:10px" target="_blank"><i class="fa fa-globe"></i> Export Summary as GeoJSON </a>
   <a href="{{url_for('geotagx.map_summary', category_name = category.short_name )}}" class="btn btn-purchase pull-right" style="margin-left:10px" target="_blank"><i class="fa fa-map"></i> Visualize Summary on Map </a>
@@ -456,9 +448,9 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_share_buttons(type, target) %}
-<a style="color:#00ACED" rel="nofollow" target="_blank" title="Share this {{type}} via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#3B5998" rel="nofollow" target="_blank" title="Share this {{type}} via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#DD4B39" rel="nofollow" target="_blank" title="Share this {{type}} via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
+<a style="color:#00ACED" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+<a style="color:#3B5998" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+<a style="color:#DD4B39" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
 {% endmacro %}
 
 {% macro render_project_share_buttons(project) %}
