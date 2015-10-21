@@ -10,9 +10,11 @@
 	</div>
 </div>
 {% if invite_new_volunteers %}
+{% import "projects/_helpers.html" as helper %}
 <div class="row">
 	<div class="col-xs-12">
-		<p>{{ _("Sorry, you've contributed to all the tasks for this project, but this project still needs more volunteers, so please spread the word!") }}</p>
+		<p>{{ _("Sorry, you have contributed to all the tasks for this project but it still needs more volunteers. Please spread the word!") }}</p>
+		<center><span style="font-size:1.5em">{{helper.render_project_share_buttons(project)}}</span></center>
 	</div>
 </div>
 {% else %}
