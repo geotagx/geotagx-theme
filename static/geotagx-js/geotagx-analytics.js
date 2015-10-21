@@ -79,8 +79,8 @@
 		}
 
 		$("body").on("click.analytics", onElementClicked);
-		$("#share-category > a").on("click.analytics", onShareCategory);
-		$("#share-project > a").on("click.analytics", onShareProject);
+		$(".share-category").on("click.analytics", onShareCategory);
+		$(".share-project").on("click.analytics", onShareProject);
 		$("a[href!=][href]").on("click.analytics", onLinkClicked);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
 
