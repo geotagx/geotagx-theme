@@ -454,3 +454,13 @@ function imgError(image) {
 	<a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
 </div>
 {% endmacro %}
+
+{% macro render_share_buttons(type, target) %}
+<a style="color:#00ACED" rel="nofollow" target="_blank" title="Share this {{type}} via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+<a style="color:#3B5998" rel="nofollow" target="_blank" title="Share this {{type}} via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+<a style="color:#DD4B39" rel="nofollow" target="_blank" title="Share this {{type}} via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
+{% endmacro %}
+
+{% macro render_project_share_buttons(project) %}
+{{render_share_buttons("project", request.host_url + url_for("project.details", short_name=project.short_name)[1:])}}
+{% endmacro %}

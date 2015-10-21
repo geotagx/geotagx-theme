@@ -3,19 +3,13 @@
 {% set active_project  = "all" %}
 {% import "projects/_helpers.html" as helper %}
 
-{% macro render_share_buttons() %}
-<a style="color:#00ACED" target="_blank" title="Share this page via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{request.url}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#3B5998" target="_blank" title="Share this page via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{request.url}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#DD4B39" target="_blank" title="Share this page via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{request.url}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
-{% endmacro %}
-
 {% block content %}
 <div class="row">
     {% if project %}
     <div id="project-info" style="min-height:400px">
         <h2>
             <span style="color:#444E67">{{project.name}}&nbsp;<small style="text-transform:uppercase">{{_('About')}}</small></span>
-            <span class="pull-right" style="font-size:0.55em">{{render_share_buttons()}}</span>
+            <span class="pull-right" style="font-size:0.55em">{{helper.render_project_share_buttons(project)}}</span>
         </h2>
         {% if project.long_description %}
         <div style="padding:1em 0 0.5em 0; border-bottom:1px solid #EEE">
