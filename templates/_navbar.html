@@ -31,6 +31,7 @@
             </ul>
             <ul class="nav navbar-nav pull-right">
                 <li id="incompatible-browser-icon" class="show-on-incompatible-browser"><a class="clickable" title="Incompatible Web Browser" data-toggle="collapse" data-target="#incompatible-browser-message" aria-expanded="false" aria-controls="incompatible-browser-message"><i class="fa fa-2x fa-warning"></i></a></li>
+		<li><a>{%- include "_google_translate_widget.html" ignore missing -%}</a></li>
                 {% if current_user.is_authenticated() %}
                 <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="padding-left:5px">
                 {{ render_user_thumbnail(current_user, upload_method, 'smallAvatar', 'img-circle', 'width:30px' ) }}

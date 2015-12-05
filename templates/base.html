@@ -72,6 +72,7 @@
   {% else %}
   <body data-user-id="{{ current_user.id }}" data-user-name="{{ current_user.get_id() }}">
   {% endif %}
+
     {%- include "_gtm.html" ignore missing -%}
 
     {% if not current_user.is_anonymous() %}
