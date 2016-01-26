@@ -43,3 +43,6 @@
 [submodule "projects/geotagx-project-yemen-culture"]
 	path = projects/geotagx-project-yemen-culture
 	url = https://github.com/geotagx/geotagx-project-yemen-culture.git
+[submodule "projects/geotagx-project-mapreview"]
+	path = projects/geotagx-project-mapreview
+	url = https://github.com/geotagx/geotagx-project-mapreview
