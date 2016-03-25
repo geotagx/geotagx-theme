@@ -34,48 +34,29 @@
 <script src="{{js}}/jquery.md5.js"></script>
 <script src="{{js}}/parallax-slider/jquery.cslider.js"></script>
 <script>
-    $(function(){ $("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000}); });
-    window.client_remote_addr = "{{user_ip}}";
+    $(function(){
+		$("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000});
+		$(".portfolio_category_div").dblclick(function(){ document.location = "/project/category/"+$(this).attr("data-filter")+"/"; });
+		$(".portfolio-anchors div").click(function(){
+			if($(this).attr('data-filter').split(" ").length > 1){
+				$("#disqus_thread").css("display","none");
+			}else{
+				$("#disqus_thread").css("display","block");
+				// Use category hash instead of category short names, as they are pretty long in some cases
+				// and that causes disqus to not consider them as valid identifiers in those cases.
+				var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
+				DISQUS.reset({reload: true, config: function(){
+					this.page.identifier = category_hash;
+					this.page.url = "http://geotagx.org/#!"+category_hash;
+				}});
+			}
+		})
+	});
+	window.client_remote_addr = "{{user_ip}}";
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $(".portfolio_category_div").dblclick(function(){
-        document.location = "/project/category/"+$(this).attr('data-filter')+"/";
-    });
-});
-</script>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'geotagx'; // Required - Replace example with your forum shortname
-    var disqus_identifier = "all-categories-hidden-form";
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-    $(document).ready(function(){
-        $(".portfolio-anchors div").click(function(){
-            if($(this).attr('data-filter').split(" ").length > 1){
-                $("#disqus_thread").css("display","none");
-            }else{
-                $("#disqus_thread").css("display","block");
-                // Use category hash instead of category short names, as they are pretty long in some cases
-                // and that causes disqus to not consider them as valid identifiers in those cases.
-                var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
-
-                DISQUS.reset({
-                  reload: true,
-                  config: function () {
-                    this.page.identifier = category_hash;
-                    this.page.url = "http://geotagx.org/#!"+category_hash;
-                  }
-                });
-
-            }
-        })
-    })
+	var disqus_shortname = "geotagx";
+	var disqus_identifier = "all-categories-hidden-form";
+	(function(){var dsq = document.createElement('script');dsq.type = 'text/javascript';dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);})();
 </script>
 {% endblock %}
