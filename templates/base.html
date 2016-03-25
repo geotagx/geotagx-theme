@@ -61,81 +61,60 @@
 
         <title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>
     </head>
+    <body data-user-id="{{user_id}}" data-user-name="{{user_name}}">
+        {%- include "_gtm.html" ignore missing -%}
+        {%- include "_navbar.html" -%}
 
-
-  {%- if current_user.is_anonymous() %}
-  <body data-user-id="0" data-user-name="#geotagx-anonymous">
-  {% else %}
-  <body data-user-id="{{ current_user.id }}" data-user-name="{{ current_user.get_id() }}">
-  {% endif %}
-
-    {%- include "_gtm.html" ignore missing -%}
-
-    {% if not current_user.is_anonymous() %}
-    <!-- checkpoint::logged-in::{{current_user.name}} -->
-    {% endif %}
-    {% set active_page = active_page | default('index') -%}
-    {% set active_app  = active_app | default('none') -%}
-
-    {% include '_navbar.html' %}
-
-    {% if request['path'] == "/" %}
+        {% if request["path"] == "/" %}
         {% include "_slider.html" %}
-    {% else %}
+        {% else %}
         {% include "_breadcrumbs.html" %}
-    {% endif %}
-
-        <div class="container" style="min-height:400px;">
-
-        {% include "_flash_messages.html" %}
-        {% block content %}{% endblock %}
-
-        {% if active_page != "home#index" %}
-        </div>
         {% endif %}
-        <!--container end-->
 
-    {% include '_footer.html' %}
+        <div id="page">
+            <header id="page-header">
+                {% block header %}{% endblock %}
+            </header>
+            <main id="page-content" role="main" style="min-height:400px;">
+                {% include "_flash_messages.html" %}
+                {% block content %}{% endblock %}
+            </main>
+            <footer id="page-footer">
+                {% include "_footer.html" %}
+                {% if show_cookies_warning %}
+                <div id="cookie-consent" style="position:fixed; z-index:32; width:100%; left:0; right:0; bottom:0; padding:1em; color:#FFF; background:#34495E">
+                    <div class="col-xs-9">Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.</div>
+                    <div class="col-xs-3"><div class="pull-right"><button id="accept-cookies" class="btn btn-success" style="border-radius:3px;-webkit-border-radius:3px;">{{_("Accept")}}</button></div></div>
+                </div>
+                {% endif %}
+                {% block footer %}{% endblock %}
+            </footer>
+        </div>
+        <script src="{{js}}/bootstrap.min.js"></script>
+        <script src="{{js}}/mixitup.js"></script>
+        <script src="{{js}}/geotagx.js"></script>
+        <script src="{{js}}/ccl/analytics.min.js"></script>
+        <script src="{{js}}/geotagx-analytics.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+        {% if show_cookies_warning %}
+        <script>
+            "use strict";
+            $("#accept-cookies").click(function(){
+                var cookie_name = "{{brand}}_accept_cookies";
+                var exdays = 120;
+                var exdate = new Date();
 
-    <!-- js placed at the end of the document so the pages load faster
-<script src="{{url_for('static', filename='geotagx-js/jquery.js')}}">
-</script>
--->
-    {% if show_cookies_warning %}
-    <div id="cookie-consent" style="position:fixed; z-index:32; width:100%; left:0; right:0; bottom:0; padding:1em; color:#FFF; background:#34495E">
-     <div class="col-md-8">
-	   Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.
-     </div>
-     <div class="col-md-4">
-        <button id="accept-cookies" class="btn-success" style="border-radius: 3px;-webkit-border-radius: 3px;">Accept</button>
-     </div>
-    </div>
-    <script>
-        $("#accept-cookies").click(function(){
-            var cookie_name = "{{brand}}_accept_cookies";
-            var exdays = 120;
-            var exdate = new Date();
+                exdate.setDate(exdate.getDate() + exdays);
+                var cookie_value = escape("Yes") + ((exdays==null) ? "" : "; expires=" + exdate.toUTCString());
+                document.cookie = cookie_name + "=" + cookie_value + ";path=/";
 
-            exdate.setDate(exdate.getDate() + exdays);
-            var cookie_value = escape("Yes") + ((exdays==null) ? "" : "; expires=" + exdate.toUTCString());
-            document.cookie = cookie_name + "=" + cookie_value + ";path=/";
-
-            $("#cookie-consent").fadeOut(75);
-        });
-    </script>
-    {% endif %}
-    <script src="{{url_for('static', filename='geotagx-js/bootstrap.min.js')}}">
-    </script>
-    <script src="{{url_for('static', filename='geotagx-js/mixitup.js')}}">
-    </script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/geotagx.js')}}">
-    </script>
-    <script src="{{url_for('static', filename='geotagx-js/ccl/analytics.min.js')}}">
-    </script>
-    <script src="{{url_for('static', filename='geotagx-js/geotagx-analytics.js')}}">
-    </script>
-  </body>
+                $("#cookie-consent").fadeOut(75);
+            });
+        </script>
+        {% endif %}
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        {% block script %}{% endblock %}
+    </body>
 </html>
