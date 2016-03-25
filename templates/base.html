@@ -11,9 +11,19 @@
 {% set vendor = url_for("static", filename="vendor") -%}
 {% set active_page = active_page|default("index") -%}
 {% set active_project = active_project|default("none") -%}
-{% set user_ip = request["remote_addr"] %}
-{% set user_id = 0 if current_user.is_anonymous() else current_user.id %}
-{% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() %}
+{% set user_ip = request["remote_addr"] -%}
+{% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
+{% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() -%}
+
+{% macro row(row_id=None, row_class="row", col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2") %}
+{# Renders content in a column that is nested in a row, as per the Bootstrap grid guidelines. #}
+<div {% if row_id %}id="{{row_id}}" {% endif %}class="{{row_class}}">
+    <div {% if col_id %}id="{{col_id}}" {% endif %}class="{{col_class}}">
+        {{caller()}}
+    </div>
+</div>
+{% endmacro -%}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,7 +32,7 @@
         <meta name="description" content="Crowdsourcing for disaster management.">
         <meta name="keywords" content="crowdsource, crowdsourcing, volunteer, disaster, mapping, humanitarian, relief, efforts, citizen, science, unitar, unosat">
         <meta name="author" content="UNITAR-UNOSAT">
-        {% block meta %}{% endblock %}
+        {%- block meta %}{% endblock -%}
 
         <link rel="shortcut icon" href="{{img}}/favicon.ico" type="image/x-icon">
 
@@ -38,7 +48,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.8.0/bootstrap-social.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato">
-        {% block stylesheet %}{% endblock %}
+        {%- block stylesheet %}{% endblock -%}
 
         <script src="{{vendor}}/modernizr.min.js"></script>
         <!--[if lt IE 9]>
@@ -58,14 +68,14 @@
 
         <div id="page">
             <header id="page-header">
-                {% block header %}{% endblock %}
+                {%- block header %}{% endblock -%}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
                 {% if active_page != "home#index" %}
                 {% include "_breadcrumbs.html" %}
                 {% endif %}
                 {% include "_flash_messages.html" %}
-                {% block content %}{% endblock %}
+                {%- block content %}{% endblock -%}
             </main>
             <footer id="page-footer">
                 {% include "_footer.html" %}
@@ -75,7 +85,7 @@
                     <div class="col-xs-3"><div class="pull-right"><button id="accept-cookies" class="btn btn-success" style="border-radius:3px;-webkit-border-radius:3px;">{{_("Accept")}}</button></div></div>
                 </div>
                 {% endif %}
-                {% block footer %}{% endblock %}
+                {%- block footer %}{% endblock -%}
             </footer>
         </div>
         <script src="{{js}}/bootstrap.min.js"></script>
@@ -103,6 +113,6 @@
         </script>
         {% endif %}
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        {% block script %}{% endblock %}
+        {%- block script %}{% endblock -%}
     </body>
 </html>
