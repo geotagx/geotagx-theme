@@ -69,7 +69,7 @@
 		}
 
 		// Are we viewing a category's profile page?
-		var $categoryProfile = $("#category-profile[data-short-name!=][data-short-name]");
+		var $categoryProfile = $("#category-profile[data-short-name!=''][data-short-name]");
 		if ($categoryProfile.length > 0)
 			onVisitCategory($categoryProfile.data("short-name"));
 
@@ -84,7 +84,7 @@
 		$("body").on("click.analytics", onElementClicked);
 		$(".share-category").on("click.analytics", onShareCategory);
 		$(".share-project").on("click.analytics", onShareProject);
-		$("a[href!=][href]").on("click.analytics", onLinkClicked);
+		$("a[href!=''][href]").on("click.analytics", onLinkClicked);
 		$("#signin button").on("click.analytics", onSignInButtonClicked);
 
 		$("#project-task-presenter.analysis .btn-answer").on("click.analytics", onAnswerQuestion);
@@ -167,7 +167,7 @@
 					"#questionnaire-rewind, #questionnaire-rewind *", // The "Go to previous question" button is disabled and hidden when there're no more questions. It is still considered clickable.
 					"#questionnaire-no-photo, #questionnaire-no-photo *", // The "I don not see a photo" button behaves just like the "Go to previous question"" button.
 					"button:enabled, button:enabled *", // Enabled buttons.
-					"a[href!=], a[href!=] *", // Anchors with valid links.
+					"a[href!=''], a[href!=''] *", // Anchors with valid links.
 					".image-caption", //Image Caption element on grid panels
 					"#submit-analysis, #submit-analysis *" // Submit Task Response Button
 				].join(", ");
@@ -225,7 +225,7 @@
 					analytics.fireEvent("action.internalLinkClicked", data);
 			}else {
 				// Clicks to external pages are only interesting if we're viewing a project's profile page.
-				var $projectProfile = $("#project-profile[data-short-name!=]");
+				var $projectProfile = $("#project-profile[data-short-name!='']");
 				if ($projectProfile.length > 0){
 					data.projectId = $projectProfile.data("short-name");
 					analytics.fireEvent("action.externalLinkClicked", data);
