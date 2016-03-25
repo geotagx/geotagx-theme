@@ -2,8 +2,6 @@
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
 {% from "projects/_helpers.html" import render_project_image_url %}
 
-<script type="text/javascript" src="{{url_for('static', filename='geotagx-js/jquery.md5.js')}}"></script>
-
 <!-- Voodoo for a simple counter :( -->
 {% for value in categories_projects.values(): %}
 
@@ -33,7 +31,7 @@
 {% endfor %}
 
 
-<div class="container" id="project_grid" style="padding-top: 135px; margin-top: -135px;">
+<div class="row" id="project_grid" style="padding-top: 135px; margin-top: -135px;">
     <h3 class="text-center"><strong style="color:#444e67">Projects</strong></h3>
 	<div class="row portfolio-anchors">
 		<div class="col-md-2 filter active clickable" data-filter="{% for category in category_image_dict.keys() %}{{category}}{% if not loop.last %}{{" "}}{% endif %}{% endfor %}">
@@ -49,79 +47,34 @@
 		</div>
 		{% endfor %}
 	</div>
+    <hr style="margin-top:2em">
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $(".portfolio_category_div").dblclick(function(){
-        document.location = "/project/category/"+$(this).attr('data-filter')+"/";
-    });
-});
-</script>
-<br/>
-<hr>
 {% set app_list = [] %}
 {% set app_list_indices = [] %}
-<div class="container">
-    <div class="row  mar-b-30">
-        <div id="portfoliolist-three">
-            <div class="col-md-12">
-            <!-- This block collects all the known apps and categories as a list of tuples -->
-            {% for category in  categories_projects.keys() %}
-                {% if category in category_image_dict.keys() %}
-                    {% for app in categories_projects[category] %}
-                        {% if app_list.append((app,category)) %}{% endif %}
-                        {% if app_list_indices.append(app.short_name) %}{% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-            <!-- This block randomly shuffles the whole list -->
-            <!-- Sadly jinja2 doesnt have a shuffle filter :(, so we hack one using whatever tools we have
-            This hack is necessary as we DO-NOT want to touch the code outside the geotagx-theme repository,
-            so that we dont have any major conflicts while we regularly upgrade pybosse -->
-            {% for i in range(app_list|length) %}
-            {% set temp_selection = app_list|random %} <!-- Randomly select one element from the list -->
-            {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(temp_selection[0], temp_selection[1], current_user.admin) }}<!-- Render the element -->
-            {% if app_list.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list -->
-            {% if app_list_indices.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list_indices -->
-            {% endfor %}
-            </div>
+<div class="row mar-b-30">
+    <div id="portfoliolist-three">
+        <div class="col-md-12">
+        <!-- This block collects all the known apps and categories as a list of tuples -->
+        {% for category in  categories_projects.keys() %}
+            {% if category in category_image_dict.keys() %}
+                {% for app in categories_projects[category] %}
+                    {% if app_list.append((app,category)) %}{% endif %}
+                    {% if app_list_indices.append(app.short_name) %}{% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <!-- This block randomly shuffles the whole list -->
+        <!-- Sadly jinja2 doesnt have a shuffle filter :(, so we hack one using whatever tools we have
+        This hack is necessary as we DO-NOT want to touch the code outside the geotagx-theme repository,
+        so that we dont have any major conflicts while we regularly upgrade pybosse -->
+        {% for i in range(app_list|length) %}
+        {% set temp_selection = app_list|random %} <!-- Randomly select one element from the list -->
+        {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(temp_selection[0], temp_selection[1], current_user.admin) }}<!-- Render the element -->
+        {% if app_list.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list -->
+        {% if app_list_indices.pop(app_list_indices.index(temp_selection[0].short_name)) %}{% endif %}<!-- POP out that element from app_list_indices -->
+        {% endfor %}
         </div>
     </div>
 </div>
-
-<div id="disqus_thread" style="display:none"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'geotagx'; // Required - Replace example with your forum shortname
-    var disqus_identifier = "all-categories-hidden-form";
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-    $(document).ready(function(){
-        $(".portfolio-anchors div").click(function(){
-            if($(this).attr('data-filter').split(" ").length > 1){
-                $("#disqus_thread").css("display","none");
-            }else{
-                $("#disqus_thread").css("display","block");
-                // Use category hash instead of category short names, as they are pretty long in some cases
-                // and that causes disqus to not consider them as valid identifiers in those cases.
-                var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
-
-                DISQUS.reset({
-                  reload: true,
-                  config: function () {
-                    this.page.identifier = category_hash;
-                    this.page.url = "http://geotagx.org/#!"+category_hash;
-                  }
-                });
-
-            }
-        })
-    })
-</script>
+<div class="row"><div class="col-xs-12"><div id="disqus_thread" style="display:none"></div></div></div>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
