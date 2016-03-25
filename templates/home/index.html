@@ -3,37 +3,37 @@
 {% import "account/_helpers.html" as account_helper %}
 
 {% set active_page = 'home#index' %}
-{% block content %}
 
-<div class="row" style="margin-top:40px">
-	<p class="text-center big-icon-3">
-	Welcome to  <strong class="ml-5" style="color:#444e67">GeoTag-X</strong>
-	<br/>
-	</p>
-</div>
-<div class="row" style="margin-top:10px">
-	<br/>
-	<div class="col-md-8 text-center col-md-offset-2">
-		<center>
-			GeoTag-X aims to <b style="font-size:17px">help disaster relief efforts</b> on the ground to plan a response by asking <b style="font-size:17px">volunteers</b> to <b style="font-size:17px"> analyse photos taken in disaster-affected areas</b>.
-			<br/><br/>
-			There are <b style="font-size:17px">no particular skills required</b> to participate and it <b style="font-size:17px">only takes a few minutes</b> or less to analyse each photo.
-			<br/>
-			<br/>
-			<a href="/about#image_anchor">
-				<div class="col-md-4 col-md-offset-4" style="background-color:#34495e;border-radius:5px">
-					<h4 style="color:white;">How to get started ?<i class="indicator fa fa-plus-circle" style="padding-left:10px;color:#48cfad"></i></h4>
-				</div>
-			</a>
-		</center>
-	</div>
-
-</div>
-<br/>
-<br/>
-<hr>
-{% include '_front_project_grid.html' %}
-</div>
+{% block stylesheet %}
+<link rel="stylesheet" href="{{css}}/parallax-slider/parallax-slider.css">
 {% endblock %}
 
 
+{% block content %}
+<div class="container" style="margin-bottom:1.5em">
+	<div class="row text-center">
+		<div class="col-xs-12"><h1 style="font-size:2.4em">{{_("Welcome to")}}&nbsp;<strong style="color:#444E67; white-space:nowrap">{{brand}}</strong></h1></div>
+	</div>
+	<div class="row">
+		<div class="text-center col-xs-12 col-md-8 col-md-offset-2">
+			<p class="text-center">GeoTag-X aims to <b style="font-size:17px">help disaster relief efforts</b> on the ground to plan a response by asking <b style="font-size:17px">volunteers</b> to <b style="font-size:17px"> analyse photos taken in disaster-affected areas</b>.<br><br>There are <b style="font-size:17px">no particular skills required</b> to participate and it <b style="font-size:17px">only takes a few minutes</b> or less to analyse each photo.<br><br></p>
+			<a class="btn btn-lg btn-primary" href="/about#image_anchor" style="margin-bottom:2em;background:#34495E">{{_("How to get started?")}}<i class="fa fa-plus-circle" style="padding:0 0 0 0.5em; color:#48cfad"></i></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-10 col-md-offset-1">
+		</div>
+	</div>
+	<hr>
+</div>
+{% include "_front_project_grid.html" %}
+{% endblock %}
+
+
+{% block script %}
+<script src="{{js}}/parallax-slider/jquery.cslider.js"></script>
+<script>
+    $(function(){ $("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000}); });
+    window.client_remote_addr = "{{user_ip}}";
+</script>
+{% endblock %}

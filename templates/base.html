@@ -48,15 +48,6 @@
         <script src="{{js}}/jquery-1.8.3.min.js"></script>
         <script src="{{js}}/geotagx-surveys.js"></script>
 
-        {% if request['path'] == '/' %}
-        <link rel="stylesheet" href="{{css}}/parallax-slider/parallax-slider.css">
-        <script src="{{js}}/parallax-slider/jquery.cslider.js"></script>
-        <script>
-            $(function(){ $('#featured-projects').cslider({autoplay: true, bgincrement: 0, interval: 6000}); });
-            window.client_remote_addr = "{{user_ip}}";
-        </script>
-        {% endif %}
-
         {% include "_gcs.html" ignore missing %}
 
         <title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>
@@ -65,17 +56,16 @@
         {%- include "_gtm.html" ignore missing -%}
         {%- include "_navbar.html" -%}
 
-        {% if request["path"] == "/" %}
-        {% include "_slider.html" %}
-        {% else %}
-        {% include "_breadcrumbs.html" %}
-        {% endif %}
-
         <div id="page">
             <header id="page-header">
                 {% block header %}{% endblock %}
             </header>
             <main id="page-content" role="main" style="min-height:400px;">
+                {% if active_page == "home#index" %}
+                {% include "_slider.html" %} {# TODO Move to home/index.html#content #}
+                {% else %}
+                {% include "_breadcrumbs.html" %}
+                {% endif %}
                 {% include "_flash_messages.html" %}
                 {% block content %}{% endblock %}
             </main>
