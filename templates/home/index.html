@@ -44,6 +44,10 @@
 {% endblock %}
 
 
+{# Remove breadcrumbs from the front page by declaring an empty breadcrumbs block. #}
+{% block breadcrumbs %}{% endblock %}
+
+
 {% block content %}
 {% call row(col_class="col-xs-12") %}
 	{% include "_slider.html" %}

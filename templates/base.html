@@ -71,9 +71,7 @@
                 {%- block header %}{% endblock -%}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
-                {% if active_page != "home#index" %}
-                {% include "_breadcrumbs.html" %}
-                {% endif %}
+                {%- block breadcrumbs %}{% include "_breadcrumbs.html" %}{% endblock -%}
                 {% include "_flash_messages.html" %}
                 {%- block content %}{% endblock -%}
             </main>
