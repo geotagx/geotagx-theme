@@ -60,7 +60,7 @@
             <header id="page-header">
                 {% block header %}{% endblock %}
             </header>
-            <main id="page-content" role="main" style="min-height:400px;">
+            <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
                 {% if active_page == "home#index" %}
                 {% include "_slider.html" %} {# TODO Move to home/index.html#content #}
                 {% else %}
