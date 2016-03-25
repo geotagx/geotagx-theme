@@ -1,72 +1,68 @@
+{% set static = url_for("static", filename="geotagx") -%}
+{#
+{% set css = static + "/css" -%}
+{% set js = static + "/js" -%}
+{% set img = static + "/img" -%}
+{% set vendor = static + "/vendor" -%}
+#}
+{% set css = url_for("static", filename="geotagx-css") -%}
+{% set js = url_for("static", filename="geotagx-js") -%}
+{% set img = url_for("static", filename="geotagx-img") -%}
+{% set vendor = url_for("static", filename="vendor") -%}
+{% set active_page = active_page|default("index") -%}
+{% set active_project = active_project|default("none") -%}
+{% set user_ip = request["remote_addr"] %}
+{% set user_id = 0 if current_user.is_anonymous() else current_user.id %}
+{% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="{{url_for('static', filename='geotagx-img/favicon.ico')}}" type="image/x-icon">
-    <link rel="icon" href="{{url_for('static', filename='geotagx-img/favicon.ico')}}" type="image/x-icon">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Crowdsourcing for disaster management.">
+        <meta name="keywords" content="crowdsource, crowdsourcing, volunteer, disaster, mapping, humanitarian, relief, efforts, citizen, science, unitar, unosat">
+        <meta name="author" content="UNITAR-UNOSAT">
+        {% block meta %}{% endblock %}
 
-    {% if brand == title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>{{ brand }} &middot; {{ title | safe}}</title>
-    {% endif %}
+        <link rel="shortcut icon" href="{{img}}/favicon.ico" type="image/x-icon">
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{url_for('static', filename='geotagx-css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='geotagx-css/theme.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='geotagx-css/bootstrap-reset.css')}}" rel="stylesheet">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.8.0/bootstrap-social.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.8.0/bootstrap-social.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="{{css}}/bootstrap.min.css">
+        <link rel="stylesheet" href="{{css}}/theme.css">
+        <link rel="stylesheet" href="{{css}}/bootstrap-reset.css">
+        <link rel="stylesheet" href="{{css}}/mixitup.css">
+        <link rel="stylesheet" href="{{css}}/component.css">
+        <link rel="stylesheet" href="{{css}}/style.css">
+        <link rel="stylesheet" href="{{css}}/style-responsive.css">
+        {% block stylesheet %}{% endblock %}
 
-    <!--external css-->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='geotagx-css/mixitup.css')}}">
+        <script src="{{vendor}}/modernizr.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="{{js}}/html5shiv.js"></script>
+        <script src="{{js}}/respond.min.js"></script>
+        <![endif]-->
+        <script src="{{js}}/jquery-1.8.3.min.js"></script>
+        <script src="{{js}}/geotagx-surveys.js"></script>
 
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+        {% if request['path'] == '/' %}
+        <link rel="stylesheet" href="{{css}}/parallax-slider/parallax-slider.css">
+        <script src="{{js}}/parallax-slider/jquery.cslider.js"></script>
+        <script>
+            $(function(){ $('#featured-projects').cslider({autoplay: true, bgincrement: 0, interval: 6000}); });
+            window.client_remote_addr = "{{user_ip}}";
+        </script>
+        {% endif %}
+
+        {% include "_gcs.html" ignore missing %}
+
+        <title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>
+    </head>
 
 
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/component.css')}}">
-    <link href="{{url_for('static', filename='geotagx-css/style.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='geotagx-css/style-responsive.css')}}" rel="stylesheet" />
-
-    <script src="{{url_for('static', filename='vendor/modernizr.min.js')}}"></script>
-    <script src="{{url_for('static', filename='geotagx-js/jquery-1.8.3.min.js')}}">
-    </script>
-    <script src="{{url_for('static', filename='geotagx-js/geotagx-surveys.js')}}">
-    </script>
-    {% if request['path'] == '/' %}
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='geotagx-css/parallax-slider/parallax-slider.css')}}" />
-    <script type="text/javascript" src="{{url_for('static', filename='geotagx-js/parallax-slider/jquery.cslider.js')}}">
-    </script>
-    <script type="text/javascript">
-      $(function() {
-        $('#featured-projects').cslider({
-          autoplay    : true,
-          bgincrement : 0,
-          interval : 6000
-        });
-      });
-    window.client_remote_addr = "{{request['remote_addr']}}";
-    </script>
-    {% endif %}
-
-    <!-- Google Custom Search -->
-    {% include '_gcs.html' ignore missing %}
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-    <script src="{{url_for('static', filename='geotagx-js/html5shiv.js')}}">
-    </script>
-    <script src="{{url_for('static', filename='geotagx-js/respond.min.js')}}">
-    </script>
-    <![endif]-->
-  </head>
   {%- if current_user.is_anonymous() %}
   <body data-user-id="0" data-user-name="#geotagx-anonymous">
   {% else %}
