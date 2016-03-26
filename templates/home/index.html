@@ -48,10 +48,12 @@
 {% block breadcrumbs %}{% endblock %}
 
 
+{% block header %}
+{% include "_slider.html" %}
+{% endblock %}
+
+
 {% block content %}
-{% call row(col_class="col-xs-12") %}
-	{% include "_slider.html" %}
-{% endcall %}
 {% call row() %}
 	{% call row(row_id="welcome-to-geotagx-wrapper", col_id="welcome-to-geotagx", col_class="col-xs-12") %}
 		<h1>{{_("Welcome to")}}&nbsp;<strong>{{brand}}</strong></h1>
