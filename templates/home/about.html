@@ -1,6 +1,200 @@
 {% extends "base.html" %}
 {% set active_page = "about" %}
 
+{% block stylesheet %}
+<style>
+.panel-heading,
+.panel-body {
+	color:#FFF !important;
+	background:#34495E !important;
+}
+.panel-body a,
+#about_page_row a {
+	color:#48CFAD !important;
+}
+.panel-body a:hover,
+#about_page_row a:hover {
+	color:#9ACD32 !important;
+}
+.panel {
+	margin-top:0;
+}
+div {
+	font-size:17px;
+}
+#about_page_row {
+	padding:0 0.5em;
+}
+#image_anchor {
+	margin-bottom:2em;
+}
+#image_anchor > figure > img {
+	width:100%;
+	height:197px;
+}
+.accordion-toggle {
+	border:none;
+	background:none;
+	font-size:1.5em;
+	font-weight:900;
+	margin:0.5em 0;
+}
+.accordion-toggle[aria-expanded="true"] > i.fa.fa-plus-circle,
+.accordion-toggle[aria-expanded="false"] > i.fa.fa-minus-circle {
+	display:none;
+}
+</style>
+{% endblock %}
+
+
 {% block content %}
-    {% include ['custom/_about.html', 'home/_about.html'] ignore missing %}
+{% call row() %}
+<div id="about_page_row" class="row">
+	<div class="col-xs-12 col-md-8 col-md-offset-2">
+		<div class="row">
+			<p class="text-center">
+				<strong style="font-size:18px">GeoTag-X</strong> is a crowdsourcing research project set up by the <a href="http://www.unitar.org/unosat/">United Nations Institute for Training and Research’s Operational Satellite Applications Programme (UNITAR-UNOSAT)</a> as part of the <a href="http://citizencyberlab.eu/">Citizen Cyberlab project</a>.<br>
+				<br>
+				GeoTag-X aims to <strong>help disaster relief efforts</strong> on the ground to plan a response by asking <strong>volunteers</strong> to <strong>analyse</strong> <strong>photos taken in disaster-affected areas</strong>.
+			</p>
+			<center><img src="{{img}}/wordle.png" style="width:80%"></img></center>
+			<p class="text-center">Anyone can be a volunteer.<br>There are <strong>no particular skills required</strong> to participate and it <strong>only takes a few minutes</strong> or less to analyse each photo.</p>
+		</div>
+	</div>
+</div>
+<div id="image_anchor" class="row text-center">
+	<figure class="col-xs-10 col-xs-offset-1 col-md-3 col-md-offset-0">
+		<img src="{{img}}/about_page_images/intro_1.jpg" class="img-responsive"></img>
+		<figcaption><a rel="nofollow" target="_blank" href="https://www.flickr.com/photos/faoswalim/13444934795/in/album-72157642992734333/"><i class="fa fa-copyright"></i>&nbsp;FAO SWALIM</a></figcaption>
+	</figure>
+	<figure class="col-xs-10 col-xs-offset-1 col-md-3 col-md-offset-0">
+		<img src="{{img}}/about_page_images/intro_2.jpg" class="img-responsive"></img>
+		<figcaption><a rel="nofollow" target="_blank" href="https://commons.wikimedia.org/wiki/File:WHO_in_PPE.jpg"><i class="fa fa-creative-commons"></i>&nbsp;Discasto</a></figcaption>
+	</figure>
+	<figure class="col-xs-10 col-xs-offset-1 col-md-3 col-md-offset-0">
+		<img src="{{img}}/about_page_images/intro_3.jpg" class="img-responsive"></img>
+		<figcaption><a rel="nofollow" target="_blank" href="https://commons.wikimedia.org/wiki/File:May_flooding_2014.JPG"><i class="fa fa-creative-commons"></i>&nbsp;Marckos</a></figcaption>
+	</figure>
+	<figure class="col-xs-10 col-xs-offset-1 col-md-3 col-md-offset-0">
+		<img src="{{img}}/about_page_images/intro_4.png" class="img-responsive"></img>
+		<figcaption><a rel="nofollow" target="_blank" href="https://www.flickr.com/photos/130225227@N02/15773600134/sizes/l"><i class="fa fa-copyright"></i>&nbsp;REACH Initiative</a></figcaption>
+	</figure>
+</div>
+{% endcall %}
+{% endblock %}
+
+
+{% block footer %}
+<div class="property blue-bg in-page-link" style="margin-bottom:0;padding-top:1.5em;padding-bottom:1.5em;">
+	<div class="container-fluid">
+		{% call row() %}
+			<div id="accordion" class="panel-group">
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<center><button class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false">How to get started?&nbsp;&nbsp;<i class="fa fa-fw fa-plus-circle"></i><i class="fa fa-fw fa-minus-circle"></i></button></center>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							There are two ways to volunteer for GeoTag-X: you can either analyse photos or find photos.<br/><br/>
+							<center><h4 id="what_do_i_need"><img src="{{img}}/desktop.png" style="margin-right:10px" width="50"></img>What do I need?</h4></center>
+							<hr>
+							The only things required to start contributing is a PC or tablet with an Internet connection, and some spare time.<br/>
+							This means that anyone can do it wherever they want, whenever they want. <br/><br/><br/>
+
+							<center><h4 id="analyse_photos" style="padding-top:135px;margin-top:-135px;"><img src="{{img}}/flask.png" style="margin-right:10px" width="50"></img>Analyse photos</h4></center>
+							<hr>
+							Help us extract information from the photos being collected by contributing to the different applications on <strong>GeoTag-X</strong>.<br/><br/>
+							It’s easy. Just follow these steps:<br/>
+							✓ Sign up for an <a href="{{url_for('account.register')}}">account</a>.<br/>
+							<i style="margin-left:11px;color:white">Note: is that mandatory? No, but it would be very helpful for us as we would like to build our community of experienced volunteers.</i><br/>
+							✓ Choose a project from the different applications on the <a href="/#project_grid">Project page</a>.<br/>
+							✓ Start contributing and analyse as many photos as you feel like.<br/><br/>
+							Don’t worry: it will take no longer than 2 minutes to register and between (less than) 1 to 3 minutes to analyse each photo.<br/>
+							If you are not sure what you are doing, you can take the project’s tutorial. It will teach you what to look for.<br/><br/><br/>
+
+							<center><h4 id="find_photos" style="padding-top:135px;margin-top:-135px"><img src="{{img}}/binocular.png" style="margin-right:10px" width="50"></img>Find photos</h4></center>
+							<hr>
+							Photos are our main source of information. We need you to help us find photos for the different projects that are on the website.<br/><br/>
+							When it has been enabled for a project, you can use the <a href="https://chrome.google.com/webstore/detail/geotag-x-photo-collector/objndpnfdmjgiaadijpcfbobahbdomjp?hl=en">GeoTag-X Photo Collector extension</a> for Google Chrome <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank"><i class="fa fa-chrome"></i></a> to send us photos as you browse.<br/> To do so, simply right-click the photo you want to send and select <i style="color:white">Upload image URL to GeoTag-X</i>.<br/>
+							If you find albums containing relevant photos <a href="mailto:geotag-x@cern.ch">send</a> them to us and we will load them in for analysis.<a href="mailto:geotag-x@cern.ch"><i class="fa fa-envelope-o fa-2x" style="padding-left:30px"></i></a><br/><br/><br/>
+
+
+							<center><h4 id="download_data" style="padding-top:135px;margin-top:-135px"><img src="{{img}}/Download_256.png" style="margin-right:10px" width="50"></img>Download Data</h4></center>
+							<hr>
+							Instructions about downloading and undestanding the data about all the projects can be accessed here : <a href="{{url_for('static',filename='data/GeoTag-X_Data.pdf')}}" target="_blank">GeoTag-X Data</a><br/><br/>
+							<hr style="margin-bottom:5px;margin-top:20px">
+							<i style="color:white">Note: most of these projects are a work in progress.</i><br/>
+							If you find bugs or things that you don’t really like, or if you want to give us your feedback, you can post it on <a href="https://github.com/geotagx/geotagx-theme/issues">GitHub <i class="fa fa-github"></i>
+							</a> or use the <a href="http://geotagx.org/geotagx/feedback">Feedback form</a>.<br/>
+							We would love to hear what you think.
+						</div>
+					</div>
+				</div>
+				<hr style="margin:0;padding:0;">
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title text-center">
+							<center><button id="how_will_the_analysis_help" class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false">How will the analysis help?&nbsp;&nbsp;<i class="fa fa-fw fa-plus-circle"></i><i class="fa fa-fw fa-minus-circle"></i></button></center>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse">
+						<div class="panel-body">
+							Let's see with an example.<br><br>
+							Our <a href="/project/category/emergencyshelterassessmentinthemiddleeast/">Winter Shelter Assessment application</a> is designed to assess whether emergency shelters in displacements sites in Jordan and Iraq are suitably prepared for winter.<br><br>
+							When people flee disasters, they may spend time in camps, sometimes for many years. Emergency shelters – often tents – need to be protected from harsh climatic extremes in both summer and winter. Weather conditions in the Middle East are characterized by very warm summers and cold winters, with temperatures sometimes dropping below freezing. This can leave displaced families and informal settlements particularly vulnerable.<br><br>
+							To help in the assessment, we ask questions based around <a rel="nofollow" target="_blank" href="https://www.sheltercluster.org/">Shelter Cluster indicators</a>, informed by <a href="http://www.reach-initiative.org/reach-completes-rapid-assessment-for-shelter-and-cccm-clusters-in-iraq" target="_blank">REACH shelter assessments</a>. Questions can be, for example, is the shelter raised off the ground? Does the shelter have a second cover? Is there space to put a chimney safely inside the shelter?<br><br>
+							The analysis questions are closely linked to the questions in assessments undertaken by REACH so that they can easily integrate the results into their work, and get a better idea of what is happening on the ground during a disaster – in this case, whether or not the emergency shelters are suitably prepared for winter. When the tool is no longer in an experimental phase and being used in operations, the results will help local people, governments, and humanitarian actors plan an emergency response.<br>
+						</div>
+					</div>
+				</div>
+				<hr style="margin:0;padding:0;">
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<center><button id="other_ways_to_contribute" class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false">Other ways to contribute&nbsp;&nbsp;<i class="fa fa-fw fa-plus-circle"></i><i class="fa fa-fw fa-minus-circle"></i></button></center>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse">
+						<div class="panel-body">
+							We welcome collaborators for new GeoTag-X projects, such as organisations or researchers addressing a particular crisis.<br>
+							If you have an idea for a project on GeoTag-X send us an email at <a href="mailto:geotagx-x@cern.ch">geotag-x@cern.ch</a>.<br><br>
+							We are also researching how visitors learn through their interaction with GeoTag-X and the projects on it. To be part of this research make sure you sign up for an account and accept to be part of the research project.<br>
+							You can learn more at <a target="_blank" href="http://citizencyberlab.eu/">Citizen Cyberlab</a>.
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endcall %}
+	</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+(function(){
+	"use strict";
+	$(document).ready(function(){
+		var sections = {
+			"#image_anchor":"#collapseOne",
+			"#find_photos":"#collapseOne",
+			"#analyse_photos":"#collapseOne",
+			"#what_do_i_need":"#collapseOne",
+			"#how_will_the_analysis_help":"#collapseTwo",
+			"#other_ways_to_contribute":"#collapseThree",
+		}
+		var hash = document.location.hash;
+		var hashSection = $.trim(sections[hash]); // $.trim always returns a string.
+		if (hashSection){
+			$(hashSection).collapse();
+			if (hash === "#what_do_i_need")
+				window.scrollBy(0, -250);
+			else
+				window.scrollTo(0, $(hash).offset().top);
+		}
+	});
+})();
+</script>
 {% endblock %}
