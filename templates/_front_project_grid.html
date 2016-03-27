@@ -29,25 +29,31 @@
         {% set _temp = category_label_dict.update({ _category['short_name'] : _category['name']}) %}
     {% endif %}
 {% endfor %}
-
-
-<div class="row" id="project_grid" style="padding-top: 135px; margin-top: -135px;">
-    <h3 class="text-center"><strong style="color:#444e67">Projects</strong></h3>
-	<div class="row portfolio-anchors">
-		<div class="col-md-2 filter active clickable" data-filter="{% for category in category_image_dict.keys() %}{{category}}{% if not loop.last %}{{" "}}{% endif %}{% endfor %}">
-			<span class="badge bg-green clickable">{{count.value}}</span>
-			<center><img class="portfolio-anchor-thumbnail clickable" src="http://geotagx.org/static/img/default_logo.png"></center>
-			<span>All</span>
-		</div>
-		{% for category in category_image_dict.keys() %}
-		<div class="col-md-2 filter portfolio_category_div clickable" data-filter="{{category}}" data-toggle="tooltip" data-placement="middle" title="Double Click to go to Category Page. Single Click to filter projects on this page">
-			<span class="badge bg-green clickable">{% if category in categories_projects.keys() %}{{categories_projects[category].__len__()}}{%else%} 0 {% endif %}</span>
-			<center><img class="portfolio-anchor-thumbnail clickable" src="{{category_image_dict[category]}}"></center>
-			<span>{{category_label_dict[category]}}</span>
-		</div>
-		{% endfor %}
-	</div>
-    <hr style="margin-top:2em">
+<style>
+#project_grid {
+    padding-top:70px;
+    margin-top:-70px;
+}
+</style>
+<div id="project_grid" class="row">
+    <div class="col-xs-12">
+        <div class="row"><h3 class="text-center"><strong style="color:#444e67">{{_("Projects")}}</strong></h3></div>
+        <div class="row portfolio-anchors">
+            <div class="col-md-2 filter active clickable" data-filter="{% for category in category_image_dict.keys() %}{{category}}{% if not loop.last %}{{" "}}{% endif %}{% endfor %}">
+                <span class="badge bg-green clickable">{{count.value}}</span>
+                <center><img class="portfolio-anchor-thumbnail clickable" src="http://geotagx.org/static/img/default_logo.png"></center>
+                <span>All</span>
+            </div>
+            {% for category in category_image_dict.keys() %}
+            <div class="col-md-2 filter portfolio_category_div clickable" data-filter="{{category}}" data-toggle="tooltip" data-placement="middle" title="Double Click to go to Category Page. Single Click to filter projects on this page">
+                <span class="badge bg-green clickable">{% if category in categories_projects.keys() %}{{categories_projects[category].__len__()}}{%else%} 0 {% endif %}</span>
+                <center><img class="portfolio-anchor-thumbnail clickable" src="{{category_image_dict[category]}}"></center>
+                <span>{{category_label_dict[category]}}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <hr style="margin-top:2em; margin-bottom:2.5em">
+    </div>
 </div>
 {% set app_list = [] %}
 {% set app_list_indices = [] %}
