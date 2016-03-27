@@ -1,17 +1,7 @@
 {% extends "base.html" %}
+{% from "helpers/_disqus.html" import render_disqus_script %}
 
 {% set active_page = "feedback" %}
 
-{% block content %}
-{% call row() %}<div id="disqus_thread"></div>{% endcall %}
-{% endblock %}
-
-
-{% block script %}
-<script>
-var disqus_shortname = "geotagx";
-var disqus_identifier = "feedback";
-(function(){var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-{% endblock %}
+{% block content %}{% call row() %}<div id="disqus_thread"></div>{% endcall %}{% endblock %}
+{% block script %}{{render_disqus_script("feedback")}}{% endblock %}

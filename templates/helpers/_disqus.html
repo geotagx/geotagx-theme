@@ -1,0 +1,8 @@
+{##
+ # Renders the Disqus initialization script.
+ # TODO Document parameters.
+##}
+{% macro render_disqus_script(identifier, short_name="geotagx") %}
+<script>var disqus_identifier='{{identifier}}';(function(){var d=document.createElement('script');d.type='text/javascript';d.async=true;d.src='//{{short_name}}.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(d);})();</script>
+<noscript>Please enable JavaScript to view the <a rel="nofollow" target="_blank" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% endmacro %}
