@@ -2,56 +2,53 @@
 {% set active_page = "profile" %}
 {% set active_link = "applications" %}
 {% import "account/_helpers.html" as helper %}
-{% import "projects/_helpers.html" as app_helper %}
+{% from "projects/_helpers.html" import broken_image %}
 {% from "_helpers.html" import geotagx_render_app_tile %}
 
 {% block content %}
-
-
-<div class="container" id="project_grid">
-    <h3 class="text-center"><strong style="color:#444e67">Project Status</strong></h3>
-        <div class="row portfolio-anchors">
-                    <div class="col-md-2 filter active col-md-offset-3" data-filter="draft published">
-                        <center><i class="fa fa-bars fa-5x"></i></center>
-                        <span>All</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="draft">
-                        <center><i class="fa fa-file-text fa-5x"></i></center>
-                        <span>Draft</span>
-                    </div>
-                    <div class="col-md-2 filter" data-filter="published">
-                        <center><i class="fa fa-globe fa-5x"></i></center>
-                        <span>Published</span>
-                    </div>
-        </div>
+{% call row() %}
+<div class="row"><div class="col-xs-12"><h3 class="text-center"><strong style="color:#444e67">Project Status</strong></h3></div></div>
+<div class="row portfolio-anchors">
+	<div class="col-xs-4 filter active" data-filter="draft published">
+		<center><i class="fa fa-bars fa-5x"></i></center>
+		<span>All</span>
+	</div>
+	<div class="col-xs-4 filter" data-filter="draft">
+		<center><i class="fa fa-file-text fa-5x"></i></center>
+		<span>Draft</span>
+	</div>
+	<div class="col-xs-4 filter" data-filter="published">
+		<center><i class="fa fa-globe fa-5x"></i></center>
+		<span>Published</span>
+	</div>
 </div>
-
-
-<div class="container">
-    <div class="row  mar-b-30">
-        <div id="portfoliolist-three">
-            <div class="col-md-12">
-            {% if projects_published or projects_draft %}
-                {% if projects_published %}
-                {% for app in projects_published %}
-                    {{ geotagx_render_app_tile(app, upload_method , draft=False) }}
-                {% endfor %}
-                {% endif %}
-                {% if projects_draft %}
-                {% for app in projects_draft %}
-                    {{ geotagx_render_app_tile(app, upload_method , draft=True) }}
-                {% endfor %}
-                {% endif %}
-            {% else %}
-            <center>
-                <h2>{{ _('You have not created a project') }}</h2>
-                <a href="{{url_for('project.new')}}" class="btn btn-primary input-lg">{{ _('Create a Project') }}</a>
-            </center>
-            {% endif %}          
-            </div>
-        </div>
-    </div>
+{% endcall %}
+{% call row() %}
+<div class="row mar-b-30">
+	<div id="portfoliolist-three">
+		<div class="col-xs-12">
+			{% if projects_published or projects_draft %}
+				{% if projects_published %}
+				{% for app in projects_published %}
+					{{ geotagx_render_app_tile(app, upload_method , draft=False) }}
+				{% endfor %}
+				{% endif %}
+				{% if projects_draft %}
+				{% for app in projects_draft %}
+					{{ geotagx_render_app_tile(app, upload_method , draft=True) }}
+				{% endfor %}
+				{% endif %}
+			{% else %}
+			<center>
+				<h2>{{ _('You have not created a project') }}</h2>
+				<a href="{{url_for('project.new')}}" class="btn btn-primary input-lg">{{ _('Create a Project') }}</a>
+			</center>
+			{% endif %}
+		</div>
+	</div>
 </div>
-
-{{ app_helper.broken_image() }}
+{% endcall %}
 {% endblock %}
+
+
+{% block script %}{{broken_image()}}{% endblock %}
