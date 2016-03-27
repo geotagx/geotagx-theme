@@ -2,7 +2,7 @@
 {% set active_page = "profile" %}
 {% set active_link = "profile" %}
 {% import "account/_helpers.html" as helper %}
-{% import "projects/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 {% import "_helpers.html" as geotagx_helper %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
 
@@ -10,31 +10,25 @@
 <!-- NOTE :: A part of the profile page is rendered in the breadcrumb -->
 <!-- TO-DO : Fix this  -->
 
-<div class="row-fluid">
-    <div class="span9">
-        <hr>
-        <h2>{{ _('Your Contributions') }}</h2>
-        <br/><br/>
-        <div class="container">
-            <div class="row  mar-b-30">
-                <div id="portfoliolist-three">
-                    <div class="col-md-12">
-                    {% for app in projects_contrib %}
-                    {% if app.owner_id == current_user.id %}
-                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_project_image_url(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True) }}                    
-                    {% else %}
-                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_project_image_url(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app) }}
-                    {% endif %}
-
-                    {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div><!-- end span9 -->
-</div>
-
-{{ app_helper.broken_image() }}
+{% call row() %}
+	{% call row(col_class="col-xs-12") %}<h1>{{_("Your Contributions")}}</h1>{% endcall %}
+	{% call row(col_class="col-xs-12") %}
+		<div class="row  mar-b-30">
+			<div id="portfoliolist-three">
+				<div class="col-md-12">
+					{% for app in projects_contrib %}
+					{% if app.owner_id == current_user.id %}
+						{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=project_helper.render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True)}}
+					{% else %}
+						{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=project_helper.render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app)}}
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endcall %}
+{% endcall %}
 {% endblock %}
+
+
+{% block script %}{{project_helper.broken_image()}}{% endblock %}
