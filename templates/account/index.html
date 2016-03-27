@@ -5,8 +5,7 @@
 {% from "projects/_helpers.html" import broken_image %}
 
 {% block content %}
-{{ broken_image() }}
-
+{% call row() %}
 <div class="row">
   <div>
       {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
@@ -35,7 +34,7 @@
                           </div>
                           <div class="user-profile-member_since">
                             <span class="label">{{ _('Joined') }} </span><span class="value">{{account.registered_ago}}</span>
-                          </div>                          
+                          </div>
                         </div>
             </div>
           </a>
@@ -57,5 +56,10 @@
     {% endif %}
   </div>
 </div>
+{% endcall %}
+{% endblock %}
 
+
+{% block script %}
+{{broken_image()}}
 {% endblock %}
