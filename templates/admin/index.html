@@ -4,76 +4,56 @@
 {% import "account/_helpers.html" as helper %}
 
 {% block content %}
+{% call row() %}
+<div class="row"><div class="col-xs-12"><h1>{{_("Administrator Dashboard")}}</h1></div></div>
 <div class="row">
-    <div class="span9" style="min-height:400px;">
-        <h1><strong>{{ _('Admin Site') }}</strong></h1>
-        <div class="row-fluid">
-            <div id="dashboard" class="col-md-6 well">
-                <h2><i class="icon-dashboard"></i> {{_('Sourcerer Dashboard')}}</h2>
-                <p>{{_('Dashboard for moderating images collected through GeoTag-X Sourcerers')}}</p>
-                <a href="{{url_for('geotagx.sourcerer_dashboard')}}" class="btn btn-primary">
-                    {{ _('Go') }} <i class="icon-chevron-right"></i>
-                </a>
-            </div>
-            <div id="dashboard" class="col-md-6 well">
-                <h2><i class="icon-dashboard"></i> {{_('Background Jobs')}}</h2>
-                <p>{{_('Monitor the background jobs')}}</p>
-                <a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-primary">
-                    {{ _('Manage') }} <i class="icon-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div id="featured-apps" class="col-md-6 well">
-                <h2><i class="icon-star"></i> {{_('Featured Projects')}}</h2>
-                <p>{{_('Show projects on the front page')}}</p>
-                <a href="{{url_for('admin.featured')}}" class="btn btn-primary">
-                    {{ _('Manage') }} <i class="icon-chevron-right"></i>
-                </a>
-            </div>
-            <div id="categories" class="col-md-6 well">
-                <h2><i class="icon-check"></i> {{_('Categories')}}</h2>
-                <p>{{_('Manage project categories')}}</p>
-                <a href="{{url_for('admin.categories')}}" class="btn btn-primary">
-                    {{ _('Manage') }} <i class="icon-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div id="users" class="col-md-6 well">
-                <h2><i class="icon-user"></i> {{_('Administrators')}}</h2>
-                <p>{{_('Manage administrators')}}</p>
-                <a href="{{url_for('admin.users')}}" class="btn btn-primary">
-                    {{ _('Manage') }} <i class="icon-chevron-right"></i>
-                </a>
-            </div>
-            <div id="users-list" class="col-md-6 well">
-                <h2><i class="icon-list"></i> {{_('Users')}}</h2>
-                <p>{{_('Export a list of users')}}</p>
-                <a href="{{url_for('geotagx.export_users', format='json')}}" class="btn btn-primary">
-                    {{ _('JSON') }}
-                </a>
-                <a href="{{url_for('geotagx.export_users', format='csv')}}" class="btn btn-primary">
-                    {{ _('CSV') }}
-                </a>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div id="users-list" class="col-md-6 well">
-                <h2><i class="icon-list"></i> {{_('Users Management')}}</h2>
-                <p>{{_('Manage all registered Users')}}</p>
-                <a href="{{url_for('geotagx.users_page')}}" class="btn btn-primary">
-                    {{ _('Manage') }}
-                </a>
-            </div>
-            <div id="users-list" class="col-md-6 well">
-                <h2><i class="icon-list"></i> {{_('Send Newsletter')}}</h2>
-                <p>{{_('Send newsletter to all registered users.')}}</p>
-                <a href="{{url_for('geotagx.newsletter')}}" class="btn btn-primary">
-                    {{ _('Go') }}
-                </a>
-            </div>            
-        </div>
-    </div>
+	<div class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-dashboard"></i> {{_('Sourcerer Dashboard')}}</h2>
+		<p>{{_('Dashboard for moderating images collected through GeoTag-X Sourcerers')}}</p>
+		<a href="{{url_for('geotagx.sourcerer_dashboard')}}" class="btn btn-primary">{{ _('Go') }} <i class="icon-chevron-right"></i></a>
+	</div>
+	<div class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-dashboard"></i> {{_('Background Jobs')}}</h2>
+		<p>{{_('Monitor the background jobs')}}</p>
+		<a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
+	</div>
 </div>
+<div class="row">
+	<div id="featured-apps" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-star"></i> {{_('Featured Projects')}}</h2>
+		<p>{{_('Show projects on the front page')}}</p>
+		<a href="{{url_for('admin.featured')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
+	</div>
+	<div id="categories" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-check"></i> {{_('Categories')}}</h2>
+		<p>{{_('Manage project categories')}}</p>
+		<a href="{{url_for('admin.categories')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
+	</div>
+</div>
+<div class="row">
+	<div id="users" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-user"></i> {{_('Administrators')}}</h2>
+		<p>{{_('Manage administrators')}}</p>
+		<a href="{{url_for('admin.users')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
+	</div>
+	<div id="users-list" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-list"></i> {{_('Users')}}</h2>
+		<p>{{_('Export a list of users')}}</p>
+		<a href="{{url_for('geotagx.export_users', format='json')}}" class="btn btn-primary">{{ _('JSON') }}</a>
+		<a href="{{url_for('geotagx.export_users', format='csv')}}" class="btn btn-primary">{{_('CSV')}}</a>
+	</div>
+</div>
+<div class="row">
+	<div id="users-list" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-list"></i> {{_('Users Management')}}</h2>
+		<p>{{_('Manage all registered Users')}}</p>
+		<a href="{{url_for('geotagx.users_page')}}" class="btn btn-primary">{{ _('Manage') }}</a>
+	</div>
+	<div id="users-list" class="col-xs-12 col-md-6 well">
+		<h2><i class="icon-list"></i> {{_('Send Newsletter')}}</h2>
+		<p>{{_('Send newsletter to all registered users.')}}</p>
+		<a href="{{url_for('geotagx.newsletter')}}" class="btn btn-primary">{{ _('Go') }}</a>
+	</div>
+</div>
+{% endcall %}
 {% endblock %}
