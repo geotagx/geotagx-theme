@@ -1,5 +1,5 @@
 <div class="row">
-    <!-- Success and Error Messages for the user --> 
+    <!-- Success and Error Messages for the user -->
     <div class="span6 offset2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
@@ -53,7 +53,7 @@
         <div class="progress progress-striped">
             <div id="progress" rel="tooltip" title="#" class="bar" style="width: 0%;"></div>
         </div>
-        <!-- 
+        <!--
             This project uses Disqus to allow users to provide some feedback.
             The next section includes a button that when a user clicks on it will
             load the comments, if any, for the given task
@@ -154,7 +154,7 @@ function loadUserProgress() {
         var pct = Math.round((data.done*100)/data.total);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
+        $("#progress").tooltip({'placement': 'left'});
         $("#total").text(data.total);
         $("#done").text(data.done);
     });

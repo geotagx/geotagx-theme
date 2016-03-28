@@ -5,16 +5,16 @@
 
 
 <div class="signin-container">
-    <div class="row vertical-offset-100">      
+    <div class="row vertical-offset-100">
       <div class="col-md-4 col-md-offset-4">
         <center>
-        <span class="label label-warning"><i class="icon-bullhorn"></i> {{ _('Note') }}</span> 
-            {{ _('By clicking the') }} 
+        <span class="label label-warning"><i class="icon-bullhorn"></i> {{ _('Note') }}</span>
+            {{ _('By clicking the') }}
             <strong>{{ _('Create account button') }}
             </strong>{{ _('below you are agreeing to the') }}
-            <a target="blank" href="{{terms_of_use | safe}}">{{ _('terms of use') }} </a>{{ _('and') }} 
+            <a target="blank" href="{{terms_of_use | safe}}">{{ _('terms of use') }} </a>{{ _('and') }}
             <a href="{{data_use | safe}}">{{ _('data') }}</a>.
-        </center>          
+        </center>
         <div class="panel panel-default centered-form-panel geotagx-panel">
           <div class="panel-body">
             {% from "_formhelpers.html" import geotagx_render_field  %}
@@ -24,13 +24,13 @@
                   <div class="form-group text-center">
                     <i class="fa fa-user-plus big-icon-10"></i>
                   </div>
-                    {{ geotagx_render_field(form.fullname,"fullname", "Full Name", "text") }}          
-                    {{ geotagx_render_field(form.name,"name", "Username", "text") }}          
-                    {{ geotagx_render_field(form.email_addr,"email_addr", "Email", "text") }}          
-                    {{ geotagx_render_field(form.password,"password", "Password", "password") }}          
-                    {{ geotagx_render_field(form.confirm,"confirm", "Confirm Password", "password") }}          
-               
-                <div class="form-group">          
+                    {{ geotagx_render_field(form.fullname,"fullname", "Full Name", "text") }}
+                    {{ geotagx_render_field(form.name,"name", "Username", "text") }}
+                    {{ geotagx_render_field(form.email_addr,"email_addr", "Email", "text") }}
+                    {{ geotagx_render_field(form.password,"password", "Password", "password") }}
+                    {{ geotagx_render_field(form.confirm,"confirm", "Confirm Password", "password") }}
+
+                <div class="form-group">
                 <button type="submit" class="btn btn-block btn-primary input-lg">{{ _('Create Account') }}</button>
                 </div>
                 <div class="form-group">

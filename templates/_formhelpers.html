@@ -1,7 +1,7 @@
 {% macro render_field(field, addon, prepend, tooltip, label_text) %}
         {% if 'class_' in kwargs.keys() %}
           {% if kwargs.update({'class_' : kwargs['class_']+ " input-lg form-control"}) %}{% endif %}
-        {% else %} 
+        {% else %}
           {% if field.type != "FileField" and field.type != "SelectField" and kwargs.update({'class_' : " input-lg form-control"}) %}{% endif %}
         {% endif %}
 
@@ -10,9 +10,9 @@
             {{ render_label(field, tooltip, label_text) }}
           </div>
           {% if field.type != "FileField" %}
-          <div class="col-md-9 geotagx-field-value"> 
+          <div class="col-md-9 geotagx-field-value">
           {% else %}
-          <div class="col-md-6 geotagx-field-value">           
+          <div class="col-md-6 geotagx-field-value">
           {% endif %}
               <div class="form-group {% if field.errors %} has-error {% endif %}">
                     {% if addon %}
@@ -32,14 +32,14 @@
                         {% for error in field.errors %}
                         <span class="help-inline">{{ error }}</span>
                         {% endfor %}
-                    {% endif %}                 
+                    {% endif %}
               </div>
             </div>
           {% if field.type == "FileField" %}
           <div id="{{field.name}}_upload_button" class="col-md-3 geotagx-field-value">
-            <button type="submit" name="btn" value="Upload" class="btn btn-primary input-lg">{{ _("Upload") }}</button>     
+            <button type="submit" name="btn" value="Upload" class="btn btn-primary input-lg">{{ _("Upload") }}</button>
           </div>
-          {% endif %}            
+          {% endif %}
         </div>
 {% endmacro %}
 
@@ -71,7 +71,7 @@
                           <li><span class="help-block danger">{{ error }}</span></li>
                           {% endfor %}
                         </ul>
-                      {% endif %}                    
+                      {% endif %}
                   </div>
               </div>
 {% endmacro %}
@@ -85,9 +85,9 @@
               {{field.label}}
             {% endif %}
           </div>
-          <div class="col-md-9 geotagx-field-value"> 
+          <div class="col-md-9 geotagx-field-value">
               <div class="form-group {% if field.errors %} has-error {% endif %}">
-                  <div>                    
+                  <div>
                       {{field(class_="input-lg form-control")}}
                       {% if field.errors %}
                         <ul style="list-style-position:inside;">
@@ -95,7 +95,7 @@
                           <li><span class="help-block danger">{{ error }}</span></li>
                           {% endfor %}
                         </ul>
-                      {% endif %}                    
+                      {% endif %}
                   </div>
               </div>
             </div>
@@ -112,7 +112,7 @@
                           <li><span class="help-block">{{ error }}</span></li>
                           {% endfor %}
                         </ul>
-                      {% endif %}                    
+                      {% endif %}
                   </div>
               </div>
 {% endmacro %}
@@ -125,6 +125,6 @@
                     {% for error in field.errors %}
                     <span class="help-inline">{{ error }}</span>
                     {% endfor %}
-                {% endif %}   
-              </div>           
+                {% endif %}
+              </div>
 {% endmacro %}

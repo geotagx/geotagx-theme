@@ -4,14 +4,14 @@
         {% if (not current_user.is_anonymous()) and ( request['path'] == "/account/"+current_user.name+"/" or request['path'] == "/account/"+current_user.name+"/update" ) %}
 
           {% import "account/_helpers.html" as account_helper %}
-          {{ account_helper.render_user_profile(current_user, upload_method, "settings") }} 
+          {{ account_helper.render_user_profile(current_user, upload_method, "settings") }}
 
         {% elif request['path'][:9]=="/account/" and projects %}
           {% import "account/_helpers.html" as account_helper %}
-          {{ account_helper.render_user_public_profile(user, upload_method, "settings") }} 
+          {{ account_helper.render_user_public_profile(user, upload_method, "settings") }}
 
         {% elif request['path'][:18]=="/project/category/" %}
-          
+
           {% import "projects/_helpers.html" as project_helper %}
           {{ project_helper.render_category_profile(active_cat, pagination) }}
 
@@ -20,7 +20,7 @@
         {% elif request['path'][:21] == "/geotagx/users/delete" %}
 
           {% import "account/_helpers.html" as account_helper %}
-          {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }} 
+          {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }}
 
         {% elif active_page == "projects" %}
 
@@ -42,23 +42,23 @@
               {% if request['path'] == "/account/forgot-password" %}
                 Reset Password
               {% endif %}
-              
+
               {% if request['path'] == "/account/register" %}
                 Create New Account
-              {% endif %}   
+              {% endif %}
 
               {% if request['path'] == "/about" %}
                 About
-              {% endif %}   
+              {% endif %}
 
               {% if request['path'] == "/app/new" %}
               {{ _('Create New Project') }}
-              {% endif %}  
+              {% endif %}
 
 
               {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
               {{ current_user.fullname+"'s #"+_("projects") }}
-              {% endif %}  
+              {% endif %}
 
             </h1>
           </div>
@@ -67,29 +67,29 @@
               {% if request['path'] == "/account/signin" %}
                 <li><a href="/">Home</a></li>
                 <li class="active">Login</li>
-              {% endif %}    
+              {% endif %}
               {% if request['path'] == "/account/forgot-password" %}
                 <li><a href="/">Home</a></li>
                 <li class="active">Reset Password</li>
-              {% endif %}      
+              {% endif %}
               {% if request['path'] == "/account/register" %}
-                <li><a href="/">Home</a></li>              
+                <li><a href="/">Home</a></li>
                 <li class="active">Register</li>
-              {% endif %}    
+              {% endif %}
               {% if request['path'] == "/about" %}
-                <li><a href="/">Home</a></li>              
+                <li><a href="/">Home</a></li>
                 <li class="active">About</li>
-              {% endif %}  
+              {% endif %}
               {% if request['path'] == "/project/new" %}
-                <li><a href="/">Home</a></li>              
+                <li><a href="/">Home</a></li>
                 <li class="active">{{ _('Create New Project') }}</li>
-              {% endif %}  
+              {% endif %}
               {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
-                <li><a href="/account/{{current_user.name}}/">My Account</a></li>              
+                <li><a href="/account/{{current_user.name}}/">My Account</a></li>
                 <li class="active">{{ _('Projects') }}</li>
-              {% endif %}  
+              {% endif %}
             </ol>
-          </div>  
+          </div>
 
         {% endif %}
 

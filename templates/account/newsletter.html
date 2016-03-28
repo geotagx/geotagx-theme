@@ -13,10 +13,10 @@
         <a id="signmeup" class="btn btn-primary"
             href="{{url_for('account.newsletter_subscribe', subscribe=True,
             next=next)}}">{{_('Sign me up!')}}</a>
-        <a id="notinterested" class="btn btn-default" 
+        <a id="notinterested" class="btn btn-default"
             href="{{url_for('account.newsletter_subscribe', subscribe=False,
             next=next)}}">{{_('Not interested')}}</a>
 	</div>
-	
+
 </div>
 {% endblock %}

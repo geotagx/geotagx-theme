@@ -14,7 +14,7 @@ class NewsletterForm(Form):
   <h2>GeoTag-X Newsletter</h2>
   <form action="{{ url_for('geotagx.newsletter') }}" method=post>
     <input name="_csrf_token" type=hidden value="{{ csrf_token() }}">
- 
+
 
                         <fieldset>
 
@@ -51,7 +51,7 @@ class NewsletterForm(Form):
                                       Note : The message HAS TO BE in markdown format
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <br/>
                         <div class="form-actions">
 
@@ -61,10 +61,10 @@ class NewsletterForm(Form):
                                             {{ form.submit(class="btn btn-primary input-lg", style="width:100%") }}
                                     </div>
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                         </fieldset>
- 
+
   </form>
 
 {% endblock %}

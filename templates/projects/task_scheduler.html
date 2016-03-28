@@ -28,7 +28,7 @@
                 <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.sched, class_="span4", 
+                        {{ render_field(form.sched, class_="span4",
                         placeholder="Task scheduler for your rpoject")}}
                         <div class="form-actions">
                             <input type="submit" value="{{_('Set redundancy')}}" class="btn btn-primary input-lg" />

@@ -32,7 +32,7 @@
             <a href="{{url_for('account.profile', name=user.name)}}">
               {{ render_user_thumbnail(user, upload_method, class="img-circle col-md-12") }}
             </a>
-            
+
           </div>
           <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
             <h1>
@@ -47,13 +47,13 @@
               </i>
               <i>{{ _('Username')}}</i>   :   <strong class="user-profile-values">{{ user.name }}</strong> </h3>
             </p>
-            
+
             {% if private %}
             <p>
                 <h3>
                 <i class="fa fa-envelope fa-lg pr-10">
                 </i>
-                <i>{{ _('E-mail')}}</i>   :   <strong class="user-profile-values">{{ user.email_addr }}</strong> 
+                <i>{{ _('E-mail')}}</i>   :   <strong class="user-profile-values">{{ user.email_addr }}</strong>
                                   {% if (user.valid_email == False) %}
                                     {% if (user.confirmation_email_sent == False) %}
                                     <a href="{{ url_for('account.confirm_email')}}" class="btn btn-small btn-success">Validate email</a>
@@ -87,13 +87,13 @@
               <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values"> {{ _('The user has not contributed to any tasks yet') }} </strong>
               </h3>
             </p>
-            {% endif %}  
+            {% endif %}
 
             <h3><i class="fa fa-dashboard fa-lg pr-10"></i> {{ _('Contributed Tasks') }}: <strong class="user-profile-values">{{ user.score }}</strong></h3>
-            
+
             {% if settings %}
             <h3><i class="fa fa-key fa-lg pr-10"></i> {{ _('API key') }}: <strong class="user-profile-values"><code>{{ user.api_key }}</code></strong></h3>
-            {% endif %}       
+            {% endif %}
             <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
 
             <hr>
@@ -115,7 +115,7 @@
             <a href="{{url_for('account.profile', name=user.name)}}">
               {{ render_user_thumbnail(user, upload_method, class="img-circle col-md-12") }}
             </a>
-            
+
           </div>
           <div class="col-lg-8 col-sm-8 wow fadeInRight animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
             <h1>
@@ -130,7 +130,7 @@
               </i>
               <i>{{ _('Username')}}</i>   :   <strong class="user-profile-values">{{ user.name }}</strong> </h3>
             </p>
-            
+
 
             {% if user.rank %}
             <p>
@@ -152,7 +152,7 @@
               <h3><i class="fa fa-trophy fa-lg pr-10"></i> {{ _('Rank')}}: <strong class="user-profile-values"> {{ _('The user has not contributed to any tasks yet') }} </strong>
               </h3>
             </p>
-            {% endif %}  
+            {% endif %}
             <h3><i class="fa fa-dashboard fa-lg pr-10"></i> {{ _('Contributed Tasks') }}: <strong class="user-profile-values">{{ user.score }}</strong></h3>
 
             <h3><i class="fa fa-calendar fa-lg pr-10"></i> {{ _('Joined') }}: <strong class="user-profile-values">{{ user.created[0:10]}}</strong></h3>
@@ -205,7 +205,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}

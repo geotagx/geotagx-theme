@@ -67,7 +67,7 @@ h3 > small {
                             var container = document.getElementById('users');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 pie     : {show: true, explode: 2},
                                 grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -112,7 +112,7 @@ h3 > small {
                             var container = document.getElementById('apps');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 pie     : {show: true, explode: 2},
                                 grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
@@ -122,7 +122,7 @@ h3 > small {
                                 legend  : {position: 'se'}
                             });
                         })();
-                        
+
                         </script>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ h3 > small {
                             var container = document.getElementById('tasks');
                             var graph = Flotr.draw(container, [
                                 {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
                                 {
                                 bars : {show: true},
                                 grid    : {verticalLines: true, horizontalLines: true},
@@ -154,7 +154,7 @@ h3 > small {
                                 legend  : {position: 'ne'}
                             });
                         })();
-                        
+
                         </script>
                     </div>
                 </div>
@@ -175,7 +175,7 @@ h3 > small {
                     map.fitWorld();
                     map.setZoom(1);
                     var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                    L.tileLayer(url, 
+                    L.tileLayer(url,
                         {
                         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         maxZoom: 18,
@@ -199,7 +199,7 @@ h3 > small {
             </div>
             {% endif %}
             <!-- END Anonymous Users Map CARD -->
-        {% endif %} 
+        {% endif %}
     </div>
 </div>
 {% endblock %}

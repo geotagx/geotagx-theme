@@ -65,7 +65,7 @@ window.multiPolygonMarkers = [];
 window.markerStack = [];
 window.polygonRenderings = {};
 
-window.temp = false; 
+window.temp = false;
 
 window.previousMarker = false;
 
@@ -84,7 +84,7 @@ window.blueIcon = L.AwesomeMarkers.icon({
 function compute_centroid_of_multiPolygon(multiPolygon, feature_index){
 	for(var i=0; i<multiPolygon.geometry.coordinates.length; i++){
 
-		//Iterate over all multiPolygons 
+		//Iterate over all multiPolygons
 		var polygon_centroids = []
 		for(var k = 0; k<multiPolygon.geometry.coordinates[i].length; k++){
 			polygon_centroids.push(compute_centroid_of_polygon(multiPolygon.geometry.coordinates[i][k]));

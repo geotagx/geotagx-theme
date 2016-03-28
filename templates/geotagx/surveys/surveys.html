@@ -49,7 +49,7 @@ $("#do_not_take_survey").click(function(){
   $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=RESPONSE_NOT_TAKEN&new_geotagx_survey_state=DENY_TO_PARTICIPATE", function(data){
     if(data.result == true){
       document.location = "/";
-    }    
+    }
   });
 });
 </script>
@@ -97,7 +97,7 @@ $("#do_not_take_survey").click(function(){
   $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=AGREE_TO_PARTICIPATE&new_geotagx_survey_state=DENY_TO_PARTICIPATE_IN_FINAL_SURVEY", function(data){
     if(data.result == true){
       document.location = "/";
-    }    
+    }
   });
 });
 </script>

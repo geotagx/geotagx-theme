@@ -18,7 +18,7 @@
           </center>
         </div>
         <br/>
-        <h4> <strong> {{ _('Please note that if you decide to go ahead with this operation then :') }} </strong> <h4> 
+        <h4> <strong> {{ _('Please note that if you decide to go ahead with this operation then :') }} </strong> <h4>
         <dl class="dl-horizontal">
           <dt> {{ _('Task Runs') }} </dt>
           <dd> {{ _('All task runs associated with this user will be marked as anonymous, and the user_ip will be marked with the username instead to ensure unique user identity in analytics') }} </dd>
@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                     {% for app in owned_projects %}
 
-                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_project_image_url(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True) }} 
+                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_project_image_url(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True) }}
 
                     {% endfor %}
                     </div>
