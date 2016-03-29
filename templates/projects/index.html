@@ -1,55 +1,57 @@
 {% extends "projects/base.html" %}
-{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
+{% set active_page_title = active_cat.name %}
 
 {% block content %}
-<script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
-<div class="row">
-    <div class="span9">
-            <div id="sorts" class="btn-group pull-right" style="margin-top:12px;">
-                <button class="btn dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Order by <span id="order">name</span> <span class="caret"></span></button>
-              <ul class="dropdown-menu" style="top:35px;">
-                  <li><a href="#" data-sort-value="original-order">name</a></li>
-                  <li><a href="#" data-sort-value="date">date</a></li>
-                  <li><a href="#" data-sort-value="activity">activity</a></li>
-                  <li><a href="#" data-sort-value="progress">progress</a></li>
-              </ul>
-            </div>
+{% call row() %}
+  <div id="sorts" class="btn-group pull-right" style="margin-top:12px;">
+      <button class="btn dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Order by <span id="order">name</span> <span class="caret"></span></button>
+    <ul class="dropdown-menu" style="top:35px;">
+        <li><a href="#" data-sort-value="original-order">name</a></li>
+        <li><a href="#" data-sort-value="date">date</a></li>
+        <li><a href="#" data-sort-value="activity">activity</a></li>
+        <li><a href="#" data-sort-value="progress">progress</a></li>
+    </ul>
+  </div>
+  {% if projects %}
+    {% if active_cat.short_name=="featured"%}
+    <h1>
+        <i class="icon-star"></i> {{pagination.total_count}} {{ _('Featured Projects') }}
+    </h1>
+    <h2>{{ _('A special selection of the most interesting projects') }}</h2>
+    {% elif active_cat.short_name=='draft' %}
+    <h1>
+        <i class="icon-wrench"></i> {{pagination.total_count}} {{ _('Draft Projects')}}</h1>
+    <h2>{{ _('Work in progress projects') }}</h2>
+    {% else %}
+    <h1>Projects</h1>
+    {% endif %}
 
-        {% if projects %}
-            {% if active_cat.short_name=="featured"%}
-            <h1>
-                <i class="icon-star"></i> {{pagination.total_count}} {{ _('Featured Projects') }}
-            </h1>
-            <h2>{{ _('A special selection of the most interesting projects') }}</h2>
-            {% elif active_cat.short_name=='draft' %}
-            <h1>
-                <i class="icon-wrench"></i> {{pagination.total_count}} {{ _('Draft Projects')}}</h1>
-            <h2>{{ _('Work in progress projects') }}</h2>
-            {% else %}
-            <h1>Projects</h1>
-            {% endif %}
-
-            <div class="projects">
-              <div id="portfoliolist-three">
-                  <div class="col-md-12">
-                      {% for project in projects %}
-                        {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(project, active_cat.short_name, isAdmin, upload_method) }}
-                      {% endfor %}
-                  </div>
-              </div>
-            </div>
-
-            {% if pagination.pages > 1 %}
-                {{ helper.render_pagination(pagination) }}
-            {% endif %}
-        {% else %}
-            <h1>
-                <i class="icon-th"></i> Projects</h1>
-            <h2>{{_('Sorry, there are no published projects for this category yet')}}</h2>
-        {% endif %}
+    <div class="projects">
+      <div id="portfoliolist-three">
+          <div class="col-md-12">
+              {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
+              {% for project in projects %}
+                {{render_geotagx_project_portfolio_element_with_stats_front_page_tile(project, active_cat.short_name, current_user.admin, upload_method)}}
+              {% endfor %}
+          </div>
+      </div>
     </div>
-</div>
-{{ helper.broken_image() }}
+
+    {% if pagination.pages > 1 %}
+        {{ helper.render_pagination(pagination) }}
+    {% endif %}
+  {% else %}
+    <h1>
+        <i class="icon-th"></i> Projects</h1>
+    <h2>{{_('Sorry, there are no published projects for this category yet')}}</h2>
+  {% endif %}
+{% endcall %}
+{% endblock %}
+
+
+{% block script %}
+<script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
+{{helper.broken_image()}}
 <script>
 $( function() {
   // init Isotope
