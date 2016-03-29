@@ -1,0 +1,12 @@
+{#
+ # Renders a column inside a row inside a fluid container.
+ #}
+{% macro render_container(id=None, fluid=True, row_id=None, row_classes=None, col_id=None, col_classes="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2") %}
+<div {% if id %}id="{{id}}" {% endif %}class="container{% if fluid %}-fluid{% endif %}">
+	<div{% if row_id %} id="{{row_id}}"{% endif %} class="row{% if row_classes %} {{row_classes}}{% endif %}">
+		<div class="{{col_classes}}">
+			{{caller()}}
+		</div>
+	</div>
+</div>
+{% endmacro %}

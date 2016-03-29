@@ -1,0 +1,57 @@
+{#
+ # Renders a page's breadcrumbs, title and subtitle.
+ #}
+{% macro render_header(breadcrumbs=None, title=None, subtitle=None) %}
+{#
+ # This macro is a prototype. The 'False' in the following condition is set to disable it.
+ # If the rendered HTML is small and managable enough, it will eventually end up in the
+ # base.html template.
+ #}
+{% if False and (breadcrumbs or title) %}
+
+{# The style will make its way to a CSS file later on. #}
+<style>
+#page-header-content {
+	background:red;
+	background:#EEE;
+	color:#4A4A4A;
+	padding-top:1.15em;
+	padding-bottom:1.15em;
+	box-shadow:inset 0 -1px 1px 0 #CECECE;
+	-moz-box-shadow:inset 0 -1px 1px 0 #CECECE;
+	-webkit-box-shadow:inset 0 -1px 1px 0 #CECECE;
+	font-family:Lato;
+}
+#page-breadcrumbs {
+}
+#page-title {
+	font-weight:900;
+	font-size:1.5em;
+	text-transform:uppercase;
+	letter-spacing:3px;
+	margin-top:0.25em;
+}
+#page-subtitle {
+	font-weight:400;
+	font-size:1.15em;
+}
+</style>
+{% import "helpers/_bootstrap.html" as bootstrap %}
+{% call bootstrap.render_container(id="page-header-content") %}
+{% if breadcrumbs %}
+<div class="row">
+	<div class="col-xs-12">
+
+
+	</div>
+</div>
+{% endif %}
+{% if title %}
+<div id="page-title" class="row"><div class="col-xs-12">{{title}}</div></div>
+{% endif %}
+{% if subtitle %}
+<div id="page-subtitle" class="row"><div class="col-xs-12">{{subtitle}}</div></div>
+{% endif %}
+{% endcall %}
+{% endif %}
+{% endmacro %}

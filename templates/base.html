@@ -68,8 +68,11 @@
         {%- include "_navigation.html" -%}
         <div id="page">
             <header id="page-header">
-                {%- block breadcrumbs %}{% include "_breadcrumbs.html" %}{% endblock -%}
-                {%- block header %}{% endblock -%}
+                {% block header %}
+                {% from "helpers/_page.html" import render_header %}
+                {{render_header(page_breadcrumbs, title=active_page_title, subtitle=active_page_subtitle)}}
+                {% include "_breadcrumbs.html" %}
+                {% endblock %}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
                 {% include "_flash_messages.html" %}
