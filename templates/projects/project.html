@@ -1,6 +1,7 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project  = "all" %}
+{% set active_page_title = project.name %}
+{% set active_page_subtitle = project.description %}
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}

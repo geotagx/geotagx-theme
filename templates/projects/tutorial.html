@@ -1,11 +1,8 @@
-{% extends "/base.html" %}
-{% set active_page = "projects" %}
-{% set active_project = project.short_name %}
+{% extends "projects/project.html" %}
 {% set active_project_url = url_for("project.details", short_name = active_project) %}
 {% set active_project_newtask_url = url_for("project.presenter", short_name = active_project) %}
 
 {% block content %}
-
 <div class="row">
 	<div class="col-xs-12"><h2><a href="{{active_project_url}}">{{project.name}}</a>  <small style="text-transform:uppercase">{{_('Tutorial')}}</small></h2></div>
 	{% if project.info.tutorial %}

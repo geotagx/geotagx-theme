@@ -1,6 +1,4 @@
-{% extends "/base.html" %}
-{% set active_page = "projects"  %}
-{% set active_project = project.short_name %}
+{% extends "projects/project.html" %}
 
 {% block content %}
 <script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
@@ -10,7 +8,6 @@
 	</div>
 </div>
 {% if invite_new_volunteers %}
-{% import "projects/_helpers.html" as helper %}
 <div class="row">
 	<div class="col-xs-12">
 		<p>{{ _("Sorry, you have contributed to all the tasks for this project but it still needs more volunteers. Please spread the word!") }}</p>

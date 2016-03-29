@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "profile" %}
+{% set active_page_title = _("Settings") %}
+{% set active_page_subtitle = _("Edit your profile.") %}
 {% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
 {% from "projects/_helpers.html" import broken_image %}
@@ -13,7 +15,7 @@
 {% from "_formhelpers.html" import render_field %}
 {% from "_formhelpers.html" import geotagx_render_field , geotagx_render_checkbox , geotagx_render_selectlist %}
 
-<!-- TO-DO :: Handle Form errors properlu -->
+<!-- TO-DO :: Handle Form errors properly -->
 {% call row() %}
 <div class="row">
     <section class="tab wow fadeInLeft animated" data-wow-animation-name="none" style="visibility: visible; -webkit-animation-name: none;">
