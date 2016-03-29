@@ -1,6 +1,6 @@
-{% extends "projects/project.html" %}
-{% set active_project_url = url_for("project.details", short_name = active_project) %}
-{% set active_project_newtask_url = url_for("project.presenter", short_name = active_project) %}
+{% extends "projects/base.html" %}
+{% set active_project_url = url_for("project.details", short_name=active_project) %}
+{% set active_project_newtask_url = url_for("project.presenter", short_name=active_project) %}
 
 {% block content %}
 <div class="row">

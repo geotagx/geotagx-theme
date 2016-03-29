@@ -15,6 +15,7 @@
 {% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
 {% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() -%}
 {% set user_locale = "en" if current_user.is_anonymous() else current_user.locale -%}
+{% import "helpers/_bootstrap.html" as bootstrap %}
 
 {% macro row(row_id=None, row_class="row", col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2") %}
 {# Renders content in a column that is nested in a row, as per the Bootstrap grid guidelines. #}

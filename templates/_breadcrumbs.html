@@ -22,14 +22,6 @@
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }}
 
-        {% elif active_page == "projects" %}
-
-          {% if project and project.short_name != "geotagxblog" %}
-            <!-- Project Page-->
-            {% import "projects/_helpers.html" as app_helper %}
-            {{ app_helper.render_project_profile(project, upload_method , owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user) }}
-          {% endif %}
-
         {% elif active_page == "summary" %}
             Visualisation of Summary of Responses on a Map
         {% elif active_page == "sourcerer-dashboard" %}

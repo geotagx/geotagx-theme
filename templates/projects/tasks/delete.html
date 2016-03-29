@@ -1,7 +1,5 @@
-{% extends "/base.html" %}
-{% set active_page = "projects" %}
-{% set active_link  = "settings" %}
-{% import "projects/_helpers.html" as helper %}
+{% extends "projects/base.html" %}
+{% set active_link = "settings" %}
 
 {% block content %}
 {{ helper.render_project_sublabel("Tasks > Delete") }}
