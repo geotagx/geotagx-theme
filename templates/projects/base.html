@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% set active_page = "projects" %}
+
+{% if project %}
 {% set active_page_title = project.name %}
 {% set active_page_subtitle = project.description %}
 {% set active_project = project.short_name %}
+{% endif %}
+
 {% import "projects/_helpers.html" as helper %}
 
 {% block stylesheet %}
@@ -21,8 +25,7 @@
 {{super()}}
 {% if project and project.short_name != "geotagxblog" %}
 	{% call bootstrap.render_container(id="project-synopsis") %}
-		{% from "projects/_helpers.html" import render_project_profile %}
-		{{render_project_profile(project, upload_method, owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user)}}
+		{{helper.render_project_profile(project, upload_method, owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user)}}
 	{% endcall %}
 {% endif %}
 {% endblock %}
