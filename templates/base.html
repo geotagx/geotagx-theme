@@ -75,7 +75,7 @@
                 {% endblock %}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
-                {% include "_flash_messages.html" %}
+                {% call row() %}{% include "_flash_messages.html" %}{% endcall %}
                 {%- block content %}{% endblock -%}
             </main>
             <footer id="page-footer">
