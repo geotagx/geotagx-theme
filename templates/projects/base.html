@@ -29,3 +29,8 @@
 	{% endcall %}
 {% endif %}
 {% endblock %}
+
+
+{% block content %}
+{% call row() %}{% block main_content %}{% endblock %}{% endcall %}
+{% endblock %}
