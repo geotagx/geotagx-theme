@@ -1,37 +1,47 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
-{% set active_link = "profile" %}
-{% import "account/_helpers.html" as helper %}
-{% import "projects/_helpers.html" as app_helper %}
-{% import "_helpers.html" as geotagx_helper %}
+{% set active_page = "view_member_profile" %}
+{% set active_page_title = _("View Member Profile") %}
+{% set page_breadcrumbs = [(_("Community"), url_for("account.index"))] %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
+{% from "account/_helpers.html" import render_user_public_profile %}
+{% from "projects/_helpers.html" import broken_image %}
+
+{% block stylesheet %}
+<style>
+#user-profile {
+  color:#FFF;
+  background:#34495E;
+  padding-top:1.5em;
+  padding-bottom:1.5em;
+}
+</style>
+{% endblock %}
+
+
+{% block header %}
+{{super()}}
+{% call bootstrap.render_container(id="user-profile") %}
+{{render_user_public_profile(user, upload_method, "settings")}}
+{% endcall %}
+{% endblock %}
+
 
 {% block content %}
-<!-- NOTE :: A part of the profile page is rendered in the breadcrumb -->
-<!-- TO-DO : Fix this  -->
-
-<div class="row-fluid">
-    <div class="span9">
-        <hr>
-        <h2><b style="color:#34495e">{{ user.fullname}}'s</b>{{_(' Contributions') }}</h2>
-        <br/><br/>
-        <div class="container">
-            <div class="row  mar-b-30">
-                <div id="portfoliolist-three">
-                    <div class="col-md-12">
-                    {% for app in projects %}
-
-                    {{ render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method) }}
-
-                    {% endfor %}
-                    </div>
-                </div>
+{% call row() %}
+<h2><strong style="color:#34495e">{{user.fullname}}</strong>&nbsp;{{_('has contributed to the following projects') }}</h2>
+<div style="margin-top:2em">
+    <div class="row  mar-b-30">
+        <div id="portfoliolist-three">
+            <div class="col-md-12">
+            {% for app in projects %}
+            {{render_geotagx_project_portfolio_element_with_stats_front_page_tile(app, category, isAdmin, upload_method)}}
+            {% endfor %}
             </div>
         </div>
-
-
-    </div><!-- end span9 -->
+    </div>
 </div>
-
-{{ app_helper.broken_image() }}
+{% endcall %}
 {% endblock %}
+
+
+{% block script %}{{broken_image()}}{% endblock %}
