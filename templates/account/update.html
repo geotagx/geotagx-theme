@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "profile_settings" %}
 {% set active_page_title = _("Profile Settings") %}
-{% set active_page_subtitle = _("Edit your profile.") %}
+{% set active_page_subtitle = _("Manage your profile.") %}
 {% set page_breadcrumbs = [(_("Profile"), url_for("account.profile", name=current_user.name))] %}
 {% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
@@ -256,6 +256,7 @@
                 <div id="api_key" class="tab-pane fade">
 
                     <div class="col-md-4 col-md-offset-4">
+                        <p class="text-center"><span style="color:#A00;background:#EEE;padding:0.5em;font-weight:700">{{current_user.api_key}}</span></p>
                         <form method="post" class="form-horizontal" action="{{ url_for('account.reset_api_key', name=current_user.name)}}">
                                 <fieldset>
                                     <center>
