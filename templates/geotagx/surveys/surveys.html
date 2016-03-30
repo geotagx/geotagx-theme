@@ -3,8 +3,10 @@
 {% set active_page_title = _("Participation Survey") %}
 
 {% block content %}
+{% if current_user.is_authenticated() %}
 {% call row() %}
-{% if not current_user.is_anonymous() and survey_type == "INITIAL" %}
+
+{% if survey_type == "INITIAL" %}
 <p><span style="font-size:16px;"><strong><span style="font-family: Tahoma, sans-serif; background-color: rgb(255, 255, 255);">Are you happy to take part in the <a href="http://citizencyberlab.eu/">Citizen Cyberlab</a> Research project ?<br/><br/>
 <center><i class="fa fa-book fa-5x"></i></center><br/>
 </span></strong></span></p><div><p>Being part of the research will <i class="ml-5"> not take up much time</i>. We will ask you to fill in a couple of online surveys, <strong style="color:#444e67;font-size:20px;">one now</strong> and <strong style="color:#444e67;font-size:20px;">one later on</strong>, after you have had some experience working on GeoTag-X. You may also be contacted by the researchers for an interview and / or to complete future surveys as the research evolves. The below information tells you about our research and highlight issues concerning your participation.</p><p><strong style="color:#444e67;font-size:20px;">I. Purpose of the Investigation</strong></p><p>The aim of our research is to explore <strong style="color:#444e67;font-size:20px;"> volunteer&rsquo;s engagement </strong> and <strong style="color:#444e67;font-size:20px;"> motivation</strong> to participate in <strong style="color:#444e67;font-size:20px;">online citizen science projects</strong>. We are also interested in issues such as learning and creativity. By conducting surveys and interviews, we are hoping to gain a greater understanding of why people take part in the various aspects of these projects and what they get out of the experience.</p><p><strong style="color:#444e67;font-size:20px;">II. Confidentiality and Voluntary Participation</strong></p><p>All information provided will be treated confidentially, as specified by the <strong style="color:#444e67;font-size:20px;">Data Protection Act, 1998</strong>. If published, <i class="ml-5">you will not be identifiable from the data</i>.</p><p>Participation is completely voluntary. You therefore have the right to withdraw from the survey and/or interview at any time, without fear of consequence.&nbsp; <i class="ml-5">If requested, your data can be destroyed.</i></p><p><strong style="color:#444e67;font-size:20px;">III. Questions</strong></p><p>Please feel free to ask any questions you might have regarding the surveys and/or interviews. The lead researcher for evaluating GeoTag-X is:</p><p>&middot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr Charlene Jennett, University College London. Email :&nbsp;<a href="mailto:charlene.jennett@ucl.ac.uk" target="_blank">charlene.jennett@ucl.ac.uk</a></p><p>&nbsp;</p></div><p>&nbsp;</p>
@@ -14,10 +16,6 @@
 
 <br/><br/>
 <p>For more information about the project, you can also visit the Citizen Cyberlab website : <a href="http://citizencyberlab.com/" target="_blank">http://citizencyberlab.com/</a></p></div><p>&nbsp;</p>
-
-<script type="text/javascript">
-window.geotagxSurveyType = "INITIAL";
-</script>
 
 <!-- Modal -->
 <div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
@@ -36,35 +34,12 @@ window.geotagxSurveyType = "INITIAL";
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<script type="text/javascript">
-$('#surveyModal').on('hidden.bs.modal', function(){
-  $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=RESPONSE_NOT_TAKEN&new_geotagx_survey_state=AGREE_TO_PARTICIPATE", function(data){
-    if(data.result == true){
-      document.location = "/";
-    }
-  });
-});
-
-$("#do_not_take_survey").click(function(){
-  $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=RESPONSE_NOT_TAKEN&new_geotagx_survey_state=DENY_TO_PARTICIPATE", function(data){
-    if(data.result == true){
-      document.location = "/";
-    }
-  });
-});
-</script>
 {% elif not current_user.is_anonymous() and survey_type == "FINAL" %}
-        <center><i class="fa fa-book fa-5x"></i></center><br/>
-    <p>
-      <span style="color: rgb(31, 73, 125); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);"><strong><span style="font-size:18px;">Thanks</span></strong>, you have completed more than <strong>{{GEOTAGX_FINAL_SURVEY_TASK_REQUIREMENTS}} tasks</strong> already! This short survey is the second part of the <strong>Citizen Cyberlab</strong> survey you completed at registration. Thanks again for helping out our research, if you need a reminder what <a href="http://citizencyberlab.eu/"><strong>Citizen Cyberlab</strong></a> is here is their website (</span><a href="http://citizencyberlab.eu/" style="color: rgb(17, 85, 204); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);" target="_blank">citizencyberlab.eu</a><span style="color: rgb(31, 73, 125); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);">).</span></p>
-
+<center><i class="fa fa-book fa-5x"></i></center><br/>
+<p><span style="color: rgb(31, 73, 125); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);"><strong><span style="font-size:18px;">Thanks</span></strong>, you have completed more than <strong>{{GEOTAGX_FINAL_SURVEY_TASK_REQUIREMENTS}} tasks</strong> already! This short survey is the second part of the <strong>Citizen Cyberlab</strong> survey you completed at registration. Thanks again for helping out our research, if you need a reminder what <a href="http://citizencyberlab.eu/"><strong>Citizen Cyberlab</strong></a> is here is their website (</span><a href="http://citizencyberlab.eu/" style="color: rgb(17, 85, 204); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);" target="_blank">citizencyberlab.eu</a><span style="color: rgb(31, 73, 125); font-family: Calibri, sans-serif; font-size: 14.5454540252686px; background-color: rgb(255, 255, 255);">).</span></p>
 <a id="take_survey" class="btn btn-success" type="button" data-toggle="modal" data-target="#surveyModal">Take Final Survey</a>
 <a id="do_not_take_survey" class="btn btn-danger" type="button" >Opt Out</a>
 
-<script type="text/javascript">
-window.geotagxSurveyType = "FINAL";
-</script>
 
 <!-- Modal -->
 <div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
@@ -80,38 +55,47 @@ window.geotagxSurveyType = "FINAL";
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-$('#surveyModal').on('hidden.bs.modal', function(){
-  window.location.href="/";
-});
-
-$('#surveyModal').on('hidden.bs.modal', function(){
-  $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=AGREE_TO_PARTICIPATE&new_geotagx_survey_state=ALL_SURVEYS_COMPLETE", function(data){
-    if(data.result == true){
-      document.location = "/";
-    }
-  });
-});
-
-$("#do_not_take_survey").click(function(){
-  $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=AGREE_TO_PARTICIPATE&new_geotagx_survey_state=DENY_TO_PARTICIPATE_IN_FINAL_SURVEY", function(data){
-    if(data.result == true){
-      document.location = "/";
-    }
-  });
-});
-</script>
-
-
-</script>
-
-
-{% elif not current_user.is_anonymous() and survey_type == "NONE" %}
-  <script type="text/javascript">
-    document.location = "/";
-  </script>
 {% endif %}
 
 {% endcall %}
+{% endif %}
+{% endblock %}
+
+
+{% block script %}
+{% if current_user.is_authenticated() %}
+<script>
+{% if survey_type != "NONE" %}window.geotagxSurveyType = "{{survey_type}}";{% endif %}
+{% if survey_type == "INITIAL" %}
+  $('#surveyModal').on('hidden.bs.modal', function(){
+    $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=RESPONSE_NOT_TAKEN&new_geotagx_survey_state=AGREE_TO_PARTICIPATE", function(data){
+      if (data.result == true)
+        document.location = "/";
+    });
+  });
+  $("#do_not_take_survey").click(function(){
+    $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=RESPONSE_NOT_TAKEN&new_geotagx_survey_state=DENY_TO_PARTICIPATE", function(data){
+      if(data.result == true)
+        document.location = "/";
+    });
+  });
+{% elif survey_type == "FINAL" %}
+  $("#surveyModal").on("hidden.bs.modal", function(){
+    window.location.href = "/";
+    $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=AGREE_TO_PARTICIPATE&new_geotagx_survey_state=ALL_SURVEYS_COMPLETE", function(data){
+      if(data.result == true)
+        document.location = "/";
+    });
+  });
+  $("#do_not_take_survey").click(function(){
+    $.get("/geotagx/update_geotagx_survey_status?previous_geotagx_survey_state=AGREE_TO_PARTICIPATE&new_geotagx_survey_state=DENY_TO_PARTICIPATE_IN_FINAL_SURVEY", function(data){
+    if(data.result == true)
+      document.location = "/";
+    });
+  });
+{% elif survey_type == "NONE" %}
+  document.location = "/";
+{% endif %}
+</script>
+{% endif %}
 {% endblock %}
