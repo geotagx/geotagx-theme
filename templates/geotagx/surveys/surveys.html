@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% set active_page = "survey_check" %}
+{% set active_page_title = _("Participation Survey") %}
 
 {% block content %}
-
+{% call row() %}
 {% if not current_user.is_anonymous() and survey_type == "INITIAL" %}
 <p><span style="font-size:16px;"><strong><span style="font-family: Tahoma, sans-serif; background-color: rgb(255, 255, 255);">Are you happy to take part in the <a href="http://citizencyberlab.eu/">Citizen Cyberlab</a> Research project ?<br/><br/>
 <center><i class="fa fa-book fa-5x"></i></center><br/>
@@ -112,4 +113,5 @@ $("#do_not_take_survey").click(function(){
   </script>
 {% endif %}
 
+{% endcall %}
 {% endblock %}
