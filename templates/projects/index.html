@@ -1,6 +1,26 @@
 {% extends "projects/base.html" %}
 {% set active_page_title = active_cat.name %}
 
+{% block stylesheet %}
+<style>
+#category-header {
+  margin:0;
+  padding-top:0;
+  padding-bottom:1.5em;
+  background:#34495E;
+  color:#FFF;
+}
+</style>
+{% endblock %}
+
+{% block header %}
+{{super()}}
+{% call bootstrap.render_container(id="category-header") %}
+{{helper.render_category_profile(active_cat, pagination)}}
+{% endcall %}
+{% endblock %}
+
+
 {% block content %}
 {% call row() %}
   <div id="sorts" class="btn-group pull-right" style="margin-top:12px;">

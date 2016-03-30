@@ -1,54 +1,78 @@
 {% extends "base.html" %}
-{% set active_page = "delete_user"  %}
+{% set active_page = "delete_user" %}
+{% set active_page_title = _("Delete User") %}
+{% set page_breadcrumbs = [(_("Manage Users"), url_for("geotagx.users_page"))] %}
 {% import "account/_helpers.html" as helper %}
-{% from "projects/_helpers.html" import broken_image %}
-{% import "projects/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
 
+{% block stylesheet %}
+<style>
+#user-profile {
+  color:#FFF;
+  background:#34495E;
+  padding-top:2em;
+  padding-bottom:2em;
+}
+#user-profile .profile_param_link {
+  text-transform:uppercase;
+}
+</style>
+{% endblock %}
+
+
+{% block header %}
+{{super()}}
+{% call bootstrap.render_container(id="user-profile") %}
+{{helper.render_user_public_profile(target_user, upload_method, "settings")}}
+{% endcall %}
+{% endblock %}
+
+
 {% block content %}
-{{ broken_image() }}
-
-<div class="row-fluid">
-    <div>
-      <h3 class="text-center"> {{ _('Are you sure you want to delete this user ?') }} </h3><br/>
-        <div class="row">
-          <center>
-            <a class="btn btn-danger btn-lg" href="{{ url_for('geotagx.delete_user', name = target_user['name'], confirmed = 'confirmed')+'?user_page_redirect='+user_page_redirect }}"> {{ _('Yes, Delete this user permanently') }}</a>
-            <a class="btn btn-success btn-lg" href="{{ url_for('geotagx.users_page', page = user_page_redirect) }}"> {{ _('Cancel') }}</a>
-          </center>
-        </div>
-        <br/>
-        <h4> <strong> {{ _('Please note that if you decide to go ahead with this operation then :') }} </strong> <h4>
-        <dl class="dl-horizontal">
-          <dt> {{ _('Task Runs') }} </dt>
-          <dd> {{ _('All task runs associated with this user will be marked as anonymous, and the user_ip will be marked with the username instead to ensure unique user identity in analytics') }} </dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt> {{ _('Projects') }}</dt>
-          <dd> {{ _('Ownership of the projects owned by this user will be changed to your user account.') }} </dd>
-        </dl>
-
-
-        <hr>
-        <h2>{{ _('Projects Owned by this user') }}</h2>
-        <br/><br/>
-        {% if owned_projects|length > 0 %}
-        <div class="container">
-            <div class="row  mar-b-30">
-                <div id="portfoliolist-three">
-                    <div class="col-md-12">
-                    {% for app in owned_projects %}
-
-                        {{ render_geotagx_project_portfolio_element_with_stats(category="", image_link=app_helper.render_project_image_url(app, upload_method),  info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True) }}
-
-                    {% endfor %}
-                    </div>
+{% call row() %}
+<div>
+  <h3 class="text-center"> {{ _('Are you sure you want to delete this user ?') }} </h3><br/>
+    <div class="row">
+      <center>
+        <a class="btn btn-danger btn-lg" href="{{ url_for('geotagx.delete_user', name = target_user['name'], confirmed = 'confirmed')+'?user_page_redirect='+user_page_redirect }}"> {{ _('Yes, Delete this user permanently') }}</a>
+        <a class="btn btn-success btn-lg" href="{{ url_for('geotagx.users_page', page = user_page_redirect) }}"> {{ _('Cancel') }}</a>
+      </center>
+    </div>
+    <br/>
+    <h4> <strong> {{ _('Please note that if you decide to go ahead with this operation then :') }} </strong> <h4>
+    <dl class="dl-horizontal">
+      <dt> {{ _('Task Runs') }} </dt>
+      <dd> {{ _('All task runs associated with this user will be marked as anonymous, and the user_ip will be marked with the username instead to ensure unique user identity in analytics') }} </dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt> {{ _('Projects') }}</dt>
+      <dd> {{ _('Ownership of the projects owned by this user will be changed to your user account.') }} </dd>
+    </dl>
+    <hr>
+    <h2>{{ _('Projects Owned by this user') }}</h2>
+    <br/><br/>
+    {% if owned_projects|length > 0 %}
+    <div class="container">
+        <div class="row  mar-b-30">
+            <div id="portfoliolist-three">
+                <div class="col-md-12">
+                {% for app in owned_projects %}
+                    {{render_geotagx_project_portfolio_element_with_stats(category="", image_link=project_helper.render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=project.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=project.short_name), percentage_complete=project.overall_progress, label=project.name, app=app, isAdmin=True) }}
+                {% endfor %}
                 </div>
             </div>
         </div>
-        {% else %}
-          <h4> This user doesnot currently own any projects </h4>
-        {% endif %}
     </div>
+    {% else %}
+      <h4>This user does not currently own any projects.</h4>
+    {% endif %}
 </div>
+{% endcall %}
+{% endblock %}
+
+
+{% block script %}
+{% from "projects/_helpers.html" import broken_image %}
+{{broken_image()}}
 {% endblock %}

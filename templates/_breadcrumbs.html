@@ -10,16 +10,6 @@
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(user, upload_method, "settings") }}
 
-        {% elif request['path'][:18]=="/project/category/" %}
-
-          {% import "projects/_helpers.html" as project_helper %}
-          {{ project_helper.render_category_profile(active_cat, pagination) }}
-
-        {% elif request['path'][:21] == "/geotagx/users/delete" %}
-
-          {% import "account/_helpers.html" as account_helper %}
-          {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }}
-
         {% endif %}
         </div>
       </div>
