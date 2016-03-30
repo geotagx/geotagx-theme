@@ -1,11 +1,12 @@
 {% extends "/base.html" %}
-{% set active_page = "admin" %}
+{% set active_page = "administrator_dashboard" %}
+{% set active_page_title = _("Administrator Dashboard") %}
+{% set active_page_subtitle = _("Manage various components of the platform.") %}
 {% set active_link = "admin" %}
 {% import "account/_helpers.html" as helper %}
 
 {% block content %}
 {% call row() %}
-<div class="row"><div class="col-xs-12"><h1>{{_("Administrator Dashboard")}}</h1></div></div>
 <div class="row">
 	<div class="col-xs-12 col-md-6 well">
 		<h2><i class="icon-dashboard"></i> {{_('Sourcerer Dashboard')}}</h2>
