@@ -22,27 +22,7 @@
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }}
 
-        {% else %}
-          <div class="col-lg-4 col-sm-4">
-            <h1>
-              {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
-              {{ current_user.fullname+"'s #"+_("projects") }}
-              {% endif %}
-            </h1>
-          </div>
-          <div class="col-lg-8 col-sm-8">
-            <ol class="breadcrumb pull-right">
-              {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}
-                <li><a href="/account/{{current_user.name}}/">My Account</a></li>
-                <li class="active">{{ _('Projects') }}</li>
-              {% endif %}
-            </ol>
-          </div>
-
         {% endif %}
-
         </div>
-
-
       </div>
 </div>

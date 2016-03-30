@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
+{% set active_page = "manage_your_projects" %}
+{% set active_page_title = _("Manage Your Projects") %}
+{% set active_page_subtitle = _("Create, update or delete your projects.") %}
+{% set page_breadcrumbs = [(_("Profile"), url_for("account.profile", name=current_user.name))] %}
 {% set active_link = "applications" %}
 {% import "account/_helpers.html" as helper %}
 {% from "projects/_helpers.html" import broken_image %}
