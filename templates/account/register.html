@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% set active_page_title = _("Create an Account") %}
+{% set active_page_subtitle = _("Not a member yet? Sign up for free.") %}
+{% set page_breadcrumbs = [(_("Sign In"), url_for("account.signin"))] %}
 
 {% block content %}
-
-
-
 <div class="signin-container">
     <div class="row vertical-offset-100">
       <div class="col-md-4 col-md-offset-4">
