@@ -72,7 +72,6 @@
                 {% block header %}
                 {% from "helpers/_page.html" import render_header %}
                 {{render_header(page_breadcrumbs, title=active_page_title, subtitle=active_page_subtitle)}}
-                {% include "_breadcrumbs.html" %}
                 {% endblock %}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
