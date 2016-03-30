@@ -22,10 +22,7 @@
           {% import "account/_helpers.html" as account_helper %}
           {{ account_helper.render_user_public_profile(target_user, upload_method, "settings") }}
 
-        {% elif active_page == "summary" %}
-            Visualisation of Summary of Responses on a Map
         {% else %}
-
           <div class="col-lg-4 col-sm-4">
             <h1>
               {% if (not current_user.is_anonymous()) and  request['path'] == "/account/"+current_user.name+"/applications" %}

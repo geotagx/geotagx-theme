@@ -1,30 +1,51 @@
 {% extends "base.html" %}
-{% set active_page = "summary"  %}
+{% set active_page = "summary" %}
+{% set active_page_title = "Data Visualisation" %}
+{% set active_page_subtitle = "A visualisation of the summarized response data." %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+<style>
+#map { height:780px; }
+.modal .modal-dialog { width: 80%; }
+</style>
+{% endblock %}
 
 
 {% block content %}
+{% call row() %}
+<div id="map"></div>
+<div id="myModal" class="modal large fade" role="dialog">
+<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Summary</h4>
+			</div>
+			<div class="modal-body">
+				<div id="summary-modal">
+					<center><img class='summary-image' style="max-width:60%"></img><br/></center>
+					<center><div class="image-source"></div></center>
+					<center><div class='questions'>QUESTIONS</div></center>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endcall %}
+{% endblock %}
 
- </div>
- <div class="container-fluid">
 
- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
- <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
- <script src="http://code.highcharts.com/highcharts.js"></script>
- <script src="http://code.highcharts.com/modules/exporting.js"></script>
-
- <style type="text/css">
- #map { height:780px; }
-
- .modal .modal-dialog { width: 80%; }
-
- </style>
-
- <div id="map"></div>
-
-<script type="text/javascript">
-
+{% block script %}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script>
 var CATEGORY_NAME = "{{category_name}}";
 
 var geoJSON_URL = "/geotagx/export/category/"+CATEGORY_NAME+"/GeoJSON";
@@ -208,37 +229,4 @@ function init(){
 	}
 }
 </script>
-
-
-<!-- Modal -->
-<div id="myModal" class="modal large fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Summary</h4>
-      </div>
-      <div class="modal-body">
-		<div id="summary-modal">
-			<center>
-				<img class='summary-image' style="max-width:60%"></img><br/>
-			</center>
-			<center>
-				<div class="image-source"></div>
-			</center>
-			<center>
-				<div class='questions'>QUESTIONS</div>
-			</center>
-		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 {% endblock %}
