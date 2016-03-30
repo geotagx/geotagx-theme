@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "delete_user" %}
 {% set active_page_title = _("Delete User") %}
-{% set page_breadcrumbs = [(_("Manage Users"), url_for("geotagx.users_page"))] %}
+{% set page_breadcrumbs = [(_("Administrator Dashboard"), url_for("admin.index")), (_("Manage Users"), url_for("geotagx.users_page"))] %}
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
