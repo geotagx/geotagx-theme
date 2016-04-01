@@ -24,13 +24,4 @@
 	{% endif %}
 </div>
 {{ project.info.tutorial | safe}}
-
-<div id='PYBOSSA_USER_LOCALE' hidden>
-{% if current_user.is_anonymous() %}
-en
-{% else %}
-{{ current_user.locale }}
-{% endif %}
-</div>
-
 {% endblock %}
