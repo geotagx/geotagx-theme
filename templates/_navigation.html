@@ -77,7 +77,7 @@ body {
 						</ul>
 					</li>
 					{% else %}
-					<li><a role="button" id="sign-in-button" class="btn btn-primary navbar-btn" href="{{url_for('account.signin')}}"><strong>{{_("Sign In")}}</strong></a></li>
+					<li><a role="button" id="sign-in-button" class="btn btn-primary navbar-btn" href="{{url_for('account.signin')}}{% if active_page != 'sign_in' %}?next={{request.path}}{% endif %}"><strong>{{_("Sign In")}}</strong></a></li>
 					{% endif %}
 				</ul>
 			</div>
