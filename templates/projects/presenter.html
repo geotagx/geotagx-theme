@@ -18,14 +18,6 @@
 {{ project.info.task_presenter|safe }}
 {% endif %}
 
-<div id='PYBOSSA_USER_LOCALE' hidden>
-{% if current_user.is_anonymous() %}
-en
-{% else %}
-{{ current_user.locale }}
-{% endif %}
-</div>
-
 {% if current_user.is_anonymous() %}
 <div class="modal fade" id="anonymousUserMessageModal" tabindex="-1" role="dialog" aria-labelledby="anonymousUserMessageModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
