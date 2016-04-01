@@ -20,16 +20,6 @@
 {% endblock %}
 
 
-{% block header %}
-{{super()}}
-{% if project and project.short_name != "geotagxblog" %}
-	{% call bootstrap.render_container(id="project-synopsis") %}
-		{{helper.render_project_profile(project, upload_method, owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user)}}
-	{% endcall %}
-{% endif %}
-{% endblock %}
-
-
 {% block content %}
 {% call row() %}{% block main_content %}{% endblock %}{% endcall %}
 {% endblock %}
