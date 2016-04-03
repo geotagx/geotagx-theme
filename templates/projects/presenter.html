@@ -32,23 +32,29 @@
 {% block main_content %}
 <div class="row">
 	<div class="col-xs-12">
-		<h2><a href="{{url_for('project.details', short_name=project.short_name)}}">{{ project.name }}</a>  <small style="text-transform:uppercase">{{ _('Contribute') }}</small></h2>
+		{% if project.completed or invite_new_volunteers %}
+		<h3>{{_("Thank you for showing an interest in this project.")}}</h3>
+		{% if project.completed %}
+		<p>{{_("All available tasks for this project have been successfully completed.")}}</p>
+		<a class="btn btn-lg btn-primary" href="{{url_for('project.export_to', short_name=project.short_name)}}">{{_("Export Results")}}</a>
+		{% elif invite_new_volunteers %}
+		<p>{{_("You have participated in all available tasks however we still need more volunteers to contribute.")}}<br>{{_("Help us spread the word by sharing the project!")}}</p>
+		{% endif %}
+		{% else %}
+		{% from "projects/helpers/_presenter.html" import render_presenter %}
+		{{render_presenter(project)}}
+		{% endif %}
 	</div>
 </div>
-{% if invite_new_volunteers %}
-<div class="row">
-	<div class="col-xs-12">
-		<p>{{ _("Sorry, you have contributed to all the tasks for this project but it still needs more volunteers. Please spread the word!") }}</p>
-		<center><span style="font-size:1.5em">{{helper.render_project_share_buttons(project)}}</span></center>
-	</div>
-</div>
-{% else %}
-{{ project.info.task_presenter|safe }}
-{% endif %}
 {% endblock %}
 
 
 {% block script %}
-<script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}"></script>
-<script>$("#remind-me-later").click(function(){ $(".show-on-anonymous").fadeOut(); });</script>
+{%- if not (project.completed or invite_new_volunteers) %}
+<script src="{{js}}/projects/presenter.min.js" defer></script>
+<script>
+$("#remind-me-later").click(function(){ $(".show-on-anonymous").fadeOut(); });
+var __configuration__ = {{project.info.task_presenter|safe}};
+</script>
+{% endif -%}
 {% endblock %}
