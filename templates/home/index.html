@@ -54,16 +54,20 @@
 
 
 {% block content %}
-{% call row() %}
-	{% call row(row_id="welcome-to-geotagx-wrapper", col_id="welcome-to-geotagx", col_class="col-xs-12") %}
+{% call bootstrap.row() %}
+<div id="welcome-to-geotagx-wrapper" class="row">
+	<div id="welcome-to-geotagx" class="col-xs-12">
 		<h1>{{_("Welcome to")}}&nbsp;<strong>{{brand}}</strong></h1>
 		<p class="text-center">GeoTag-X aims to <strong>help disaster relief efforts</strong> on the ground to plan a response by asking <strong>volunteers</strong> to <strong> analyse photos taken in disaster-affected areas</strong>.<br><br>There are <strong>no particular skills required</strong> to participate and it <strong>only takes a few minutes</strong> or less to analyse each photo.<br><br></p>
 		<a id="getting-started" class="btn btn-lg" href="/about#image_anchor">{{_("How to get started?")}}<i class="fa fa-plus-circle"></i></a>
 		<hr>
-	{% endcall %}
-	{% call row(row_id="front-page-grid-wrapper", col_class="col-xs-12") %}
+	</div>
+</div>
+<div id="front-page-grid-wrapper" class="row">
+	<div class="col-xs-12">
 		{% include "_front_project_grid.html" %}
-	{% endcall %}
+	</div>
+</div>
 {% endcall %}
 {% endblock %}
 

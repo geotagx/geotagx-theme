@@ -3,5 +3,5 @@
 {% set active_page = "feedback" %}
 {% set active_page_title = _("Feedback") %}
 
-{% block content %}{% call row() %}<div id="disqus_thread"></div>{% endcall %}{% endblock %}
+{% block content %}{% call bootstrap.row() %}<div id="disqus_thread"></div>{% endcall %}{% endblock %}
 {% block script %}{{render_disqus_script("feedback")}}{% endblock %}

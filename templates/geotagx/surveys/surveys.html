@@ -4,7 +4,7 @@
 
 {% block content %}
 {% if current_user.is_authenticated() %}
-{% call row() %}
+{% call bootstrap.row() %}
 
 {% if survey_type == "INITIAL" %}
 <p><span style="font-size:16px;"><strong><span style="font-family: Tahoma, sans-serif; background-color: rgb(255, 255, 255);">Are you happy to take part in the <a href="http://citizencyberlab.eu/">Citizen Cyberlab</a> Research project ?<br/><br/>

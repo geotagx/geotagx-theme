@@ -30,23 +30,25 @@
 
 
 {% block content %}
-{% call row() %}
-	{% call row(col_class="col-xs-12") %}<h1>{{_("Your Contributions")}}</h1>{% endcall %}
-	{% call row(col_class="col-xs-12") %}
-	<div class="row mar-b-30">
-		<div id="portfoliolist-three">
-			<div class="col-xs-12">
-				{% for app in projects_contrib %}
-				{% if app.owner_id == current_user.id %}
-					{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True)}}
-				{% else %}
-					{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app)}}
-				{% endif %}
-				{% endfor %}
+{% call bootstrap.row() %}
+	<div class="row"><div class="col-xs-12"><h1>{{_("Your Contributions")}}</h1></div></div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row mar-b-30">
+				<div id="portfoliolist-three">
+					<div class="col-xs-12">
+						{% for app in projects_contrib %}
+						{% if app.owner_id == current_user.id %}
+							{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True)}}
+						{% else %}
+							{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app)}}
+						{% endif %}
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	{% endcall %}
 {% endcall %}
 {% endblock %}
 

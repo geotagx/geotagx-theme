@@ -1,7 +1,7 @@
 {#
  # Renders a column inside a row inside a fluid container.
  #}
-{% macro render_container(id=None, fluid=True, row_id=None, row_classes=None, col_id=None, col_classes="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2") %}
+{% macro render_container(id=None, fluid=True, row_id=None, row_classes=None, col_id=None, col_classes="col-xs-12 col-md-10 col-md-offset-1") %}
 <div {% if id %}id="{{id}}" {% endif %}class="container{% if fluid %}-fluid{% endif %}">
 	<div{% if row_id %} id="{{row_id}}"{% endif %} class="row{% if row_classes %} {{row_classes}}{% endif %}">
 		<div{% if col_id %} id="{{col_id}}"{% endif %} class="{{col_classes}}">
@@ -10,3 +10,15 @@
 	</div>
 </div>
 {% endmacro %}
+
+{#
+ # Renders a responsive div.
+ #}
+{% macro row(row_id=None, col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1") %}
+{# Renders content in a column that is nested in a row, as per the Bootstrap grid guidelines. #}
+<div {% if row_id %}id="{{row_id}}" {% endif %}class="row">
+    <div {% if col_id %}id="{{col_id}}" {% endif %}class="{{col_class}}">
+        {{caller()}}
+    </div>
+</div>
+{% endmacro -%}

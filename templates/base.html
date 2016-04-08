@@ -17,15 +17,6 @@
 {% set user_locale = "en" if current_user.is_anonymous() else current_user.locale -%}
 {% import "helpers/_bootstrap.html" as bootstrap %}
 
-{% macro row(row_id=None, row_class="row", col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2") %}
-{# Renders content in a column that is nested in a row, as per the Bootstrap grid guidelines. #}
-<div {% if row_id %}id="{{row_id}}" {% endif %}class="{{row_class}}">
-    <div {% if col_id %}id="{{col_id}}" {% endif %}class="{{col_class}}">
-        {{caller()}}
-    </div>
-</div>
-{% endmacro -%}
-
 <!DOCTYPE html>
 <html lang="{{user_locale}}">
     <head>
@@ -74,7 +65,7 @@
                 {% endblock %}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
-                {% call row() %}{% include "_flash_messages.html" %}{% endcall %}
+                {% call bootstrap.row() %}{% include "_flash_messages.html" %}{% endcall %}
                 {%- block content %}{% endblock -%}
             </main>
             <footer id="page-footer">
