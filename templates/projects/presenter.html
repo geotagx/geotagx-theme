@@ -5,6 +5,12 @@
 
 {% block stylesheet %}
 {{super()}}
+<link rel="stylesheet" href="{{css}}/projects/presenter-base.css">
+<link rel="stylesheet" href="{{css}}/projects/presenter-questionnaire.css">
+<link rel="stylesheet" href="{{css}}/projects/presenter-subject.css">
+<link rel="stylesheet" href="{{css}}/projects/presenter-subject-image.css">
+<link rel="stylesheet" href="{{css}}/projects/presenter-subject-pdf.css">
+{# Once the stylesheets above are a bit more stable, they will be concactenated and minified to form a single presenter.min.css. #}
 <link rel="stylesheet" href="{{css}}/projects/presenter.min.css">
 {% endblock %}
 
@@ -17,11 +23,13 @@
 	<div class="col-xs-12">
 		<div id="share-project">{{helper.render_project_share_buttons(project)}}</div>
 		{% if current_user.is_anonymous() %}
-		<p id="anonymous-notification-message" class="show-on-anonymous">{{_("You are contributing to this project anonymously and will not get any credit for your work.")}}</p>
-		<ul class="list-inline show-on-anonymous">
-			<li><a id="anonymous-sign-in" class="btn btn-lg btn-primary" href="{{url_for('account.signin')}}?next={{request.path}}">{{_("Sign In")}}</a></li>
-			<li><button role="button" id="remind-me-later" class="btn btn-lg btn-default">{{_("Remind Me Later")}}</button></li>
-		</ul>
+		<div id="anonymous-notification">
+			<p id="anonymous-notification-message">{{_("You are contributing to this project anonymously and will not get any credit for your work.")}}</p>
+			<ul class="list-inline">
+				<li><a id="anonymous-sign-in" class="btn btn-lg btn-primary" href="{{url_for('account.signin')}}?next={{request.path}}">{{_("Sign In")}}</a></li>
+				<li><button role="button" id="remind-me-later" class="btn btn-lg btn-default" disabled>{{_("Remind Me Later")}}</button></li>
+			</ul>
+		</div>
 		{% endif %}
 	</div>
 </div>
@@ -54,10 +62,14 @@
 
 {% block script %}
 {%- if not (project.completed or invite_new_volunteers) %}
+<script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" defer></script>
+<script src="{{js}}/projects/presenter-base.js" defer></script>
+<script src="{{js}}/projects/presenter-questionnaire.js" defer></script>
+<script src="{{js}}/projects/presenter-subject.js" defer></script>
+<script src="{{js}}/projects/presenter-subject-image.js" defer></script>
+<script src="{{js}}/projects/presenter-subject-pdf.js" defer></script>
+{# Once the scripts above are a bit more stable, they will be concactenated and minified to form a single presenter.min.js. #}
 <script src="{{js}}/projects/presenter.min.js" defer></script>
-<script>
-$("#remind-me-later").click(function(){ $(".show-on-anonymous").fadeOut(); });
-var __configuration__ = {{project.info.task_presenter|safe}};
-</script>
+<script>var __configuration__ = {{project.info.task_presenter|safe}};</script>
 {% endif -%}
 {% endblock %}
