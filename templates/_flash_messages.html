@@ -1,21 +1,20 @@
-    <div class="alert-messages">
-
-    {% with messages = get_flashed_messages(with_categories=True) %}
-    {%if messages %}
-      {% for category, message in messages %}
-        <!-- Add custom flash message corrections to avoid touching the pybossa core code-->
-        <!-- TO-DO :: Send pull requests to Pybossa-core for each of these-->
-        <!-- #33 : fix typo in password recovery message -->
-        {% if message.strip() == "We've send you an email with account recovery instructions!" %}
-          {% set message = "We've sent you an email with account recovery instructions!" %}
-        {% endif %}
-        <!-- Fix for depreciation of alert-error and replacing the category name with danger in all such cases -->
-        {% set bootstrap_category = dict(error="danger").get(category, category) %}
-      <div id="msg_{{bootstrap_category}}" class="alert alert-{{bootstrap_category}} fade in">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-          {{ message | safe}}
-        </div>
-      {% endfor %}
-    {% endif %}
-    {% endwith %}
-    </div>
+<div id="flash-messages">
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+	{% for category, message in messages %}
+		<!-- Add custom flash message corrections to avoid touching the pybossa core code-->
+		<!-- TO-DO :: Send pull requests to Pybossa-core for each of these-->
+		<!-- #33 : fix typo in password recovery message -->
+		{% if message.strip() == "We've send you an email with account recovery instructions!" %}
+			{% set message = "We've sent you an email with account recovery instructions!" %}
+		{% endif %}
+		<!-- Fix for depreciation of alert-error and replacing the category name with danger in all such cases -->
+		{% set bootstrap_category = dict(error="danger").get(category, category) %}
+		<div id="msg_{{bootstrap_category}}" class="alert alert-{{bootstrap_category}} fade in">
+			<a class="close" data-dismiss="alert" href="#">&times;</a>
+			{{message | safe}}
+		</div>
+	{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
