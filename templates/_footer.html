@@ -1,140 +1,67 @@
-    <!--footer start-->
-<div class="container-fluid supported partners-wrapper">
-    <div class="container partners">
-    <div class="row">
-      <div class="col-sm-2 text-center">
-        <a target="_blank" href="http://citizencyberlab.eu/"><img class="img-thumbnail" src="/static/geotagx-img/CCLogo.png"></a>
-      </div>
-      <div class="col-sm-2 text-center" style="padding:0px">
-        <a target="_blank" href="http://www.unitar.org/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unitar.png"></a>
-      </div>
-      <div class="col-sm-2 text-center">
-        <a target="_blank" href="http://cordis.europa.eu/fp7/home_en.html"><img class="img-thumbnail" src="/static/geotagx-img/FP7-logo.png"></a>
-      </div>
-      <div class="col-sm-2 text-center" style="padding:0px">
-        <a target="_blank" href="http://www.unitar.org/unosat/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unosat.png"></a>
-      </div>
-      <div class="col-sm-2 text-center">
-        <a target="_blank" href="http://www.citizencyberscience.net/"><img class="img-thumbnail" src="/static/geotagx-img/ccc.png"></a>
-      </div>
-      <div class="col-sm-2 text-center">
-        <a target="_blank" href="http://www.pybossa.com/"><img class="img-thumbnail" src="http://pybossa.com/assets/img/pybossa_ocs_logo_pos.png" style="height:auto!important;padding-top:25px"></a>
-      </div>
-    </div>
-  </div>
+<div class="container-fluid">
+	<div id="footer-information" class="row">
+		<div class="col-xs-12 col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="section col-xs-12 col-md-4">
+					<ul class="section">
+						<li class="header">{{_("About")}}</li>
+						<li>
+							<p>{{_("GeoTag-X is a research project that will assess if we can teach you, our volunteers, to recognise the important information in different forms of media and create relevant, structured datasets used to the benefit of disaster response teams.")}}</p>
+							<div style="margin-top:1em; background:#FFF; max-width:520px"><a class="twitter-timeline" href="https://twitter.com/GeotagX" data-widget-id="590993925449494528" data-screen-name="GeotagX" data-chrome="noheader transparent"></a></div>
+						</li>
+					</ul>
+				</div>
+				<div class="section col-xs-12 col-md-2">
+					<ul class="section">
+						<li class="header">{{_("Partners")}}</li>
+						<li><a target="_blank" href="http://citizencyberlab.eu/">Citizen Cyberlab</a></li>
+						<li><a target="_blank" href="http://cordis.europa.eu/fp7/home_en.html">European Commission</a></li>
+					</ul>
+					<ul class="section">
+						<li class="header">{{_("Help")}}</li>
+						<li><a target="_blank" href="/about#image_anchor">{{_("Getting Started")}}</a></li>
+						<li><a target="_blank" href="{{url_for('help.api')}}">{{_("Using the API")}}</a></li>
+						<li><a target="_blank" href="mailto:geotag-x@cern.ch">{{_("Contact Us")}}</a></li>
+					</ul>
+					<ul class="section">
+						<li class="header">{{_("Legal")}}</li>
+						<li><a target="_blank" href="{{url_for('help.tos')}}">{{_("Terms of Service")}}</a></li>
+						<li><a target="_blank" href="{{url_for('help.cookies_policy')}}">{{_("Cookie Policy")}}</a></li>
+						<li><a target="_blank" href="{{url_for('help.license')}}">{{_("Licenses")}}</a></li>
+					</ul>
+				</div>
+				<div class="section col-xs-12 col-md-2">
+					<ul class="section">
+						<li class="header">{{_("Resources")}}</li>
+						<li><a target="_blank" href="{{url_for('geotagx.blogs')}}">{{_("Blog")}}</a></li>
+						<li><a target="_blank" href="/newsletter/">{{_("Newsletter")}}</a></li>
+						<li><a target="_blank" href="https://github.com/geotagx">{{_("Open Source")}}</a></li>
+						<li><a target="_blank" href="/stats/">{{_("General Statistics")}}</a></li>
+					</ul>
+					<ul class="section">
+						<li class="header">{{_("Technologies")}}</li>
+						<li><a target="_blank" rel="nofollow" href="http://pybossa.com/">PyBossa</a></li>
+						<li><a target="_blank" rel="nofollow" href="http://ckan.org/">CKAN</a></li>
+						<li><a target="_blank" rel="nofollow" href="http://www.epicollect.net/">EpiCollect</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer-legal" class="row">
+		<div class="col-xs-12 col-md-10 col-md-offset-1">
+			<div class="row">
+				<div id="footer-copyright" class="col-xs-12 col-md-6">
+					<div class="text-center visible-xs-block visible-sm-block"><div>&copy; 2016 UNITAR/UNOSAT</div><div><a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div></div>
+					<div class="visible-md-block visible-lg-block">&copy; 2016 UNITAR/UNOSAT&nbsp;&middot;&nbsp;<a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div>
+				</div>
+				<div id="footer-social-media" class="text-right col-xs-12 col-md-6 visible-md-block visible-lg-block">
+					<ul class="list-inline">
+						<li><a target="_blank" href="https://twitter.com/GeoTagX"><i class="fa fa-2x fa-fw fa-twitter"></i></a></li>
+						<li><a target="_blank" href="https://github.com/geotagx"><i class="fa fa-2x fa-fw fa-github"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-2 col-sm-2" style="padding-right:0px; padding-left:0px">
-        <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
-          <h1>
-            Resources
-          </h1>
-          <ul class="page-footer-list">
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="http://docs.pybossa.com">Docs</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/api">API</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/terms-of-use">Terms of Use</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/cookies-policy">Privacy</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/stats/">Stats</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 col-sm-2" style="padding-right:0px">
-        <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
-          <h1>
-            Licenses
-          </h1>
-          <ul class="page-footer-list">
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/license">Overview</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/license#applications">Applications</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/license#data">Data</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="/help/license#content">Content</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 col-sm-2">
-        <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
-          <h1>
-            Technologies
-          </h1>
-          <ul class="page-footer-list">
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="http://ckan.org/">CKAN</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="http://www.epicollect.net/">EpiCollect</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right"></i>
-              <a target="_blank" href="http://pybossa.com/">Pybossa</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 col-sm-2 address wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s" style="margin-left:5%">
-        <h1>
-          contact info
-        </h1>
-        <address>
-          <p><i class="fa fa-twitter pr-10"></i>Twitter :  <a target="_blank" href="http://twitter.com/GeoTagX">@GeoTagX</a></p>
-          <p><i class="fa fa-github pr-10"></i>Github :  <a target="_blank" href="https://github.com/geotagx">GeoTagX</a></p>
-          <p><i class="fa fa-envelope pr-10"></i>Email :   <br/><a target="_blank" href="mailto:geotag-x@cern.ch">geotag-x@cern.ch</a></p>
-        </address>
-      </div>
-
-      <div class="col-lg-3 col-sm-3 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".3s">
-
-<a class="twitter-timeline" href="https://twitter.com/GeotagX" data-widget-id="590993925449494528">Tweets by @GeotagX</a>
-
-
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- footer end -->
-<!--small footer start -->
-<footer class="footer-small">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-6 pull-right">
-                <ul class="social-link-footer list-unstyled">
-                    <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".5s"><a target="_blank" href="http://twitter.com/GeoTagX"><i class="fa fa-twitter"></i></a></li>
-                    <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".7s"><a target="_blank" href="https://github.com/geotagx"><i class="fa fa-github"></i></a></li>
-                    <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".5s"><a target="_blank" href="mailto:geotag-x@cern.ch"><i class="fa fa-envelope"></i></a></li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</footer>
-<!--small footer end-->
