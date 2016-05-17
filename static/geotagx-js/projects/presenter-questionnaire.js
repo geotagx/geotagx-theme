@@ -202,7 +202,7 @@
                 // Binary questions are a bit special: if the user clicks "I Don't Know" or "Subject Not Clear"
                 // and neither of these answers has been explicitly specified as a branching condition, the
                 // answer is assumed to be "No".
-                if (question.type === "binary" && !(answer in branch) && answer !== "yes")
+                if (question.input.type === "binary" && !(answer in branch) && answer !== "yes")
                     answer = "no";
 
                 if (answer in branch){
@@ -306,7 +306,7 @@
     function showQuestion(question){
         if (question){
             var key = question.key;
-            var type = question.type;
+            var type = question.input.type;
             var index = index_[key];
 
             $("#question")
@@ -329,23 +329,21 @@
             percentageComplete_.innerHTML = percentage + "%";
             rewindButton_.disabled = progressStack_.length < 2;
 
-            // Build the input fields, if need be.
-            var parameters = question.parameters;
             switch (type){
                 case "dropdown-list":
-                    buildDropdownListField(key, parameters);
+                    buildDropdownListField(key, question.input);
                     break;
-                case "select":
-                    buildSelectField(key, parameters);
+                case "radio-list":
+                    buildRadioListField(key, question.input);
                     break;
                 case "checklist":
-                    buildChecklistField(key, parameters);
+                    buildChecklistField(key, question.input);
                     break;
                 case "illustrative-checklist":
-                    buildIllustrativeChecklistField(key, parameters);
+                    buildIllustrativeChecklistField(key, question.input);
                     break;
-                case "geolocation":
-                    buildGeolocationField(key, parameters);
+                case "geotagging":
+                    buildGeotaggingField(key, question.input);
                     break;
                 default:
                     break;
@@ -360,16 +358,16 @@
     /**
      * Builds the question's 'dropdown-list' input field.
      * @param key a question key.
-     * @param parameters a set of question parameters.
+     * @param input the input configuration used to build the field.
      */
-    function buildDropdownListField(key, parameters){
+    function buildDropdownListField(key, input){
         var element = document.getElementById("dropdown-list-field");
         var storageKey = "dropdown-list-field-for-" + key;
         var html = sessionStorage.getItem(storageKey); // Has the HTML been cached?
         if (html === null){
             html = '<option name="' + key + '" role="prompt" selected disabled></option>';
-            for (var i = 0; i < parameters.options.length; ++i){
-                var option = parameters.options[i];
+            for (var i = 0; i < input.options.length; ++i){
+                var option = input.options[i];
                 html += '<option name="' + key + '" value="' + option.value + '"></option>';
             }
             sessionStorage.setItem(storageKey, html);
@@ -377,35 +375,36 @@
         element.innerHTML = html;
     }
     /**
-     * Builds the question's 'select' input field.
+     * Builds the question's 'radio-list' input field.
      * @param key a question key.
-     * @param parameters a set of question parameters.
+     * @param input the input configuration used to build the field.
      */
-    function buildSelectField(key, parameters){
-        var storageKey = "select-field-for-" + key;
+    function buildRadioListField(key, input){
+        var storageKey = "radio-list-field-for-" + key;
         var html = sessionStorage.getItem(storageKey);
         if (html === null){
             html = "";
-            for (var i = 0; i < parameters.options.length; ++i){
-                var option = parameters.options[i];
+            for (var i = 0; i < input.options.length; ++i){
+                var option = input.options[i];
                 html += '<label><input type="radio" name="' + key + '" value="' + option.value + '"><span role="label-name"></span></label><br>';
             }
             sessionStorage.setItem(storageKey, html);
         }
-        document.querySelector("#select-field > section.custom-labels").innerHTML = html;
-        document.querySelector('#select-field > label[role="other-option"] > input[type="radio"]').setAttribute("name", key);
+        document.querySelector("#radio-list-field > section.custom-labels").innerHTML = html;
+        document.querySelector('#radio-list-field > label[role="other-option"] > input[type="radio"]').setAttribute("name", key);
     }
     /**
      * Builds the question's 'checklist' input field.
-     * @param question a question instance.
+     * @param key a question key.
+     * @param input the input configuration used to build the field.
      */
-    function buildChecklistField(key, parameters){
+    function buildChecklistField(key, input){
         var storageKey = "checklist-field-for-" + key;
         var html = sessionStorage.getItem(storageKey);
         if (html === null){
             html = "";
-            for (var i = 0; i < parameters.options.length; ++i){
-                var option = parameters.options[i];
+            for (var i = 0; i < input.options.length; ++i){
+                var option = input.options[i];
                 html += '<label><input type="checkbox" name="' + key + '" value="' + option.value + '"><span role="label-name"></span></label><br>';
             }
             sessionStorage.setItem(storageKey, html);
@@ -437,13 +436,13 @@
             document.getElementById("question-help-modal-content").innerHTML = help;
         }
 
-        switch (question.type){
+        switch (question.input.type){
             case "dropdown-list":
-                updateDropdownListField(question.key, question.parameters);
+                updateDropdownListField(question.key, question.input);
                 return;
-            case "select":
+            case "radio-list":
             case "checklist":
-                updateMultipleChoiceField(question.type, question.key, question.parameters);
+                updateMultipleChoiceField(question.input.type, question.key, question.input.options);
                 return;
             default:
                 return;
@@ -452,11 +451,11 @@
     /**
      * Updates a dropdown list field.
      * @param key a question key.
-     * @param parameters the input's parameters.
+     * @param input the input configuration used to build the field.
      */
-    function updateDropdownListField(key, parameters){
+    function updateDropdownListField(key, input){
         var prompt = "Please select an item"; // FIXME parameters.prompt
-        var options = parameters.options;
+        var options = input.options;
         var nodes = document.getElementById("dropdown-list-field").children;
 
         // Note: the first node is reserved for the prompt.
@@ -465,14 +464,14 @@
             nodes[i + 1].innerHTML = inCurrentLanguage(options[i].label);
     }
     /**
-     * Updates a multiple choice field, i.e. select (multiple choice, single response) or checklist (multiple choice, multiple response).
+     * Updates a multiple choice field, i.e. radio-list (multiple choice, single response) or checklist (multiple choice, multiple response).
      * @param type a question type.
      * @param key a question key.
-     * @param parameters the input's parameters.
+     * @param options the input's list of selectable options.
      */
-    function updateMultipleChoiceField(type, key, parameters){
-        for (var i = 0; i < parameters.options.length; ++i){
-            var option = parameters.options[i];
+    function updateMultipleChoiceField(type, key, options){
+        for (var i = 0; i < options.length; ++i){
+            var option = options[i];
             var selector = '#' + type + '-field > section.custom-labels > label > input[value="' + option.value + '"] + span[role="label-name"]';
             document.querySelector(selector).innerHTML = inCurrentLanguage(option.label);
         }
@@ -482,7 +481,7 @@
      */
     function onQuestionAnswered(event){
         var question = __component__.getCurrentQuestion();
-        var type = question.type;
+        var type = question.input.type;
         var answer = event.currentTarget.value;
         if (answer === "OK"){
             // In cases where the answer is "OK", the answer will depend on the question type
@@ -502,7 +501,7 @@
                     var selectedItem = document.querySelector("#dropdown-list-field > option:checked:not(:disabled)");
                     answer = selectedItem !== null ? $.trim(selectedItem.value) : "None";
                     break;
-                case "select":
+                case "radio-list":
                 case "checklist":
                     answer = "";
                     var inputs = document.querySelectorAll('#' + type + '-field input[name="' + question.key + '"]:checked');
