@@ -2,8 +2,8 @@
 {% set active_page = "tutorial" %}
 {% set active_page_title = _("Tutorial") %}
 {% set active_page_subtitle = _("Learn how to participate in this project.") %}
-{% set active_project_url = url_for("project.details", short_name=active_project) %}
-{% set active_project_newtask_url = url_for("project.presenter", short_name=active_project) %}
+{% set active_project_url = url_for("project.details", short_name=project.short_name) %}
+{% set active_project_newtask_url = url_for("project.presenter", short_name=project.short_name) %}
 
 {% block main_content %}
 <div class="row">
