@@ -182,17 +182,14 @@
     font-size:1.2em;
 }
 #question[data-type="dropdown-list"]          > #question-answer > #question-answer-fields  > .field-group.dropdown-list,
-#question[data-type="select"]                 > #question-answer > #question-answer-fields  > .field-group.select,
+#question[data-type="radio-list"]             > #question-answer > #question-answer-fields  > .field-group.radio-list,
 #question[data-type="checklist"]              > #question-answer > #question-answer-fields  > .field-group.checklist,
 #question[data-type="illustrative-checklist"] > #question-answer > #question-answer-fields  > .field-group.illustrative-checklist,
 #question[data-type="text"]                   > #question-answer > #question-answer-fields  > .field-group.text,
-#question[data-type="longtext"]               > #question-answer > #question-answer-fields  > .field-group.longtext,
 #question[data-type="number"]                 > #question-answer > #question-answer-fields  > .field-group.number,
 #question[data-type="datetime"]               > #question-answer > #question-answer-fields  > .field-group.datetime,
-#question[data-type="date"]                   > #question-answer > #question-answer-fields  > .field-group.date,
 #question[data-type="url"]                    > #question-answer > #question-answer-fields  > .field-group.url,
-#question[data-type="geolocation"]            > #question-answer > #question-answer-fields  > .field-group.geolocation,
-#question[data-type="custom"]                 > #question-answer > #question-answer-fields  > .field-group.custom {
+#question[data-type="geotagging"]             > #question-answer > #question-answer-fields  > .field-group.geotagging {
     display:block;
 }
 /**
@@ -293,10 +290,17 @@
     text-transform:uppercase;
     letter-spacing:1px;
     color:#FFF;
-    border-radius:0;
+    border-radius:1px;
 }
 #questionnaire .btn-answer:disabled {
     opacity:1;
+}
+#questionnaire .btn-nosubject {
+    display:none;
+    background:#EF0000;
+}
+#questionnaire #question[data-index="0"] .btn-nosubject {
+    display:inline;
 }
 #questionnaire .btn-yes,
 #questionnaire .btn-ok {
@@ -308,19 +312,20 @@
 }
 #questionnaire .btn-unclear {
     color:#666;
+    margin-top:0.3em;
 }
 #questionnaire .btn-unknown {
     background:#F6BB42;
 }
-#question[data-type]                          > #question-answer > #question-answer-buttons > .btn.show-on-binary,
-#question[data-type]                          > #question-answer > #question-answer-buttons > .btn.show-on-list,
-#question[data-type="binary"]                 > #question-answer > #question-answer-buttons > .btn.hide-on-binary {
+#question[data-type]                          > #question-answer > #question-answer-buttons .btn.show-on-binary,
+#question[data-type]                          > #question-answer > #question-answer-buttons .btn.show-on-list,
+#question[data-type="binary"]                 > #question-answer > #question-answer-buttons .btn.hide-on-binary {
     display:none !important;
 }
-#question[data-type="binary"]                 > #question-answer > #question-answer-buttons > .btn.show-on-binary,
-#question[data-type="dropdown-list"]          > #question-answer > #question-answer-buttons > .btn.show-on-list,
-#question[data-type="select"]                 > #question-answer > #question-answer-buttons > .btn.show-on-list,
-#question[data-type="checklist"]              > #question-answer > #question-answer-buttons > .btn.show-on-list,
-#question[data-type="illustrative-checklist"] > #question-answer > #question-answer-buttons > .btn.show-on-list {
+#question[data-type="binary"]                 > #question-answer > #question-answer-buttons .btn.show-on-binary,
+#question[data-type="dropdown-list"]          > #question-answer > #question-answer-buttons .btn.show-on-list,
+#question[data-type="radio-list"]             > #question-answer > #question-answer-buttons .btn.show-on-list,
+#question[data-type="checklist"]              > #question-answer > #question-answer-buttons .btn.show-on-list,
+#question[data-type="illustrative-checklist"] > #question-answer > #question-answer-buttons .btn.show-on-list {
     display:inline !important;
 }

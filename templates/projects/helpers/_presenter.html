@@ -2,4 +2,131 @@
  # Renders the specified project's task presenter.
  #}
 {% macro render_presenter(project) %}
+<div id="loading-project" class="row">
+	<div class="col-xs-12">
+		<center><i class="fa fa-cloud-download"></i></center>
+	</div>
+</div>
+<div id="project" class="row" data-short-name="{{project.short_name}}">
+	<div id="questionnaire" class="col-xs-12 col-lg-5" data-analysis-complete="false">
+		<header id="questionnaire-header" class="section-header">
+			<section id="questionnaire-progress">
+				<button id="questionnaire-rewind" disabled><i class="fa fa-lg fa-backward"></i></button>
+				<div id="questionnaire-percentage-complete"></div>
+				<div id="questionnaire-progress-bar"></div>
+			</section>
+			<section id="questionnaire-status">
+				<div id="analysis-status"><span id="analyses-remaining">&#8734;</span>&nbsp;&#124;&nbsp;<span id="analyses-completed">&#8734;</span></div>
+				<i id="questionnaire-status-busy"    class="status-icon fa fa-circle"></i>
+				<i id="questionnaire-status-success" class="status-icon fa fa-check-circle"></i>
+				<i id="questionnaire-status-error"   class="status-icon fa fa-exclamation-circle"></i>
+			</section>
+			<section id="questionnaire-submission-form">
+				<button id="questionnaire-submission-button" class="btn btn-block btn-lg btn-success">{{_("Submit Your Analysis")}}</button>
+				<center>
+					<div id="questionnaire-submission-message"></div>
+					<p id="questionnaire-submission-thanks">Thank you very much for contributing to this project! We appreciate any feedback you may have so find us on <a target="_blank" href="https://github.com/geotagx/pybossa/issues"><strong>GitHub</strong></a> or <a href="mailto:geotag-x@cern.ch?Subject=GeoTag-X feedback" target="_top"><strong>send us an email</strong></a>.</p>
+				</center>
+			</section>
+		</header>
+		<div id="question" data-type data-key data-index>
+			<section id="question-information">
+				<header><h1 id="question-title"></h1></header>
+				<div id="question-help-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="questionHelpModalLabel">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 id="question-help-modal-title" class="modal-title"></h4>
+							</div>
+							<div class="modal-body">
+								<div id="question-help-modal-content"></div>
+								<p style="margin-top:1em"><i class="fa fa-lg fa-fw fa-info-circle"></i>&nbsp;<button class="btn btn-answer btn-xs btn-unknown" disabled>{{_("I do not know")}}</button>&nbsp;&nbsp;{{_("is a very useful answer if you are not sure how to reply to this question.")}}</p>
+							</div>
+							<div class="modal-footer"><button type="button" class="btn btn-primary btn-xs text-uppercase" data-dismiss="modal"><strong>{{_("Close")}}</strong></button></div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p id="question-assistance">
+						<span id="question-hint"></span>
+						<span id="question-more-help">If you are having trouble answering this question, <a id="question-help-modal-toggle" role="button" data-toggle="modal" data-target="#question-help-modal"><strong>get some help</strong></a>.</span>
+					</p>
+				</div>
+			</section>
+			<section id="question-answer">
+				<div id="question-answer-fields">
+					<div class="field-group dropdown-list">
+						<section class="input"><select id="dropdown-list-field"></select></section>
+						<section class="reset"><button id="dropdown-list-field-reset" disabled><i class="fa fa-close"></i></button></section>
+					</div>
+					<div class="field-group radio-list">
+						<div id="radio-list-field" class="multiple-choice">
+							<section class="custom-labels"></section>
+							<label role="other-option"><input type="radio" value="Other"><span role="label-name" data-i18n="other">Other</span><input type="text"></label>
+						</div>
+					</div>
+					<div class="field-group checklist">
+						<div id="checklist-field" class="multiple-choice">
+							<section class="custom-labels"></section>
+							<label role="other-option"><input type="checkbox" value="Other"><span role="label-name" data-i18n="other">Other</span><input type="text"></label>
+						</div>
+					</div>
+					<div class="field-group illustrative-checklist"></div>
+					<div class="field-group text">
+						<input id="text-field" type="text">
+						<textarea id="longtext-field"></textarea>
+					</div>
+					<div class="field-group number"><input id="number-field" type="number"></div>
+					<div class="field-group datetime"></div>
+					<div class="field-group url"><input id="url-field" type="url"></div>
+					<div class="field-group geotagging"></div>
+				</div>
+				<div id="question-answer-buttons">
+					<button class="btn btn-answer btn-sm btn-yes  show-on-binary" value="Yes">{{_("Yes")}}</button>
+					<button class="btn btn-answer btn-sm btn-no   show-on-binary" value="No">{{_("No")}}</button>
+					<button class="btn btn-answer btn-sm btn-ok   hide-on-binary" value="OK">{{_("OK")}}</button>
+					<button class="btn btn-answer btn-sm btn-none show-on-list"   value="None">
+						<span class="visible-xs-block">{{_("None")}}</span>
+						<span class="hidden-xs">{{_("None of the above")}}</span>
+					</button>
+					<button class="btn btn-answer btn-sm btn-unknown" value="Unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}">
+						<span class="visible-xs-block">{{_("I do not know")}}</span>
+						<span class="visible-sm-block">{{_("I do not know how to answer")}}</span>
+						<span class="visible-md-block visible-lg-block">{{_("I do not know how to answer this question")}}</span>
+					</button>
+					<button class="btn btn-answer btn-sm btn-unclear btn-block" value="NotClear">{{_("Not enough information")}}</button>
+					<button class="btn btn-answer btn-sm btn-nosubject btn-block" value="NoSubject">{{_("I do not see a subject to analyse")}}</button>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div id="subject" class="col-xs-12 col-lg-7">
+{#
+		<div id="subject-ui" class="row">
+			<div class="col-xs-12">
+				<div id="image-zoom-factor" class="subject-ui">&times;<span class="value">1.00</span></div>
+				<div>X</div>
+			</div>
+		</div>
+#}
+{#
+		<button class="subject-ui btn btn-primary btn-sm"></button>
+		<a id="image-source" class="subject-ui btn btn-primary btn-sm"><i class="fa fa-external-link-square"></i></a>
+		<header id="subject-header" class="section-header" hidden>
+			<ul class="list-inline">
+				<li><button id="subject-zoom-in" class="subject-control show-on-image"><i class="fa fa-search-plus"></i></button></li>
+				<li><button id="subject-zoom-out" class="subject-control show-on-image"><i class="fa fa-search-minus"></i></button></li>
+				<li><button id="subject-rotate-left" class="subject-control show-on-image"><i class="fa fa-rotate-left"></i></button></li>
+				<li><button id="subject-rotate-right" class="subject-control show-on-image"><i class="fa fa-rotate-right"></i></button></li>
+			</ul>
+			<ul class="list-inline pull-right">
+				<li><a id="subject-source" class="subject-control" role="button" target="_blank"><i class="fa fa-external-link-square"></i></a></li>
+				<li><button id="subject-help" class="subject-control"><i class="fa fa-question-circle"></i></button></li>
+			</ul>
+		</header>
+#}
+		<div id="subject-body"></div>
+	</div>
+</div>
 {% endmacro %}
