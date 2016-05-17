@@ -26,7 +26,7 @@
     var __component__ = {};
 
     //TODO Document variables.
-    var language_ = "en-US";
+    var language_ = null;
     var index_ = null;
     var questions_ = null;
     var answers_ = null;
@@ -57,6 +57,7 @@
     __component__.initialize = function(language){
         var configuration = __configuration__.task_presenter;
 
+        language_ = isLanguageAvailable(language) ? language : getDefaultLanguage();
         index_ = configuration.questionnaire.index;
         questions_ = configuration.questionnaire.questions;
         initialQuestion_ = questions_[0];
@@ -286,6 +287,19 @@
         //TODO
     };
     /**
+     * Checks if translations for the specified language are available.
+     * @param languageCode the language code for the language to check.
+     */
+    function isLanguageAvailable(languageCode){
+        return __configuration__.task_presenter.language["available"].indexOf(languageCode) >= 0;
+    }
+    /**
+     * Returns the default language.
+     */
+    function getDefaultLanguage(){
+        return __configuration__.task_presenter.language["default"];
+    }
+    /**
      * Displays the specified question.
      * @param question the question to display.
      */
@@ -293,10 +307,12 @@
         if (question){
             var key = question.key;
             var type = question.type;
+            var index = index_[key];
 
             $("#question")
             .attr("data-key", key)
-            .attr("data-type", type); // Why .attr() instead of .data()? See https://stackoverflow.com/q/7458649
+            .attr("data-type", type)
+            .attr("data-index", index); // Why .attr() instead of .data()? See https://stackoverflow.com/q/7458649
 
             var hasHint = "hint" in question;
             var hasHelp = "help" in question;
@@ -304,11 +320,10 @@
             $("#question-hint").toggleClass("hide", !hasHint);
             $("#question-more-help").toggleClass("hide", !hasHelp);
 
-            var questionIndex = index_[key];
-            progressStack_.push(questionIndex);
+            progressStack_.push(index);
 
             // Update the progress bar (and rewind button state).
-            var percentage = Math.max(0, Math.min(100, ((questionIndex / questions_.length) * 100).toFixed(0)));
+            var percentage = Math.max(0, Math.min(100, ((index / questions_.length) * 100).toFixed(0)));
             var maxWidth = questionnaireProgress_.offsetWidth - rewindButton_.offsetWidth - 100;
             $progressBar_.css("width", Math.round((percentage * maxWidth) / 100) + "px");
             percentageComplete_.innerHTML = percentage + "%";

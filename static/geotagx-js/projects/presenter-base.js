@@ -45,7 +45,7 @@
      */
     geotagx.project.initialize = function(){
         //try {
-            var language = "en-US";//document.querySelector("html").getAttribute("lang");
+            var language = document.querySelector("html").getAttribute("lang");
 
             updateReminder(language);
             updateRepository();
