@@ -9,6 +9,7 @@ module.exports = function(grunt){
         },
         concat: {
             options: {
+                separator: ";",
                 stripBanners: true
             },
             // Concatenate uncompressed files.
