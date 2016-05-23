@@ -5,7 +5,7 @@
 {% set active_page = 'home#index' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{css}}/parallax-slider/parallax-slider.css">
+<link rel="stylesheet" href="{{css}}/home/slider.css">
 <style>
 #welcome-to-geotagx {
 	text-align:center;
@@ -100,7 +100,7 @@
 
 {% block script %}
 <script src="{{vendor}}/jquery-md5/jquery.md5.js"></script>
-<script src="{{js}}/parallax-slider/jquery.cslider.js"></script>
+<script src="{{vendor}}/jquery.cslider/src/jquery.cslider.js"></script>
 <script>
     $(function(){
 		$("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000});
