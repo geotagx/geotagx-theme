@@ -76,6 +76,7 @@
             </footer>
         </div>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="{{js}}/base.min.js"></script>
         <script src="{{js}}/geotagx-surveys.js"></script>
         <script src="{{js}}/mixitup.js"></script>
         <script src="{{js}}/geotagx.js"></script>
@@ -84,22 +85,6 @@
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-        {% if show_cookies_warning %}
-        <script>
-            "use strict";
-            $("#accept-cookies").click(function(){
-                var cookie_name = "{{brand}}_accept_cookies";
-                var exdays = 120;
-                var exdate = new Date();
-
-                exdate.setDate(exdate.getDate() + exdays);
-                var cookie_value = escape("Yes") + ((exdays==null) ? "" : "; expires=" + exdate.toUTCString());
-                document.cookie = cookie_name + "=" + cookie_value + ";path=/";
-
-                $("#cookie-consent").fadeOut(75);
-            });
-        </script>
-        {% endif %}
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         {%- block script %}{% endblock -%}
     </body>
