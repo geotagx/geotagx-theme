@@ -2,8 +2,6 @@
  * This script contains functionality common to all GeoTag-X pages.
  */
 $(document).ready(function(){
-	// checkBrowserCompatibility();
-
 	// Initialize Bootstrap's opt-in javascript components.
 	$("[data-toggle='tooltip']").tooltip();
 	$("[data-toggle='popover']").popover();
@@ -106,57 +104,3 @@ $(document).ready(function(){
 
 /** jquery smooth scroll included **/
 });
-/**
- * Checks for any missing HTML5 requirements.
- */
-function checkBrowserCompatibility(){
-	var missing = null; // An array of missing requirements.
-
-	// If the compatibility check has already been performed, any missing
-	// requirements are most likely cached.
-	if (window.sessionStorage)
-		missing = JSON.parse(sessionStorage.getItem("org.geotagx.browser.compatibility.missing"));
-
-	// No cached results so we have to determine all missing requirements.
-	if (missing === null){
-		missing = [];
-		var requirements = {
-			"history":"HTML5 History Management",
-			"localstorage":"HTML5 Web Storage (Local Storage)",
-			"sessionstorage":"HTML5 Web Storage (Session Storage)",
-		};
-		for (var key in requirements){
-			if (!Modernizr[key])
-				missing.push(requirements[key]);
-		}
-		// Cache the results, if possible.
-		if (window.sessionStorage)
-			sessionStorage.setItem("org.geotagx.browser.compatibility.missing", JSON.stringify(missing));
-	}
-
-	// If there are any missing requirements, then the browser is incompatible.
-	if (missing.length > 0){
-		// Explicitly list all missing requirements.
-		var $list = $("#incompatible-browser-missing-requirements");
-		for (var i = 0; i < missing.length; ++i){
-			$list.append("<li>" + missing[i] + "</li>");
-		}
-
-		var $message = $("#incompatible-browser-message");
-
-		// When the message is hidden, it is assumed that the user has read it
-		// and does not need to be constantly reminded; keep it hidden indefinitely, if possible.
-		if (window.localStorage){
-			var hideMessage = JSON.parse(localStorage.getItem("org.geotagx.browser.compatibility.hideMessage"));
-			if (hideMessage)
-				$message.removeClass("in");
-
-			$message.on("hidden.bs.collapse", function(){
-				localStorage.setItem("org.geotagx.browser.compatibility.hideMessage", true);
-			}).on("shown.bs.collapse", function(){
-				localStorage.setItem("org.geotagx.browser.compatibility.hideMessage", false);
-			});
-		}
-		$(".show-on-incompatible-browser").removeClass("show-on-incompatible-browser");
-	}
-}
