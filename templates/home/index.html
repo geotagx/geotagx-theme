@@ -103,25 +103,42 @@
 <script src="{{vendor}}/jquery.cslider/src/jquery.cslider.js"></script>
 <script src="{{vendor}}/mixitup/jquery.mixitup.min.js"></script>
 <script>
-    $(function(){
-		$("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000});
-		$(".portfolio_category_div").dblclick(function(){ document.location = "/project/category/"+$(this).attr("data-filter")+"/"; });
-		$(".portfolio-anchors div").click(function(){
-			if($(this).attr('data-filter').split(" ").length > 1){
-				$("#disqus_thread").css("display","none");
-			}else{
-				$("#disqus_thread").css("display","block");
-				// Use category hash instead of category short names, as they are pretty long in some cases
-				// and that causes disqus to not consider them as valid identifiers in those cases.
-				var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
-				DISQUS.reset({reload: true, config: function(){
-					this.page.identifier = category_hash;
-					this.page.url = "http://geotagx.org/#!"+category_hash;
-				}});
+$(function(){
+	(function(){
+		var projectGrid = {
+			init: function(){
+				$("#portfoliolist-three").mixitup({
+					targetSelector: ".portfolio",
+					filterSelector: ".filter",
+					effects: ["fade"],
+					easing: "snap",
+					onMixEnd: projectGrid.hoverEffect()
+				});
+			},
+			hoverEffect: function(){
+				$('#portfoliolist-three .portfolio .portfolio-hover').hover(function(){$(this).find('.image-caption').slideDown(250);}, function(){$(this).find('.image-caption').slideUp(250);});
 			}
-		})
-	});
-	window.client_remote_addr = "{{user_ip}}";
+		};
+		projectGrid.init();
+	})();
+	$("#featured-projects").cslider({autoplay: true, bgincrement: 0, interval: 6000});
+	$(".portfolio_category_div").dblclick(function(){ document.location = "/project/category/"+$(this).attr("data-filter")+"/"; });
+	$(".portfolio-anchors div").click(function(){
+		if($(this).attr('data-filter').split(" ").length > 1){
+			$("#disqus_thread").css("display","none");
+		}else{
+			$("#disqus_thread").css("display","block");
+			// Use category hash instead of category short names, as they are pretty long in some cases
+			// and that causes disqus to not consider them as valid identifiers in those cases.
+			var category_hash = $.md5($(this).attr('data-filter')).substring(0,8);
+			DISQUS.reset({reload: true, config: function(){
+				this.page.identifier = category_hash;
+				this.page.url = "http://geotagx.org/#!"+category_hash;
+			}});
+		}
+	})
+});
+window.client_remote_addr = "{{user_ip}}";
 </script>
 <script type="text/javascript">
 	var disqus_shortname = "geotagx";
