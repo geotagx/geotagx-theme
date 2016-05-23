@@ -19,6 +19,7 @@ module.exports = function(grunt){
                         "<%= dir.js %>/base/page.js",
                         "<%= dir.js %>/base/ccl-analytics.min.js",
                         "<%= dir.js %>/base/analytics.js",
+                        "<%= dir.js %>/base/surveys.js",
                     ],
                 }
             },

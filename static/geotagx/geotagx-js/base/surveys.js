@@ -8,12 +8,12 @@ $(document).ready(function(){
 			}else if(data.geotagx_survey_status=="AGREE_TO_PARTICIPATE"){
 				//Check if the number of tasks is greater than the required number of tasks
 				if(data.task_runs > data.final_survey_task_requirements){
-					document.location = "/geotagx/survey"					
+					document.location = "/geotagx/survey"
 				}
 			}else {
 				//Case of ["DENY_TO_PARTICIPATE", "DENY_TO_PARTICIPATE_IN_FINAL_SURVEY", "ALL_SURVEYS_COMPLETE" ]
 				//Do Nothing
-			}	
+			}
 		});
 	}
 })
