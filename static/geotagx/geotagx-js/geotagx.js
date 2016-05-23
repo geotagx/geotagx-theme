@@ -44,33 +44,10 @@ $(document).ready(function(){
         // Run the show!
         filterList.init();
     });
-    $('.magnefig').each(function(){
-        $(this).magnificPopup({
-            type:'image',
-            removalDelay: 300,
-            mainClass: 'mfp-fade'
-        })
-    });
-
-    $(".image-caption a").tooltip();
 
 
 
-var Script = function () {
 
-
-
-//    bxslider
-
-    // $('.bxslider').show();
-    // $('.bxslider').bxSlider({
-    //     minSlides: 4,
-    //     maxSlides: 4,
-    //     slideWidth: 276,
-    //     slideMargin: 20
-    // });
-
-}();
 
 	(function() {
 
