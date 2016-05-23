@@ -24,10 +24,18 @@ module.exports = function(grunt){
                     ],
                 }
             },
+            bundle_minified_vendors: {
+                files: {
+                    "<%= dir.js %>/base.min.js": [
+                        "<%= dir.js %>/base.min.js",
+                        "<%= dir.vendor %>/jquery-smooth-scroll/jquery.smooth-scroll.min.js",
+                    ],
+                }
+            },
         },
     });
     grunt.loadNpmTasks("grunt-contrib-concat");
 
-    grunt.registerTask("bundle", ["concat:bundle"]);
+    grunt.registerTask("bundle", ["concat:bundle", "concat:bundle_minified_vendors"]);
     grunt.registerTask("minify", ["minify:TODO"]);
 };
