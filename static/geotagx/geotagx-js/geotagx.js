@@ -2,13 +2,6 @@
  * This script contains functionality common to all GeoTag-X pages.
  */
 $(document).ready(function(){
-	// Initialize Bootstrap's opt-in javascript components.
-	$("[data-toggle='tooltip']").tooltip();
-	$("[data-toggle='popover']").popover();
-
-	// Initialize Smooth scroll.
-	$("a").smoothScroll();
-
     $(function () {
 
         var filterList = {
