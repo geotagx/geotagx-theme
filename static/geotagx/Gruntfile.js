@@ -2,9 +2,9 @@ module.exports = function(grunt){
     grunt.initConfig({
         pkg: grunt.file.readJSON("bower.json"),
         dir: {
-            css: "geotagx-css",
-            js: "geotagx-js",
-            img: "geotagx-img",
+            css: "css",
+            js: "js",
+            img: "img",
             vendor: "vendor",
         },
         concat: {
