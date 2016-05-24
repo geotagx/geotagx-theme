@@ -28,6 +28,7 @@
     "jquery-md5": "*",
     "jquery.cslider": "*",
     "Jcrop": "jcrop#^2.0.4",
-    "isotope": "^3.0.0"
+    "isotope": "^3.0.0",
+    "codemirror": "CodeMirror#^5.15.2"
   }
 }
