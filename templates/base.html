@@ -1,7 +1,7 @@
 {% set static = url_for("static", filename="geotagx") -%}
 {% set css = static + "/css" -%}
 {% set js = static + "/js" -%}
-{% set img = static + "/img" -%}
+{% set img = url_for("static", filename="img") -%}
 {% set vendor = static + "/vendor" -%}
 {% set active_page = active_page|default("index") -%}
 {% set active_project = active_project|default("none") -%}

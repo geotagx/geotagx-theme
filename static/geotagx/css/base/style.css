@@ -57,7 +57,7 @@ p { line-height: 22px }
     transition: all .3s ease;
     border: 1px solid #fff;
     box-shadow: none;
-    background: url("/static/geotagx/img/search-icon.jpg") no-repeat 10px 8px;
+    background: url("/static/img/search-icon.jpg") no-repeat 10px 8px;
     padding: 0 5px 0 35px;
     color: #fff;
     margin-left: 10px;
@@ -1597,7 +1597,7 @@ ul#filters > .active > span {
 /*faq*/
 #newsletter-faq {
     padding: 72px 0;
-    background: url("/static/geotagx/img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
+    background: url("/static/img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
     height: 200px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -2652,7 +2652,7 @@ p { text-align: left }
 .bg-purple { background-color: #932ab6 !important }
 .bg-maroon { background-color: #85144b !important }
 .tag-line-section {
-    background: url("/static/geotagx/img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
+    background: url("/static/img/tg-black-bg.png") no-repeat fixed top rgba(0,0,0,0.7);
     height: 300px;
     margin-bottom: 30px;
 }
