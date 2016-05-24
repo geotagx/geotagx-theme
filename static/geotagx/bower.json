@@ -26,6 +26,7 @@
     "animate.css": "~3.4.0",
     "vue": "~1.0.24",
     "jquery-md5": "*",
-    "jquery.cslider": "*"
+    "jquery.cslider": "*",
+    "Jcrop": "jcrop#^2.0.4"
   }
 }

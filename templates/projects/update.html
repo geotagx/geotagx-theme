@@ -5,8 +5,8 @@
 
 {% from "_formhelpers.html" import render_field %}
 {% from "_formhelpers.html" import render_dynamic_filefield_submit_button %}
-<script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
+<script src="{{vendor}}/Jcrop/js/Jcrop.min.js"></script>
+<link rel="stylesheet" href="{{vendor}}/Jcrop/css/Jcrop.min.css">
 <div class="row">
   <div class="span9">
       <legend><strong>{{project.name}}</strong>: {{_('Update the project')}}</legend>

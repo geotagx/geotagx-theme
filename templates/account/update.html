@@ -8,7 +8,7 @@
 {% from "projects/_helpers.html" import broken_image %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
+<link rel="stylesheet" href="{{vendor}}/Jcrop/css/Jcrop.min.css">
 {% endblock %}
 
 
@@ -301,7 +301,7 @@
 
 
 {% block script %}
-<script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
+<script src="{{vendor}}/Jcrop/js/Jcrop.min.js"></script>
 <script src="{{url_for('static', filename='js/image_crop.js')}}"></script>
 {{broken_image()}}
 {% endblock %}
