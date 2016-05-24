@@ -12,8 +12,21 @@ module.exports = function(grunt){
                 separator: ";",
                 stripBanners: true
             },
-            // Concatenate uncompressed files.
-            bundle: {
+            bundle_css: {
+                options: {
+                    separator: "",
+                },
+                files: {
+                    "<%= dir.css %>/base.min.css": [
+                        "<%= dir.css %>/base/page.css",
+                        "<%= dir.css %>/base/footer.css",
+                        "<%= dir.css %>/base/component.css",
+                        "<%= dir.css %>/base/style.css",
+                        "<%= dir.css %>/base/style-responsive.css",
+                    ],
+                }
+            },
+            bundle_js: {
                 files: {
                     "<%= dir.js %>/base.min.js": [
                         "<%= dir.js %>/base/underscore-small.js",
@@ -36,6 +49,6 @@ module.exports = function(grunt){
     });
     grunt.loadNpmTasks("grunt-contrib-concat");
 
-    grunt.registerTask("bundle", ["concat:bundle", "concat:bundle_minified_vendors"]);
+    grunt.registerTask("bundle", ["concat:bundle_css", "concat:bundle_js", "concat:bundle_minified_vendors"]);
     grunt.registerTask("minify", ["minify:TODO"]);
 };
