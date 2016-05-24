@@ -27,6 +27,7 @@
     "vue": "~1.0.24",
     "jquery-md5": "*",
     "jquery.cslider": "*",
-    "Jcrop": "jcrop#^2.0.4"
+    "Jcrop": "jcrop#^2.0.4",
+    "isotope": "^3.0.0"
   }
 }
