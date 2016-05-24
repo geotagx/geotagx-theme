@@ -18,6 +18,7 @@ module.exports = function(grunt){
                 },
                 files: {
                     "<%= dir.css %>/base.min.css": [
+                        "<%= dir.css %>/base/bootstrap-reset.css",
                         "<%= dir.css %>/base/page.css",
                         "<%= dir.css %>/base/footer.css",
                         "<%= dir.css %>/base/component.css",
