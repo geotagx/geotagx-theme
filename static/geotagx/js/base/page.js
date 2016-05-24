@@ -28,14 +28,12 @@
 (function(){
     "use strict";
 
-    var $button = $("#back-to-top");
-    $button.click(function(){ $("body").animate({scrollTop:0}); });
-    $(window).scroll(function(){
-        if ($(this).scrollTop() >= 400)
-            $button.fadeIn(120);
-        else
-            $button.fadeOut(120);
+    var $backToTopButton = $("#back-to-top");
+    $backToTopButton.click(function(e){
+        $("body, html").animate({scrollTop: 0});
+        e.preventDefault();
     });
+    $(window).scroll(_throttle(function(){$backToTopButton.css("visibility", $(this).scrollTop() > 400 ? "visible" : "hidden");}, 150));
 
     $("#accept-cookies").click(function(){
         var TIMEOUT = 120; // The message is shown again after TIMEOUT number of days.
