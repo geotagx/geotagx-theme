@@ -101,7 +101,7 @@
             {% for u in update_feed[0:30] %}
             <li>
                 {% if u.action_updated == 'Project' %}
-                <p><img class="img-circle" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="max-width:30px;">
+                <p><img class="img-circle" src="{{url_for('static', filename='img/placeholders/project.png')}}" style="max-width:30px;">
                 <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name }}</a> {{ _('new project created') }} {{u.updated | pretty_date }} </p>
                 {% endif %}
                 {% if u.action_updated == 'Blog' %}

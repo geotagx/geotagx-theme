@@ -152,9 +152,9 @@
 <script>
 function imgError(image) {
     image.onerror = "";
-    image.src = "{{url_for('static', filename='img/placeholder.project.png')}}";
+    image.src = "{{url_for('static', filename='img/placeholders/project.png')}}";
     if (arguments[1] === 'user') {
-        image.src = "{{url_for('static', filename='img/placeholder.user.png')}}";
+        image.src = "{{url_for('static', filename='img/placeholders/user.png')}}";
     }
     return true;
 }
@@ -251,7 +251,7 @@ function imgError(image) {
 {% elif project.info.thumbnail %}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);">
 {% else %}
-    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}">
+    <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholders/project.png')}}" style="{{style}}">
 {% endif %}
 {% endmacro %}
 
@@ -265,7 +265,7 @@ function imgError(image) {
 {% elif project.info.thumbnail %}
     {{project.info.thumbnail}}"
 {% else %}
-{{url_for('static', filename='img/placeholder.project.png')}}
+{{url_for('static', filename='img/placeholders/project.png')}}
 {% endif %}
 {% endmacro %}
 

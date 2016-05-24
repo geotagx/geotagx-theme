@@ -19,7 +19,7 @@
         {% if categories_projects[_category].__len__() > 0 %}
             {% set _temp = category_image_dict.update( {_category : render_project_image_url(categories_projects[_category][0], upload_method)}) %}
         {% else %}
-            {% set _temp = category_image_dict.update( {_category : url_for('static', filename='img/placeholder.project.png') } ) %}
+            {% set _temp = category_image_dict.update( {_category : url_for('static', filename='img/placeholders/project.png') } ) %}
         {% endif %}
     {% endif %}
 {% endfor %}

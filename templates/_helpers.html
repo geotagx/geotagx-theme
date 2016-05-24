@@ -6,7 +6,7 @@
         <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onerror="imgError(this, 'user');">
         {% endif %}
     {% else %}
-        <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')}}">
+        <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholders/user.png')}}">
     {% endif %}
 {% endmacro %}
 
@@ -203,6 +203,6 @@
 	{% elif app.info.thumbnail %}
 	    {{app.info.thumbnail}}
 	{% else %}
-	    {{url_for('static', filename='img/placeholder.project.png')}}
+	    {{url_for('static', filename='img/placeholders/project.png')}}
 	{% endif %}
 {% endmacro %}
