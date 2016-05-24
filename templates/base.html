@@ -61,10 +61,12 @@
                 {%- block footer %}{% endblock -%}
                 {% include "_footer.html" %}
                 {% if show_cookies_warning %}
-                <div id="cookie-consent" style="position:fixed; z-index:32; width:100%; left:0; right:0; bottom:0; padding:1em; color:#FFF; background:#34495E">
-                    <div class="col-xs-9">Cookies help us deliver our services. By using our services, you agree to our <a style="border-bottom:1px dotted #FFF; color:#FFF" href="{{url_for('help.cookies_policy')}}">use of cookies</a>.</div>
-                    <div class="col-xs-3"><div class="pull-right"><button id="accept-cookies" class="btn btn-success" style="border-radius:3px;-webkit-border-radius:3px;">{{_("Accept")}}</button></div></div>
-                </div>
+                <div id="cookie-consent">
+                    <div class="row">
+                        <div class="col-xs-12"><p>Cookies help us deliver our services. By using {{brand}}, you agree to our <a href="{{url_for('help.cookies_policy')}}">cookie policy</a>.</p></div>
+                        <div class="col-xs-12"><button id="accept-cookies" class="btn btn-sm btn-primary">{{_("Accept")}}</button></div>
+                    </div>
+                 </div>
                 {% endif %}
             </footer>
             <button id="back-to-top"><span class="fa-stack fa-lg"><i class="fa fa-stop fa-stack-2x"></i><i class="fa fa-long-arrow-up fa-stack-1x fa-inverse"></i></span></button>
