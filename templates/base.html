@@ -2,7 +2,7 @@
 {% set css = static + "/css" -%}
 {% set js = static + "/js" -%}
 {% set img = url_for("static", filename="img") -%}
-{% set vendor = static + "/vendor" -%}
+{% set vendor = url_for("static", filename="vendor") -%}
 {% set active_page = active_page|default("index") -%}
 {% set active_project = active_project|default("none") -%}
 {% set user_ip = request["remote_addr"] -%}
