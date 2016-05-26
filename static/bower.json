@@ -29,6 +29,7 @@
     "jquery.cslider": "*",
     "Jcrop": "jcrop#^2.0.4",
     "isotope": "^3.0.0",
-    "codemirror": "CodeMirror#^5.15.2"
+    "codemirror": "CodeMirror#^5.15.2",
+    "marked": "^0.3.5"
   }
 }
