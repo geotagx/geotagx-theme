@@ -25,3 +25,82 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
+(function(geotagx){
+    "use strict";
+
+    Vue.component("g-question", {
+        template: "#g-question-template",
+        components: {
+            "g-input-polar": geotagx.vue.component.PolarInput,
+            "g-input-dropdown-list": geotagx.vue.component.DropdownListInput,
+            "g-input-multiple-choice": geotagx.vue.component.MultipleChoiceInput,
+            "g-input-text": geotagx.vue.component.TextInput,
+            "g-input-number": geotagx.vue.component.NumberInput,
+            "g-input-datetime": geotagx.vue.component.DatetimeInput,
+            "g-input-url": geotagx.vue.component.UrlInput,
+            "g-input-geotagging": geotagx.vue.component.GeotaggingInput,
+        },
+        props: {
+            /**
+             * The question configuration.
+             */
+            question: {
+                type: Object,
+                required: true,
+            },
+            /**
+             * The current language.
+             */
+            language: {
+                type: String,
+                required: true,
+            },
+        },
+        computed: {
+            /**
+             * The question's title.
+             */
+            title: function(){
+                return this.question.title[this.language];
+            },
+            /**
+             * The question's key.
+             */
+            key: function(){
+                return this.question.key;
+            },
+            /**
+             * The question's hint.
+             */
+            hint: function(){
+                return this.hasHint() ? this.question.hint[this.language] : null;
+            },
+            /**
+             * The question's help.
+             */
+            help: function(){
+                return this.hasHelp() ? this.question.help[this.language] : null;
+            },
+            /**
+             * The question's input configuration.
+             */
+            input: function(){
+                return this.question.input;
+            },
+        },
+        methods: {
+            /**
+             * Returns true if the question has a hint in the current language, false otherwise.
+             */
+            hasHint: function(){
+                return this.question.hint && this.question.hint[this.language];
+            },
+            /**
+             * Returns true if the question has help in the current language, false otherwise.
+             */
+            hasHelp: function(){
+                return this.question.help && this.question.help[this.language];
+            },
+        },
+    });
+})(window.geotagx = window.geotagx || {});
