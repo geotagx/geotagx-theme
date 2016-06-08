@@ -44,16 +44,24 @@
 <div class="row">
 	<div class="col-xs-12">
 		{% if project.completed or invite_new_volunteers %}
-		<h3>{{_("Thank you for showing an interest in this project.")}}</h3>
-		{% if project.completed %}
-		<p>{{_("All available tasks for this project have been successfully completed.")}}</p>
-		<a class="btn btn-lg btn-primary" href="{{url_for('project.export_to', short_name=project.short_name)}}">{{_("Export Results")}}</a>
-		{% elif invite_new_volunteers %}
-		<p>{{_("You have participated in all available tasks however we still need more volunteers to contribute.")}}<br>{{_("Help us spread the word by sharing the project!")}}</p>
-		{% endif %}
+			<h3>{{_("Thank you for showing an interest in this project.")}}</h3>
+			{% if project.completed %}
+				<p>{{_("All available tasks for this project have been successfully completed.")}}</p>
+				<a class="btn btn-lg btn-primary" href="{{url_for('project.export_to', short_name=project.short_name)}}">{{_("Export Results")}}</a>
+			{% elif invite_new_volunteers %}
+				<p>{{_("You have participated in all available tasks however we still need more volunteers to contribute.")}}<br>{{_("Help us spread the word by sharing the project!")}}</p>
+			{% endif %}
 		{% else %}
-		{% from "projects/helpers/_presenter.html" import render_presenter %}
-		{{render_presenter(project)}}
+			{% from "projects/helpers/_presenter.html" import render_questionnaire, render_subject %}
+			<div id="loading-project" class="row">
+				<div class="col-xs-12">
+					<center><i class="fa fa-cloud-download"></i></center>
+				</div>
+			</div>
+			<div id="project" class="row" data-short-name="{{project.short_name}}">
+				<div class="col-xs-12 col-lg-7">{{render_subject()}}</div>
+				<div class="col-xs-12 col-lg-5">{{render_questionnaire()}}</div>
+			</div>
 		{% endif %}
 	</div>
 </div>
@@ -62,14 +70,31 @@
 
 {% block script %}
 {%- if not (project.completed or invite_new_volunteers) %}
+<script>
+(function(geotagx){
+	"use strict";
+	geotagx.project = geotagx.project || {};
+	geotagx.project.configuration = Object.freeze({{project.info.task_presenter | safe}});
+})(window.geotagx = window.geotagx || {});
+</script>
 <script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" defer></script>
-<script src="{{js}}/projects/presenter-base.js" defer></script>
-<script src="{{js}}/projects/presenter-questionnaire.js" defer></script>
-<script src="{{js}}/projects/presenter-subject.js" defer></script>
-<script src="{{js}}/projects/presenter-subject-image.js" defer></script>
-<script src="{{js}}/projects/presenter-subject-pdf.js" defer></script>
-{# Once the scripts above are a bit more stable, they will be concactenated and minified to form a single presenter.min.js. #}
+<script src="{{vendor}}/marked/marked.min.js" defer></script>
+<script src="{{vendor}}/vue/dist/vue.min.js" defer></script>
+<script src="{{js}}/projects/presenter/components/base.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-polar.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-dropdown-list.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-multiple-choice.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-text.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-number.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-datetime.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-url.js" defer></script>
+<script src="{{js}}/projects/presenter/components/input-geotagging.js" defer></script>
+<script src="{{js}}/projects/presenter/components/subject-image.js" defer></script>
+<script src="{{js}}/projects/presenter/components/subject-pdf.js" defer></script>
+<script src="{{js}}/projects/presenter/components/question.js" defer></script>
+<script src="{{js}}/projects/presenter/questionnaire.js" defer></script>
+<script src="{{js}}/projects/presenter/subject.js" defer></script>
+{# TODO Once the scripts above are a bit more stable, they should be concatenated and minified to form a single presenter.min.js. #}
 <script src="{{js}}/projects/presenter.min.js" defer></script>
-<script>var __configuration__ = {{project.info.task_presenter|safe}};</script>
 {% endif -%}
 {% endblock %}
