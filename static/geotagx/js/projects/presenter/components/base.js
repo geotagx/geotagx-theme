@@ -27,6 +27,7 @@
  */
 (function(geotagx){
     "use strict";
+
     geotagx = geotagx || {};
     geotagx.vue = geotagx.vue || {};
     geotagx.vue.component = geotagx.vue.component || {};

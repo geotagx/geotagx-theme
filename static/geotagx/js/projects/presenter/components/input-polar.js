@@ -25,3 +25,31 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
+(function(geotagx){
+    "use strict";
+
+    geotagx.vue.component.PolarInput = Vue.extend({
+        template: "#g-input-polar-template",
+        props: {
+            /**
+             * The input configuration.
+             */
+            input: {
+                type: Object,
+                required: true,
+            },
+            /**
+             * The current language.
+             */
+            language: {
+                type: String,
+                required: true,
+            },
+        },
+        methods: {
+            onAnswer: function(answer){
+                geotagx.vue.helper.dispatchAnswer(this, answer);
+            }
+        }
+    });
+})(window.geotagx = window.geotagx || {});
