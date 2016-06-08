@@ -25,3 +25,46 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
+(function(geotagx){
+    "use strict";
+
+    geotagx.vue.component.TextInput = Vue.extend({
+        template: "#g-input-text-template",
+        data: function(){
+            return {
+                model: null,
+            };
+        },
+        props: {
+            /**
+             * The input configuration.
+             */
+            input: {
+                type: Object,
+                required: true,
+            },
+            /**
+             * The current language.
+             */
+            language: {
+                type: String,
+                required: true,
+            },
+        },
+        methods: {
+            /**
+             * Resets the input field.
+             */
+            reset: function(){
+                this.model = null;
+            },
+            /**
+             * An event handler that is called when the 'OK' button is pressed.
+             */
+            onAnswer: function(){
+                this.model = typeof(this.model) === "string" ? this.model.trim() : "";
+                geotagx.vue.helper.dispatchAnswer(this, this.model.length > 0 ? this.model : null);
+            }
+        }
+    });
+})(window.geotagx = window.geotagx || {});
