@@ -25,3 +25,10 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
+(function(geotagx){
+    "use strict";
+
+    geotagx.vue.component.DatetimeInput = Vue.extend({
+        template: "#g-input-datetime-template"
+    });
+})(window.geotagx = window.geotagx || {});
