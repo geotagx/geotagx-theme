@@ -1,32 +1,42 @@
 {#
- # Renders the task presenter's questionnaire section.
+ # Renders the task presenter's questionnaire.
  #}
 {% macro render_questionnaire() %}
 <div id="questionnaire">
 	<header id="questionnaire-header" class="section-header">
-		<section id="questionnaire-progress">
+		<section class="left">
 			<button id="questionnaire-rewind" :disabled="!hasPreviousQuestion()" @click="showPreviousQuestion"><i class="fa fa-lg fa-backward"></i></button>
+		</section>
+		<section class="center">
 			<div id="questionnaire-percentage-complete"><span v-text="percentageComplete"></span>%</div>
-			<div id="questionnaire-progress-bar" :style="{width: progressBarWidth + 'px'}"></div>
+			<div id="questionnaire-progress" class="progress"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="percentageComplete" :style="{width: percentageComplete + '%'}"></div></div>
 		</section>
-		<section id="questionnaire-status">
-			<div id="analysis-status"><span id="analyses-remaining">&#8734;</span>&nbsp;&#124;&nbsp;<span id="analyses-completed">&#8734;</span></div>
-			<i id="questionnaire-status-busy"    class="status-icon fa fa-circle"></i>
-			<i id="questionnaire-status-success" class="status-icon fa fa-check-circle"></i>
-			<i id="questionnaire-status-error"   class="status-icon fa fa-exclamation-circle"></i>
-		</section>
-		<section id="questionnaire-submission-form" v-show="false">
-			<button id="questionnaire-submission-button" class="btn btn-block btn-lg btn-success">{{_("Submit Your Analysis")}}</button>
-			<center>
-				<div id="questionnaire-submission-message"></div>
-				<p id="questionnaire-submission-thanks">Thank you very much for contributing to this project! We appreciate any feedback you may have so find us on <a target="_blank" href="https://github.com/geotagx/pybossa/issues"><strong>GitHub</strong></a> or <a href="mailto:geotag-x@cern.ch?Subject=GeoTag-X feedback" target="_top"><strong>send us an email</strong></a>.</p>
-			</center>
+		<section class="right">
+			<div id="questionnaire-statistics">
+				<span id="questionnaire-analyses-remaining" v-html="analysesCompleted"></span>&nbsp;&#124;&nbsp;<span id="questionnaire-analyses-total" v-html="numberOfAnalyses"></span>
+			</div>
+			<ul id="questionnaire-status-icons" class="list-inline">
+				<li><i class="status-icon-busy fa fa-2x fa-circle"></i></li>
+				<li><i class="status-icon-success fa fa-2x fa-check-circle"></i></li>
+				<li><i class="status-icon-error fa fa-2x fa-exclamation-circle"></i></li>
+			</ul>
 		</section>
 	</header>
-	<div id="question"><g-question :question="currentQuestion" :language="currentLanguage"></g-question></div>
-	<button class="btn btn-answer btn-md btn-block btn-nosubject" value="NoSubject" v-show="!hasPreviousQuestion()">{{_("I do not see a subject")}}</button>
-	<button class="btn btn-answer btn-md btn-block btn-unclear"   value="NotClear">{{_("Subject not clear enough")}}</button>
-	<button class="btn btn-answer btn-md btn-block btn-unknown "  value="Unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}">{{_("I do not know")}}</button>
+	<div id="questionnaire-submission-form" v-show="isComplete">
+		<button id="questionnaire-submission-button" class="btn btn-block btn-lg btn-success" @click="submit">{{_("Submit Your Analysis")}}</button>
+		<center>
+			<div id="questionnaire-submission-message"></div>
+			<p id="questionnaire-submission-thanks">Thank you very much for contributing to this project! We appreciate any feedback you may have so find us on <a target="_blank" href="https://github.com/geotagx/pybossa/issues"><strong>GitHub</strong></a> or <a href="mailto:geotag-x@cern.ch?Subject=GeoTag-X feedback" target="_top"><strong>send us an email</strong></a>.</p>
+		</center>
+	</div>
+	<div id="question" v-show="!isComplete">
+		<g-question :question="currentQuestion" :language="currentLanguage"></g-question>
+{#
+		<button type="button" class="btn btn-answer btn-sm btn-block btn-unclear" value="NotClear">{{_("Subject not clear enough")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-block btn-unknown" value="Unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-block btn-nosubject" value="NoSubject" v-show="!hasPreviousQuestion()">{{_("I do not see a subject")}}</button>
+#}
+	</div>
 	<template id="g-question-template">
 		<header><h1 id="question-title" v-text="title"></h1></header>
 		<div id="question-assistance">
@@ -42,7 +52,7 @@
 					</div>
 					<div class="modal-body">
 						<div id="question-help-modal-content" v-html="help | markdown"></div>
-						<p style="margin-top:1em"><i class="fa fa-lg fa-fw fa-info-circle"></i>&nbsp;<button class="btn btn-answer btn-xs btn-unknown" disabled>{{_("I do not know")}}</button>&nbsp;&nbsp;{{_("is a very useful answer if you are not sure how to reply to this question.")}}</p>
+						<p style="margin-top:1em"><i class="fa fa-lg fa-fw fa-info-circle"></i>&nbsp;<button type="button" class="btn btn-answer btn-xs btn-unknown" disabled>{{_("I do not know")}}</button>&nbsp;&nbsp;{{_("is a very useful answer if you are not sure how to reply to this question.")}}</p>
 					</div>
 					<div class="modal-footer"><button type="button" class="btn btn-primary btn-xs text-uppercase" data-dismiss="modal"><strong>{{_("Close")}}</strong></button></div>
 				</div>
@@ -60,13 +70,19 @@
 		</div>
 	</template>
 	<template id="g-input-polar-template">
-		<button class="btn btn-answer btn-md btn-yes" @click="onAnswer('Yes')">{{_("Yes")}}</button>
-		<button class="btn btn-answer btn-md btn-no" @click="onAnswer('No')">{{_("No")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-yes" @click="onAnswer('Yes')">{{_("Yes")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-no" @click="onAnswer('No')">{{_("No")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-dropdown-list-template">
-		<button class="btn btn-answer btn-md btn-ok" :disabled="!isOptionSelected()" @click="onAnswer('OK')">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-none" @click="onAnswer('None')">{{_("None of the above")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" :disabled="!isOptionSelected()" @click="reset">{{_("Reset")}}</button>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" :disabled="!isOptionSelected()" @click="onAnswer('OK')">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" :disabled="!isOptionSelected()" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-none" @click="onAnswer('None')">{{_("None of the above")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-multiple-choice-template">
 		<ul class="list-unstyled">
@@ -84,41 +100,65 @@
 				</label>
 			</li>
 		</ul>
-		<button class="btn btn-answer btn-md btn-ok" :disabled="!isOptionSelected()" @click="onAnswer('OK')">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-none" @click="onAnswer('None')">{{_("None of the above")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" :disabled="!isOptionSelected()" @click="reset">{{_("Reset")}}</button>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" :disabled="!isOptionSelected()" @click="onAnswer('OK')">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" :disabled="!isOptionSelected()" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-none" @click="onAnswer('None')">{{_("None of the above")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-text-template">
-		<input type="text" v-if="isShortText()" v-model="model" autofocus>
-		<textarea v-else v-model="model" autofocus></textarea>
-		<button class="btn btn-answer btn-md btn-ok" @click="onAnswer">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" @click="reset">{{_("Reset")}}</button>
+		<input type="text" v-if="isShortText()" v-model="model">
+		<textarea v-else v-model="model"></textarea>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" @click="onAnswer">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-number-template">
-		<input type="number" v-model="model" autofocus>
-		<button class="btn btn-answer btn-md btn-ok" @click="onAnswer">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" @click="reset">{{_("Reset")}}</button>
+		<input type="number" v-model="model">
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" @click="onAnswer">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-datetime-template">
-		<input type="text" class="datepicker-here" v-model="model" autofocus>
-		<button class="btn btn-answer btn-md btn-ok" @click="onAnswer">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" @click="reset">{{_("Reset")}}</button>
+		<input type="text" class="datepicker-here" v-model="model">
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" @click="onAnswer">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-url-template">
-		<input type="url" v-model="model" autofocus>
-		<button class="btn btn-answer btn-md btn-ok" @click="onAnswer">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" @click="reset">{{_("Reset")}}</button>
+		<input type="url" v-model="model">
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" @click="onAnswer">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 	<template id="g-input-geotagging-template">
 		<div></div>
-		<button class="btn btn-answer btn-md btn-ok" @click="onAnswer">{{_("OK")}}</button>
-		<button class="btn btn-answer btn-md btn-reset" @click="reset">{{_("Reset")}}</button>
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-answer btn-sm btn-ok" @click="onAnswer">{{_("OK")}}</button>
+			<button type="button" class="btn btn-answer btn-sm btn-reset" @click="reset">{{_("Reset")}}</button>
+		</div>
+		<button type="button" class="btn btn-answer btn-sm btn-unknown" data-toggle="tooltip" data-placement="bottom" title="{{_('Did you read the help?')}}" @click="onAnswer('Unknown')">{{_("I do not know")}}</button>
+		<button type="button" class="btn btn-answer btn-sm btn-unclear" @click="onAnswer('NotClear')">{{_("Not clear enough")}}</button>
 	</template>
 </div>
 {% endmacro %}
 
 {#
- # Renders the task presenter's subject section.
+ # Renders the task presenter's subject.
  #}
 {% macro render_subject() %}
 <div id="subject">
