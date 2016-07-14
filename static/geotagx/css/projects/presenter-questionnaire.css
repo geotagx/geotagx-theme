@@ -2,20 +2,25 @@
     color:#555;
 }
 #questionnaire-header {
-}
-#questionnaire[data-analysis-complete="false"] #questionnaire-header {
-    background:none;
-}
-#questionnaire[data-analysis-complete="true"] #questionnaire-header {
-    background:#EEE;
-}
-#questionnaire-progress {
     position:relative;
     margin:0;
     padding:0;
-    height:2.5em;
+    width:100%;
     background:#EEE;
+    height:2.5em;
 }
+#questionnaire-header > section {
+    position:absolute;
+    top:0;
+    bottom:0;
+}
+#questionnaire-header > section.left {
+    z-index:2;
+    left:0;
+}
+/**
+ * Rewind button.
+ */
 #questionnaire-rewind {
     position:relative;
     width:2.5em;
@@ -39,79 +44,92 @@
     top:0.6em;
     left:0.4em;
 }
-#questionnaire-percentage-complete {
-    position:absolute;
-    z-index:2;
-    top:0;
-    left:1.725em;
-    bottom:0;
-    font-weight:400;
-    font-size:1.725em;
-    letter-spacing:1px;
+#questionnaire-header > section.center {
+    z-index:0;
+    left:2.5em;
+    right:0;
 }
-#questionnaire-progress-bar {
+/**
+ * Progress bar.
+ */
+#questionnaire-percentage-complete {
     position:absolute;
     z-index:1;
     top:0;
-    left:2.5em;
+    left:0.25em;
     bottom:0;
-    width:0;
-    background:#CCC;
-    transition:width 0.3s ease-in-out;
-    -o-transition:width 0.3s ease-in-out;
-    -ms-transition:width 0.3s ease-in-out;
-    -moz-transition:width 0.3s ease-in-out;
-    -webkit-transition:width 0.3s ease-in-out;
-}
-#questionnaire-status {
-    position:absolute;
-    display:inline;
-    z-index:2;
-    top:0;
-    right:1.05em;
     margin:0;
-    padding:0 0.5em 0 0;
-    height:2.5em;
+    padding:0;
+    font-weight:400;
+    font-size:1.75em;
+    letter-spacing:1px;
 }
-#questionnaire-status > .status-icon {
-    display:none;
-    font-size:2em;
-    line-height:1.35em;
+#questionnaire-progress {
+    height:100%;
+    border-radius:0;
 }
-#analysis-status {
-    font-size:1.725em;
-    font-weight:700;
+#questionnaire-progress > .progress-bar {
+    background:#CCC;
+}
+#questionnaire-progress,
+#questionnaire-progress > .progress-bar {
+    border:none;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+#questionnaire-header > section.right {
+    z-index:2;
+    right:0;
+    padding-right:0.25em;
+}
+/**
+ * Questionnaire statistics.
+ */
+#questionnaire-statistics {
+    height:100%;
+    font-size:1.75em;
+    font-weight:900;
+    line-height:1.4em;
+    margin:0 0.1em 0 0;
     color:#EF1800;
 }
-#analyses-remaining,
-#analyses-completed {
+#questionnaire-analyses-remaining,
+#questionnaire-analyses-total {
+    font-size:0.9em;
     color:#6F6F6F;
 }
-#analyses-remaining {
+#questionnaire-analyses-remaining {
     font-weight:400;
 }
-#analyses-completed {
-    font-weight:900;
+/**
+ * Status icons.
+ */
+#questionnaire-status-icons {
+    padding:0.25em 0 0 0;
+    height:100%;
 }
-#questionnaire-status-busy {
+#questionnaire-status-icons > li > i.fa {
+    display:none;
+}
+#questionnaire-status-icons > li > i.status-icon-busy {
     color:#EEE;
     animation-name:flash;
     animation-duration:1s;
     animation-iteration-count:infinite;
 }
-#questionnaire-status-success {
-    color:#0B0;
+#questionnaire-status-icons > li > i.status-icon-success {
+    color:#0D0;
 }
-#questionnaire-status-error {
-    color:#B00;
+#questionnaire-status-icons > li > i.status-icon-error {
+    color:#D00;
 }
+/**
+ * Submission confirmation.
+ */
 #questionnaire-submission-form {
     width:100%;
     padding:0.5em;
-}
-#questionnaire[data-analysis-complete="false"] #questionnaire-submission-form,
-#questionnaire[data-analysis-complete="true"] #analysis-status {
-    display:none;
 }
 #questionnaire-submission-button {
     text-transform:uppercase;
@@ -138,9 +156,6 @@
 #question {
     margin:1em 0 0;
 }
-#questionnaire[data-analysis-complete="true"] #question {
-    display:none;
-}
 #question-title {
     font-weight:900;
     font-size:1.8em;
@@ -161,71 +176,60 @@
 #question-assistance {
     font-size:1.1em;
 }
+#question-assistance p {
+    margin:0;
+}
 #question-help-modal-toggle {
     cursor:help;
     color:#007ACE;
 }
-#question-answer {
+#question-input {
     margin:0.5em 0 0;
 }
-#question-answer-fields {
+#question-input > .btn-answer:disabled {
+    opacity:0.5 !important;
+}
+#question-input-fields {
     margin:0 0 1em 0;
 }
 /**
  * Input fields.
  */
-#question-answer-fields > .field-group {
+#question-input-fields > .field-group {
     position:relative;
     display:none;
     margin:0.5em 0;
     padding:0;
     font-size:1.2em;
 }
-#question[data-type="dropdown-list"]          > #question-answer > #question-answer-fields  > .field-group.dropdown-list,
-#question[data-type="radio-list"]             > #question-answer > #question-answer-fields  > .field-group.radio-list,
-#question[data-type="checklist"]              > #question-answer > #question-answer-fields  > .field-group.checklist,
-#question[data-type="illustrative-checklist"] > #question-answer > #question-answer-fields  > .field-group.illustrative-checklist,
-#question[data-type="text"]                   > #question-answer > #question-answer-fields  > .field-group.text,
-#question[data-type="number"]                 > #question-answer > #question-answer-fields  > .field-group.number,
-#question[data-type="datetime"]               > #question-answer > #question-answer-fields  > .field-group.datetime,
-#question[data-type="url"]                    > #question-answer > #question-answer-fields  > .field-group.url,
-#question[data-type="geotagging"]             > #question-answer > #question-answer-fields  > .field-group.geotagging {
+#question[data-type="dropdown-list"]          > #question-input > #question-input-fields  > .field-group.dropdown-list,
+#question[data-type="radio-list"]             > #question-input > #question-input-fields  > .field-group.radio-list,
+#question[data-type="checklist"]              > #question-input > #question-input-fields  > .field-group.checklist,
+#question[data-type="illustrative-checklist"] > #question-input > #question-input-fields  > .field-group.illustrative-checklist,
+#question[data-type="text"]                   > #question-input > #question-input-fields  > .field-group.text,
+#question[data-type="number"]                 > #question-input > #question-input-fields  > .field-group.number,
+#question[data-type="datetime"]               > #question-input > #question-input-fields  > .field-group.datetime,
+#question[data-type="url"]                    > #question-input > #question-input-fields  > .field-group.url,
+#question[data-type="geotagging"]             > #question-input > #question-input-fields  > .field-group.geotagging {
     display:block;
-}
-/**
- * Textual input fields.
- */
-#text-field,
-#longtext-field,
-#number-field,
-#url-field {
-    width:100%;
-    min-width:100%;
-    max-width:100%;
-    margin:0;
-    padding:0.5em;
-    font-weight:700;
-    border:1px solid #DDD;
-    background:#EEE;
-    letter-spacing:1px;
 }
 /**
  * Dropdown list fields.
  */
-#question-answer-fields > .field-group.dropdown-list {
+#question-input-fields > .field-group.dropdown-list {
     width:100%;
     height:2em;
 }
-#question-answer-fields > .field-group.dropdown-list > section {
+#question-input-fields > .field-group.dropdown-list > section {
     position:absolute;
     top:0;
     bottom:0;
 }
-#question-answer-fields > .field-group.dropdown-list > section.input {
+#question-input-fields > .field-group.dropdown-list > section.input {
     left:0;
     right:2em;
 }
-#question-answer-fields > .field-group.dropdown-list > section.reset {
+#question-input-fields > .field-group.dropdown-list > section.reset {
     right:0;
     width:2em;
 }
@@ -256,7 +260,7 @@
 /**
  * Multiple choice fields, i.e. select (multiple choice, single response) and checklist (multiple choice, multiple response).
  */
-#question-answer-fields > .field-group .multiple-choice label {
+#question-input-fields > .field-group .multiple-choice label {
     font:inherit;
     cursor:pointer;
     user-select:none;
@@ -266,11 +270,11 @@
     -webkit-user-select:none;
     -webkit-touch-callout:none;
 }
-#question-answer-fields > .field-group .multiple-choice label > input[type="radio"],
-#question-answer-fields > .field-group .multiple-choice label > input[type="checkbox"] {
+#question-input-fields > .field-group .multiple-choice label > input[type="radio"],
+#question-input-fields > .field-group .multiple-choice label > input[type="checkbox"] {
     margin:0 0.3em 0 0;
 }
-#question-answer-fields > .field-group .multiple-choice label[role="other-option"] > input[type="text"] {
+#question-input-fields > .field-group .multiple-choice label[role="other-option"] > input[type="text"] {
     visibility:hidden;
     margin:0 0 0 0.5em;
     padding:0.25em 0.3em;
@@ -279,7 +283,7 @@
     border:1px solid #DDD;
     background:#EEE;
 }
-#question-answer-fields > .field-group .multiple-choice label[role="other-option"] > input:checked ~ input[type="text"] {
+#question-input-fields > .field-group .multiple-choice label[role="other-option"] > input:checked ~ input[type="text"] {
     visibility:visible;
 }
 /**
@@ -290,21 +294,21 @@
     text-transform:uppercase;
     letter-spacing:1px;
     color:#FFF;
-    border-radius:1px;
+    border-radius:2px;
 }
 #questionnaire .btn-answer:disabled {
-    opacity:1;
+    opacity:0.7;
 }
 #questionnaire .btn-nosubject {
-    display:none;
     background:#EF0000;
 }
-#questionnaire #question[data-index="0"] .btn-nosubject {
-    display:inline;
-}
 #questionnaire .btn-yes,
-#questionnaire .btn-ok {
+#questionnaire .btn-ok,
+#questionnaire .btn-reset {
     background:#8CC152;
+}
+#questionnaire .btn-ok {
+    border-radius:2px 0 0 2px;
 }
 #questionnaire .btn-no,
 #questionnaire .btn-none {
@@ -312,20 +316,81 @@
 }
 #questionnaire .btn-unclear {
     color:#666;
-    margin-top:0.3em;
+    background:#EEE;
 }
 #questionnaire .btn-unknown {
     background:#F6BB42;
 }
-#question[data-type]                          > #question-answer > #question-answer-buttons .btn.show-on-binary,
-#question[data-type]                          > #question-answer > #question-answer-buttons .btn.show-on-list,
-#question[data-type="binary"]                 > #question-answer > #question-answer-buttons .btn.hide-on-binary {
-    display:none !important;
+#questionnaire .btn-reset {
+    opacity:0.6;
+    border-radius:0 2px 2px 0;
 }
-#question[data-type="binary"]                 > #question-answer > #question-answer-buttons .btn.show-on-binary,
-#question[data-type="dropdown-list"]          > #question-answer > #question-answer-buttons .btn.show-on-list,
-#question[data-type="radio-list"]             > #question-answer > #question-answer-buttons .btn.show-on-list,
-#question[data-type="checklist"]              > #question-answer > #question-answer-buttons .btn.show-on-list,
-#question[data-type="illustrative-checklist"] > #question-answer > #question-answer-buttons .btn.show-on-list {
-    display:inline !important;
+#questionnaire .btn-reset:disabled {
+    opacity:0.3 !important;
+    background:#8CC152 !important;
+}
+#questionnaire .btn-reset:hover {
+    opacity:1;
+    background:#CC0000;
+}
+
+
+/**
+ * Common input fields.
+ */
+#question-input > input,
+#question-input > textarea {
+    display:block;
+    width:100%;
+    min-width:100%;
+    max-width:100%;
+    margin:0 0 0.75em 0;
+    padding:0.5em;
+    border:1px solid #DDD;
+    background:#EEE;
+    letter-spacing:1px;
+}
+/**
+ * Polar input.
+ */
+#question-input[data-type="polar"] {
+}
+/**
+ * Dropdown list input.
+ */
+#question-input[data-type="dropdown-list"] {
+}
+/**
+ * Multiple-choice input.
+ */
+#question-input[data-type="multiple-choice"] {
+}
+/**
+ * Text input.
+ */
+#question-input[data-type="text"] {
+}
+#question-input[data-type="text"] > input,
+#question-input[data-type="text"] > textarea {
+    font-style:italic;
+}
+/**
+ * Number input.
+ */
+#question-input[data-type="number"] {
+}
+/**
+ * Date/time input.
+ */
+#question-input[data-type="datetime"] {
+}
+/**
+ * URL input.
+ */
+#question-input[data-type="url"] {
+}
+/**
+ * Geotagging input.
+ */
+#question-input[data-type="geotagging"] {
 }
