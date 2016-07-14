@@ -1,6 +1,6 @@
 /**
  * This script is part of the GeoTag-X theme.
- * It initializes the geotagx.vue context.
+ * It is the task presenter's core script.
  *
  * Author: Jeremy Othieno (j.othieno@gmail.com)
  *
@@ -26,17 +26,19 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 (function(geotagx){
-    "use strict";
+	"use strict";
 
-    geotagx = geotagx || {};
-    geotagx.vue = geotagx.vue || {};
-    geotagx.vue.component = geotagx.vue.component || {};
-    geotagx.vue.helper = {
-        /**
-         * Dispatches an answer to the questionnaire instance.
-         */
-        dispatchAnswer: function(vueContext, answer){
-            vueContext.$dispatch("on-question-answered", answer);
-        },
-    };
+	geotagx.project = geotagx.project || {};
+	geotagx.project.taskPresenter = geotagx.project.taskPresenter || {};
+
+	geotagx.vue = geotagx.vue || {};
+	geotagx.vue.component = geotagx.vue.component || {};
+	geotagx.vue.helper = {
+		/**
+		 * Dispatches an answer to the questionnaire instance.
+		 */
+		dispatchAnswer: function(vueContext, answer){
+			vueContext.$dispatch("on-question-answered", answer);
+		},
+	};
 })(window.geotagx = window.geotagx || {});

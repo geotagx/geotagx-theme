@@ -1,6 +1,6 @@
 /**
  * This script is part of the GeoTag-X theme.
- * It manages the task presenter's subject.
+ * It manages the task presenter's tutorial.
  *
  * Author: Jeremy Othieno (j.othieno@gmail.com)
  *
@@ -28,6 +28,6 @@
 (function(geotagx){
 	"use strict";
 
-	geotagx.project.taskPresenter.subject = null;
+	geotagx.project.taskPresenter.tutorial = null;
 
 }(window.geotagx = window.geotagx || {}));
