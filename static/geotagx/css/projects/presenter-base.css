@@ -26,25 +26,12 @@
     font-style:italic;
     padding-top:0.85em;
 }
-#anonymous-sign-in,
-#remind-me-later {
-    font-weight:900;
-    border-radius:1px;
-    letter-spacing:1px;
-}
 #remind-me-later:disabled {
     opacity:0.2;
 }
 #share-project {
     font-size:1.5em;
     margin:0.35em 0 0;
-}
-#loading-project {
-    font-size:8em;
-    color:#CCC;
-    animation-name:flash;
-    animation-duration:1s;
-    animation-iteration-count:infinite;
 }
 #task-presenter {
     padding-top:1em;
@@ -70,4 +57,12 @@
 @keyframes flash {
     from, 50%, to { opacity:1; }
     25%, 75% { opacity:0; }
+}
+/**
+ * Large buttons.
+ */
+.btn-lg {
+    font-weight:900;
+    border-radius:1px;
+    letter-spacing:1px;
 }

@@ -2,6 +2,7 @@
 {% set active_page = "contribute" %}
 {% set active_page_title = _("Contribute") %}
 {% set active_page_subtitle = _("Help us analyse the project.") %}
+{% set project_completed = project.completed or invite_new_volunteers %}
 
 {% block stylesheet %}
 {{super()}}
@@ -22,12 +23,12 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div id="share-project">{{helper.render_project_share_buttons(project)}}</div>
-		{% if current_user.is_anonymous() %}
+		{% if not project_completed and current_user.is_anonymous() %}
 		<div id="anonymous-notification">
 			<p id="anonymous-notification-message">{{_("You are contributing to this project anonymously and will not get any credit for your work.")}}</p>
 			<ul class="list-inline">
 				<li><a id="anonymous-sign-in" class="btn btn-lg btn-primary" href="{{url_for('account.signin')}}?next={{request.path}}">{{_("Sign In")}}</a></li>
-				<li><button role="button" id="remind-me-later" class="btn btn-lg btn-default" disabled>{{_("Remind Me Later")}}</button></li>
+				<li><button type="button" id="remind-me-later" class="btn btn-lg btn-default" disabled>{{_("Remind Me Later")}}</button></li>
 			</ul>
 		</div>
 		{% endif %}
@@ -41,45 +42,48 @@
 
 
 {% block main_content %}
-<div class="row">
+<div id="task-presenter" class="row">
+	{% if project_completed %}
 	<div class="col-xs-12">
-		{% if project.completed or invite_new_volunteers %}
-			<h3>{{_("Thank you for showing an interest in this project.")}}</h3>
-			{% if project.completed %}
-				<p>{{_("All available tasks for this project have been successfully completed.")}}</p>
-				<a class="btn btn-lg btn-primary" href="{{url_for('project.export_to', short_name=project.short_name)}}">{{_("Export Results")}}</a>
-			{% elif invite_new_volunteers %}
-				<p>{{_("You have participated in all available tasks however we still need more volunteers to contribute.")}}<br>{{_("Help us spread the word by sharing the project!")}}</p>
-			{% endif %}
+		<h3>{{_("Thank you for showing an interest in this project.")}}</h3>
+		{% if project.completed %}
+		<div>
+			<p>{{_("All available analyses have been successfully completed.")}}</p>
+			<a id="export-results" class="btn btn-lg btn-primary" href="{{url_for('project.export_to', short_name=project.short_name)}}">{{_("Export Results")}}</a>
+		</div>
 		{% else %}
-			{% from "projects/helpers/_presenter.html" import render_questionnaire, render_subject %}
-			<div id="loading-project" class="row">
-				<div class="col-xs-12">
-					<center><i class="fa fa-cloud-download"></i></center>
-				</div>
-			</div>
-			<div id="project" class="row" data-short-name="{{project.short_name}}">
-				<div class="col-xs-12 col-lg-7">{{render_subject()}}</div>
-				<div class="col-xs-12 col-lg-5">{{render_questionnaire()}}</div>
-			</div>
+		<div>
+			<p>{{_("You have successfully completed all available analyses however we still need more volunteers to contribute.")}}<br>{{_("Help us spread the word by sharing the project!")}}</p>
+		</div>
 		{% endif %}
 	</div>
+	{% else %}
+	{% from "projects/helpers/_presenter.html" import render_questionnaire, render_subject %}
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-12 col-lg-7">{{render_subject()}}</div>
+			<div class="col-xs-12 col-lg-5">{{render_questionnaire()}}</div>
+		</div>
+	</div>
+	{% endif %}
 </div>
 {% endblock %}
 
 
 {% block script %}
-{%- if not (project.completed or invite_new_volunteers) %}
+{%- if not project_completed %}
 <script>
 (function(geotagx){
 	"use strict";
 	geotagx.project = geotagx.project || {};
+	geotagx.project.shortName = "{{project.short_name}}";
 	geotagx.project.configuration = Object.freeze({{project.info.task_presenter | safe}});
 })(window.geotagx = window.geotagx || {});
 </script>
 <script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" defer></script>
 <script src="{{vendor}}/marked/marked.min.js" defer></script>
 <script src="{{vendor}}/vue/dist/vue.min.js" defer></script>
+<script src="{{js}}/projects/presenter/base.js" defer></script>
 <script src="{{js}}/projects/presenter/components/base.js" defer></script>
 <script src="{{js}}/projects/presenter/components/input/polar.js" defer></script>
 <script src="{{js}}/projects/presenter/components/input/dropdown-list.js" defer></script>
@@ -89,8 +93,8 @@
 <script src="{{js}}/projects/presenter/components/input/datetime.js" defer></script>
 <script src="{{js}}/projects/presenter/components/input/url.js" defer></script>
 <script src="{{js}}/projects/presenter/components/input/geotagging.js" defer></script>
-<script src="{{js}}/projects/presenter/components/subject-image.js" defer></script>
-<script src="{{js}}/projects/presenter/components/subject-pdf.js" defer></script>
+<script src="{{js}}/projects/presenter/components/subject/image.js" defer></script>
+<script src="{{js}}/projects/presenter/components/subject/pdf.js" defer></script>
 <script src="{{js}}/projects/presenter/components/question.js" defer></script>
 <script src="{{js}}/projects/presenter/questionnaire.js" defer></script>
 <script src="{{js}}/projects/presenter/subject.js" defer></script>
