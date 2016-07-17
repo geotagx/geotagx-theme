@@ -109,9 +109,6 @@
     padding:0.25em 0 0 0;
     height:100%;
 }
-#questionnaire-status-icons > li > i.fa {
-    display:none;
-}
 #questionnaire-status-icons > li > i.status-icon-busy {
     color:#EEE;
     animation-name:flash;
@@ -130,24 +127,18 @@
 #questionnaire-submission-form {
     width:100%;
     padding:0.5em;
+    background:#EEE;
 }
 #questionnaire-submission-button {
     text-transform:uppercase;
     font-weight:900;
     letter-spacing:2px;
 }
-#questionnaire-submission-message {
-    display:none;
+#questionnaire-submission-error-message {
     font-weight:500;
-    font-size:0.9em;
     font-style:italic;
-    margin:0.75em 0 2em;
-}
-#questionnaire-submission-message[data-severity="error"] {
-    color:#B00;
-}
-#questionnaire-submission-message[data-severity="success"] {
-    color:#0B0;
+    margin:0.75em 0 1em;
+    color:#F00;
 }
 #questionnaire-submission-thanks {
     margin:0.5em 0 0;

@@ -30,22 +30,28 @@
 
 	geotagx.project.taskPresenter = {};
 	/**
-	 * The current PyBossa AJAX context.
+	 * The current task.
 	 */
-	geotagx.project.taskPresenter.ajaxContext_ = {
-		task: null,
-		deferred: null,
-	};
+	var task_ = null;
+	/**
+	 *
+	 */
+	var deferred_ = null;
+	/**
+	 * True if all project tasks have been completed by the user, false otherwise.
+	 */
+	var tasksCompleted_ = false;
 	/**
 	 * Start the task presenter.
 	 */
 	geotagx.project.taskPresenter.start = function(shortName){
 		pybossa.taskLoaded(function(task, deferred){
-/*
-			if (!$.isEmptyObject(task)) {
+			if ($.isEmptyObject(task)) {
+				tasksCompleted_ = true;
+			} else {
 				// Is the task's URL accessible?
 				task.info.accessible = true;
-
+/*
 				// TODO Do this only if the subject type is an image.
 				// Cache the image for later use.
 				var imageCache = new Image();
@@ -55,69 +61,58 @@
 					//deferred.resolve(task);
 				};
 				imageCache.src = task.info.image_url;
-			}
 */
-			deferred.resolve(task);
+				deferred.resolve(task);
+			}
 		});
 		pybossa.presentTask(function(task, deferred){
-			geotagx.project.taskPresenter.ajaxContext_.task = task;
-			geotagx.project.taskPresenter.ajaxContext_.deferred = deferred;
-
-			// If the task object is empty, then there're no more tasks to participate in.
-			// Display a participation appreciation message.
-			if ($.isEmptyObject(task)) {
-//				$("#participation-appreciation-section").removeClass("hide");
-//				$("#questionnaire-section").addClass("hide");
-//				$("#image-section").addClass("hide");
-//				$("#pdf-section").addClass("hide");
-//				$("#project-task-presenter-header").addClass("hide");
-			} else {
-				geotagx.project.taskPresenter.questionnaire.updateTaskCounter();
-//				geotagx.project.taskPresenter.subject.setUrl(task.info.image_url);
-//				geotagx.project.taskPresenter.subject.setSource(task.info.source_uri);
-				geotagx.analytics.onTaskChanged(task.id);
-			}
+			task_ = task;
+			deferred_ = deferred;
+			geotagx.project.taskPresenter.questionnaire.reset();
+//			geotagx.project.taskPresenter.subject.setUrl(task.info.image_url);
+//			geotagx.project.taskPresenter.subject.setSource(task.info.source_uri);
+			geotagx.analytics.onTaskChanged(task.id);
 		});
 		pybossa.run(geotagx.project.shortName);
 	};
 	/**
-	 * Uploads the specified set of questionnaire answers.
+	 * Submits the questionnaire's answers.
 	 */
-	geotagx.project.taskPresenter.uploadAnswers = function(answers){
-		var task = geotagx.project.taskPresenter.ajaxContext_.task;
-		var deferred = geotagx.project.taskPresenter.ajaxContext_.deferred;
-		var questionnaire = geotagx.project.taskPresenter.questionnaire;
-		var resolve = function(){ deferred.resolve(); };
+	geotagx.project.taskPresenter.submit = function(answers){
+		if (!$.isEmptyObject(task_) && !$.isEmptyObject(deferred_)) {
+			// Add metadata to the answers object.
+			answers._accessible = task_.info.accessible;
 
-		// Add metadata to the answers object.
-		answers._accessible = task.info.accessible;
+			geotagx.project.taskPresenter.questionnaire.setSubmissionStatus("BUSY");
 
-		pybossa.saveTask(task.id, answers)
-		.done(function(){
-			if (answers._accessible) {
+			pybossa.saveTask(task_.id, answers)
+			.done(function(response){
 				// A delay is introduced between the moment results have been stored and the next question
 				// is displayed. Let's give the user the satisfaction of submitting their work...
 				setTimeout(function(){
-					questionnaire.onSubmission();
-					setTimeout(resolve, 1000);
+					setTimeout(function(){
+						if (tasksCompleted_) {
+							window.location.href = "/project/" + geotagx.project.shortName + "/newtask";
+						} else {
+							deferred_.resolve();
+						}
+					}, 1500);
+					geotagx.project.taskPresenter.questionnaire.analysesCompleted++;
+					geotagx.project.taskPresenter.questionnaire.setSubmissionStatus("DONE");
 				}, 1000);
-			} else {
-				resolve();
-			}
-		})
-		.fail(function(){
-			if (answers._accessible) {
+			})
+			.fail(function(response){
 				// If the status code is 403 (FORBIDDEN), then we assume that the
 				// data was sent but the deferred object has not yet been resolved.
 				if (response.status === 403) {
-					resolve();
+					deferred_.resolve();
 				} else {
-					questionnaire.onSubmissionError();
-					setTimeout(resolve, 1000);
+					geotagx.project.taskPresenter.questionnaire.setSubmissionStatus("ERROR");
+					setTimeout(function(){
+						geotagx.project.taskPresenter.questionnaire.setSubmissionStatus("IDLE");
+					}, 3500);
 				}
-			} else {
-				resolve();
-			}
-		});
+			});
+		}
 	};
 })(window.geotagx = window.geotagx || {});

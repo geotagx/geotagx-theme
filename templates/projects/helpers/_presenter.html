@@ -12,20 +12,20 @@
 			<div id="questionnaire-progress" class="progress"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="percentageComplete" :style="{width: percentageComplete + '%'}"></div></div>
 		</section>
 		<section class="right">
-			<div id="questionnaire-statistics">
+			<div id="questionnaire-statistics" v-show="submissionStatus === 'IDLE'">
 				<span id="questionnaire-analyses-remaining" v-html="analysesCompleted"></span>&nbsp;&#124;&nbsp;<span id="questionnaire-analyses-total" v-html="numberOfAnalyses"></span>
 			</div>
-			<ul id="questionnaire-status-icons" class="list-inline">
-				<li><i class="status-icon-busy fa fa-2x fa-circle"></i></li>
-				<li><i class="status-icon-success fa fa-2x fa-check-circle"></i></li>
-				<li><i class="status-icon-error fa fa-2x fa-exclamation-circle"></i></li>
+			<ul id="questionnaire-status-icons" class="list-inline" v-show="submissionStatus !== 'IDLE'">
+				<li v-show="submissionStatus === 'BUSY'"><i class="status-icon-busy fa fa-2x fa-circle"></i></li>
+				<li v-show="submissionStatus === 'DONE'"><i class="status-icon-success fa fa-2x fa-check-circle"></i></li>
+				<li v-show="submissionStatus === 'ERROR'"><i class="status-icon-error fa fa-2x fa-exclamation-circle"></i></li>
 			</ul>
 		</section>
 	</header>
 	<div id="questionnaire-submission-form" v-show="isComplete">
-		<button id="questionnaire-submission-button" type="button" class="btn btn-block btn-lg btn-success" @click="submitAnswers">{{_("Submit Your Analysis")}}</button>
+		<button id="questionnaire-submission-button" type="button" class="btn btn-block btn-lg btn-success" @click="submit" :disabled="submissionStatus !== 'IDLE'">{{_("Submit Your Analysis")}}</button>
 		<center>
-			<div id="questionnaire-submission-message"></div>
+			<div id="questionnaire-submission-error-message" v-show="submissionStatus === 'ERROR'">{{_("Hmmm... An unexpected error occurred. Please resubmit your analysis.")}}</div>
 			<p id="questionnaire-submission-thanks">Thank you very much for contributing to this project! We appreciate any feedback you may have so find us on <a target="_blank" href="https://github.com/geotagx/pybossa/issues"><strong>GitHub</strong></a> or <a href="mailto:geotag-x@cern.ch?Subject=GeoTag-X feedback" target="_top"><strong>send us an email</strong></a>.</p>
 		</center>
 	</div>
