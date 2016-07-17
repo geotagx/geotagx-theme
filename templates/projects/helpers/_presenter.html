@@ -2,7 +2,7 @@
  # Renders the task presenter's questionnaire.
  #}
 {% macro render_questionnaire() %}
-<div id="questionnaire">
+<div id="questionnaire" hidden>
 	<header id="questionnaire-header" class="section-header">
 		<section class="left">
 			<button id="questionnaire-rewind" :disabled="!hasPreviousQuestion()" @click="showPreviousQuestion"><i class="fa fa-lg fa-backward"></i></button>
@@ -23,7 +23,7 @@
 		</section>
 	</header>
 	<div id="questionnaire-submission-form" v-show="isComplete">
-		<button id="questionnaire-submission-button" class="btn btn-block btn-lg btn-success" @click="submit">{{_("Submit Your Analysis")}}</button>
+		<button id="questionnaire-submission-button" type="button" class="btn btn-block btn-lg btn-success" @click="submitAnswers">{{_("Submit Your Analysis")}}</button>
 		<center>
 			<div id="questionnaire-submission-message"></div>
 			<p id="questionnaire-submission-thanks">Thank you very much for contributing to this project! We appreciate any feedback you may have so find us on <a target="_blank" href="https://github.com/geotagx/pybossa/issues"><strong>GitHub</strong></a> or <a href="mailto:geotag-x@cern.ch?Subject=GeoTag-X feedback" target="_top"><strong>send us an email</strong></a>.</p>
