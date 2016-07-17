@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.PolarInput = Vue.extend({
+    geotagx.project.taskPresenter.component.PolarInput = Vue.extend({
         template: "#g-input-polar-template",
         props: {
             /**
@@ -48,7 +48,7 @@
         },
         methods: {
             onAnswer: function(answer){
-                geotagx.vue.helper.dispatchAnswer(this, answer);
+                this.$parent.onAnswer(answer);
             }
         }
     });

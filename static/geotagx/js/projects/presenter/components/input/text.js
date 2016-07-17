@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.TextInput = Vue.extend({
+    geotagx.project.taskPresenter.component.TextInput = Vue.extend({
         template: "#g-input-text-template",
         data: function(){
             return {
@@ -63,7 +63,7 @@
              */
             onAnswer: function(){
                 this.model = typeof(this.model) === "string" ? this.model.trim() : "";
-                geotagx.vue.helper.dispatchAnswer(this, this.model.length > 0 ? this.model : null);
+                this.$parent.onAnswer(this.model.length > 0 ? this.model : null);
             }
         }
     });

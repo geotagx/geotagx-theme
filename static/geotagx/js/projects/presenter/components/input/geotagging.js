@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.GeotaggingInput = Vue.extend({
+    geotagx.project.taskPresenter.component.GeotaggingInput = Vue.extend({
         template: "#g-input-geotagging-template"
     });
 })(window.geotagx = window.geotagx || {});

@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.MultipleChoiceInput = Vue.extend({
+    geotagx.project.taskPresenter.component.MultipleChoiceInput = Vue.extend({
         template: "#g-input-multiple-choice-template",
         data: function(){
             return {
@@ -136,7 +136,7 @@
                             answer = completeOtherOption;
                     }
                 }
-                geotagx.vue.helper.dispatchAnswer(this, answer);
+                this.$parent.onAnswer(answer);
             }
         }
     });

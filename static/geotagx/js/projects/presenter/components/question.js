@@ -31,14 +31,14 @@
     Vue.component("g-question", {
         template: "#g-question-template",
         components: {
-            "g-input-polar": geotagx.vue.component.PolarInput,
-            "g-input-dropdown-list": geotagx.vue.component.DropdownListInput,
-            "g-input-multiple-choice": geotagx.vue.component.MultipleChoiceInput,
-            "g-input-text": geotagx.vue.component.TextInput,
-            "g-input-number": geotagx.vue.component.NumberInput,
-            "g-input-datetime": geotagx.vue.component.DatetimeInput,
-            "g-input-url": geotagx.vue.component.UrlInput,
-            "g-input-geotagging": geotagx.vue.component.GeotaggingInput,
+            "g-input-polar": geotagx.project.taskPresenter.component.PolarInput,
+            "g-input-dropdown-list": geotagx.project.taskPresenter.component.DropdownListInput,
+            "g-input-multiple-choice": geotagx.project.taskPresenter.component.MultipleChoiceInput,
+            "g-input-text": geotagx.project.taskPresenter.component.TextInput,
+            "g-input-number": geotagx.project.taskPresenter.component.NumberInput,
+            "g-input-datetime": geotagx.project.taskPresenter.component.DatetimeInput,
+            "g-input-url": geotagx.project.taskPresenter.component.UrlInput,
+            "g-input-geotagging": geotagx.project.taskPresenter.component.GeotaggingInput,
         },
         props: {
             /**
@@ -100,6 +100,13 @@
              */
             hasHelp: function(){
                 return this.question.help && this.question.help[this.language];
+            },
+            /**
+             * An event handler that is called when the question is answered.
+             */
+            onAnswer: function(answer){
+                geotagx.project.taskPresenter.questionnaire.saveAnswer(this.question.key, answer);
+                geotagx.project.taskPresenter.questionnaire.showNextQuestion(answer);
             },
         },
     });

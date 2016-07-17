@@ -1,6 +1,6 @@
 /**
  * This script is part of the GeoTag-X theme.
- * It contains the implementation of the URL input component.
+ * It is the core script for all task presenter components.
  *
  * Author: Jeremy Othieno (j.othieno@gmail.com)
  *
@@ -26,9 +26,7 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 (function(geotagx){
-    "use strict";
+	"use strict";
 
-    geotagx.project.taskPresenter.component.UrlInput = Vue.extend({
-        template: "#g-input-url-template"
-    });
+	geotagx.project.taskPresenter.component = geotagx.project.taskPresenter.component || {};
 })(window.geotagx = window.geotagx || {});

@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.DropdownListInput = Vue.extend({
+    geotagx.project.taskPresenter.component.DropdownListInput = Vue.extend({
         template: "#g-input-dropdown-list-template"
     });
 })(window.geotagx = window.geotagx || {});

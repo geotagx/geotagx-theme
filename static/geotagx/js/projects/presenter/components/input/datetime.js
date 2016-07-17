@@ -28,7 +28,7 @@
 (function(geotagx){
     "use strict";
 
-    geotagx.vue.component.DatetimeInput = Vue.extend({
+    geotagx.project.taskPresenter.component.DatetimeInput = Vue.extend({
         template: "#g-input-datetime-template"
     });
 })(window.geotagx = window.geotagx || {});
