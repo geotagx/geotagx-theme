@@ -12,11 +12,5 @@
         });
 
     }
-    
-    if ( resource === 'account' ) {
-        $("#fullname").bind('textchange', function (event, previousText) {
-          $('#name').val(makeSlug($(this).val()));
-        });
-    }
 
 }());

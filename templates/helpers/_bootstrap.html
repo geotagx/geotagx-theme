@@ -14,9 +14,9 @@
 {#
  # Renders a responsive div.
  #}
-{% macro row(row_id=None, col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1") %}
+{% macro row(row_id=None, row_class=None, col_id=None, col_class="col-xs-12 col-md-10 col-md-offset-1") %}
 {# Renders content in a column that is nested in a row, as per the Bootstrap grid guidelines. #}
-<div {% if row_id %}id="{{row_id}}" {% endif %}class="row">
+<div {% if row_id %}id="{{row_id}}" {% endif %}class="row{% if row_class %} {{row_class}}{% endif %}">
     <div {% if col_id %}id="{{col_id}}" {% endif %}class="{{col_class}}">
         {{caller()}}
     </div>

@@ -61,10 +61,10 @@
 {% endmacro %}
 
 
-{% macro geotagx_render_field(field, id, title, type, value, class) %}
+{% macro geotagx_render_field(field, id, title, type, value, class, autofocus=False) %}
               <div class="form-group {% if field.errors %} has-error {% endif %}">
                   <div>
-                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg {% if class %} {{ class }} {% endif %} {% if field.errors %} has-error {% endif %}" autofocus="autofocus" placeholder="{{ title }}" type="{{ type }}", value="{{ value }}" >
+                      <input id="{{ id }}" name="{{ id }}" class="form-control input-lg {% if class %} {{ class }} {% endif %} {% if field.errors %} has-error {% endif %}" {%if autofocus %}autofocus="autofocus"{% endif %} placeholder="{{ title }}" type="{{ type }}", value="{{ value }}" >
                       {% if field.errors %}
                         <ul style="list-style-position:inside;">
                           {% for error in field.errors %}
