@@ -18,11 +18,11 @@
 		<form id="account-registration-form" method="post" accept-charset="UTF-8" role="form" action="{{url_for('account.register')}}">
 			{{form.hidden_tag()}}
 			<fieldset>
-				{{geotagx_render_field(form.email_addr,"email_addr", "Email Address", "text")}}
-				{{geotagx_render_field(form.fullname,"fullname", "Full Name", "text")}}
-				{{geotagx_render_field(form.name,"name", "Username", "text")}}
-				{{geotagx_render_field(form.password,"password", "Password", "password")}}
-				{{geotagx_render_field(form.confirm,"confirm", "Confirm Password", "password")}}
+				{{geotagx_render_field(form.email_addr,"email_addr", _("Email Address"), "email", request.form.email_addr)}}
+				{{geotagx_render_field(form.fullname,"fullname", _("Full Name"), "text", request.form.fullname)}}
+				{{geotagx_render_field(form.name,"name", _("Username"), "text", request.form.name)}}
+				{{geotagx_render_field(form.password,"password", _("Password"), "password")}}
+				{{geotagx_render_field(form.confirm,"confirm", _("Confirm Password"), "password")}}
 				<button type="submit" class="btn btn-lg btn-block btn-primary">{{_("Sign Up")}}</button>
 			</fieldset>
 		</form>

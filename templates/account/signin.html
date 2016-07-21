@@ -60,7 +60,7 @@
 		<form id="account-sign-in" method="post" accept-charset="UTF-8" role="form">
 			{{form.hidden_tag()}}
 			<fieldset>
-				{{geotagx_render_field(form.email, "email", "Email Address", "text")}}
+				{{geotagx_render_field(form.email, "email", "Email Address", "email", request.form.email)}}
 				{{geotagx_render_field(form.password, "password", "Password", "password")}}
 				<div class="form-group" style="text-align:right; padding-bottom:1.25em">
 					<div><a href="{{url_for('account.forgot_password')}}">{{_("Have you forgotten your password?")}}</a></div>
