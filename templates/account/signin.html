@@ -42,6 +42,12 @@
 	border-radius:0;
 	background:#0AF;
 }
+#authentication-error-message {
+	color:#D00;
+	font-weight:700;
+	padding:0 0 0.5em;
+	text-align:center;
+}
 </style>
 {% endblock %}
 
@@ -65,6 +71,13 @@
 				<div class="form-group" style="text-align:right; padding-bottom:1.25em">
 					<div><a href="{{url_for('account.forgot_password')}}">{{_("Have you forgotten your password?")}}</a></div>
 				</div>
+				{% if not form.email.errors and not form.password.errors and flash_messages %}
+				{% with (status, unused) = flash_messages[0] %}
+				{% if status == "error" %}
+				<p id="authentication-error-message">{{_("Incorrect email address or password.")}}</p>
+				{% endif %}
+				{% endwith %}
+				{% endif %}
 				<button type="submit" class="btn btn-lg btn-block btn-primary">{{_("Sign In")}}</button>
 			</fieldset>
 		</form>
