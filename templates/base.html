@@ -9,6 +9,7 @@
 {% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
 {% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() -%}
 {% set user_locale = "en" if current_user.is_anonymous() else current_user.locale -%}
+{% set flash_messages = get_flashed_messages(with_categories=True) -%}
 {% import "helpers/_bootstrap.html" as bootstrap %}
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@
                 {% endblock %}
             </header>
             <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
-                {%- block flash_messages %}{% call bootstrap.row() %}{% include "_flash_messages.html" %}{% endcall %}{% endblock -%}
+                {# {%- block flash_messages %}{% call bootstrap.row() %}{% include "_flash_messages.html" %}{% endcall %}{% endblock -%} #}
                 {%- block content %}{% endblock -%}
             </main>
             <footer id="page-footer">
