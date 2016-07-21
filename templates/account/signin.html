@@ -73,7 +73,7 @@
 				</div>
 				{% if not form.email.errors and not form.password.errors and flash_messages %}
 				{% with (status, unused) = flash_messages[0] %}
-				{% if status == "error" %}
+				{% if status == "error" or status == "info" %}
 				<p id="authentication-error-message">{{_("Incorrect email address or password.")}}</p>
 				{% endif %}
 				{% endwith %}
