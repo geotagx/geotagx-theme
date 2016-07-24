@@ -58,11 +58,3 @@
     from, 50%, to { opacity:1; }
     25%, 75% { opacity:0; }
 }
-/**
- * Large buttons.
- */
-.btn-lg {
-    font-weight:900;
-    border-radius:1px;
-    letter-spacing:1px;
-}
