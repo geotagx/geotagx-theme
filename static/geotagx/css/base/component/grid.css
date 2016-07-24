@@ -12,6 +12,10 @@
 .project-tile {
 	text-align:left;
 	overflow:hidden;
+	border:1px solid rgba(0, 0, 0, 0);
+}
+.project-tile:hover {
+	border-color:#DDD;
 }
 .project-tile > figure.cover {
 	position:relative;
@@ -69,7 +73,7 @@
 	position:relative;
 	padding:0.5em;
 	color:#555;
-	background:#EEF2F5;
+	background:#FFF;
 	transform:translateY(100%);
 	-o-transform:translateY(100%);
 	-ms-transform:translateY(100%);
@@ -93,7 +97,7 @@
 	pointer-events:none;
 	border:solid transparent;
 	border-color:rgba(255, 255, 255, 0);
-	border-bottom-color:#EEF2F5;
+	border-bottom-color:#FFF;
 	border-width:0.5em;
 	margin-left:0.5em;
 }
