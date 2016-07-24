@@ -27,8 +27,8 @@
 		<div id="anonymous-notification">
 			<p id="anonymous-notification-message">{{_("You are contributing to this project anonymously and will not get any credit for your work.")}}</p>
 			<ul class="list-inline">
-				<li><a id="anonymous-sign-in" class="btn btn-lg btn-primary" href="{{url_for('account.signin')}}?next={{request.path}}">{{_("Sign In")}}</a></li>
-				<li><button type="button" id="remind-me-later" class="btn btn-lg btn-default" disabled>{{_("Remind Me Later")}}</button></li>
+				<li><a id="anonymous-sign-in" class="btn btn-lg btn-primary call-to-action" href="{{url_for('account.signin')}}?next={{request.path}}">{{_("Sign In")}}</a></li>
+				<li><button type="button" id="remind-me-later" class="btn btn-lg btn-default call-to-action" disabled>{{_("Remind Me Later")}}</button></li>
 			</ul>
 		</div>
 		{% endif %}

@@ -35,13 +35,6 @@
 		border-left:1px dashed #CCC;
 	}
 }
-.authentication-page form > fieldset > button[type="submit"] {
-	font-size:1.2em;
-	font-weight:900;
-	letter-spacing:1px;
-	border-radius:0;
-	background:#0AF;
-}
 #authentication-error-message {
 	color:#D00;
 	font-weight:700;
@@ -78,7 +71,7 @@
 				{% endif %}
 				{% endwith %}
 				{% endif %}
-				<button type="submit" class="btn btn-lg btn-block btn-primary">{{_("Sign In")}}</button>
+				<button type="submit" class="btn btn-lg btn-block btn-primary call-to-action">{{_("Sign In")}}</button>
 			</fieldset>
 		</form>
 	</div>
