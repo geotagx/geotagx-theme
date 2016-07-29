@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% set active_page = "blog" %}
+{% set active_page_title = _("Blog") %}
+{% from "blog/_helpers.html" import render_post %}
+
+{% block stylesheet %}
+<style>
+#page-content {
+	color:#363636;
+	background:#EEF2F5;
+	padding-top:1em;
+}
+.post-card {
+	color:#4A4A4A;
+	background:#FBFBFB;
+	margin-bottom:2em;
+	border:1px solid #EEE;
+}
+.post-card a {
+	color:#0AF;
+}
+.post-card a:hover {
+	text-decoration:underline;
+}
+.post-card > .post {
+}
+.post-card > .post > header,
+.post-card > .post > section[role="body"],
+.post-card > .post > footer {
+	padding:0.75em;
+}
+.post-card > .post > header {
+}
+.post-card > .post > header > .title {
+	margin:0;
+	font-weight:900;
+	letter-spacing:1px;
+}
+.post-card > .post > header > .subtitle {
+	font-size:1em;
+	opacity:0.8;
+}
+.post-card > .post > .cover-image {
+	width:100%;
+	max-width:100%;
+	height:auto;
+}
+.post-card > .post > section[role="body"] {
+}
+.post-card > .post > section[role="body"] em {
+	font-style:normal;
+}
+.post-card > .post > footer {
+	border-top:1px solid #EEE;
+	background:#F6F6F6;
+}
+.post-card > .post > footer > .read-the-article {
+	font-weight:700;
+}
+
+
+
+.post > section[role="body"] img {
+	width:100%;
+	max-width:100%;
+	height:auto;
+}
+
+
+
+#sidebar {
+	padding:0;
+}
+
+#tweeter-feed {
+}
+#tweeter-feed > header {
+	color:#777;
+	font-size:1.6em;
+	font-weight:900;
+	letter-spacing:1px;
+	text-transform:uppercase;
+}
+#tweeter-feed > div[role="container"] {
+	background:#FFF;
+
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% call bootstrap.row(row_id="blog-page") %}
+<div class="row">
+	<div class="col-xs-12 col-md-8">
+		{% for post in posts %}
+		<div class="post-card">{{render_post(post, summarized=True)}}</div>
+		{% endfor %}
+	</div>
+	<aside id="sidebar" class="col-md-4 hidden-xs hidden-sm">
+		<div id="tweeter-feed">
+			<header>{{_("Latest tweets")}}</header>
+			<div role="container" x-style="background:#FFF; max-width:520px"><a class="twitter-timeline" href="https://twitter.com/GeotagX" data-widget-id="590993925449494528" data-screen-name="GeotagX" data-chrome="noheader transparent"></a></div>
+		</div>
+
+{#
+ 		{{pagination.page}}
+		{{pagination.per_page}}
+		{{pagination.total_count}}
+#}
+	</aside>
+</div>
+
+
+{% if posts %}
+{% else %}
+	<h1>{{_("Sorry, there are no blog posts yet!")}}</h1>
+
+<center>
+	<h3> Latest Blog Posts....</h3>
+</center>
+
+{% endif %}
+{% endcall %}
+{% endblock %}

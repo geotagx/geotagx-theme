@@ -1,0 +1,22 @@
+{#
+ # Renders a blog post.
+ # @param post the blog post to render.
+ # @param summarized if set to True, a summarized version of the post is rendered.
+ #}
+{% macro render_post(post, summarized=False) %}
+<article class="post">
+	<header>
+		<h3 class="title">{{post.title}}</h3>
+		<h4 class="subtitle">{{_("by")}}&nbsp;<a href="/account/{{post.owner.name}}">{{post.owner.fullname | capitalize}}</a>&nbsp;&middot;&nbsp;<time title="{{post.created}}" datetime="{{post.created[:16]}}">{{post.created | pretty_date}}</time></h4>
+	</header>
+	{% if summarized and post.cover_image %}
+	{% with cover_image_alt = _("Blog post's cover image.") %}
+	<img class="cover-image" src="{{post.cover_image}}" alt="{{cover_image_alt}}">
+	{% endwith %}
+	{% endif %}
+	<section role="body">{{post.body | markdown}}</section>
+	<footer>
+		<a class="read-the-article" href="{{url_for('geotagx-blog.post', id=post.id)}}">{{_("Read the full article")}}</a>
+	</footer>
+</article>
+{% endmacro %}
