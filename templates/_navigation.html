@@ -52,7 +52,7 @@ body {
 				<ul class="nav navbar-nav navbar-left">
 					<li{% if active_page == "about"     %} class="active"{% endif %}><a href="{{url_for('home.about')}}">{{_("About")}}</a></li>
 					<li{% if active_page == "projects"  %} class="active"{% endif %}><a href="{{url_for('project.index')}}">{{_("Projects")}}</a></li>
-					<li{% if active_page == "blog"      %} class="active"{% endif %}><a href="{{url_for('blog.index')}}">{{_("Blog")}}</a></li>
+					<li{% if active_page == "blog"      %} class="active"{% endif %}><a href="{{url_for('geotagx-blog.index')}}">{{_("Blog")}}</a></li>
 					<li{% if active_page == "community" %} class="active"{% endif %}><a href="{{url_for('account.index')}}">{{_("Community")}}</a></li>
 					<li{% if active_page == "feedback"  %} class="active"{% endif %}><a href="{{url_for('geotagx.feedback')}}">{{_("Feedback")}}</a></li>
 				</ul>
