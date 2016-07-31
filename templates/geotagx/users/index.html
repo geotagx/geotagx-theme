@@ -38,7 +38,7 @@
                           </div>
                           {% if current_user.id != account.id %}
                           <div class="user-profile-delete-button">
-                            <a class="btn btn-danger btn-lg" href="{{ url_for('geotagx.delete_user', name=account.name, confirmed='unconfirmed')+'?user_page_redirect='+pagination_page  }}"> {{ _('Delete User') }}</a>
+                            <a class="btn btn-danger btn-lg" href="{{ url_for('geotagx-admin.delete_user', name=account.name, confirmed='unconfirmed')+'?user_page_redirect='+pagination_page  }}"> {{ _('Delete User') }}</a>
                           </div>
                           {% endif %}
                         </div>

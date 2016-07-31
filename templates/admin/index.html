@@ -38,22 +38,22 @@
 		<a href="{{url_for('admin.users')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
 	</div>
 	<div id="users-list" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-list"></i> {{_('Users')}}</h2>
+		<h2><i class="icon-list"></i> {{_('Export Users')}}</h2>
 		<p>{{_('Export a list of users')}}</p>
-		<a href="{{url_for('geotagx.export_users', format='json')}}" class="btn btn-primary">{{ _('JSON') }}</a>
-		<a href="{{url_for('geotagx.export_users', format='csv')}}" class="btn btn-primary">{{_('CSV')}}</a>
+		<a href="{{url_for('geotagx-admin.export_users', format='json')}}" class="btn btn-primary">{{ _('JSON') }}</a>
+		<a href="{{url_for('geotagx-admin.export_users', format='csv')}}" class="btn btn-primary">{{_('CSV')}}</a>
 	</div>
 </div>
 <div class="row">
 	<div id="users-list" class="col-xs-12 col-md-6 well">
 		<h2><i class="icon-list"></i> {{_('Users Management')}}</h2>
 		<p>{{_('Manage all registered Users')}}</p>
-		<a href="{{url_for('geotagx.users_page')}}" class="btn btn-primary">{{ _('Manage') }}</a>
+		<a href="{{url_for('geotagx-admin.manage_users')}}" class="btn btn-primary">{{ _('Manage') }}</a>
 	</div>
 	<div id="users-list" class="col-xs-12 col-md-6 well">
 		<h2><i class="icon-list"></i> {{_('Send Newsletter')}}</h2>
 		<p>{{_('Send newsletter to all registered users.')}}</p>
-		<a href="{{url_for('geotagx.newsletter')}}" class="btn btn-primary">{{ _('Go') }}</a>
+		<a href="{{url_for('geotagx-admin.send_newsletter')}}" class="btn btn-primary">{{ _('Go') }}</a>
 	</div>
 </div>
 {% endcall %}
