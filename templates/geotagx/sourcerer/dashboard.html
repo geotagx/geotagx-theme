@@ -90,8 +90,7 @@ $("#approve_all").click(function(){
 
   $("input").prop("disabled", "true");
 
-  console.log(btoa(JSON.stringify(final_results)));
-  $.post("/geotagx/sourcerer/commands", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
+  $.post("{{url_for('geotagx-sourcerer.dashboard_commands')}}", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
     if(d.result == "SUCCESS"){
       alert("All checked entries inserted into the database for analysis.");
     }else{
@@ -118,7 +117,7 @@ $("#trash_all").click(function(){
   }
 
   $("input").prop("disabled", "true");
-  $.post("/geotagx/sourcerer/commands", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
+  $.post("{{url_for('geotagx-sourcerer.dashboard_commands')}}", {commands :  btoa(JSON.stringify(final_results)) }, function(d){
     if(d.result == "SUCCESS"){
       alert("All checked entries successfully rejected.");
     }else{
