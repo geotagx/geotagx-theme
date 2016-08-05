@@ -1,3 +1,27 @@
+{#
+ # Renders the URL to the specified user's profile picture.
+ #}
+{% macro render_profile_picture_url(user, upload_method=None) -%}
+{%- if user.info.avatar -%}
+  {%- if upload_method == "rackspace" -%}
+    {{url_for("rackspace", filename=user.info.avatar, container=user.info.container)}}
+  {%- else -%}
+    {{url_for("uploads.uploaded_file", filename=(user.info.container + "/" + user.info.avatar))}}
+  {%- endif -%}
+{%- else -%}
+  {{url_for("static", filename="img/placeholders/user.png")}}
+{%- endif -%}
+{%- endmacro -%}
+
+{#
+ # Renders the specified user's profile picture.
+ #}
+{% macro render_profile_picture(user, upload_method=None, image_id=None, image_class=None) -%}
+<img src="{{render_profile_picture_url(user, upload_method)}}"{% if image_id %} id="{{image_id}}"{% endif %}{% if image_class %} id="{{image_class}}"{% endif %}>
+{%- endmacro %}
+
+
+
 {% macro render_account_local_nav(current_user, active_link) -%}
 <!-- account_local_nav_rendering_disabled  -->
 <!-- user can use the links from the navbar for the same-->

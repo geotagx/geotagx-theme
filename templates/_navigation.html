@@ -35,6 +35,18 @@ body {
 	color:#D94F5C !important;
 	background:#EEE !important;
 }
+#user-specific-navigation {
+	margin:0;
+	padding-top:0.55em;
+	padding-bottom:0.55em;
+}
+#profile-picture-thumbnail > img {
+	width:32px;
+	height:32px;
+	margin-right:0.3em;
+	padding:0;
+	border-radius:32px;
+}
 </style>
 <header>
 	<nav id="navigation" class="navbar navbar-fixed-top">
@@ -58,8 +70,9 @@ body {
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					{% if current_user.is_authenticated() %}
+					{% from "account/_helpers.html" import render_profile_picture %}
 					<li class="dropdown">
-						<a role="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{current_user.fullname|truncate(72,true)}}&nbsp;<span class="caret"></span></a>
+						<a id="user-specific-navigation" role="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="profile-picture-thumbnail">{{render_profile_picture(current_user)}}</span>{{current_user.fullname | truncate(72, true)}}&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="{{url_for('account.profile', name=current_user.name)}}">{{_("View profile")}}</a></li>
 							{% if current_user.admin %}
