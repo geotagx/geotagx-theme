@@ -1,0 +1,98 @@
+{% extends "projects/base.html" %}
+{% set page_id = "projects" %}
+{% set page_title = _("Projects") %}
+{% set page_subtitle = _("Explore all of our available projects.") %}
+{% set page_header_share_buttons = True %}
+{% import "projects/_helpers.html" as helper %}
+
+{# TODO: Deprecate the active_page* variables. #}
+{% set active_page = page_id %}
+{% set active_page_title = page_title %}
+{% set active_page_subtitle = page_subtitle %}
+
+
+{% block stylesheet %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+<style>
+#page-content {
+	padding-top:1.75em;
+	padding-bottom:1.75em;
+}
+#category-filter-section {
+	text-align:center;
+	padding-bottom:1em;
+}
+#get-more-information {
+	margin:0.5em 0 0 !important;
+	padding:0 !important;
+}
+#get-more-information a {
+	color:#0AF;
+}
+#get-more-information a:hover {
+	text-decoration:underline;
+}
+/* MixItUp requires all grid elements to be hidden by default. */
+.grid-slot {
+	display:none;
+}
+</style>
+{% endblock %}
+
+
+{% block main_content %}
+<div id="category-filter-section" class="row">
+	<div class="col-xs-12">
+		<select id="category-filter" class="selectpicker" data-width="fit">
+			<option value="no-filter" selected disabled>{{_("Pick a category that interests you")}}</option>
+			{% for category in categories %}
+			<option value="{{category['id']}}" data-category-short-name="{{category['short_name']}}" data-subtext="{{category['projects'] | length}} {{_('projects')}}">{{category["name"]}}</option>
+			{% endfor %}
+			<option value="all-topics">{{_("All Categories")}}</option>
+		</select>
+		<p id="get-more-information" class="text-center hide"><a id="selected-category-page"><strong>Learn more</strong></a> about <strong><span id="selected-category"></span></strong>.</p>
+	</div>
+</div>
+<div id="project-grid" class="row grid">
+{% for category in categories %}
+	{% for project in category["projects"] %}
+	<div class="mix grid-slot col-xs-12 col-md-4 col-lg-4 filter-{{category['id']}}">{{helper.render_project_tile(project, show_admin_actions=current_user.is_authenticated() and (current_user.admin or current_user.id == project.owner_id))}}</div>
+	{% endfor %}
+{% endfor %}
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/2.1.11/jquery.mixitup.min.js"></script>
+<script>
+(function(){
+	"use strict";
+
+	var $projectGrid = $("#project-grid");
+
+	$("#category-filter").val("no-filter").change(function(){
+		var $filter = $(this);
+		var $getMoreInformation = $("#get-more-information");
+		var $selectedCategory = $("#selected-category");
+		var $selectedCategoryPage = $("#selected-category-page");
+		var $selectedItem = $filter.find(":selected");
+		var selectedFilter = $selectedItem.val();
+
+		if (selectedFilter === "all-topics"){
+			$getMoreInformation.addClass("hide");
+			$filter.val("no-filter");
+			$projectGrid.mixItUp("filter", "all");
+		}
+		else {
+			$selectedCategory.text($selectedItem.text());
+			$selectedCategoryPage.attr("href", "/project/category/" + $selectedItem.data("category-short-name"));
+			$getMoreInformation.removeClass("hide");
+			$projectGrid.mixItUp("filter", ".filter-" + selectedFilter);
+		}
+	});
+	$(document).ready($projectGrid.mixItUp());
+})();
+</script>
+{% endblock %}
