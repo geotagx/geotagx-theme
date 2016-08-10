@@ -1,5 +1,5 @@
 {% set static = url_for("static", filename="geotagx") -%}
-{% set css = static + "/css" -%}
+{% set css = url_for("static", filename="css") -%}
 {% set js = static + "/js" -%}
 {% set img = url_for("static", filename="img") -%}
 {% set vendor = url_for("static", filename="vendor") -%}
