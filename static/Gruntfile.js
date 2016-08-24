@@ -7,22 +7,21 @@ module.exports = function(grunt){
             img: "img",
             vendor: "vendor",
         },
-        concat: {
-            options: {
-                separator: ";",
-                stripBanners: true
-            },
-            bundle_css: {
-                options: {
-                    separator: "",
-                },
+        cssmin: {
+            theme: {
                 files: {
                     "<%= dir.css %>/theme.min.css": [
                         "<%= dir.css %>/theme/button.css",
                         "<%= dir.css %>/theme/page.css",
                         "<%= dir.css %>/theme/project-grid.css",
                     ],
-                }
+                },
+            }
+        },
+        concat: {
+            options: {
+                separator: ";",
+                stripBanners: true
             },
             bundle_js: {
                 files: {
@@ -45,8 +44,10 @@ module.exports = function(grunt){
             },
         },
     });
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-concat");
 
-    grunt.registerTask("bundle", ["concat:bundle_css", "concat:bundle_js", "concat:bundle_minified_vendors"]);
-    grunt.registerTask("minify", ["minify:TODO"]);
+    grunt.registerTask("compress", ["cssmin:theme"]);
+    grunt.registerTask("bundle", ["concat:bundle_js", "concat:bundle_minified_vendors"]);
+    grunt.registerTask("default", ["compress", "bundle"]);
 };
