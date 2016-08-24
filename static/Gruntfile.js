@@ -17,15 +17,10 @@ module.exports = function(grunt){
                     separator: "",
                 },
                 files: {
-                    "<%= dir.css %>/base.min.css": [
-                        "<%= dir.css %>/base/component/call-to-action.css",
-                        "<%= dir.css %>/base/component/grid.css",
-                        "<%= dir.css %>/base/bootstrap-reset.css",
-                        "<%= dir.css %>/base/page.css",
-                        "<%= dir.css %>/base/footer.css",
-                        "<%= dir.css %>/base/component.css",
-                        "<%= dir.css %>/base/style.css",
-                        "<%= dir.css %>/base/style-responsive.css",
+                    "<%= dir.css %>/theme.min.css": [
+                        "<%= dir.css %>/theme/button.css",
+                        "<%= dir.css %>/theme/page.css",
+                        "<%= dir.css %>/theme/project-grid.css",
                     ],
                 }
             },
