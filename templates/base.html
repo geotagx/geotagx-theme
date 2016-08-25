@@ -3,8 +3,10 @@
 {% set js = static + "/js" -%}
 {% set img = url_for("static", filename="img") -%}
 {% set vendor = url_for("static", filename="vendor") -%}
-{% set active_page = active_page|default("index") -%}
-{% set active_project = active_project|default("none") -%}
+{% set page_id = page_id | default("home") %}
+{% set page_title = page_title | default(_("Home")) %}
+{% set page_subtitle = page_subtitle | default(None) %}
+{% set breadcrumbs = breadcrumbs | default(None) %}
 {% set user_ip = request["remote_addr"] -%}
 {% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
 {% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() -%}
@@ -42,34 +44,52 @@
         {%- include "_gtm.html" ignore missing -%}
         {%- include "_navigation.html" -%}
         <div id="page">
-            <header id="page-header">
-                {% block header %}
-                {% from "helpers/_page.html" import render_header %}
-                {{render_header(page_breadcrumbs, title=active_page_title, subtitle=active_page_subtitle)}}
-                {% endblock %}
-            </header>
-            <main id="page-content" role="main" class="container-fluid" style="min-height:400px;">
-                {# {%- block flash_messages %}{% call bootstrap.row() %}{% include "_flash_messages.html" %}{% endcall %}{% endblock -%} #}
-                {%- block content %}{% endblock -%}
-            </main>
-            <footer id="page-footer">
-                {%- block footer %}{% endblock -%}
-                {% include "_footer.html" %}
-                {% if show_cookies_warning %}
-                <div id="cookie-consent">
-                    <div class="row">
-                        <div class="col-xs-12"><p>Cookies help us deliver our services. By using {{brand}}, you agree to our <a href="{{url_for('help.cookies_policy')}}">cookie policy</a>.</p></div>
-                        <div class="col-xs-12"><button id="accept-cookies" class="btn btn-sm btn-primary">{{_("Accept")}}</button></div>
+            {% block page_header %}
+            <header id="page-header" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                        {% if breadcrumbs %}
+                        <ol id="page-breadcrumbs" class="list-inline">
+                            {% for (title, href) in breadcrumbs %}
+                            <li><a href="{{href}}">{{title}}</a></li>
+                            {% endfor %}
+                            <li>{{page_title}}</li>
+                        </ol>
+                        {% endif %}
+                        <h1 id="page-title">{{page_title}}</h1>
+                        {% if page_subtitle %}<p id="page-subtitle">{{page_subtitle}}</p>{% endif %}
                     </div>
-                 </div>
-                {% endif %}
-            </footer>
-            <button id="back-to-top"><span class="fa-stack fa-lg"><i class="fa fa-stop fa-stack-2x"></i><i class="fa fa-long-arrow-up fa-stack-1x fa-inverse"></i></span></button>
+                </div>
+            </header>
+            {% endblock %}
+
+            {% block page_body %}
+            <main id="page-body" role="main" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {%- block content %}{% endblock -%}
+                    </div>
+                </div>
+            </main>
+            {% endblock %}
+
+            {% block page_footer %}
+            <footer id="page-footer" class="container-fluid">{% include "_footer.html" %}</footer>
+            {% endblock %}
+
+            {% if show_cookies_warning %}
+            <div id="cookie-consent">
+                <div class="row">
+                    <div class="col-xs-12"><p>Cookies help us deliver our services. By using {{brand}}, you agree to our <a href="{{url_for('help.cookies_policy')}}">cookie policy</a>.</p></div>
+                    <div class="col-xs-12"><button id="accept-cookies" class="btn btn-sm btn-cta">{{_("Accept")}}</button></div>
+                </div>
+             </div>
+            {% endif %}
+            <button id="back-to-top" class="btn btn-cta"><i class="fa fa-long-arrow-up"></i></button>
         </div>
         <script src="//code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="{{js}}/base.min.js"></script>
-        {# <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> #}
         {%- block script %}{% endblock -%}
     </body>
 </html>
