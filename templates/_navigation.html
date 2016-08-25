@@ -4,7 +4,7 @@ body {
 }
 #navigation {
 	background:#FFF;
-	font:700 1em Lato;
+	font-weight:700;
 	box-shadow:0 1px 1px 0 #CECECE;
 	-moz-box-shadow:0 1px 1px 0 #CECECE;
 	-webkit-box-shadow:0 1px 1px 0 #CECECE;
@@ -28,12 +28,11 @@ body {
 	margin-left:1.15em;
 	margin-right:1.15em;
 	padding:0.4em 0.75em;
-	border-radius:2px;
+	border-radius:1px;
 	color:#FFF !important;
 }
 #sign-in-button:hover {
-	color:#D94F5C !important;
-	background:#EEE !important;
+	background:#08D !important;
 }
 #user-specific-navigation {
 	margin:0;
@@ -90,7 +89,7 @@ body {
 						</ul>
 					</li>
 					{% else %}
-					<li><a role="button" id="sign-in-button" class="btn btn-primary navbar-btn" href="{{url_for('account.signin')}}{% if active_page != 'sign_in' %}{% endif %}"><strong>{{_("Sign In")}}</strong></a></li>
+					<li><a role="button" id="sign-in-button" class="btn btn-cta navbar-btn" href="{{url_for('account.signin')}}{% if active_page != 'sign_in' %}{% endif %}"><strong>{{_("Sign In")}}</strong></a></li>
 					{% endif %}
 				</ul>
 			</div>
