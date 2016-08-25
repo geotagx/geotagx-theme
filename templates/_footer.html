@@ -1,66 +1,62 @@
-<div class="container-fluid">
-	<div id="footer-information" class="row">
-		<div class="col-xs-12 col-md-10 col-md-offset-1">
-			<div class="row">
-				<div class="section col-xs-12 col-md-6 col-lg-4">
-					<ul class="section">
-						<li class="header">{{_("About")}}</li>
-						<li>
-							<p>{{_("GeoTag-X is a research project that will assess if we can teach you, our volunteers, to recognise the important information in different forms of media and create relevant, structured datasets used to the benefit of disaster response teams.")}}</p>
-							<div style="margin-top:1em; background:#FFF; max-width:520px"><a class="twitter-timeline" href="https://twitter.com/GeotagX" data-widget-id="590993925449494528" data-screen-name="GeotagX" data-chrome="noheader transparent"></a></div>
-						</li>
-					</ul>
-				</div>
-				<div class="section col-xs-12 col-md-3 col-lg-2">
-					<ul class="section">
-						<li class="header">{{_("Partners")}}</li>
-						<li><a target="_blank" href="http://citizencyberlab.eu/">Citizen Cyberlab</a></li>
-						<li><a target="_blank" href="http://cordis.europa.eu/fp7/home_en.html">European Commission</a></li>
-					</ul>
-					<ul class="section">
-						<li class="header">{{_("Help")}}</li>
-						<li><a target="_blank" href="/about#image_anchor">{{_("Getting Started")}}</a></li>
-						<li><a target="_blank" href="{{url_for('help.api')}}">{{_("Using the API")}}</a></li>
-						<li><a target="_blank" href="mailto:geotag-x@cern.ch">{{_("Contact Us")}}</a></li>
-					</ul>
-					<ul class="section">
-						<li class="header">{{_("Legal")}}</li>
-						<li><a target="_blank" href="{{url_for('help.tos')}}">{{_("Terms of Service")}}</a></li>
-						<li><a target="_blank" href="{{url_for('help.cookies_policy')}}">{{_("Cookie Policy")}}</a></li>
-						<li><a target="_blank" href="{{url_for('help.license')}}">{{_("Licenses")}}</a></li>
-					</ul>
-				</div>
-				<div class="section col-xs-12 col-md-3 col-lg-2">
-					<ul class="section">
-						<li class="header">{{_("Resources")}}</li>
-						<li><a target="_blank" href="{{url_for('geotagx-blog.index')}}">{{_("Blog")}}</a></li>
-						<li><a target="_blank" href="/newsletter/">{{_("Newsletter")}}</a></li>
-						<li><a target="_blank" href="https://github.com/geotagx">{{_("Open Source")}}</a></li>
-						<li><a target="_blank" href="/stats/">{{_("General Statistics")}}</a></li>
-					</ul>
-					<ul class="section">
-						<li class="header">{{_("Technologies")}}</li>
-						<li><a target="_blank" rel="nofollow" href="http://pybossa.com/">PyBossa</a></li>
-						<li><a target="_blank" rel="nofollow" href="http://ckan.org/">CKAN</a></li>
-						<li><a target="_blank" rel="nofollow" href="http://www.epicollect.net/">EpiCollect</a></li>
-					</ul>
-				</div>
-			</div>
+<div id="footer-information" class="row">
+	<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+		<div class="row">
+			<section class="col-xs-12 col-md-5">
+				<ul class="subsection">
+					<li role="header">{{_("About")}}</li>
+					<li><p>{{_("GeoTag-X is a research project that will assess if we can teach you, our volunteers, to recognise the important information in different forms of media and create relevant, structured datasets used to the benefit of disaster response teams.")}}</p></li>
+				</ul>
+				<ul class="subsection">
+					<li role="header">{{_("Partners")}}</li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://www.unitar.org/">UNITAR</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="http://www.citizencyberlab.org/">Citizen Cyberlab</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://cordis.europa.eu/fp7/home_en.html">European Commission</a></li>
+				</ul>
+			</section>
+			<section class="col-xs-12 col-md-4">
+				<ul class="subsection">
+					<li role="header">{{_("Legal")}}</li>
+					<li><a href="{{url_for('help.tos')}}">{{_("Terms of Service")}}</a></li>
+					<li><a href="{{url_for('help.cookies_policy')}}">{{_("Cookie Policy")}}</a></li>
+					<li><a href="{{url_for('help.license')}}">{{_("Licenses")}}</a></li>
+				</ul>
+				<ul class="subsection">
+					<li role="header">{{_("Help")}}</li>
+					<li><a href="/about#image_anchor">{{_("Getting Started")}}</a></li>
+					<li><a href="{{url_for('help.api')}}">{{_("Using the API")}}</a></li>
+					<li><a href="mailto:geotag-x@cern.ch">{{_("Contact Us")}}</a></li>
+				</ul>
+			</section>
+			<section class="col-xs-12 col-md-3">
+				<ul class="subsection">
+					<li role="header">{{_("Resources")}}</li>
+					<li><a href="/stats/">{{_("General Statistics")}}</a></li>
+					<li><a href="{{url_for('geotagx-blog.index')}}">{{_("Blog")}}</a></li>
+					<li><a href="/newsletter/">{{_("Newsletter")}}</a></li>
+					<li><a href="https://github.com/geotagx">{{_("Open Source")}}</a></li>
+				</ul>
+				<ul class="subsection">
+					<li role="header">{{_("Technologies")}}</li>
+					<li><a target="_blank" rel="nofollow noopener noreferrer" href="http://pybossa.com/">PyBossa</a></li>
+					<li><a target="_blank" rel="nofollow noopener noreferrer" href="http://ckan.org/">CKAN</a></li>
+					<li><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.epicollect.net/">EpiCollect</a></li>
+				</ul>
+			</section>
 		</div>
 	</div>
-	<div id="footer-legal" class="row">
-		<div class="col-xs-12 col-md-10 col-md-offset-1">
-			<div class="row">
-				<div id="footer-copyright" class="col-xs-12 col-md-6">
-					<div class="text-center visible-xs-block visible-sm-block"><div>&copy; 2016 UNITAR/UNOSAT</div><div><a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div></div>
-					<div class="visible-md-block visible-lg-block">&copy; 2016 UNITAR/UNOSAT&nbsp;&middot;&nbsp;<a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div>
-				</div>
-				<div id="footer-social-media" class="text-right col-xs-12 col-md-6 visible-md-block visible-lg-block">
-					<ul class="list-inline">
-						<li><a target="_blank" href="https://twitter.com/GeoTagX"><i class="fa fa-2x fa-fw fa-twitter"></i></a></li>
-						<li><a target="_blank" href="https://github.com/geotagx"><i class="fa fa-2x fa-fw fa-github"></i></a></li>
-					</ul>
-				</div>
+</div>
+<div id="footer-legal" class="row">
+	<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+		<div class="row">
+			<div id="footer-copyright" class="col-xs-12 col-md-6">
+				<div class="text-center visible-xs-block visible-sm-block"><div>&copy; 2016 UNITAR/UNOSAT</div><div><a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div></div>
+				<div class="visible-md-block visible-lg-block">&copy; 2016 UNITAR/UNOSAT&nbsp;&middot;&nbsp;<a target="_blank" href="https://www.unitar.org/unosat/">www.unitar.org/unosat</a></div>
+			</div>
+			<div id="footer-social-media" class="text-right col-xs-12 col-md-6 visible-md-block visible-lg-block">
+				<ul class="list-inline">
+					<li><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/GeoTagX"><i class="fa fa-2x fa-fw fa-twitter"></i></a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/geotagx"><i class="fa fa-2x fa-fw fa-github"></i></a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
