@@ -16,80 +16,80 @@
 
 <!DOCTYPE html>
 <html lang="{{user_locale}}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Crowdsourcing for disaster management.">
-        <meta name="keywords" content="crowdsource, crowdsourcing, volunteer, disaster, mapping, humanitarian, relief, efforts, citizen, science, unitar, unosat">
-        <meta name="author" content="UNITAR-UNOSAT">
-        {%- block meta %}{% endblock -%}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Crowdsourcing for disaster management.">
+		<meta name="keywords" content="crowdsource, crowdsourcing, volunteer, disaster, mapping, humanitarian, relief, efforts, citizen, science, unitar, unosat">
+		<meta name="author" content="UNITAR-UNOSAT">
+		{%- block meta %}{% endblock -%}
 
-        <link rel="shortcut icon" href="{{img}}/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="{{img}}/favicon.ico" type="image/x-icon">
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic,300italic,300,100italic,100"> {# TODO Optimize this when design is complete. #}
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{css}}/theme.min.css">
-        {%- block stylesheet %}{% endblock -%}
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic,300italic,300,100italic,100"> {# TODO Optimize this when design is complete. #}
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{css}}/theme.min.css">
+		{%- block stylesheet %}{% endblock -%}
 
-        <!--[if lt IE 9]>
-        <script src="{{vendor}}/html5shiv/dist/html5shiv.min.js"></script>
-        <script src="{{vendor}}/respond/dest/respond.min.js"></script>
-        <![endif]-->
-        {% include "_gcs.html" ignore missing %}
+		<!--[if lt IE 9]>
+		<script src="{{vendor}}/html5shiv/dist/html5shiv.min.js"></script>
+		<script src="{{vendor}}/respond/dest/respond.min.js"></script>
+		<![endif]-->
+		{% include "_gcs.html" ignore missing %}
 
-        <title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>
-    </head>
-    <body data-user-id="{{user_id}}" data-user-name="{{user_name}}">
-        {%- include "_gtm.html" ignore missing -%}
-        {%- include "_navigation.html" -%}
-        <div id="page">
-            {% block page_header %}
-            <header id="page-header" class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-                        {% if breadcrumbs %}
-                        <ol id="page-breadcrumbs" class="list-inline">
-                            {% for (title, href) in breadcrumbs %}
-                            <li><a href="{{href}}">{{title}}</a></li>
-                            {% endfor %}
-                            <li>{{page_title}}</li>
-                        </ol>
-                        {% endif %}
-                        <h1 id="page-title">{{page_title}}</h1>
-                        {% if page_subtitle %}<p id="page-subtitle">{{page_subtitle}}</p>{% endif %}
-                    </div>
-                </div>
-            </header>
-            {% endblock %}
+		<title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>
+	</head>
+	<body data-user-id="{{user_id}}" data-user-name="{{user_name}}">
+		{%- include "_gtm.html" ignore missing -%}
+		{%- include "_navigation.html" -%}
+		<div id="page">
+			{% block page_header %}
+			<header id="page-header" class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+						{% if breadcrumbs %}
+						<ol id="page-breadcrumbs" class="list-inline">
+							{% for (title, href) in breadcrumbs %}
+							<li><a href="{{href}}">{{title}}</a></li>
+							{% endfor %}
+							<li>{{page_title}}</li>
+						</ol>
+						{% endif %}
+						<h1 id="page-title">{{page_title}}</h1>
+						{% if page_subtitle %}<p id="page-subtitle">{{page_subtitle}}</p>{% endif %}
+					</div>
+				</div>
+			</header>
+			{% endblock %}
 
-            {% block page_body %}
-            <main id="page-body" role="main" class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12">
-                        {%- block content %}{% endblock -%}
-                    </div>
-                </div>
-            </main>
-            {% endblock %}
+			{% block page_body %}
+			<main id="page-body" role="main" class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+						{%- block content %}{% endblock -%}
+					</div>
+				</div>
+			</main>
+			{% endblock %}
 
-            {% block page_footer %}
-            <footer id="page-footer" class="container-fluid">{% include "_footer.html" %}</footer>
-            {% endblock %}
+			{% block page_footer %}
+			<footer id="page-footer" class="container-fluid">{% include "_footer.html" %}</footer>
+			{% endblock %}
 
-            {% if show_cookies_warning %}
-            <div id="cookie-consent">
-                <div class="row">
-                    <div class="col-xs-12"><p>Cookies help us deliver our services. By using {{brand}}, you agree to our <a href="{{url_for('help.cookies_policy')}}">cookie policy</a>.</p></div>
-                    <div class="col-xs-12"><button id="accept-cookies" class="btn btn-sm btn-cta">{{_("Accept")}}</button></div>
-                </div>
-             </div>
-            {% endif %}
-            <button id="back-to-top" class="btn btn-cta"><i class="fa fa-long-arrow-up"></i></button>
-        </div>
-        <script src="//code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="{{js}}/base.min.js"></script>
-        {%- block script %}{% endblock -%}
-    </body>
+			{% if show_cookies_warning %}
+			<div id="cookie-consent">
+				<div class="row">
+					<div class="col-xs-12"><p>Cookies help us deliver our services. By using {{brand}}, you agree to our <a href="{{url_for('help.cookies_policy')}}">cookie policy</a>.</p></div>
+					<div class="col-xs-12"><button id="accept-cookies" class="btn btn-sm btn-cta">{{_("Accept")}}</button></div>
+				</div>
+			 </div>
+			{% endif %}
+			<button id="back-to-top" class="btn btn-cta"><i class="fa fa-long-arrow-up"></i></button>
+		</div>
+		<script src="//code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="{{js}}/base.min.js"></script>
+		{%- block script %}{% endblock -%}
+	</body>
 </html>
