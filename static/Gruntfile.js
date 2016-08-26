@@ -45,11 +45,27 @@ module.exports = function(grunt){
                 }
             },
         },
+        zopfli: {
+            css: {
+                expand: true,
+                cwd: "<%= dir.css %>",
+                dest: "<%= dir.css %>",
+                src: "**/*.min.css",
+            },
+            js: {
+                expand: true,
+                cwd: "<%= dir.js %>",
+                dest: "<%= dir.js %>",
+                src: "**/*.min.js",
+            },
+        },
     });
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks("grunt-zopfli-native");
 
-    grunt.registerTask("compress", ["cssmin:theme"]);
+    grunt.registerTask("minify", ["cssmin:theme"]);
     grunt.registerTask("bundle", ["concat:bundle_js", "concat:bundle_minified_vendors"]);
-    grunt.registerTask("default", ["compress", "bundle"]);
+    grunt.registerTask("compress", ["zopfli:css", "zopfli:js"]);
+    grunt.registerTask("default", ["minify", "bundle", "compress"]);
 };
