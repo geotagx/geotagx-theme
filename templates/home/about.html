@@ -1,6 +1,7 @@
 {% extends "base.html" %}
-{% set active_page = "about" %}
-{% set active_page_title = _("About") %}
+{% set page_id = "about" %}
+{% set page_title = _("About") %}
+{% set page_subtitle = None %}
 
 {% block stylesheet %}
 <style>
@@ -79,10 +80,8 @@
 	</figure>
 </div>
 {% endcall %}
-{% endblock %}
 
 
-{% block footer %}
 <div class="property blue-bg in-page-link" style="margin-bottom:0;padding-top:1.5em;padding-bottom:1.5em;">
 	<div class="container-fluid">
 		{% call bootstrap.row() %}
