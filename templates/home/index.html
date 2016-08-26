@@ -1,18 +1,21 @@
 {% extends "base.html" %}
-{% set active_page = "home" %}
+{% set page_id = "home" %}
+{% set page_title = _("Home") %}
+{% set page_subtitle = _("Welcome to GeoTag-X.") %}
 {% set featured_projects = categories_projects["featured"] %}
 {% from "projects/_helpers.html" import render_project_tile %}
 
 {% block stylesheet %}
 <style>
-#page-header,
-#page-footer {
-	color:#555;
+#page-body {
+	color:#4A4A4A;
+	background:#EEF2F5;
 }
-#page-header {
-	padding-top:2em;
+#welcome-jumbotron {
+	padding-top:0.75em;
 	padding-bottom:3em;
 	text-align:center;
+	background:#FFF;
 }
 #welcome-to-brand {
 	font-size:3em;
@@ -22,6 +25,7 @@
 	padding-bottom:0;
 }
 #brand-tagline {
+	font-size:1.5em;
 	color:#666;
 	padding-bottom:0.8em;
 }
@@ -36,10 +40,6 @@
 }
 #visualize-collected-data {
 	margin-top:1.8em;
-}
-#page-content {
-	color:#4A4A4A;
-	background:#EEF2F5;
 }
 #featured-projects {
 	font-size:1.05em;
@@ -70,69 +70,68 @@
 {% endblock %}
 
 
-{% block header %}
-{% call bootstrap.render_container() %}
-<h1 id="welcome-to-brand">Welcome to {{brand}}</h1>
-<h3 id="brand-tagline">Volunteer and help plan an emergency response.</h3>
-<p id="brand-info" class="text-center">{{brand}} is a research project that aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
-<div><a id="learn-more" href="{{url_for('home.about')}}">Learn more</a></div>
-{# <div><button id="visualize-collected-data" class="btn btn-lg btn-primary call-to-action">{{_("Visualize Collected Data Sample")}}</button></div> #}
-{% endcall %}
-{% endblock %}
+{% block page_header %}{% endblock %}
 
 
 {% block content %}
+{% call bootstrap.row(row_id="welcome-jumbotron") %}
+<div>
+	<h1 id="welcome-to-brand">Welcome to {{brand}}</h1>
+	<h2 id="brand-tagline">Volunteer and help plan an emergency response.</h2>
+	<p id="brand-info" class="text-center">{{brand}} is a research project that aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
+	<div><a id="learn-more" href="{{url_for('home.about')}}">Learn more</a></div>
+	{# <div><button id="visualize-collected-data" class="btn btn-lg btn-cta">{{_("Visualize Collected Data Sample")}}</button></div> #}
+</div>
+{% endcall %}
+
 {% if featured_projects %}
-{% call bootstrap.row() %}
-<div id="featured-projects">
-	<header id="featured-projects-header">
-		<h1>Featured Projects</h1>
-	</header>
-	<div>
-		<p class="text-center">Get involved! There are no particular skills required to contribute to any one of our projects.</p>
-		<div id="featured-projects-grid" class="row grid">
-			{% with current_user_is_authenticated = current_user.is_authenticated() %}
-			{% for project in featured_projects %}
-			<div class="grid-slot col-xs-12 col-md-4">{{render_project_tile(project, show_admin_actions=current_user_is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}</div>
-			{% endfor %}
-			{% endwith %}
-		</div>
-		<div id="explore-projects" class="text-center">
-			<p class="text-center">{{_("Explore more of our projects ranging from a variety of topics.")}}</p>
-			<a class="btn btn-lg btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
-		</div>
+{% call bootstrap.row(row_id="featured-projects") %}
+<header id="featured-projects-header">
+	<h1>Featured Projects</h1>
+</header>
+<div>
+	<p class="text-center">Get involved! There are no particular skills required to contribute to any one of our projects.</p>
+	<div id="featured-projects-grid" class="row grid">
+		{% with current_user_is_authenticated = current_user.is_authenticated() %}
+		{% for project in featured_projects %}
+		<div class="grid-slot col-xs-12 col-md-4">{{render_project_tile(project, show_admin_actions=current_user_is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}</div>
+		{% endfor %}
+		{% endwith %}
+	</div>
+	<div id="explore-projects" class="text-center">
+		<p class="text-center">{{_("Explore more of our projects ranging from a variety of topics.")}}</p>
+		<a class="btn btn-lg btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
 	</div>
 </div>
 {% endcall %}
 {% endif %}
-{% endblock %}
 
-
-{% block footer_ %}
-{% call bootstrap.render_container() %}
+{#
+{% call bootstrap.row(row_id="featured-partners") %}
 <div class="container-fluid supported partners-wrapper">
 	<div class="container partners">
-	<div class="row">
-	  <div class="col-sm-2 text-center">
-		<a target="_blank" href="http://citizencyberlab.eu/"><img class="img-thumbnail" src="/static/img/CCLogo.png"></a>
-	  </div>
-	  <div class="col-sm-2 text-center" style="padding:0px">
-		<a target="_blank" href="http://www.unitar.org/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unitar.png"></a>
-	  </div>
-	  <div class="col-sm-2 text-center">
-		<a target="_blank" href="http://cordis.europa.eu/fp7/home_en.html"><img class="img-thumbnail" src="/static/geotagx-img/FP7-logo.png"></a>
-	  </div>
-	  <div class="col-sm-2 text-center" style="padding:0px">
-		<a target="_blank" href="http://www.unitar.org/unosat/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unosat.png"></a>
-	  </div>
-	  <div class="col-sm-2 text-center">
-		<a target="_blank" href="http://www.citizencyberscience.net/"><img class="img-thumbnail" src="/static/geotagx-img/ccc.png"></a>
-	  </div>
-	  <div class="col-sm-2 text-center">
-		<a target="_blank" href="http://www.pybossa.com/"><img class="img-thumbnail" src="http://pybossa.com/assets/img/pybossa_ocs_logo_pos.png" style="height:auto!important;padding-top:25px"></a>
-	  </div>
-	</div>
-  </div>
+		<div class="row">
+			<div class="col-sm-2 text-center">
+				<a target="_blank" href="http://citizencyberlab.eu/"><img class="img-thumbnail" src="/static/img/CCLogo.png"></a>
+			</div>
+			<div class="col-sm-2 text-center" style="padding:0px">
+				<a target="_blank" href="http://www.unitar.org/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unitar.png"></a>
+			</div>
+			<div class="col-sm-2 text-center">
+				<a target="_blank" href="http://cordis.europa.eu/fp7/home_en.html"><img class="img-thumbnail" src="/static/geotagx-img/FP7-logo.png"></a>
+			</div>
+			<div class="col-sm-2 text-center" style="padding:0px">
+				<a target="_blank" href="http://www.unitar.org/unosat/"><img class="img-thumbnail" src="/static/geotagx-img/logo_unosat.png"></a>
+			</div>
+			<div class="col-sm-2 text-center">
+				<a target="_blank" href="http://www.citizencyberscience.net/"><img class="img-thumbnail" src="/static/geotagx-img/ccc.png"></a>
+			</div>
+			<div class="col-sm-2 text-center">
+				<a target="_blank" href="http://www.pybossa.com/"><img class="img-thumbnail" src="http://pybossa.com/assets/img/pybossa_ocs_logo_pos.png" style="height:auto!important;padding-top:25px"></a>
+			</div>
+		</div>
+ 	</div>
 </div>
 {% endcall %}
+#}
 {% endblock %}
