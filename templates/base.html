@@ -3,8 +3,8 @@
 {% set js = static + "/js" -%}
 {% set img = url_for("static", filename="img") -%}
 {% set vendor = url_for("static", filename="vendor") -%}
-{% set page_id = page_id | default("home") %}
-{% set page_title = page_title | default(_("Home")) %}
+{% set page_id = page_id | default(None) %}
+{% set page_title = page_title | default(None) %}
 {% set page_subtitle = page_subtitle | default(None) %}
 {% set breadcrumbs = breadcrumbs | default(None) %}
 {% set user_ip = request["remote_addr"] -%}
