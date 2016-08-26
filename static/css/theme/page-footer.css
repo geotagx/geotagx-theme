@@ -41,8 +41,10 @@
 	padding:0;
 	list-style:none;
 }
-#footer-information section > ul.subsection > li:not(:first-child) {
-	margin-bottom:0.35em;
+@media (max-width: 767px) {
+	#footer-information section > ul.subsection > li:not(:first-child) {
+		margin-bottom:0.5em;
+	}
 }
 #footer-information section > ul.subsection > li[role="header"] {
 	margin-top:1.5em;
