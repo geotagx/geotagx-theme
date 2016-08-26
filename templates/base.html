@@ -64,13 +64,7 @@
 			{% endblock %}
 
 			{% block page_body %}
-			<main id="page-body" role="main" class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						{%- block content %}{% endblock -%}
-					</div>
-				</div>
-			</main>
+			<main id="page-body" role="main" class="container-fluid">{% block content %}{% endblock %}</main>
 			{% endblock %}
 
 			{% block page_footer %}
