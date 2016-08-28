@@ -1,2 +1,8 @@
 node_modules
 vendor
+
+# Ignore auto-generated minified and compressed files.
+*.min.css
+*.min.css.gz
+*.min.js
+*.min.js.gz
