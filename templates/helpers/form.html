@@ -1,0 +1,41 @@
+{#
+ # Renders a caption for a field in the form.
+ # @param label the label to render.
+ # @param help a short description of the field, placed as a subtext under the label.
+ # @param for the ID of the labelable form-related element.
+ # @param form the ID of the form element with which the label is associated.
+ #}
+{% macro label(label, help=None, for=None, form=None) %}
+{% if label %}<label class="control-label"{% if for %} for="{{for}}"{% endif %}{% if form %} form="{{form}}"{% endif %}>{{label}}</label>{% endif %}
+{% if help %}<p class="help-block">{{help}}</p>{% endif %}
+{% endmacro %}
+
+{#
+ # Renders a field with static text content.
+ # @param text the text to render.
+ # @param id the ID of the element being rendered.
+ #}
+{% macro text(text, id=None) %}
+<p{% if id %} id="{{id}}"{% endif %} class="form-control-static">{{text}}</p>
+{% endmacro %}
+
+
+{% macro input(name, type="text", value=None, placeholder=None) %}
+<input name="{{name}}" type="{{type}}" class="form-control"{% if value %} value="{{value}}"{% endif %}{% if placeholder %} placeholder="{{placeholder}}"{% endif %}>
+{% endmacro %}
+
+
+
+
+{#
+ # Renders a select field.
+ #}
+{% macro select(name, options, selected=None, id=None) %}
+{% if options %}
+<select name="{{name}}" class="form-control">
+    {% for (locale, name) in options %}
+    <option value="{{locale}}"{% if locale == selected %} selected{% endif %}>{{name}}</option>
+    {% endfor %}
+</select>
+{% endif %}
+{% endmacro %}
