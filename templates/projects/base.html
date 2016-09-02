@@ -1,25 +1,2 @@
 {% extends "base.html" %}
-{% if project %}
-	{% set active_project = project.short_name %}
-	{% set page_breadcrumbs = [] %} {# TODO Find a way to add the project's category's name and URL here. #}
-	{% if active_page != "about_the_project" %}
-		{% set page_breadcrumbs = page_breadcrumbs + [(project.name, url_for("project.details", short_name=project.short_name))] %}
-	{% endif %}
-{% endif %}
-{% import "projects/_helpers.html" as helper %}
-
-{% block stylesheet %}
-<style>
-#project-synopsis {
-	color:#FFF;
-	background:#34495E;
-	padding-top:2em;
-	padding-bottom:2em;
-}
-</style>
-{% endblock %}
-
-
-{% block content %}
-{% call bootstrap.row() %}{% block main_content %}{% endblock %}{% endcall %}
-{% endblock %}
+{% import "projects/_helpers.html" as project_helper %}

@@ -1,115 +1,98 @@
 {% extends "projects/base.html" %}
-{% set active_page_title = active_cat.name %}
+{% set page_id = "project-category" %}
+{% set page_title = active_cat.name %}
+{% set breadcrumbs = [(_("Projects"), url_for("geotagx-project-browser.index"))] %}
+{% set special_category = active_cat.short_name in ["featured", "draft"] %}
 
 {% block stylesheet %}
 <style>
-#category-header {
-  margin:0;
-  padding-top:0;
-  padding-bottom:1.5em;
-  background:#34495E;
-  color:#FFF;
+.heading {
+	margin:0 0 0.75em 0;
+	padding:0;
+	font-size:1.25em;
+	font-weight:700;
+	letter-spacing:2px;
+	text-transform:uppercase;
+}
+#category-share {
+	font-size:1.25em;
+	margin-top:0.25em;
+	padding:0;
+}
+#page-body {
+	padding-top:0;
+	padding-bottom:0;
+}
+#page-body > .row {
+	padding-top:1em;
+	padding-bottom:1em;
+}
+#category-description {
+	font-size:1.05em;
+}
+#no-projects {
+	font-size:1.5em;
+	font-weight:700;
+	margin:2em 0 0;
+}
+#category-projects {
+	color:#DDD;
+	background:#2E3D49;
+}
+#category-projects .heading {
+	margin:0;
+}
+#category-data {
+	background:#EEF2F5;
 }
 </style>
 {% endblock %}
 
-{% block header %}
+
+{% block header_content %}
 {{super()}}
-{% call bootstrap.render_container(id="category-header") %}
-{{helper.render_category_profile(active_cat, pagination)}}
-{% endcall %}
+{% if projects and active_cat.short_name != "draft" %}
+	{% call bootstrap.row(row_id="category-share") %}
+	{{project_helper.render_share_buttons("category", request.url)}}
+	{% endcall %}
+{% endif %}
 {% endblock %}
 
 
-{% block content %}
-{% call bootstrap.row() %}
-  <div id="sorts" class="btn-group pull-right" style="margin-top:12px;">
-      <button class="btn dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Order by <span id="order">name</span> <span class="caret"></span></button>
-    <ul class="dropdown-menu" style="top:35px;">
-        <li><a href="#" data-sort-value="original-order">name</a></li>
-        <li><a href="#" data-sort-value="date">date</a></li>
-        <li><a href="#" data-sort-value="activity">activity</a></li>
-        <li><a href="#" data-sort-value="progress">progress</a></li>
-    </ul>
-  </div>
-  {% if projects %}
-    {% if active_cat.short_name=="featured"%}
-    <h1>
-        <i class="icon-star"></i> {{pagination.total_count}} {{ _('Featured Projects') }}
-    </h1>
-    <h2>{{ _('A special selection of the most interesting projects') }}</h2>
-    {% elif active_cat.short_name=='draft' %}
-    <h1>
-        <i class="icon-wrench"></i> {{pagination.total_count}} {{ _('Draft Projects')}}</h1>
-    <h2>{{ _('Work in progress projects') }}</h2>
-    {% else %}
-    <h1>Projects</h1>
-    {% endif %}
+{% block body_content %}
+{% if not special_category %}
+	{% call bootstrap.row(row_id="category-description") %}
+	<div class="row">
+		<div class="col-xs-12">{{active_cat.description | safe}}</div>
+	</div>
+	{% endcall %}
+{% endif %}
 
-    <div class="projects">
-      <div id="portfoliolist-three">
-          <div class="col-md-12">
-              {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
-              {% for project in projects %}
-                {{render_geotagx_project_portfolio_element_with_stats_front_page_tile(project, active_cat.short_name, current_user.admin, upload_method)}}
-              {% endfor %}
-          </div>
-      </div>
-    </div>
+{% if not projects %}
+	<p id="no-projects">{{_("Sorry, there are no projects assigned to this category yet.")}}</p>
+{% else %}
+	{% call bootstrap.row(row_id="category-projects") %}
+	<header><h1 class="heading">{{_("Projects")}}</h1></header>
+	<div class="grid row">
+		{% for project in projects %}
+		<div class="grid-slot col-xs-12 col-md-4 col-lg-4">{{project_helper.render_project_tile(project, show_admin_actions=current_user.is_authenticated() and (current_user.admin or current_user.id == project.owner_id))}}</div>
+		{% endfor %}
+	</div>
+	{% if pagination.pages > 1 %}{{project_helper.render_pagination(pagination)}}{% endif %}
+	{% endcall %}
+{#
+	{% if not special_category %}
+		{% call bootstrap.row(row_id="category-data") %}
+			<header><h1 class="heading">{{_("Aggregated Data")}}</h1></header>
+			<div id="summary-map"></div>
+			<button class="btn btn-lg btn-cta" href="{{url_for('geotagx.map_summary', category_name=active_cat.short_name)}}">{{_("Visualize Data")}}</button>
 
-    {% if pagination.pages > 1 %}
-        {{ helper.render_pagination(pagination) }}
-    {% endif %}
-  {% else %}
-    <h1>
-        <i class="icon-th"></i> Projects</h1>
-    <h2>{{_('Sorry, there are no published projects for this category yet')}}</h2>
-  {% endif %}
-{% endcall %}
-{% endblock %}
-
-
-{% block script %}
-<script src="{{vendor}}/isotope/dist/isotope.pkgd.min.js"></script>
-{{helper.broken_image()}}
-<script>
-$( function() {
-  // init Isotope
-  var $container = $('.projects').isotope({
-    itemSelector: '.project-item',
-    layoutMode: 'fitRows',
-    getSortData: {
-      date: '.date',
-      activity: '.activity',
-      progress: '.progress parseInt',
-    },
-    sortAscending: {
-        progress: false,
-        activity: false,
-    }
-  });
-
-  // bind sort button click
-  $('#sorts').on( 'click', 'a', function() {
-    var sortValue = $(this).attr('data-sort-value');
-    $container.isotope({ sortBy: sortValue });
-    if (sortValue == 'original-order') {
-        $("#order").text('name');
-    }
-    else {
-        $("#order").text(sortValue);
-    }
-  });
-
-  // change is-checked class on buttons
-  $('.dropdown-toggle').each( function( i, buttonGroup ) {
-    var $buttonGroup = $( buttonGroup );
-    $buttonGroup.on( 'click', 'button', function() {
-      $buttonGroup.find('.is-checked').removeClass('is-checked');
-      $( this ).addClass('is-checked');
-    });
-  });
-
-});
-</script>
+			<ul id="category-menu" class="nav nav-stacked">
+				<li><a class="btn btn-block btn-lg btn-cta" href="{{url_for('geotagx.map_summary', category_name=active_cat.short_name)}}">{{_("Visualize Summary")}}</a></li>
+				<li><a class="btn btn-block btn-cta" href="{{url_for('geotagx-geojson-exporter.export_category_results', category_short_name=active_cat.short_name)}}">{{_("Export Summary")}}&nbsp;(GeoJSON)</a></li>
+			</ul>
+		{% endcall %}
+	{% endif %}
+#}
+{% endif %}
 {% endblock %}
