@@ -44,8 +44,9 @@
 		{%- include "_gtm.html" ignore missing -%}
 		{%- include "_navigation.html" -%}
 		<div id="page">
-			{% block page_header %}
+			{% block header %}
 			<header id="page-header" class="container-fluid">
+				{% block header_content %}
 				<div class="row">
 					<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 						{% if breadcrumbs %}
@@ -60,15 +61,18 @@
 						{% if page_subtitle %}<p id="page-subtitle">{{page_subtitle}}</p>{% endif %}
 					</div>
 				</div>
+				{% endblock %}
 			</header>
 			{% endblock %}
 
-			{% block page_body %}
-			<main id="page-body" role="main" class="container-fluid">{% block content %}{% endblock %}</main>
+			{% block body %}
+			<main id="page-body" role="main" class="container-fluid">{% block body_content %}{% endblock %}</main>
 			{% endblock %}
 
-			{% block page_footer %}
-			<footer id="page-footer" class="container-fluid">{% include "_footer.html" %}</footer>
+			{% block footer %}
+			<footer id="page-footer" class="container-fluid">
+				{% block footer_content %}{% include "_footer.html" %}{% endblock %}
+			</footer>
 			{% endblock %}
 
 			{% if show_cookies_warning %}
