@@ -1,2 +1,13 @@
 {% extends "base.html" %}
 {% import "projects/_helpers.html" as project_helper %}
+{% set page_share = page_share | default(True) %}
+
+
+{% block header_content %}
+{{super()}}
+{% if enable_share_page %}
+	{% call bootstrap.row(row_id="category-share") %}
+		{{project_helper.render_share_buttons("category", request.url)}}
+	{% endcall %}
+{% endif %}
+{% endblock %}

@@ -1,10 +1,10 @@
 {% extends "account/signin.html" %}
-{% set active_page = "account_register" %}
-{% set active_page_title = _("Create a New Account") %}
-{% set active_page_subtitle = _("Not a member yet? Sign up for free.") %}
-{% set page_breadcrumbs = [(_("Sign In"), url_for("account.signin"))] %}
+{% set page_id = "register" %}
+{% set page_title = _("Create a New Account") %}
+{% set page_subtitle = _("Not a member yet? Sign up for free.") %}
+{% set breadcrumbs = [(_("Sign In"), url_for("account.signin"))] %}
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row(row_id="account-registration-page", row_class="authentication-page") %}
 <p class="header">By signing up, you hereby agree to our <a target="_blank" href="{{url_for('help.tos')}}">Terms of Service</a> and that you have read our <a target="_blank" href="{{url_for('help.privacy')}}">Privacy</a> and <a target="_blank" href="{{url_for('help.cookies_policy')}}">Cookie</a> policies.</p>
 <div class="row">
@@ -23,7 +23,7 @@
 				{{geotagx_render_field(form.name,"name", _("Username"), "text", request.form.name)}}
 				{{geotagx_render_field(form.password,"password", _("Password"), "password")}}
 				{{geotagx_render_field(form.confirm,"confirm", _("Confirm Password"), "password")}}
-				<button type="submit" class="btn btn-lg btn-block btn-primary call-to-action">{{_("Sign Up")}}</button>
+				<button type="submit" class="btn btn-lg btn-block btn-cta">{{_("Sign Up")}}</button>
 			</fieldset>
 		</form>
 	</div>

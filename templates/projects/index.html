@@ -3,6 +3,7 @@
 {% set page_title = active_cat.name %}
 {% set breadcrumbs = [(_("Projects"), url_for("geotagx-project-browser.index"))] %}
 {% set special_category = active_cat.short_name in ["featured", "draft"] %}
+{% set enable_share_page = projects and active_cat.short_name != "draft" %}
 
 {% block stylesheet %}
 <style>
@@ -46,16 +47,6 @@
 	background:#EEF2F5;
 }
 </style>
-{% endblock %}
-
-
-{% block header_content %}
-{{super()}}
-{% if projects and active_cat.short_name != "draft" %}
-	{% call bootstrap.row(row_id="category-share") %}
-	{{project_helper.render_share_buttons("category", request.url)}}
-	{% endcall %}
-{% endif %}
 {% endblock %}
 
 

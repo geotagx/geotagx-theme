@@ -1,14 +1,13 @@
 {% extends "base.html" %}
-{% set active_page = active_page | default("account_sign_in") %}
-{% set active_page_title = active_page_title | default(_("Sign In")) %}
-{% set active_page_subtitle = active_page_subtitle | default(_("Sign in to your GeoTag-X account.")) %}
+{% set page_id = page_id | default("sign-in") %}
+{% set page_title = page_title | default(_("Sign In")) %}
+{% set page_subtitle = page_subtitle | default(_("Sign in to your GeoTag-X account.")) %}
 {% from "_formhelpers.html" import geotagx_render_field %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css">
 <style>
 .authentication-page {
-	padding-top:1em;
 	padding-bottom:1.5em;
 }
 .authentication-page .header {
@@ -45,7 +44,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row(row_id="account-login-page", row_class="authentication-page") %}
 <p class="header">Not a member yet? <a href="{{url_for('account.register')}}">Sign up for free</a>!</p>
 <div class="row">
@@ -71,7 +70,7 @@
 				{% endif %}
 				{% endwith %}
 				{% endif %}
-				<button type="submit" class="btn btn-lg btn-block btn-primary call-to-action">{{_("Sign In")}}</button>
+				<button type="submit" class="btn btn-lg btn-block btn-cta">{{_("Sign In")}}</button>
 			</fieldset>
 		</form>
 	</div>
