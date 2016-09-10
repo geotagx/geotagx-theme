@@ -6,6 +6,7 @@
 {% set page_id = page_id | default(None) %}
 {% set page_title = page_title | default(None) %}
 {% set page_subtitle = page_subtitle | default(None) %}
+{% set page_share = page_share | default(False) %}
 {% set breadcrumbs = breadcrumbs | default(None) %}
 {% set user_ip = request["remote_addr"] -%}
 {% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
@@ -59,6 +60,13 @@
 						{% endif %}
 						<h1 id="page-title">{{page_title}}</h1>
 						{% if page_subtitle %}<p id="page-subtitle">{{page_subtitle}}</p>{% endif %}
+						{% if page_share %}
+						<div>
+							<a style="color:#00ACED" target="_blank" rel="nofollow noreferrer noopener" class="share-{{type}}" title="Share this {{type}} via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+							<a style="color:#3B5998" target="_blank" rel="nofollow noreferrer noopener" class="share-{{type}}" title="Share this {{type}} via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+							<a style="color:#DD4B39" target="_blank" rel="nofollow noreferrer noopener" class="share-{{type}}" title="Share this {{type}} via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
+						</div>
+						{% endif %}
 					</div>
 				</div>
 				{% endblock %}
