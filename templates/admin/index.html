@@ -1,60 +1,67 @@
-{% extends "/base.html" %}
-{% set active_page = "administrator_dashboard" %}
-{% set active_page_title = _("Administrator Dashboard") %}
-{% set active_page_subtitle = _("Manage various components of the platform.") %}
-{% set active_link = "admin" %}
-{% import "account/_helpers.html" as helper %}
+{% extends "base.html" %}
+{% set page_id = "administrator-dashboard" %}
+{% set page_title = _("Administrator Dashboard") %}
+{% set page_subtitle = _("Manage the platform.") %}
+{% set sections = [
+	(url_for("admin.users"), _("Administrators"), _("Manage administrators.")),
+	(url_for("rq_dashboard.overview"), _("Background Jobs"), _("Manage background jobs.")),
+	(url_for("admin.featured"), _("Featured Projects"), _("Showcase projects on the front page.")),
+	(url_for("geotagx-admin.send_newsletter"), _("Newsletter"), _("Send out a newsletter.")),
+	(url_for("admin.categories"), _("Project Categories"), _("Setup project categories.")),
+	(url_for("geotagx-sourcerer.dashboard"), _("Sourcerer"), _("Moderate collected images.")),
+	(url_for("geotagx-admin.manage_users"), _("Users"), _("Manage registered users.")),
+] %}
 
-{% block content %}
-{% call bootstrap.row() %}
+
+{% block stylesheet %}
+<style>
+#administrator-dashboard {
+	margin-top:1em;
+}
+.dashboard-section {
+	padding:0.5em;
+	margin-bottom:2em;
+	background:#F3F3F3;
+	border:1px solid #EAEAEA;
+	position:relative;
+}
+.dashboard-section:hover {
+	color:#FFF;
+	background:#0AF;
+}
+.dashboard-section > h1 {
+	font-weight:700;
+	font-size:1.3em;
+	letter-spacing:1px;
+	margin:0;
+}
+.dashboard-section > p {
+	min-height: 3em;
+}
+.dashboard-section > a {
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+</style>
+{% endblock %}
+
+
+{% block body_content %}
+{% call bootstrap.row(row_id="administrator-dashboard") %}
 <div class="row">
-	<div class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-dashboard"></i> {{_('Sourcerer Dashboard')}}</h2>
-		<p>{{_('Dashboard for moderating images collected through GeoTag-X Sourcerers')}}</p>
-		<a href="{{url_for('geotagx-sourcerer.dashboard')}}" class="btn btn-primary">{{ _('Go') }} <i class="icon-chevron-right"></i></a>
+{% for url, title, subtitle in sections %}
+	<div class="col-xs-12 col-md-4">
+		<div class="dashboard-section"><h1>{{title}}</h1><p>{{subtitle}}</p><a href={{url}}></a></div>
 	</div>
-	<div class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-dashboard"></i> {{_('Background Jobs')}}</h2>
-		<p>{{_('Monitor the background jobs')}}</p>
-		<a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
-	</div>
+	{% if loop.index is divisibleby 3 %}
 </div>
 <div class="row">
-	<div id="featured-apps" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-star"></i> {{_('Featured Projects')}}</h2>
-		<p>{{_('Show projects on the front page')}}</p>
-		<a href="{{url_for('admin.featured')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
-	</div>
-	<div id="categories" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-check"></i> {{_('Categories')}}</h2>
-		<p>{{_('Manage project categories')}}</p>
-		<a href="{{url_for('admin.categories')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
-	</div>
-</div>
-<div class="row">
-	<div id="users" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-user"></i> {{_('Administrators')}}</h2>
-		<p>{{_('Manage administrators')}}</p>
-		<a href="{{url_for('admin.users')}}" class="btn btn-primary">{{ _('Manage') }} <i class="icon-chevron-right"></i></a>
-	</div>
-	<div id="users-list" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-list"></i> {{_('Export Users')}}</h2>
-		<p>{{_('Export a list of users')}}</p>
-		<a href="{{url_for('geotagx-admin.export_users', format='json')}}" class="btn btn-primary">{{ _('JSON') }}</a>
-		<a href="{{url_for('geotagx-admin.export_users', format='csv')}}" class="btn btn-primary">{{_('CSV')}}</a>
-	</div>
-</div>
-<div class="row">
-	<div id="users-list" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-list"></i> {{_('Users Management')}}</h2>
-		<p>{{_('Manage all registered Users')}}</p>
-		<a href="{{url_for('geotagx-admin.manage_users')}}" class="btn btn-primary">{{ _('Manage') }}</a>
-	</div>
-	<div id="users-list" class="col-xs-12 col-md-6 well">
-		<h2><i class="icon-list"></i> {{_('Send Newsletter')}}</h2>
-		<p>{{_('Send newsletter to all registered users.')}}</p>
-		<a href="{{url_for('geotagx-admin.send_newsletter')}}" class="btn btn-primary">{{ _('Go') }}</a>
-	</div>
+	{% endif %}
+{% endfor %}
 </div>
 {% endcall %}
 {% endblock %}
