@@ -1,49 +1,25 @@
 {% extends "base.html" %}
-{% set active_page = "community" %}
-{% set active_page_title = _("Community") %}
-{% set active_page_subtitle = [total, _("active registered users.")]|join(" ") %}
+{% set page_id = "community" %}
+{% set page_title = _("Community") %}
+{% set page_subtitle = [total, _("active humanitarians.")] | join(" ") %}
+{% set page_locked = enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
 {% from "privacy/locked.html" import render_lock_page %}
-{% import "account/_helpers.html" as helper %}
-{% from "projects/_helpers.html" import broken_image %}
+{% from "helpers/user.html" import render_user_grid %}
+{% from "helpers/page.html" import render_pagination %}
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
-{% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+<div class="row text-center">
+	<div class="col-xs-12"><a class="btn btn-lg btn-cta" href="{{url_for('leaderboard.index')}}">{{_("Leaderboard")}}</a></div>
+</div>
+<hr>
+<div class="row text-center">
+{% if page_locked %}
 	{{render_lock_page()}}
 {% else %}
-	<div class="row text-right" style="margin-bottom:2em">
-		<div class="col-xs-12">
-			<a class="btn btn-lg btn-primary" href="{{url_for('leaderboard.index')}}"><i class="fa fa-lg fa-trophy"></i>&nbsp;&nbsp;{{_("Leaderboard")}}</a>
-		</div>
-	</div>
-	{% if accounts %}
-		{% set accounts_per_row = 4 %}
-		<div class="row">
-		{% for account in accounts %}
-			<div class="col-xs-{{12//accounts_per_row}}">
-				<a href="{{url_for('account.profile', name=account.name)}}">
-					<div class="community-page-user-tile" style="margin-bottom:2em">
-						<div class="user-profile-image"><center>{{helper.render_user_thumbnail(account, upload_method, style="height:150px; width:150px;", class="img-circle")}}</center></div>
-						<div class="user-profile-data text-center">
-							<div class="user-profile-fullname">{{account.fullname}}</div>
-							<div class="user-profile-task_runs"><span class="label">{{_("Contributed Tasks")}}:</span>&nbsp;<span class="value">{{account.task_runs}}</span></div>
-							<div class="user-profile-member_since"><span class="label">{{_("Joined")}}</span><span class="value">{{account.registered_ago}}</span></div>
-						</div>
-					</div>
-				</a>
-			</div>
-			{% if loop.index is divisibleby(accounts_per_row) and not loop.last %}
-				</div><div class="row">
-			{% endif %}
-		{% endfor %}
-		</div>
-	{% endif %}
-	{% if pagination.pages > 1 %}
-		<div class="row"><div class="col-xs-12">{{helper.render_pagination(pagination)}}</div></div>
-	{% endif %}
+	<div class="col-xs-12">{{render_user_grid(accounts)}}</div>
+	<div class="col-xs-12">{{render_pagination(pagination)}}</div>
 {% endif %}
+</div>
 {% endcall %}
 {% endblock %}
-
-
-{% block script %}{{broken_image()}}{% endblock %}

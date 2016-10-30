@@ -17,6 +17,7 @@ module.exports = function(grunt){
                         "<%= dir.css %>/theme/page-header.css",
                         "<%= dir.css %>/theme/page-footer.css",
                         "<%= dir.css %>/theme/project-grid.css",
+                        "<%= dir.css %>/theme/user-card.css",
                     ],
                 },
             }
