@@ -24,12 +24,13 @@
  # Renders a user card.
  #}
 {% macro render_user_card(user, upload_method=None) %}
+{% set score = user.n_task_runs if user.n_task_runs is defined else user.task_runs %}
 <div class="user-card">
 	<div class="row">
 		<div class="avatar col-xs-4">{{render_avatar(user, upload_method)}}</div>
 		<div class="bio col-xs-8 text-left">
 			<div class="name">{{user.fullname}}</div>
-			<div class="score">{{_("Score")}}:&nbsp;<span class="value">{{user.task_runs}}</span></div>
+			<div class="score">{{_("Score")}}:&nbsp;<span class="value">{{score}}</span></div>
 			<div class="joined">{{_("Joined")}}&nbsp;<span class="value">{{user.registered_ago}}</span></div>
 		</div>
 	</div>
