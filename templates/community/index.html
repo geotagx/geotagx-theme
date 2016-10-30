@@ -10,14 +10,14 @@
 {% block body_content %}
 {% call bootstrap.row() %}
 <div class="row text-center">
-	<div class="col-xs-12"><a class="btn btn-lg btn-cta" href="{{url_for('leaderboard.index')}}">{{_("Leaderboard")}}</a></div>
+	<div class="col-xs-12"><a class="btn btn-lg btn-cta" href="{{url_for('geotagx-community.leaderboard')}}">{{_("Leaderboard")}}</a></div>
 </div>
 <hr>
 <div class="row text-center">
 {% if page_locked %}
 	{{render_lock_page()}}
 {% else %}
-	<div class="col-xs-12">{{render_user_grid(accounts)}}</div>
+	<div class="col-xs-12">{{render_user_grid(users)}}</div>
 	<div class="col-xs-12">{{render_pagination(pagination)}}</div>
 {% endif %}
 </div>
