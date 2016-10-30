@@ -1,66 +1,98 @@
 {% extends "base.html" %}
-{% set active_page = "community"  %}
-{% import "privacy/locked.html" as privacy %}
-{% import "account/_helpers.html" as helper %}
+{% set page_id = "manage-users" %}
+{% set page_title = _("Manage Users") %}
+{% set page_subtitle = _("Manage the registered users.") %}
+{% import "helpers/page.html" as page_helper %}
+{% from "account/_helpers.html" import render_user_thumbnail %}
 {% from "projects/_helpers.html" import broken_image %}
 
-{% block content %}
-{{ broken_image() }}
-
-<div class="row">
-  <div>
-      {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-      {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small></h1>
-      {% if accounts %}
-      <div class="container">
-        <div class="row">
-      {% set count=0 %}
-
-      {% for account in accounts %}
-      <a href="{{url_for('account.profile', name=account.name)}}">
-          <div class="col-xs-3 community-page-user-tile" style="margin-bottom:40px">
-                        <div class="user-profile-image">
-                          <center>
-                        {{ helper.render_user_thumbnail(account, upload_method, style="height:150px; width:150px;", class="img-circle") }}
-                          </center>
-                        </div>
-                        <div class="user-profile-data text-center">
-                          <div class="user-profile-fullname">
-                            {{ account.fullname }}
-                          </div>
-                          <div class="user-profile-task_runs">
-                            <span class="label"> {{ _('Contributed Tasks') }} : </span><span class="value">{{account.n_task_runs}}</span>
-                          </div>
-                          <div class="user-profile-member_since">
-                            <span class="label">{{ _('Joined') }} </span><span class="value">{{account.registered_ago}}</span>
-                          </div>
-                          {% if current_user.id != account.id %}
-                          <div class="user-profile-delete-button">
-                            <a class="btn btn-danger btn-lg" href="{{ url_for('geotagx-admin.delete_user', name=account.name, confirmed='unconfirmed')+'?user_page_redirect='+pagination_page  }}"> {{ _('Delete User') }}</a>
-                          </div>
-                          {% endif %}
-                        </div>
-            </div>
-          </a>
-          {% set count = count + 1 %}
-          {% if count % 4 == 0 %}
-            </div> <!-- End Row div -->
-            <div class="row"> <!-- Start new Row div -->
-          {% endif %}
-            <!-- </a> -->
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-    <div class="span9">
-        {% if pagination.pages > 1 %}
-            {{ helper.render_pagination(pagination) }}
-        {% endif %}
-    </div>
-    {% endif %}
-  </div>
+{% macro render_card(account) %}
+<div class="user-card">
+	<div class="row">
+		<div class="user-avatar col-xs-4">{{render_user_thumbnail(account, upload_method)}}</div>
+		<div class="col-xs-8">
+			<div class="name">{{account.fullname}}</div>
+			<div class="score">{{_("Score")}}:&nbsp;<span class="value">{{account.n_task_runs}}</span></div>
+			<div class="joined">{{_("Joined")}}&nbsp;<span class="value">{{account.registered_ago}}</span></div>
+			<div class="actions">
+				<a class="btn btn-sm btn-view-user btn-primary" href="{{url_for('account.profile', name=account.name)}}">{{_("View")}}</a>
+				{% if current_user.id != account.id %}
+				<a class="btn btn-sm btn-delete-user btn-danger" href="{{url_for('geotagx-admin.delete_user', name=account.name, confirmed='unconfirmed')+'?user_page_redirect='+pagination_page}}">{{_("Delete User")}}</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </div>
+{% endmacro %}
 
+
+{% block stylesheet %}
+<style>
+.btn-export {
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+.user-card {
+	background:#EEE;
+	margin-top:0.5em;
+	margin-bottom:1em;
+	padding:0.5em;
+	border:1px solid #DDD;
+}
+.user-card:hover {
+	background:#DFDFDF;
+}
+.user-card .user-avatar {
+	padding-right:0;
+}
+.user-card .user-avatar > img {
+	width:100%;
+	height:auto;
+}
+.user-card .name {
+	font-weight:700;
+}
+.user-card .score,
+.user-card .joined {
+	color:#555;
+	margin:0;
+	padding:0;
+	font-weight:700;
+	font-size:0.78em;
+}
+.user-card .actions {
+	display:inline-block;
+	margin-top:0.75em;
+}
+.user-card .actions > a {
+	font-weight:700;
+	margin-right:0.75em;
+}
+</style>
+{% endblock %}
+
+
+{% block body_content %}
+{% call bootstrap.row() %}
+<div class="row">
+	<div class="col-xs-12 col-md-6"><a class="btn-export btn btn-block btn-cta" href="{{url_for('geotagx-admin.export_users', format='json')}}">{{_("Export users")}}&nbsp;(JSON)</a></div>
+	<div class="col-xs-12 col-md-6"><a class="btn-export btn btn-block btn-cta" href="{{url_for('geotagx-admin.export_users', format='csv')}}">{{_("Export users")}}&nbsp;(CSV)</a></div>
+</div>
+<hr>
+<div class="row">
+	{% for account in accounts %}
+	<div class="col-xs-4">{{render_card(account)}}</div>
+	{%if loop.index is divisibleby 3 %}
+</div>
+<div class="row">
+	{% endif %}
+	{% endfor %}
+</div>
+<div class="col-xs-12 text-center">{{page_helper.render_pagination(pagination)}}</div>
+{% endcall %}
+{% endblock %}
+
+
+{% block script %}
+{{broken_image()}}
 {% endblock %}
