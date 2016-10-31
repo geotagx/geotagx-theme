@@ -44,38 +44,6 @@
 {% endmacro %}
 
 
-{% macro render_pagination(pagination, handle) %}
-	<div class="text-center">
-		<ul class="pagination">
-		{% if pagination.has_prev %}
-			<li>
-				<a href="{{ url_for_other_page(pagination.page - 1)	}}">&laquo; {{_('Prev')}} {{handle}}</a>
-			</li>
-		{% endif %}
-
-		{%- for page in pagination.iter_pages() %}
-			{% if page %}
-			{% if page != pagination.page %}
-			<li>
-				<a href="{{ url_for_other_page(page) }}">{{ page }}</a>
-			</li>
-			{% else %}
-			<li class="active">
-				<a href="#">{{ page }}</a>
-			</li>
-			{% endif %}
-			{% endif %}
-		{%- endfor %}
-		{% if pagination.has_next %}
-			<li>
-			<a href="{{ url_for_other_page(pagination.page + 1)
-				}}">{{_('Next')}} {{handle}}&raquo;</a>
-			</li>
-		{% endif %}
-	</ul>
-  </div>
-{% endmacro %}
-
 {% macro render_project_local_nav(project, active_link, current_user) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
 	<li {% if active_link=="info"%}class="active"{% endif %}><a href="{{url_for('project.details', short_name=project.short_name)}}"><i class="icon-chevron-right"></i> {{_('Info')}}</a></li>
