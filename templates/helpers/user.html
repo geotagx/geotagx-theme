@@ -37,23 +37,3 @@
 	<a class="profile-page" href="{{url_for('account.profile', name=user.name)}}"></a>
 </div>
 {% endmacro %}
-
-{#
- # Renders a grid of users.
- # @param users the collection of users to render.
- # @param row_size the number of elements in the grid's row.
- # @param render_item a function that renders a grid item.
- #}
-{% macro render_user_grid(users, row_size=3, render_item=render_user_card) %}
-{% if users %}
-<div class="row">
-	{% for user in users %}
-	<div class="col-xs-12 col-md-{{12//row_size}}">{{render_item(user)}}</div>
-	{% if loop.index is divisibleby row_size %}
-</div>
-<div class="row">
-	{% endif %}
-{% endfor %}
-</div>
-{% endif %}
-{% endmacro %}

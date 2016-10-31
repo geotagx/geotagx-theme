@@ -3,12 +3,13 @@
 {% set page_title = _("Community Leaderboard") %}
 {% set page_locked = enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
 {% from "privacy/locked.html" import render_lock_page %}
-{% from "helpers/user.html" import render_user_grid, render_avatar %}
+{% from "helpers/page.html" import render_grid %}
+{% from "helpers/user.html" import render_avatar %}
 
 {#
  # Renders a leaderboard user card.
  #}
-{% macro render_leaderboard_user_card(user, upload_method) %}
+{% macro render_leaderboard_card(user, upload_method) %}
 <div class="user-card">
 	<div class="row">
 		<div class="avatar col-xs-4">{{render_avatar(user, upload_method)}}</div>
@@ -43,7 +44,7 @@
 {% if page_locked %}
 	{{render_lock_page()}}
 {% else %}
-	<div class="col-xs-12">{{render_user_grid(users, render_item=render_leaderboard_user_card)}}</div>
+	<div class="col-xs-12">{{render_grid(users, render_leaderboard_card)}}</div>
 {% endif %}
 </div>
 {% endcall %}

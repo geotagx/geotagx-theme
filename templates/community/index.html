@@ -4,8 +4,8 @@
 {% set page_subtitle = [total, _("active humanitarians.")] | join(" ") %}
 {% set page_locked = enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
 {% from "privacy/locked.html" import render_lock_page %}
-{% from "helpers/user.html" import render_user_grid %}
-{% from "helpers/page.html" import render_pagination %}
+{% from "helpers/page.html" import render_grid, render_pagination %}
+{% from "helpers/user.html" import render_user_card %}
 
 {% block body_content %}
 {% call bootstrap.row() %}
@@ -17,7 +17,7 @@
 {% if page_locked %}
 	{{render_lock_page()}}
 {% else %}
-	<div class="col-xs-12">{{render_user_grid(users)}}</div>
+	<div class="col-xs-12">{{render_grid(users, render_user_card)}}</div>
 	<div class="col-xs-12">{{render_pagination(pagination)}}</div>
 {% endif %}
 </div>
