@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% set active_page = "view_member_profile" %}
-{% set active_page_title = _("View Member Profile") %}
+{% set page_id = "view_member_profile" %}
+{% set page_title = _("View Member Profile") %}
 {% set page_breadcrumbs = [(_("Community"), url_for("account.index"))] %}
 {% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats_front_page_tile %}
 {% from "account/_helpers.html" import render_user_public_profile %}
@@ -26,7 +26,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
 <h2><strong style="color:#34495e">{{user.fullname}}</strong>&nbsp;{{_('has contributed to the following projects') }}</h2>
 <div style="margin-top:2em">

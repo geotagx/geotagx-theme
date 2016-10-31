@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% import "projects/_helpers.html" as helper %}
-{% set active_page = "blog_posts" %}
-{% set active_page_title = _("Blog") %}
+{% set page_id = "blog_posts" %}
+{% set page_title = _("Blog") %}
 
-{% block content %}
+{% block body_content %}
 
 
 {% macro render_blog_strip(blogposts) %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% set active_page = "profile_settings" %}
-{% set active_page_title = _("Profile Settings") %}
-{% set active_page_subtitle = _("Manage your profile.") %}
+{% set page_id = "profile_settings" %}
+{% set page_title = _("Profile Settings") %}
+{% set page_subtitle = _("Manage your profile.") %}
 {% set page_breadcrumbs = [(_("Profile"), url_for("account.profile", name=current_user.name))] %}
 {% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
@@ -12,7 +12,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% from "_formhelpers.html" import render_field %}
 {% from "_formhelpers.html" import geotagx_render_field , geotagx_render_checkbox , geotagx_render_selectlist %}
 

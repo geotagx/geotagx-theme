@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% set active_page = "delete_user" %}
-{% set active_page_title = _("Delete User") %}
+{% set page_id = "delete_user" %}
+{% set page_title = _("Delete User") %}
 {% set page_breadcrumbs = [(_("Administrator Dashboard"), url_for("admin.index")), (_("Manage Users"), url_for("geotagx-admin.manage_users"))] %}
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
@@ -29,7 +29,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
 <div>
   <h3 class="text-center"> {{ _('Are you sure you want to delete this user ?') }} </h3><br/>

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% set active_page = "manage_your_projects" %}
-{% set active_page_title = _("Manage Your Projects") %}
-{% set active_page_subtitle = _("Create, update or delete your projects.") %}
+{% set page_id = "manage_your_projects" %}
+{% set page_title = _("Manage Your Projects") %}
+{% set page_subtitle = _("Create, update or delete your projects.") %}
 {% set page_breadcrumbs = [(_("Profile"), url_for("account.profile", name=current_user.name))] %}
 {% set active_link = "applications" %}
 {% import "account/_helpers.html" as helper %}
 {% from "projects/_helpers.html" import broken_image %}
 {% from "_helpers.html" import geotagx_render_app_tile %}
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
 <div class="row"><div class="col-xs-12"><h3 class="text-center"><strong style="color:#444e67">Project Status</strong></h3></div></div>
 <div class="row portfolio-anchors">

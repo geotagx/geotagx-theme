@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% set active_page = "sourcerer-dashboard" %}
-{% set active_page_title = "GeoTag-X Sourcerer Dashboard" %}
+{% set page_id = "sourcerer-dashboard" %}
+{% set page_title = "GeoTag-X Sourcerer Dashboard" %}
 {% set page_breadcrumbs = [(_("Administrator Dashboard"), url_for("admin.index"))] %}
 {% from "projects/_helpers.html" import broken_image %}
 
-{% block content %}
+{% block body_content %}
 {{ broken_image() }}
 <script type="text/javascript">
     var csrftoken = "{{ csrf_token() }}"

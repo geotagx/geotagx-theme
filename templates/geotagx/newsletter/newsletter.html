@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set active_page = "newsletter" %}
+{% set page_id = "newsletter" %}
 
 
 class NewsletterForm(Form):
@@ -9,7 +9,7 @@ class NewsletterForm(Form):
   submit = SubmitField("Send")
 
 
-{% block content %}
+{% block body_content %}
 
   <h2>GeoTag-X Newsletter</h2>
   <form action="{{ url_for('geotagx-admin.send_newsletter') }}" method=post>

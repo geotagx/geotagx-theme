@@ -1,12 +1,12 @@
 {% extends "/base.html" %}
-{% set active_page = "profile" %}
+{% set page_id = "profile" %}
 {% set active_link = "admin" %}
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
 {% from "account/_helpers.html" import render_account_local_nav %}
 {% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
 
-{% block content %}
+{% block body_content %}
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 <style>

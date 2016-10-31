@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% set active_page = "help" %}
+{% set page_id = "help" %}
 
-{% block content %}
+{% block body_content %}
 {% include ['custom/_tos.html', 'help/_tos.html'] ignore missing %}
 {% endblock %}

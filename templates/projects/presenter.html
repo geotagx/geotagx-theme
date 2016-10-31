@@ -1,7 +1,7 @@
 {% extends "projects/base.html" %}
-{% set active_page = "contribute" %}
-{% set active_page_title = _("Contribute") %}
-{% set active_page_subtitle = _("Help us analyse the project.") %}
+{% set page_id = "contribute" %}
+{% set page_title = _("Contribute") %}
+{% set page_subtitle = _("Help us analyse the project.") %}
 {% set project_completed = project.completed or invite_new_volunteers %}
 
 {% block stylesheet %}

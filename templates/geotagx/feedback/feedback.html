@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "_helpers/disqus.html" import render_disqus_script %}
-{% set active_page = "feedback" %}
-{% set active_page_title = _("Feedback") %}
+{% set page_id = "feedback" %}
+{% set page_title = _("Feedback") %}
 
-{% block content %}{% call bootstrap.row() %}<div id="disqus_thread"></div>{% endcall %}{% endblock %}
+{% block body_content %}{% call bootstrap.row() %}<div id="disqus_thread"></div>{% endcall %}{% endblock %}
 {% block script %}{{render_disqus_script("feedback")}}{% endblock %}

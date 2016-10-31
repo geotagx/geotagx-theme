@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% set active_page = "summary" %}
-{% set active_page_title = "Data Visualisation" %}
-{% set active_page_subtitle = "A visualisation of the summarized response data." %}
+{% set page_id = "summary" %}
+{% set page_title = "Data Visualisation" %}
+{% set page_subtitle = "A visualisation of the summarized response data." %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
@@ -13,7 +13,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
 <div id="map"></div>
 <div id="myModal" class="modal large fade" role="dialog">
