@@ -49,3 +49,19 @@
 	</figure>
 </div>
 {% endmacro %}
+
+{#
+ # Renders a project grid.
+ # @param projects a collection of projects to render.
+ # @param current_user the current user.
+ #}
+{% macro render_project_grid(projects, current_user=None) %}
+{% if projects %}
+	{% from "_helpers/page.html" import render_grid %}
+	{% with is_authenticated = current_user.is_authenticated() if current_user else False %}
+	{% call(project, show_admin_actions) render_grid(projects) %}
+		{{render_project_card(project, show_admin_actions=is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}
+	{% endcall %}
+	{% endwith %}
+{% endif %}
+{% endmacro %}

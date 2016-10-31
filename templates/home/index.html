@@ -3,7 +3,7 @@
 {% set page_title = _("Home") %}
 {% set page_subtitle = _("Welcome to GeoTag-X.") %}
 {% set featured_projects = categories_projects["featured"] %}
-{% from "_helpers/project.html" import render_project_card %}
+{% from "_helpers/project.html" import render_project_grid %}
 
 {% block stylesheet %}
 <style>
@@ -56,11 +56,10 @@
 	letter-spacing:2px;
 }
 #featured-projects-grid {
-	padding-top:0.5em;
-	padding-bottom:0.5em;
+	margin-top:2em;
 }
 #explore-projects {
-	margin:0.5em 0 2.5em;
+	margin:0 0 2.5em;
 }
 #page-footer {
 }
@@ -93,13 +92,7 @@
 </header>
 <div>
 	<p class="text-center">Get involved! There are no particular skills required to contribute to any one of our projects.</p>
-	<div id="featured-projects-grid" class="row grid">
-		{% with current_user_is_authenticated = current_user.is_authenticated() %}
-		{% for project in featured_projects %}
-		<div class="grid-slot col-xs-12 col-md-4">{{render_project_card(project, show_admin_actions=current_user_is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}</div>
-		{% endfor %}
-		{% endwith %}
-	</div>
+	<div id="featured-projects-grid">{{render_project_grid(featured_projects, current_user)}}</div>
 	<div id="explore-projects" class="text-center">
 		<p class="text-center">{{_("Explore more of our projects ranging from a variety of topics.")}}</p>
 		<a class="btn btn-lg btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
