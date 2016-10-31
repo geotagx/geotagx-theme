@@ -1,0 +1,51 @@
+{#
+ # Renders the URL to a specified project's cover image.
+ # If no cover image exists, then a URL to a placeholder image is returned.
+ #}
+{% macro render_cover_src(project, upload_method=None) %}
+{%- if project.info.container -%}
+	{%- if upload_method == "rackspace" -%}
+		{{url_for("rackspace", filename=project.info.thumbnail, container=project.info.container)}}
+	{%- else -%}
+		{{url_for("uploads.uploaded_file", filename=(project.info.container + "/" + project.info.thumbnail))}}
+	{%- endif -%}
+{%- elif project.info.thumbnail -%}
+	{{project.info.thumbnail}}
+{%- else -%}
+	{{url_for("static", filename="img/placeholders/project.png")}}
+{%- endif -%}
+{% endmacro %}
+
+{#
+ # Renders the specified project's cover image.
+ #}
+{% macro render_cover(project, upload_method=None, cover_id=None, cover_class=None) -%}
+<img src="{{render_cover_src(project, upload_method)}}"{% if cover_id %} id="{{cover_id}}"{% endif %}{% if cover_class %} class="{{cover_class}}"{% endif %}>
+{%- endmacro %}
+
+{#
+ # Renders a project card.
+ # @param project an instance of a project containing the information to render.
+ # @param category_id the project's category identifier.
+ # @param show_admin_actions shows administration action buttons if set to True, hides them otherwise.
+ #}
+{% macro render_project_card(project, category_id=None, show_admin_actions=False) %}
+<div class="project-card" data-short-name="{{project.short_name}}" data-project-id="{{project.id}}"{% if category_id %} data-category-id="{{category_id}}"{% endif %}>
+	<figure class="cover">
+		{{render_cover(project)}}
+		<figcaption>
+			<div class="caption-body">
+				<header><h2 class="title">{{project.name}}</h2></header>
+				<p class="description">{{project.description}}&nbsp;<a href="{{url_for('project.details', short_name=project.short_name)}}">Read more</a> about this project or {% if True %}<a href="{{url_for('project.presenter', short_name=project.short_name)}}">start contributing</a>{% else %}<a href="#">see the results</a>{% endif %}.</p>
+				<hr>
+				<footer>{{project.n_volunteers}} VOLUNTEERS&nbsp;&bull;&nbsp;{{project.n_tasks}} TASKS&nbsp;&bull;&nbsp;{{project.overall_progress}}% COMPLETE</footer>
+			</div>
+		</figcaption>
+		<div class="overlay">
+			{% if show_admin_actions %}
+			<a href="{{url_for('project.settings', short_name=project.short_name)}}" class="settings"><i class="fa fa-lg fa-cog"></i></a>
+			{% endif %}
+		</div>
+	</figure>
+</div>
+{% endmacro %}

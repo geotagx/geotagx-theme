@@ -3,7 +3,7 @@
 {% set page_title = _("Home") %}
 {% set page_subtitle = _("Welcome to GeoTag-X.") %}
 {% set featured_projects = categories_projects["featured"] %}
-{% from "projects/_helpers.html" import render_project_tile %}
+{% from "_helpers/project.html" import render_project_card %}
 
 {% block stylesheet %}
 <style>
@@ -96,7 +96,7 @@
 	<div id="featured-projects-grid" class="row grid">
 		{% with current_user_is_authenticated = current_user.is_authenticated() %}
 		{% for project in featured_projects %}
-		<div class="grid-slot col-xs-12 col-md-4">{{render_project_tile(project, show_admin_actions=current_user_is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}</div>
+		<div class="grid-slot col-xs-12 col-md-4">{{render_project_card(project, show_admin_actions=current_user_is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}</div>
 		{% endfor %}
 		{% endwith %}
 	</div>
