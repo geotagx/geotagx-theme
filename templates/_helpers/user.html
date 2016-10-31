@@ -17,7 +17,7 @@
  # Renders the specified user's profile picture.
  #}
 {% macro render_avatar(user, upload_method=None, image_id=None, image_class=None) -%}
-<img src="{{render_avatar_src(user, upload_method)}}"{% if image_id %} id="{{image_id}}"{% endif %}{% if image_class %} id="{{image_class}}"{% endif %}>
+<img src="{{render_avatar_src(user, upload_method)}}"{% if image_id %} id="{{image_id}}"{% endif %}{% if image_class %} class="{{image_class}}"{% endif %}>
 {%- endmacro %}
 
 {#
