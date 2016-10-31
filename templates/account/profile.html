@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
-{% set active_page_title = _("Profile") %}
-{% set active_page_subtitle = _("View your GeoTag-X profile.") %}
-{% set active_link = "profile" %}
-{% import "account/_helpers.html" as helper %}
-{% from "_helpers.html" import render_geotagx_project_portfolio_element_with_stats %}
-{% from "projects/_helpers.html" import broken_image, render_project_image_url %}
+{% set page_id = "profile" %}
+{% set page_title = _("Profile") %}
+{% set page_subtitle = _("View your GeoTag-X profile.") %}
+{% from "_helpers/project.html" import render_project_grid %}
+{% from "account/_helpers.html" import render_user_profile %}
 
 {% block stylesheet %}
 <style>
@@ -23,34 +21,17 @@
 {{super()}}
 {% if current_user.is_authenticated() %}
 	{% call bootstrap.render_container(id="profile-header") %}
-	{{helper.render_user_profile(current_user, upload_method, "settings")}}
+		{{render_user_profile(current_user, upload_method, "settings")}}
 	{% endcall %}
 {% endif %}
 {% endblock %}
 
 
-{% block content %}
+{% block body_content %}
 {% call bootstrap.row() %}
-	<div class="row"><div class="col-xs-12"><h1>{{_("Your Contributions")}}</h1></div></div>
 	<div class="row">
-		<div class="col-xs-12">
-			<div class="row mar-b-30">
-				<div id="portfoliolist-three">
-					<div class="col-xs-12">
-						{% for app in projects_contrib %}
-						{% if app.owner_id == current_user.id %}
-							{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app, isAdmin=True)}}
-						{% else %}
-							{{render_geotagx_project_portfolio_element_with_stats(category="", image_link=render_project_image_url(app, upload_method), info_link=url_for('project.details', short_name=app.short_name), tutorial_link="#", contributing_link=url_for('project.presenter', short_name=app.short_name), percentage_complete=app.overall_progress, label=app.name, app=app)}}
-						{% endif %}
-						{% endfor %}
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="col-xs-12"><h1>{{_("Your Contributions")}}</h1><hr></div>
+		<div class="col-xs-12">{{render_project_grid(projects_contrib, current_user)}}</div>
 	</div>
 {% endcall %}
 {% endblock %}
-
-
-{% block script %}{{broken_image()}}{% endblock %}
