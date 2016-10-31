@@ -1,18 +1,17 @@
 {#
  # Renders a grid of items.
  # @param items the items to render.
- # @param render_item a function that renders a grid item.
  # @param row_size the number of items in the grid's row.
  # @param row_classes a set of custom classes for each grid row.
  # @param col_classes a set of custom classes for each grid column.
  #}
-{% macro render_grid(items, render_item, row_size=3, row_classes=None, col_classes=None) %}
-{% if items and render_item is callable %}
+{% macro render_grid(items, row_size=3, row_classes=None, col_classes=None) %}
+{% if items %}
 {% set row_class = ["row grid-row", row_classes|default("", true)]|join(" ") %}
-{% set col_class = ["grid-col col-xs-12 col-md-"~(12//row_size), col_classes|default("", true)]|join(" ") %}
+{% set col_class = ["grid-column col-xs-12 col-md-"~(12//row_size), col_classes|default("", true)]|join(" ") %}
 <div class="{{row_class}}">
 	{% for item in items %}
-	<div class="{{col_class}}">{{render_item(item)}}</div>
+	<div class="{{col_class}}">{{caller(item)}}</div>
 	{% if loop.index is divisibleby row_size %}
 </div>
 <div class="row grid-row{% if row_class %} {{row_class}}{% endif %}">

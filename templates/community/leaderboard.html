@@ -44,7 +44,7 @@
 {% if page_locked %}
 	{{render_lock_page()}}
 {% else %}
-	<div class="col-xs-12">{{render_grid(users, render_leaderboard_card)}}</div>
+	<div class="col-xs-12">{% call(user) render_grid(users) %}{{render_leaderboard_card(user)}}{% endcall %}</div>
 {% endif %}
 </div>
 {% endcall %}

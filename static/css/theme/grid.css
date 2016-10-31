@@ -1,6 +1,6 @@
 /**
  * This stylesheet is part of the GeoTag-X theme.
- * It contains user card styles.
+ * It contains grid styles.
  *
  * Copyright (c) 2016 UNITAR/UNOSAT
  *
@@ -23,41 +23,6 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
-.user-card {
-	position:relative;
-	background:#EEE;
-	padding:0.5em;
-	border:1px solid #DDD;
-}
-.user-card:hover {
-	color:#FFF;
-	background:#0AF;
-}
-.user-card .avatar {
-	padding-right:0;
-}
-.user-card .avatar > img {
-	width:100%;
-	height:auto;
-}
-.user-card .bio {
-	padding-left:0.5em;
-}
-.user-card .bio > .name {
-	font-weight:700;
-}
-.user-card .bio > .score,
-.user-card .bio > .joined {
-	margin:0;
-	padding:0;
-	font-weight:700;
-	font-size:0.78em;
-	opacity:0.7;
-}
-.user-card > .profile-page {
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
+.grid-column {
+	margin-bottom:2em;
 }

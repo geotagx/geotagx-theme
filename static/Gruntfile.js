@@ -12,6 +12,7 @@ module.exports = function(grunt){
                 files: {
                     "<%= dir.css %>/theme.min.css": [
                         "<%= dir.css %>/theme/button.css",
+                        "<%= dir.css %>/theme/grid.css",
                         "<%= dir.css %>/theme/navigation.css",
                         "<%= dir.css %>/theme/page.css",
                         "<%= dir.css %>/theme/page-header.css",
