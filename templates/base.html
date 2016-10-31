@@ -13,7 +13,7 @@
 {% set user_name = "#geotagx-anonymous" if current_user.is_anonymous() else current_user.get_id() -%}
 {% set user_locale = "en" if current_user.is_anonymous() else current_user.locale -%}
 {% set flash_messages = get_flashed_messages(with_categories=True) -%}
-{% import "helpers/_bootstrap.html" as bootstrap %}
+{% import "_helpers/bootstrap.html" as bootstrap %}
 
 <!DOCTYPE html>
 <html lang="{{user_locale}}">

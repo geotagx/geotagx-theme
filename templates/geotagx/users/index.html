@@ -2,8 +2,8 @@
 {% set page_id = "manage-users" %}
 {% set page_title = _("Manage Users") %}
 {% set page_subtitle = _("Manage the registered users.") %}
-{% from "helpers/page.html" import render_pagination %}
-{% from "helpers/user.html" import render_user_card, render_user_grid, render_avatar %}
+{% from "_helpers/page.html" import render_pagination %}
+{% from "_helpers/user.html" import render_user_card, render_user_grid, render_avatar %}
 
 {% macro render_card(user, upload_method) %}
 {{render_user_card(user, upload_method)}}

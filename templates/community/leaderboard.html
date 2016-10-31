@@ -3,8 +3,8 @@
 {% set page_title = _("Community Leaderboard") %}
 {% set page_locked = enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
 {% from "privacy/locked.html" import render_lock_page %}
-{% from "helpers/page.html" import render_grid %}
-{% from "helpers/user.html" import render_avatar %}
+{% from "_helpers/page.html" import render_grid %}
+{% from "_helpers/user.html" import render_avatar %}
 
 {#
  # Renders a leaderboard user card.

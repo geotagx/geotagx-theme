@@ -20,7 +20,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					{% if current_user.is_authenticated() %}
-					{% from "helpers/user.html" import render_avatar %}
+					{% from "_helpers/user.html" import render_avatar %}
 					<li class="dropdown">
 						<a id="user-specific-navigation" role="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="profile-picture-thumbnail">{{render_avatar(current_user)}}</span>{{current_user.fullname | truncate(72, true)}}&nbsp;<span helpers/user"></span></a>
 						<ul class="dropdown-menu">
