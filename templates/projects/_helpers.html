@@ -142,14 +142,6 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_project_title(project, upload_method, subtitle=None) %}
-<h1>
-	{% if subtitle %}
-	<strong>{{ project.name }}</strong>: {{subtitle}}</h1>
-	{% else %}
-	<strong>{{ project.name }}</strong></h1>
-	{% endif %}
-{% endmacro %}
 
 {% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
 <div class="row-fluid">
@@ -188,30 +180,6 @@ function imgError(image) {
 			</div>
 		</div>
 	</div>
-{% endmacro %}
-
-{% macro render_loading(text) %}
-<div class="row">
-	<div class="span12">
-		<div id="loading" class="alert alert-info" style="display:none;">
-			<img src="{{url_for('static', filename='img/loading.gif')}}"/> {{text}}
-		</div>
-	</div>
-</div>
-{% endmacro %}
-
-{% macro render_project_thumbnail(project, upload_method, id, class, style) %}
-{% if project.info.container %}
-	{% if upload_method == 'rackspace'%}
-	<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);">
-	{% else %}
-	<img id="{{id}}"  class="{{class}}" width="{{width}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}}" style="{{style}}" onerror="imgError(this);">
-	{% endif %}
-{% elif project.info.thumbnail %}
-	<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);">
-{% else %}
-	<img id="{{id}}" class="{{class}}" width="{{width}}" src="{{url_for('static', filename='img/placeholders/project.png')}}" style="{{style}}">
-{% endif %}
 {% endmacro %}
 
 
@@ -351,6 +319,8 @@ function imgError(image) {
 		});
 		</script>
 {% endmacro %}
+
+
 {% macro render_project_sublabel(sublabel) %}
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -358,6 +328,7 @@ function imgError(image) {
 	});
 </script>
 {% endmacro %}
+
 
 <!-- TO-DO : Use this macro for rendering urls in front_page_grid  -->
 {% macro render_category_image(category_short_name) %}
@@ -396,14 +367,4 @@ function imgError(image) {
 	<a href="{{url_for('geotagx.map_summary', category_name=category.short_name)}}" class="btn btn-purchase pull-right" style="margin-left:10px"><i class="fa fa-map"></i> Visualize Summary on Map </a>
 	<a href="/about#find_photos" class="btn btn-purchase pull-right"><i class="fa fa-binoculars"></i> Find photos for this Project </a>
 </div>
-{% endmacro %}
-
-{% macro render_share_buttons(type, target) %}
-<a style="color:#00ACED" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Twitter"  data-toggle="tooltip" data-placement="middle" href="http://twitter.com/home?status=Join%20me%20@%20{{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#3B5998" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Facebook" data-toggle="tooltip" data-placement="middle" href="http://www.facebook.com/sharer/sharer.php?u={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
-<a style="color:#DD4B39" rel="nofollow" target="_blank" class="share-{{type}}" title="Share this {{type}} via Google+"  data-toggle="tooltip" data-placement="middle" href="https://plus.google.com/share?url={{target}}"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></span></a>
-{% endmacro %}
-
-{% macro render_project_share_buttons(project) %}
-{{render_share_buttons("project", request.host_url + url_for("project.details", short_name=project.short_name)[1:])}}
 {% endmacro %}
