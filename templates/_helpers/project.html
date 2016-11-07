@@ -2,7 +2,7 @@
  # Renders the URL to a specified project's cover image.
  # If no cover image exists, then a URL to a placeholder image is returned.
  #}
-{% macro render_cover_src(project, upload_method=None) %}
+{% macro render_cover_image_src(project, upload_method=None) %}
 {%- if project.info.container -%}
 	{%- if upload_method == "rackspace" -%}
 		{{url_for("rackspace", filename=project.info.thumbnail, container=project.info.container)}}
@@ -19,15 +19,15 @@
 {#
  # Renders the URL to a specified project's blurred cover image.
  #}
-{% macro render_blurred_cover_src(project) -%}
+{% macro render_blurred_cover_image_src(project) -%}
 {{url_for("uploads.uploaded_file", filename=get_blurred_cover_image_filename(project))}}
 {%- endmacro %}
 
 {#
  # Renders the specified project's cover image.
  #}
-{% macro render_cover(project, upload_method=None, cover_id=None, cover_class=None) -%}
-<img src="{{render_cover_src(project, upload_method)}}"{% if cover_id %} id="{{cover_id}}"{% endif %}{% if cover_class %} class="{{cover_class}}"{% endif %}>
+{% macro render_cover_image(project, upload_method=None, cover_id=None, cover_class=None) -%}
+<img src="{{render_cover_image_src(project, upload_method)}}"{% if cover_id %} id="{{cover_id}}"{% endif %}{% if cover_class %} class="{{cover_class}}"{% endif %}>
 {%- endmacro %}
 
 {#
@@ -39,7 +39,7 @@
 {% macro render_project_card(project, category_id=None, show_admin_actions=False) %}
 <div class="project-card" data-short-name="{{project.short_name}}" data-project-id="{{project.id}}"{% if category_id %} data-category-id="{{category_id}}"{% endif %}>
 	<figure class="cover">
-		{{render_cover(project)}}
+		{{render_cover_image(project)}}
 		<figcaption>
 			<div class="caption-body">
 				<header><h2 class="title">{{project.name}}</h2></header>
