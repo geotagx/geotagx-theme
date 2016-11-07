@@ -17,6 +17,13 @@
 {% endmacro %}
 
 {#
+ # Renders the URL to a specified project's blurred cover image.
+ #}
+{% macro render_blurred_cover_src(project) -%}
+{{url_for("uploads.uploaded_file", filename=get_blurred_cover_image_filename(project))}}
+{%- endmacro %}
+
+{#
  # Renders the specified project's cover image.
  #}
 {% macro render_cover(project, upload_method=None, cover_id=None, cover_class=None) -%}
