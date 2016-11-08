@@ -1,55 +1,101 @@
-{% extends "projects/base.html" %}
-{% set page_id = "about_the_project" %}
+{#
+ # The current template context:
+ # current_user
+ # last_activity
+ # n_completed_tasks
+ # n_tasks
+ # n_task_runs
+ # n_volunteers
+ # overall_progress
+ # owner
+ # project
+ # upload_method
+ #}
+{% extends "base.html" %}
+{% from "_helpers/page.html" import render_share_buttons %}
+{% from "_helpers/project.html" import render_blurred_cover_image_src, render_sub_navigation %}
+{% set page_id = "about-project" %}
 {% set page_title = project.name %}
 {% set page_subtitle = project.description %}
+{% set project_category = category or get_project_category(project.category_id) %}
+{% set project_category_url = url_for("project.project_cat_index", category=project_category.short_name) %}
+{% set project_completed = overall_progress == 100 %}
+{% set is_authenticated = current_user.is_authenticated() if current_user else False %}
+{% set is_owner = is_authenticated and (current_user.admin or current_user.id == project.owner_id) %}
+{% set requires_authentication = not project.allow_anonymous_contributors and not is_authenticated %}
 
-{% block header %}
-{{super()}}
-{% if project and project.short_name != "geotagxblog" %}
-    {% call bootstrap.render_container(id="project-synopsis") %}
-        {{helper.render_project_profile(project, upload_method, owner, n_tasks, n_task_runs, overall_progress, last_activity, n_completed_tasks, n_volunteers, current_user)}}
-    {% endcall %}
-{% endif %}
+{% block stylesheet %}
+<style>
+#project-long-description {
+	font-family:"Open Sans";
+}
+#project-long-description h1 {
+	margin:1.5em 0 0.25em;
+	padding:0;
+	font-size:1.5em;
+	font-weight:700;
+}
+#project-long-description p {
+	margin:0 0 1em;
+}
+#project-updated {
+	border-top:1px solid #EEE;
+	padding-top:0.15em;
+	margin-top:2em;
+	margin-bottom:1em;
+	color:#777;
+	font-size:0.9em;
+}
+</style>
 {% endblock %}
 
 
-{% block main_content %}
-<div class="row">
-    {% if project %}
-    <div id="project-info" style="min-height:400px">
-        <h2>
-            <span style="color:#444E67">{{project.name}}&nbsp;<small style="text-transform:uppercase">{{_('About')}}</small></span>
-            <span class="pull-right" style="font-size:0.55em">{{helper.render_project_share_buttons(project)}}</span>
-        </h2>
-        {% if project.long_description %}
-        <div style="padding:1em 0 0.5em 0; border-bottom:1px solid #EEE">
-            {{project.long_description | e | markdown}}
-        </div>
-        {% endif %}
-        <div id="ckan" style="display:none">
-        <h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
-        <p><i class="icon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{project.short_name}}">Preview the data</a>
-        </p>
-        <p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
-        </div>
-    </div>
-    {% else %}
-    <div class="page-header">
-        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
-    </div>
-    {% endif %}
+{% block header %}
+<div id="project-header" class="text-center">
+	<div id="project-cover" class="project-cover" style="background-image:url({{render_blurred_cover_image_src(project)}})">
+		<div class="project-cover-overlay">
+			<div class="project-category-name"><a href="{{project_category_url}}">{{project_category.name}}</a></div>
+			<div class="project-name">{{project.name}}</div>
+			<div class="project-description">{{project.description}}</div>
+			<div class="project-progress">{{overall_progress}}% COMPLETE</div>
+			<div class="project-call-to-action">
+				{% if project_completed %}
+				<a class="btn btn-cta btn-lg" href="{{url_for('project.tasks', short_name=project.short_name)}}">{{_("View Results")}}</a>
+				{% else %}
+				<a class="btn btn-cta btn-lg" href="{{url_for('project.presenter', short_name=project.short_name)}}">{{_("Sign in to Contribute") if requires_authentication else _("Start Contributing")}}</a>
+				{% endif %}
+			</div>
+			{{render_share_buttons(request.url, ul_class="project-cover-share-page")}}
+		</div>
+	</div>
+	{{render_sub_navigation(project, current_section="about")}}
 </div>
+{% endblock %}
+
+
+{% block body_content %}
+{% call bootstrap.row() %}
+{% if project.long_description %}
+<div id="project-long-description">{{project.long_description | e | markdown}}</div>
+{% endif %}
+<div id="project-updated">Last updated on {{project.updated[:10]}}.</div>
+{% endcall %}
+{% endblock %}
+
+
+{% block script %}
 <script>
-    var url = "{{ckan_url}}/api/3/action/package_show";
-    $.get(url, {id: '{{ckan_pkg_name}}'}, function(data){
-            if (data['success'] == true) {
-                $("#ckan").show();
-                if (data['result']['license_title'] != null) {
-                    $("#ckan_license").show();
-                }
-            }
-            });
+/*
+"use strict";
+var url = "{{ckan_url}}/api/3/action/package_show";
+$.get(url, {id: "{{ckan_pkg_name}}"}, function(data){
+	if (data["success"] == true) {
+		$("#ckan").show();
+		if (data["result"]["license_title"] != null) {
+			$("#ckan_license").show();
+		}
+	}
+});
+*/
 </script>
-{{ helper.broken_image() }}
-{{ helper.knob() }}
 {% endblock %}
