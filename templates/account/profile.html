@@ -2,7 +2,7 @@
 {% set page_id = "profile" %}
 {% set page_title = _("Profile") %}
 {% set page_subtitle = _("View your GeoTag-X profile.") %}
-{% from "_helpers/project.html" import render_project_grid %}
+{% from "_helpers/project.html" import render_grid %}
 {% from "account/_helpers.html" import render_user_profile %}
 
 {% block stylesheet %}
@@ -31,7 +31,7 @@
 {% call bootstrap.row() %}
 	<div class="row">
 		<div class="col-xs-12"><h1>{{_("Your Contributions")}}</h1><hr></div>
-		<div class="col-xs-12">{{render_project_grid(projects_contrib, current_user)}}</div>
+		<div class="col-xs-12">{{render_grid(projects_contrib, current_user)}}</div>
 	</div>
 {% endcall %}
 {% endblock %}

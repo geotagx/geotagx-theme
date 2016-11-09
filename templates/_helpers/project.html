@@ -62,7 +62,7 @@
  # @param projects a collection of projects to render.
  # @param current_user the current user.
  #}
-{% macro render_project_grid(projects, current_user=None) %}
+{% macro render_grid(projects, current_user=None) %}
 {% if projects %}
 	{% from "_helpers/page.html" import render_grid %}
 	{% with is_authenticated = current_user.is_authenticated() if current_user else False %}
