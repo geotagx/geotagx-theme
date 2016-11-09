@@ -36,7 +36,7 @@
  # @param category_id the project's category identifier.
  # @param show_admin_actions shows administration action buttons if set to True, hides them otherwise.
  #}
-{% macro render_project_card(project, category_id=None, show_admin_actions=False) %}
+{% macro render_card(project, category_id=None, show_admin_actions=False) %}
 <div class="project-card" data-short-name="{{project.short_name}}" data-project-id="{{project.id}}"{% if category_id %} data-category-id="{{category_id}}"{% endif %}>
 	<figure class="cover">
 		{{render_cover_image(project)}}
@@ -67,7 +67,7 @@
 	{% from "_helpers/page.html" import render_grid %}
 	{% with is_authenticated = current_user.is_authenticated() if current_user else False %}
 	{% call(project, show_admin_actions) render_grid(projects) %}
-		{{render_project_card(project, show_admin_actions=is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}
+		{{render_card(project, show_admin_actions=is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}
 	{% endcall %}
 	{% endwith %}
 {% endif %}
