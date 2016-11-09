@@ -64,12 +64,14 @@
  #}
 {% macro render_grid(projects, current_user=None) %}
 {% if projects %}
-	{% from "_helpers/page.html" import render_grid %}
-	{% with is_authenticated = current_user.is_authenticated() if current_user else False %}
-	{% call(project, show_admin_actions) render_grid(projects) %}
-		{{render_card(project, show_admin_actions=is_authenticated and (current_user.admin or current_user.id == project.owner_id))}}
+	{% from "_helpers/page.html" import render_grid as grid %}
+	{% set is_authenticated = current_user.is_authenticated() if current_user else False %}
+	{% set is_administrator = is_authenticated and current_user.admin %}
+	{% call(project, show_admin_actions) grid(projects) %}
+		{% with is_owner = is_authenticated and current_user.id == project.owner_id %}
+			{{render_card(project, show_admin_actions=is_administrator or is_owner)}}
+		{% endwith %}
 	{% endcall %}
-	{% endwith %}
 {% endif %}
 {% endmacro %}
 
