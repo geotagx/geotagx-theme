@@ -11,20 +11,22 @@
  # project
  # upload_method
  #}
-{% extends "base.html" %}
+{% extends "projects/base.html" %}
 {% from "_helpers/page.html" import render_share_buttons %}
-{% from "_helpers/project.html" import render_blurred_cover_image_src, render_sub_navigation %}
 {% set page_id = "about-project" %}
 {% set page_title = project.name %}
 {% set page_subtitle = project.description %}
+{% set navigation_section = "about" %}
 {% set project_category = category or get_project_category(project.category_id) %}
 {% set project_category_url = url_for("project.project_cat_index", category=project_category.short_name) %}
 {% set project_completed = overall_progress == 100 %}
-{% set is_authenticated = current_user.is_authenticated() if current_user else False %}
-{% set requires_authentication = not project.allow_anonymous_contributors and not is_authenticated %}
 
 {% block stylesheet %}
+{{super()}}
 <style>
+#project-navigation {
+	text-align:center;
+}
 #project-long-description {
 	font-family:"Open Sans";
 }
@@ -51,7 +53,7 @@
 
 {% block header %}
 <div id="project-header" class="text-center">
-	<div id="project-cover" class="project-cover" style="background-image:url({{render_blurred_cover_image_src(project)}})">
+	<div id="project-cover" class="project-cover" style="background-image:url({{project_helper.render_blurred_cover_image_src(project)}})">
 		<div class="project-cover-overlay">
 			<div class="project-category-name"><a href="{{project_category_url}}">{{project_category.name}}</a></div>
 			<div class="project-name">{{project.name}}</div>
@@ -61,24 +63,23 @@
 				{% if project_completed %}
 				<a class="btn btn-cta btn-lg" href="{{url_for('project.tasks', short_name=project.short_name)}}">{{_("View Results")}}</a>
 				{% else %}
+				{% with requires_authentication = not project.allow_anonymous_contributors and not is_authenticated %}
 				<a class="btn btn-cta btn-lg" href="{{url_for('project.presenter', short_name=project.short_name)}}">{{_("Sign in to Contribute") if requires_authentication else _("Start Contributing")}}</a>
+				{% endwith %}
 				{% endif %}
 			</div>
 			{{render_share_buttons(request.url, ul_class="project-cover-share-page")}}
 		</div>
 	</div>
-	{{render_sub_navigation(project, "about", current_user)}}
 </div>
 {% endblock %}
 
 
 {% block body_content %}
-{% call bootstrap.row() %}
 {% if project.long_description %}
 <div id="project-long-description">{{project.long_description | e | markdown}}</div>
 {% endif %}
 <div id="project-updated">Last updated on {{project.updated[:10]}}.</div>
-{% endcall %}
 {% endblock %}
 
 
