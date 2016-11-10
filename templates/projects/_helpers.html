@@ -88,55 +88,6 @@
 </div><!-- end of class=row -->
 {%- endmacro %}
 
-{% macro broken_image() %}
-<script>
-function imgError(image) {
-	image.onerror = "";
-	image.src = "{{url_for('static', filename='img/placeholders/project.png')}}";
-	if (arguments[1] === 'user') {
-		image.src = "{{url_for('static', filename='img/placeholders/user.png')}}";
-	}
-	return true;
-}
-</script>
-{% endmacro %}
-
-{% macro knob(val) %}
-<script src="{{url_for('static', filename='js/vendor/jquery.knob.js')}}"></script>
-<script>
-	$(function() {
-		$(".dial").knob({
-			'min': 0,
-			'max': 100,
-			'skin': 'tron',
-			'fgColor': '#8bbf36',
-			'inputColor': '#8bbf36',
-			'readOnly': true,
-			'thickness': .2,
-			'width': 40,
-			'height': 40,
-			'displayInput': false,
-		});
-		$(".dial").css('font-size', '26px');
-		$(".dial").css('font-weight', 'bold');
-	});
-</script>
-{% endmacro %}
-
-
-{% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-<div class="row-fluid">
-	<div class="span1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-	<h2><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}
-		{% if show_contribute_btn %}
-		<a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-primary pull-right"><i class="icon-thumbs-up" style="color:white;"></i> {{ _('Start Contributing Now!') }}</a>
-		{% elif show_n_tasks %}
-		<span class="pull-right"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
-		{% endif %}
-
-	</h2>
-</div>
-{% endmacro %}
 
 {% macro render_grid_projects(projects, title, upload_method) %}
 	<div class="banner">
@@ -299,15 +250,6 @@ function imgError(image) {
 		{% endif %}
 		});
 		</script>
-{% endmacro %}
-
-
-{% macro render_project_sublabel(sublabel) %}
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".profile_param_sublabel").html("{{sublabel}}");
-	});
-</script>
 {% endmacro %}
 
 
