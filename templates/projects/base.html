@@ -4,16 +4,15 @@
 {% set is_authenticated = current_user.is_authenticated() if current_user else False %}
 {% set is_administrator = is_authenticated and current_user.admin %}
 {% set is_project_owner = is_administrator or (is_authenticated and current_user.id == project.owner_id) %}
-{% set navigation_section = navigation_section | default(None, True) %}
 {% set navigation_menu_items = [
-	( True, "about",      _("About"), url_for("project.details", short_name=project.short_name)),
-	(False, "blog",       _("Blog"), url_for("project.show_blogposts", short_name=project.short_name)),
-	(False, "forum",      _("Forum"), "#"),
-	( True, "tutorial",   _("Interactive Tutorial"), url_for("project.tutorial", short_name=project.short_name)),
-	( True, "tasks",      _("Tasks"), url_for("project.tasks", short_name=project.short_name)),
-	( True, "statistics", _("Statistics"), url_for("project.show_stats", short_name=project.short_name)),
-	(False, "audit-logs", _("Audit Logs"), url_for("project.auditlog", short_name=project.short_name)),
-	(False, "settings",   _("Settings"), url_for("project.settings", short_name=project.short_name)),
+	( True, "about-project",      _("About"), url_for("project.details", short_name=project.short_name)),
+	(False, "project-blog",       _("Blog"), url_for("project.show_blogposts", short_name=project.short_name)),
+	(False, "project-forum",      _("Forum"), "#"),
+	( True, "project-tutorial",   _("Interactive Tutorial"), url_for("project.tutorial", short_name=project.short_name)),
+	( True, "project-tasks",      _("Tasks"), url_for("project.tasks", short_name=project.short_name)),
+	( True, "project-statistics", _("Statistics"), url_for("project.show_stats", short_name=project.short_name)),
+	(False, "audit-project-logs", _("Audit Logs"), url_for("project.auditlog", short_name=project.short_name)),
+	(False, "project-settings",   _("Settings"), url_for("project.settings", short_name=project.short_name)),
 ] %}
 
 {% block stylesheet %}
@@ -60,13 +59,9 @@
 	{% call bootstrap.render_container(id="project-navigation-container") %}
 	<nav id="project-navigation">
 		<ul class="list-inline">
-		{% for (is_visible_to_public, section, title, url) in navigation_menu_items %}
+		{% for (is_visible_to_public, id, title, url) in navigation_menu_items %}
 			{% if is_administrator or is_visible_to_public %}
-				{% with is_selected = section == navigation_section %}
-					<li class="menu-item section-{{section}}{% if is_selected %} active{% endif %}">
-						<a{% if not is_selected %} href="{{url}}"{% endif %}>{{title}}</a>
-					</li>
-				{% endwith %}
+			<li class="menu-item {% if page_id == id %} active{% endif %}" data-id="{{id}}"><a href="{{url}}">{{title}}</a></li>
 			{% endif %}
 		{% endfor %}
 		</ul>

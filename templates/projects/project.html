@@ -16,7 +16,6 @@
 {% set page_id = "about-project" %}
 {% set page_title = project.name %}
 {% set page_subtitle = project.description %}
-{% set navigation_section = "about" %}
 {% set project_category = category or get_project_category(project.category_id) %}
 {% set project_category_url = url_for("project.project_cat_index", category=project_category.short_name) %}
 {% set project_completed = overall_progress == 100 %}
