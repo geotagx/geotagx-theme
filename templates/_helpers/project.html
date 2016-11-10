@@ -74,34 +74,3 @@
 	{% endcall %}
 {% endif %}
 {% endmacro %}
-
-{#
- # Renders the specified project's sub-navigation menu.
- #}
-{% macro render_sub_navigation(project, current_section, current_user=None) %}
-{% set is_authenticated = current_user.is_authenticated() if current_user else False %}
-{% set is_administrator = is_authenticated and (current_user.admin or current_user.id == project.owner_id) %}
-{% set menu_items = [
-	( True, "about",      _("About"), url_for("project.details", short_name=project.short_name)),
-	(False, "blog",       _("Blog"), url_for("project.show_blogposts", short_name=project.short_name)),
-	(False, "forum",      _("Forum"), "#"),
-	( True, "tutorial",   _("Interactive Tutorial"), url_for("project.tutorial", short_name=project.short_name)),
-	( True, "tasks",      _("Tasks"), url_for("project.tasks", short_name=project.short_name)),
-	( True, "statistics", _("Statistics"), url_for("project.show_stats", short_name=project.short_name)),
-	(False, "audit-logs", _("Audit Logs"), url_for("project.auditlog", short_name=project.short_name)),
-	(False, "settings",   _("Settings"), url_for("project.settings", short_name=project.short_name)),
-] %}
-<nav class="project-sub-navigation">
-	<ul class="list-inline">
-	{% for (is_visible_to_public, section, title, url) in menu_items %}
-		{% if is_administrator or is_visible_to_public %}
-			{% with is_selected = section == current_section %}
-				<li class="menu-item section-{{section}}{% if is_selected %} active{% endif %}">
-					<a{% if not is_selected %} href="{{url}}"{% endif %}>{{title}}</a>
-				</li>
-			{% endwith %}
-		{% endif %}
-	{% endfor %}
-	</ul>
-</nav>
-{% endmacro %}
