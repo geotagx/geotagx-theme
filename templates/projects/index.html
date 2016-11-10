@@ -1,89 +1,90 @@
-{% extends "projects/base.html" %}
-{% set page_id = "project-category" %}
+{% extends "base.html" %}
+{% from "_helpers/page.html" import render_pagination %}
+{% from "_helpers/project.html" import render_grid %}
+{% set page_id = "about-category" %}
 {% set page_title = active_cat.name %}
 {% set breadcrumbs = [(_("Projects"), url_for("geotagx-project-browser.index"))] %}
-{% set special_category = active_cat.short_name in ["featured", "draft"] %}
-{% set enable_share_page = projects and active_cat.short_name != "draft" %}
+{% set is_draft = active_cat.short_name == "draft" %}
+{% set is_featured = not is_draft and active_cat.short_name == "featured" %}
+{% set is_under_development = not is_featured and active_cat.short_name == "underdevelopment" %}
+{% set is_special = is_draft or is_featured or is_under_development %}
+{% set has_projects = projects is defined and projects | length > 0 %}
+{% set has_aggregated_data = has_projects and not is_special %}
+{% set page_share = has_aggregated_data or is_featured %}
+{% set navigation_menu_items = [
+	(True, "about-category", _("About"), url_for("project.project_cat_index", category=active_cat.short_name)),
+	(has_aggregated_data, "visualize-category-data", _("Visualize Collected Data"), url_for("geotagx.map_summary", category_name=active_cat.short_name)),
+] %}
 
 {% block stylesheet %}
 <style>
-.heading {
-	margin:0 0 0.75em 0;
-	padding:0;
-	font-size:1.25em;
-	font-weight:700;
-	letter-spacing:2px;
-	text-transform:uppercase;
-}
-#category-share {
-	font-size:1.25em;
-	margin-top:0.25em;
-	padding:0;
-}
 #page-body {
 	padding-top:0;
 	padding-bottom:0;
 }
-#page-body > .row {
-	padding-top:1em;
-	padding-bottom:1em;
+#category-navigation-container {
+	background:#EEF2F5;
+}
+#category-content-container {
+	margin-top:1em;
 }
 #category-description {
+	font-family:"Open Sans";
 	font-size:1.05em;
+	margin:0 0 1.5em 0;
+}
+#projects-heading {
+	margin:0 0 0.35em;
+	font-weight:900;
+	font-size:1.6em;
+	letter-spacing:3px;
+	text-transform:uppercase;
 }
 #no-projects {
+	font-weight:900;
 	font-size:1.5em;
-	font-weight:700;
-	margin:2em 0 0;
+	margin:1em 0 0;
+	padding:0.25em 0 0 0;
+	border-top:1px solid #EEE;
+	color:#999;
+	letter-spacing:1px;
 }
-#category-projects {
-	color:#DDD;
-	background:#2E3D49;
-}
-#category-projects .heading {
-	margin:0;
-}
-#category-data {
-	background:#EEF2F5;
+#page-pagination {
+	margin:0 0 1em 0;
+	text-align:center;
 }
 </style>
 {% endblock %}
 
 
-{% block body_content %}
-{% if not special_category %}
-	{% call bootstrap.row(row_id="category-description") %}
-	<div class="row">
-		<div class="col-xs-12">{{active_cat.description | safe}}</div>
-	</div>
+{% block body %}
+<main id="page-body" role="main">
+	{% call bootstrap.render_container(id="category-navigation-container") %}
+	<nav id="category-navigation" class="horizontal-scroll-navigation">
+		<ul class="list-inline">
+			{% for (is_visible, id, title, url) in navigation_menu_items %}
+			{% if is_visible %}<li class="menu-item {% if page_id == id %} active{% endif %}" data-id="{{id}}"><a href="{{url}}">{{title}}</a></li>{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
 	{% endcall %}
-{% endif %}
-
-{% if not projects %}
-	<p id="no-projects">{{_("Sorry, there are no projects assigned to this category yet.")}}</p>
-{% else %}
-	{% call bootstrap.row(row_id="category-projects") %}
-	<header><h1 class="heading">{{_("Projects")}}</h1></header>
-	<div class="grid row">
-		{% for project in projects %}
-		<div class="grid-slot col-xs-12 col-md-4 col-lg-4">{{project_helper.render_project_tile(project, show_admin_actions=current_user.is_authenticated() and (current_user.admin or current_user.id == project.owner_id))}}</div>
-		{% endfor %}
-	</div>
-	{% if pagination.pages > 1 %}{{project_helper.render_pagination(pagination)}}{% endif %}
+	{% call bootstrap.render_container(id="category-content-container") %}
+		{% block body_content %}
+			{% if active_cat.description %}
+			<div id="category-description">{{active_cat.description | safe}}</div>
+			{% endif %}
+			<div id="projects">
+				{% if has_projects %}
+				<h1 id="projects-heading">{{_("Projects")}}</h1>
+				{{render_grid(projects, current_user)}}
+				{% else %}
+				<p id="no-projects">{{_("There are no projects assigned to this category yet.")}}</p>
+				{% endif %}
+			</div>
+			{% if pagination.pages > 1 %}
+			<div id="page-pagination">{{render_pagination(pagination)}}</div>
+			{% endif %}
+		{% endblock %}
 	{% endcall %}
-{#
-	{% if not special_category %}
-		{% call bootstrap.row(row_id="category-data") %}
-			<header><h1 class="heading">{{_("Aggregated Data")}}</h1></header>
-			<div id="summary-map"></div>
-			<button class="btn btn-lg btn-cta" href="{{url_for('geotagx.map_summary', category_name=active_cat.short_name)}}">{{_("Visualize Data")}}</button>
-
-			<ul id="category-menu" class="nav nav-stacked">
-				<li><a class="btn btn-block btn-lg btn-cta" href="{{url_for('geotagx.map_summary', category_name=active_cat.short_name)}}">{{_("Visualize Summary")}}</a></li>
-				<li><a class="btn btn-block btn-cta" href="{{url_for('geotagx-geojson-exporter.export_category_results', category_short_name=active_cat.short_name)}}">{{_("Export Summary")}}&nbsp;(GeoJSON)</a></li>
-			</ul>
-		{% endcall %}
-	{% endif %}
-#}
-{% endif %}
+</main>
 {% endblock %}
