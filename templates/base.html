@@ -7,6 +7,7 @@
 {% set page_title = page_title | default(None) %}
 {% set page_subtitle = page_subtitle | default(None) %}
 {% set page_share = page_share | default(False) %}
+{% set page_subnavigation = page_subnavigation | default(None) %}
 {% set breadcrumbs = breadcrumbs | default(None) %}
 {% set user_ip = request["remote_addr"] -%}
 {% set user_id = 0 if current_user.is_anonymous() else current_user.id -%}
@@ -74,7 +75,20 @@
 			{% endblock %}
 
 			{% block body %}
-			<main id="page-body" role="main" class="container-fluid">{% block body_content %}{% endblock %}</main>
+			<main id="page-body" role="main">
+				{% if page_subnavigation and page_subnavigation|length > 0 %}
+				{% call bootstrap.render_container(id="page-subnavigation-container") %}
+				<nav id="page-subnavigation">
+					<ul class="list-inline">
+						{% for (visible, id, title, url) in page_subnavigation %}
+						{% if visible %}<li class="menu-item {% if page_id == id %} active{% endif %}" data-id="{{id}}"><a href="{{url}}">{{title}}</a></li>{% endif %}
+						{% endfor %}
+					</ul>
+				</nav>
+				{% endcall %}
+				{% endif %}
+				<div id="page-body-content-container" class="container-fluid">{% block body_content %}{% endblock %}</div>
+			</main>
 			{% endblock %}
 
 			{% block footer %}

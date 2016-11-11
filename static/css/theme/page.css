@@ -59,8 +59,40 @@ a:hover {
  */
 #page-body {
 	min-height:400px;
-	padding-top:1em;
 	padding-bottom:1em;
+}
+/**
+ * Page sub-navigation menu.
+ */
+#page-subnavigation-container {
+	background:#EEF2F5;
+}
+#page-subnavigation {
+	font-weight:400;
+	font-size:0.9em;
+	text-transform:uppercase;
+	letter-spacing:1px;
+}
+#page-subnavigation > ul {
+	margin:0;
+}
+#page-subnavigation > ul > li.menu-item {
+	margin:3px 0 0 0;
+	padding:1em 0;
+}
+#page-subnavigation > ul > li.menu-item.active {
+	border-bottom:3px solid #0AF;
+}
+#page-subnavigation > ul > li.menu-item+li.menu-item:before {
+	content:"\00b7\00a0";
+	margin:0;
+	padding:0;
+}
+/**
+ * The page body's content.
+ */
+#page-body-content-container {
+	margin:0.75em 0 0;
 }
 /**
  * Page footer.
