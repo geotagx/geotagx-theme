@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "_helpers/page.html" import render_pagination %}
 {% from "_helpers/project.html" import render_grid %}
-{% set page_id = "about-category" %}
+{% set page_id = page_id | default("about-category") %}
 {% set page_title = active_cat.name %}
 {% set breadcrumbs = [(_("Projects"), url_for("geotagx-project-browser.index"))] %}
 {% set is_draft = active_cat.short_name == "draft" %}
@@ -10,24 +10,15 @@
 {% set is_special = is_draft or is_featured or is_under_development %}
 {% set has_projects = projects is defined and projects | length > 0 %}
 {% set has_aggregated_data = has_projects and not is_special %}
-{% set page_share = has_aggregated_data or is_featured %}
-{% set navigation_menu_items = [
+{% set pagination = pagination | default(None) %}
+{% set page_share = page_share | default(has_aggregated_data or is_featured) %}
+{% set page_subnavigation = [
 	(True, "about-category", _("About"), url_for("project.project_cat_index", category=active_cat.short_name)),
-	(has_aggregated_data, "visualize-category-data", _("Visualize Collected Data"), url_for("geotagx.map_summary", category_name=active_cat.short_name)),
+	(True, "visualize-category-data", _("Visualize Collected Data"), url_for("geotagx.map_summary", category_name=active_cat.short_name)),
 ] %}
 
 {% block stylesheet %}
 <style>
-#page-body {
-	padding-top:0;
-	padding-bottom:0;
-}
-#category-navigation-container {
-	background:#EEF2F5;
-}
-#category-content-container {
-	margin-top:1em;
-}
 #category-description {
 	font-family:"Open Sans";
 	font-size:1.05em;
@@ -57,34 +48,19 @@
 {% endblock %}
 
 
-{% block body %}
-<main id="page-body" role="main">
-	{% call bootstrap.render_container(id="category-navigation-container") %}
-	<nav id="category-navigation" class="horizontal-scroll-navigation">
-		<ul class="list-inline">
-			{% for (is_visible, id, title, url) in navigation_menu_items %}
-			{% if is_visible %}<li class="menu-item {% if page_id == id %} active{% endif %}" data-id="{{id}}"><a href="{{url}}">{{title}}</a></li>{% endif %}
-			{% endfor %}
-		</ul>
-	</nav>
-	{% endcall %}
-	{% call bootstrap.render_container(id="category-content-container") %}
-		{% block body_content %}
-			{% if active_cat.description %}
-			<div id="category-description">{{active_cat.description | safe}}</div>
-			{% endif %}
-			<div id="projects">
-				{% if has_projects %}
-				<h1 id="projects-heading">{{_("Projects")}}</h1>
-				{{render_grid(projects, current_user)}}
-				{% else %}
-				<p id="no-projects">{{_("There are no projects assigned to this category yet.")}}</p>
-				{% endif %}
-			</div>
-			{% if pagination.pages > 1 %}
-			<div id="page-pagination">{{render_pagination(pagination)}}</div>
-			{% endif %}
-		{% endblock %}
-	{% endcall %}
-</main>
+{% block body_content %}
+{% if active_cat.description %}
+<div id="category-description">{{active_cat.description | safe}}</div>
+{% endif %}
+<div id="projects">
+	{% if has_projects %}
+	<h1 id="projects-heading">{{_("Projects")}}</h1>
+	{{render_grid(projects, current_user)}}
+	{% else %}
+	<p id="no-projects">{{_("There are no projects assigned to this category yet.")}}</p>
+	{% endif %}
+</div>
+{% if pagination and pagination.pages > 1 %}
+<div id="page-pagination">{{render_pagination(pagination)}}</div>
+{% endif %}
 {% endblock %}
