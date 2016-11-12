@@ -14,7 +14,7 @@
 {% set page_share = page_share | default(has_aggregated_data or is_featured) %}
 {% set page_subnavigation = [
 	(True, "about-category", _("About"), url_for("project.project_cat_index", category=active_cat.short_name)),
-	(True, "visualize-category-data", _("Visualize Collected Data"), url_for("geotagx.map_summary", category_name=active_cat.short_name)),
+	(True, "visualize-category-data", _("Visualize Collected Data"), url_for("geotagx.map_summary", category_short_name=active_cat.short_name)),
 ] %}
 
 {% block stylesheet %}

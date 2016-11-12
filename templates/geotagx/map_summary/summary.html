@@ -1,23 +1,33 @@
-{% extends "base.html" %}
-{% set page_id = "summary" %}
-{% set page_title = "Data Visualisation" %}
-{% set page_subtitle = "A visualisation of the summarized response data." %}
+{% extends "projects/index.html" %}
+{% set page_id = "visualize-category-data" %}
+{% set page_share = True %}
+{% set geojson_data_url = url_for("geotagx-geojson-exporter.export_category_results", category_short_name=active_cat.short_name) %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
 <style>
-#map { height:780px; }
-.modal .modal-dialog { width: 80%; }
+#map {
+	height:780px;
+	background:#222;
+	margin:1em 0 2em 0;
+}
+.modal .modal-dialog {
+	width:80%;
+}
 </style>
 {% endblock %}
 
 
 {% block body_content %}
-{% call bootstrap.row() %}
+<div class="row">
+	<div class="col-xs-12 col-md-4 col-md-offset-4">
+		<a class="btn btn-block btn-cta" download="{{active_cat.short_name}}-data-summary.geojson" href="{{geojson_data_url}}">{{_("Export Data")}}&nbsp;(GeoJSON)</a>
+	</div>
+</div>
 <div id="map"></div>
 <div id="myModal" class="modal large fade" role="dialog">
-<div class="modal-dialog">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -36,7 +46,6 @@
 		</div>
 	</div>
 </div>
-{% endcall %}
 {% endblock %}
 
 
@@ -46,11 +55,7 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <script>
-var CATEGORY_NAME = "{{category_name}}";
-
-var geoJSON_URL = "/geotagx/export/category/"+CATEGORY_NAME+"/GeoJSON";
-
-$.get(geoJSON_URL, function(d){
+$.get("{{geojson_data_url}}", function(d){
 	window.geoJSON = d;
 	init();
 })
