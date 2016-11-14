@@ -2,36 +2,39 @@
 {% set page_id = "project-blog" %}
 {% set page_title = _("Blog") %}
 {% set page_subtitle = _("Stay up-to-date with this project.") %}
+{% set has_posts = blogposts|length > 0 %}
 
-{% block main_content %}
-{{ helper.render_project_sublabel("Blog") }}
-<div class="row blogs">
-    {% if project %}
-    <div class="span9" style="min-height:400px">
-        {{ helper.render_project_title(project, upload_method) }}
-        <hr>
-        {% if blogposts %}
-        <hr>
-            <ul>
-                {% for blogpost in blogposts %}
-                    <li>
-                        <div>
-                            <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h1>{{ _('Sorry! No posts so far.') }}</h1>
-        {% endif %}
-        <hr>
-    </div>
-    {% else %}
-    <div class="page-header">
-        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
-    </div>
-    {% endif %}
-</div>
-{{ helper.broken_image() }}
-{{ helper.knob() }}
+{% block stylesheet %}
+<style>
+#no-posts-message {
+	font-weight:900;
+	font-size:1.5em;
+	color:#999;
+	letter-spacing:1px;
+}
+#article-headlines {
+	margin:0;
+	padding:0;
+}
+#article-headlines > li {
+	margin:0.75em 0 0.5em;
+}
+</style>
+{% endblock %}
+
+
+{% block body_content %}
+{% if not has_posts %}
+<p id="no-posts-message">{{_("No articles have been submitted to this blog yet.")}}</p>
+{% endif %}
+{% if is_project_owner %}
+<div><a class="btn btn-lg btn-cta" href="{{url_for('project.new_blogpost', short_name=project.short_name)}}">{{_("Write a new blog post")}}</a></div>
+{% endif %}
+{% if has_posts %}
+<ul id="article-headlines" class="list-unstyled">
+	{% for blogpost in blogposts %}
+	<li><a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{blogpost.title}}</a></li>
+	{% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

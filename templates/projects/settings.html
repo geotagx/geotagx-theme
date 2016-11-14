@@ -23,9 +23,6 @@
         <div class="btn-group btn-group-lg" role="group">
             <a type="button" class="btn btn-danger" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="fa fa-trash fa-white"></i> {{ _('Delete the project') }}</a>
         </div>
-        <div class="btn-group btn-group-lg" role="group">
-            <a type="button" class="btn btn-success" href="{{ url_for('project.new_blogpost', short_name = project.short_name) }}"><i class="fa fa-pencil fa-white"></i> {{ _('Write a blog post') }}</a>
-        </div>
         </center>
     </div>
     {% else %}
