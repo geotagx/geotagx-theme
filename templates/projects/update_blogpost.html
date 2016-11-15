@@ -1,26 +1,95 @@
-{% extends "projects/base.html" %}
+{% extends "projects/blog_post.html" %}
+{% set page_id = "edit-blog-article" %}
+{% set page_share = False %}
 
-{% block main_content %}
-{% from "_formhelpers.html" import render_field %}
-<div id="project-form" class="row">
-    <div class="span9">
-        {{ helper.render_project_title(project) }}
-        <h2>{{ _('Edit the blog post') }}</h2>
-        <form class="form-horizontal" method="post" action="{{ url_for('project.update_blogpost',
-                                                        short_name=project.short_name,
-                                                        id=blogpost.id) }}">
-            {{ form.hidden_tag() }}
-            <fieldset>
-                {{ render_field(form.title, class_="span4", placeholder= _('The title of your post')) }}
-                {{ render_field(form.body, class_="span4", placeholder= _('Write your post here. You can use Markdown!')) }}
-                <div class="form-actions">
-                    <input type="submit" value="{{_('Update')}}" class="btn btn-primary" />
-                    <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</div>
-{{ helper.broken_image() }}
-{{ helper.knob() }}
+{% block stylesheet %}
+<style>
+.section-header > h1 {
+	margin:0;
+	padding:0;
+	font-size:1.8em;
+	font-weight:900;
+	letter-spacing:1px;
+}
+.section-description {
+	margin:0;
+	padding:0 0 1em;
+}
+#update-article-form {
+	margin:0.5em 0 0;
+}
+#update-article-form input,
+#update-article-form textarea {
+	border-radius:0;
+	font-size:1.05em;
+	font-family:Open Sans;
+	line-height:1.4em;
+}
+#update-article-form textarea {
+	max-width:100%;
+	min-height:16em;
+}
+#delete-article {
+	background:#C00;
+	font-family:Lato;
+	font-weight:700;
+	letter-spacing:1px;
+	margin:0 0 0.5em;
+}
+</style>
+{% endblock %}
+
+
+{% block body_content %}
+<section>
+	<header class="section-header"><h1>{{_("Update article")}}</h1></header>
+	<form id="update-article-form" method="post" action="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}">
+		{{form.hidden_tag()}}
+		<fieldset>
+			{% with field = form.title %}
+			<div class="form-group">
+				<label for="{{field.name}}">{{_("Title")}}</label>
+				{{field(class_="form-control")}}
+				<small class="form-text text-muted">{{_("The title of your article.")}}</small>
+			</div>
+			{% endwith %}
+			{% with field = form.body %}
+			<div class="form-group">
+				<label for="{{field.name}}">{{_("Body")}}</label>
+				{{field(class_="form-control")}}
+				<small class="form-text text-muted">{{_("The content of your article. Note that the Markdown format is supported.")}}</small>
+			</div>
+			{% endwith %}
+			<div class="form-actions">
+				<input type="submit" value="{{_('Update article')}}" class="btn btn-cta">
+				<a class="btn btn-default" href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{_("Cancel")}}</a>
+			</div>
+		</fieldset>
+	</form>
+</section>
+<hr>
+<section>
+	<header class="section-header"><h1>{{_("Delete article")}}</h1></header>
+	<p class="section-description">{{_("Deleting an article is an irreversible action! Once removed, it is gone forever.")}}</p>
+	<form id="delete-article-form" method="post" action="{{url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id)}}">
+		<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+		<div class="form-actions">
+			<input id="delete-article" type="submit" value="{{_('Delete this article')}}" class="btn btn-md btn-danger">
+		</div>
+	</form>
+</section>
+{% endblock %}
+
+
+{% block script %}
+<script>
+"use strict";
+
+var form = document.getElementById("delete-article-form");
+if (form) {
+	form.onsubmit = function(){
+		return confirm("{{_('Do you really want to delete this article?')}}");
+	};
+}
+</script>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "projects/base.html" %}
-{% set page_id = "blog-article" %}
+{% set page_id = page_id | default("blog-article") %}
 {% set page_title = blogpost.title %}
-{% set page_share = True %}
+{% set page_share = page_share | default(True) %}
 {% set breadcrumbs = [(_("Blog"), url_for("project.show_blogposts", short_name=project.short_name))] %}
 {% set page_subnavigation = [
 	(True, "blog-article", _("Article"), url_for("project.show_blogpost", short_name=project.short_name, id=blogpost.id)),
