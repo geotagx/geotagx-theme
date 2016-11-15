@@ -1,44 +1,37 @@
 {% extends "projects/base.html" %}
+{% set page_id = "blog-article" %}
+{% set page_title = blogpost.title %}
+{% set page_share = True %}
+{% set breadcrumbs = [(_("Blog"), url_for("project.show_blogposts", short_name=project.short_name))] %}
+{% set page_subnavigation = [
+	(True, "blog-article", _("Article"), url_for("project.show_blogpost", short_name=project.short_name, id=blogpost.id)),
+	(True, "edit-blog-article", _("Edit Article"), url_for("project.update_blogpost", short_name=project.short_name, id=blogpost.id)),
+] %}
 
-{% block main_content %}
-<div class="row blogs">
-    {% if blogpost %}
-    <div class="span9" style="min-height:400px">
-        <hr>
-            <article>
-                <header>
-                    <h2>{{ blogpost.title }}</h2>
-                    <p>
-                        {{ _('Author: ') }} {{ blogpost.owner.name }}
-                        </br>
-                        {{ _('Written: ') }} {{ blogpost.created[0:10] }}
-                    </p>
-                </header>
-                <hr>
-                <hr>
-                <body>
-                    <p>{{ blogpost.body | e | markdown }}</p>
-                </body>
-            </article>
-        <hr>
-        {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
-        <form class="form-horizontal" method="post" action="{{ url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id) }}" onsubmit="return confirm('Do you really want to delete the blog post?');">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-            <div class="form-actions">
-                <input type="submit" value="{{_('Delete')}}" class="btn btn-danger" />
-                <a href="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="btn">{{_('Edit')}}</a>
-            </div>
-        </form>
-        {% endif %}
-        <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn">{{_('Back')}}</a>
-    </div>
-    {% else %}
-    <div class="page-header">
-        <h1>{{ _('Sorry! This blogpost does not exist.') }}</h1>
-        <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}" class="btn">{{_('Back')}}</a>
-    </div>
-    {% endif %}
-</div>
-{{ helper.broken_image() }}
-{{ helper.knob() }}
+{% block stylesheet %}
+<style>
+article img {
+	width:100%;
+}
+article > .body {
+	font-family:Open Sans;
+	font-size:1.05em;
+	line-height:1.4em;
+}
+article > footer {
+	margin:1em 0 2em;
+	padding:0.25em 0 0;
+	font:400 0.85em Lato;
+	color:#777;
+	border-top:1px solid #EEE;
+}
+</style>
+{% endblock %}
+
+
+{% block body_content %}
+<article>
+	<section class="body">{{blogpost.body | e | markdown}}</section>
+	<footer>{{_("Posted on")}} <time datetime="{{blogpost.created[:19]}}">{{blogpost.created[0:10]}}</time>.</footer>
+</article>
 {% endblock %}

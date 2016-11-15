@@ -4,7 +4,7 @@
 {% set is_administrator = is_authenticated and current_user.admin %}
 {% set is_project_owner = is_administrator or (is_authenticated and current_user.id == project.owner_id) %}
 {% set page_share = page_share | default(False) %}
-{% set page_subnavigation = [
+{% set page_subnavigation = page_subnavigation | default([
 	( True or is_administrator, "about-project",      _("About"), url_for("project.details", short_name=project.short_name)),
 	(False or is_administrator, "project-blog",       _("Blog"), url_for("project.show_blogposts", short_name=project.short_name)),
 	(False or is_administrator, "project-forum",      _("Forum"), "#"),
@@ -13,4 +13,4 @@
 	( True or is_administrator, "project-statistics", _("Statistics"), url_for("project.show_stats", short_name=project.short_name)),
 	(False or is_administrator, "audit-project-logs", _("Audit Logs"), url_for("project.auditlog", short_name=project.short_name)),
 	(False or is_administrator, "project-settings",   _("Settings"), url_for("project.settings", short_name=project.short_name)),
-] %}
+]) %}
