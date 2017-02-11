@@ -1,5 +1,5 @@
+# Ignore npm's module directory
 node_modules
-vendor
 
 # Ignore auto-generated minified and compressed files.
 *.min.css
