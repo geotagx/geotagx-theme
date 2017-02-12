@@ -2,9 +2,9 @@
 {% import "_helpers/project.html" as project_helper %}
 {% set is_authenticated = current_user.is_authenticated() if current_user else False %}
 {% set is_administrator = is_authenticated and current_user.admin %}
-{% set is_project_owner = is_administrator or (is_authenticated and current_user.id == project.owner_id) %}
+{% set is_project_owner = is_administrator or ((is_authenticated and current_user.id == project.owner_id) if project is defined else False) %}
 {% set page_share = page_share | default(False) %}
-{% set page_subnavigation = page_subnavigation | default([
+{% set page_subnavigation = page_subnavigation | default(None if project is not defined else [
 	( True or is_administrator, "about-project",      _("About"), url_for("project.details", short_name=project.short_name)),
 	(False or is_administrator, "project-blog",       _("Blog"), url_for("project.show_blogposts", short_name=project.short_name)),
 	(False or is_administrator, "project-forum",      _("Forum"), "#"),
