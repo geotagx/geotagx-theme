@@ -3,31 +3,20 @@
 {% set page_title = _("Projects") %}
 {% set page_subtitle = _("Explore all of our available projects.") %}
 {% set page_share = True %}
-{% import "projects/_helpers.html" as helper %}
 
 {% block stylesheet %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 <style>
-#page-content {
-	padding-top:1.75em;
-	padding-bottom:1.75em;
-}
 #category-filter-section {
 	text-align:center;
-	padding-bottom:1em;
+	margin:0 0 1em;
 }
 #get-more-information {
-	margin:0.5em 0 0 !important;
-	padding:0 !important;
-}
-#get-more-information a {
-	color:#0AF;
-}
-#get-more-information a:hover {
-	text-decoration:underline;
+	margin:0.5em 0 0;
+	padding:0;
 }
 /* MixItUp requires all grid elements to be hidden by default. */
-.grid-slot {
+.mix.grid-column {
 	display:none;
 }
 </style>
@@ -50,7 +39,10 @@
 <div id="project-grid" class="row grid">
 {% for category in categories %}
 	{% for project in category["projects"] %}
-	<div class="mix grid-slot col-xs-12 col-md-4 col-lg-4 filter-{{category['id']}}">{{helper.render_project_tile(project, show_admin_actions=current_user.is_authenticated() and (current_user.admin or current_user.id == project.owner_id))}}</div>
+	<div class="mix grid-column col-xs-12 col-md-4 col-lg-4 filter-{{category['id']}}">
+		{% set is_project_owner = is_administrator or (is_authenticated and current_user.id == project.owner_id) %}
+		{{project_helper.render_card(project, category_id=None, show_admin_actions=is_project_owner)}}
+	</div>
 	{% endfor %}
 {% endfor %}
 </div>
@@ -74,12 +66,11 @@
 		var $selectedItem = $filter.find(":selected");
 		var selectedFilter = $selectedItem.val();
 
-		if (selectedFilter === "all-topics"){
+		if (selectedFilter === "all-topics") {
 			$getMoreInformation.addClass("hide");
 			$filter.val("no-filter");
 			$projectGrid.mixItUp("filter", "all");
-		}
-		else {
+		} else {
 			$selectedCategory.text($selectedItem.text());
 			$selectedCategoryPage.attr("href", "/project/category/" + $selectedItem.data("category-short-name"));
 			$getMoreInformation.removeClass("hide");
