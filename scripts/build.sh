@@ -25,9 +25,6 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
-set -e
-set -o pipefail
-
 NPM=$(type -P npm)
 if [ ! -x "$NPM" ]
 then
@@ -42,7 +39,24 @@ then
 	exit 1
 fi
 
-BASE_DIR="$(readlink -f $0 | xargs realpath | xargs dirname | xargs dirname)"
+READLINK=$(type -P readlink)
+if [ ! -x "$READLINK" ]
+then
+	echo "Error! Could not find the 'readlink' executable. Please make sure it's installed, in your PATH, and executable."
+	exit 1
+fi
+
+REALPATH=$(type -P realpath)
+if [ ! -x "$REALPATH" ]
+then
+	echo "Error! Could not find the 'realpath' executable. Please make sure it's installed, in your PATH, and executable."
+	exit 1
+fi
+
+set -e
+set -o pipefail
+
+BASE_DIR="$($READLINK -f $0 | xargs $REALPATH | xargs dirname | xargs dirname)"
 STATIC_DIR="$BASE_DIR/static"
 
 # Install depedencies and build the static files.
