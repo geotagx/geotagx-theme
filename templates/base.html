@@ -1,7 +1,6 @@
 {% set css = url_for("static", filename="css") -%}
 {% set js = url_for("static", filename="js") -%}
 {% set img = url_for("static", filename="img") -%}
-{% set vendor = url_for("static", filename="vendor") -%}
 {% set page_id = page_id | default(None) %}
 {% set page_title = page_title | default(None) %}
 {% set page_subtitle = page_subtitle | default(None) %}
@@ -34,8 +33,7 @@
 		{%- block stylesheet %}{% endblock -%}
 
 		<!--[if lt IE 9]>
-		<script src="{{vendor}}/html5shiv/dist/html5shiv.min.js"></script>
-		<script src="{{vendor}}/respond/dest/respond.min.js"></script>
+		<script src="{{js}}/ie-compatibility.min.js"></script>
 		<![endif]-->
 		{% include "_gcs.html" ignore missing %}
 

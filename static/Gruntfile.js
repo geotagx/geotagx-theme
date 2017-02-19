@@ -27,10 +27,17 @@ module.exports = function(grunt){
         concat: {
             options: {
                 separator: ";",
-                stripBanners: true
+                stripBanners: {
+                    block: true,
+                    line: true
+                }
             },
             bundle_js: {
                 files: {
+                    "<%= dir.js %>/ie-compatibility.min.js": [
+                        "<%= dir.vendor %>/html5shiv/dist/html5shiv.min.js",
+                        "<%= dir.vendor %>/respond/dest/respond.min.js",
+                    ],
                     "<%= dir.js %>/base.min.js": [
                         "<%= dir.js %>/base/underscore-small.js",
                         "<%= dir.js %>/base/page.js",
