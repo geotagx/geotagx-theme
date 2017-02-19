@@ -41,6 +41,7 @@ module.exports = function(grunt){
                         "<%= dir.vendor %>/respond/dest/respond.min.js",
                     ],
                     "<%= dir.js %>/base.min.js": [
+                        "<%= dir.vendor %>/jquery/dist/jquery.min.js",
                         "<%= dir.vendor %>/bootstrap/dist/js/bootstrap.min.js",
                         "<%= dir.vendor %>/jquery-smooth-scroll/jquery.smooth-scroll.min.js",
                         "<%= dir.js %>/base/ccl-tracker/analytics.min.js",
