@@ -1,6 +1,5 @@
-{% set static = url_for("static", filename="geotagx") -%}
 {% set css = url_for("static", filename="css") -%}
-{% set js = static + "/js" -%}
+{% set js = url_for("static", filename="js") -%}
 {% set img = url_for("static", filename="img") -%}
 {% set vendor = url_for("static", filename="vendor") -%}
 {% set page_id = page_id | default(None) %}

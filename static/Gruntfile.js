@@ -3,7 +3,7 @@ module.exports = function(grunt){
         pkg: grunt.file.readJSON("package.json"),
         dir: {
             css: "css",
-            js: "geotagx/js",
+            js: "js",
             img: "img",
             vendor: "node_modules",
         },
