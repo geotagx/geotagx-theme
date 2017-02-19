@@ -1,3 +1,6 @@
 [submodule "static/js/pybossa"]
 	path = static/js/pybossa
 	url = git://github.com/PyBossa/pybossa.js.git
+[submodule "static/js/base/ccl-tracker"]
+	path = static/js/base/ccl-tracker
+	url = git://github.com/wavesoft/ccl-tracker.git
