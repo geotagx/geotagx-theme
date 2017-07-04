@@ -8,16 +8,17 @@
 {% block stylesheet %}
 <style>
 #page-body {
-	color:#4A4A4A;
 	background:#EEF2F5;
 	padding-top:0;
 	padding-bottom:0;
 }
+#home-page-header {
+	border-bottom:1px solid #DDD;
+}
 #welcome-jumbotron {
 	padding-top:0.75em;
-	padding-bottom:3em;
+	padding-bottom:2em;
 	text-align:center;
-	background:#FFF;
 }
 #welcome-to-brand {
 	font-size:3em;
@@ -40,8 +41,19 @@
 	letter-spacing:1px;
 	text-transform:uppercase;
 }
+#data-visualizer {
+	text-align:center;
+}
+#data-visualizer.active {
+	text-align:default;
+	background:#1B1D1F;
+	height:512px;
+}
+#data-visualizer.active > #visualize-collected-data {
+	display:none;
+}
 #visualize-collected-data {
-	margin-top:1.8em;
+	margin-bottom:2em;
 }
 #featured-projects {
 	font-size:1.05em;
@@ -71,34 +83,36 @@
 {% endblock %}
 
 
-{% block header %}{% endblock %}
+{% block header %}
+<div id="home-page-header">
+	{% call bootstrap.render_container(row_id="welcome-jumbotron") %}
+	<div>
+		<h1 id="welcome-to-brand">Welcome to {{brand}}</h1>
+		<h2 id="brand-tagline">Volunteer and help plan an emergency response.</h2>
+		<p id="brand-info" class="text-center">{{brand}} is a research project that aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
+		<div><a id="learn-more" href="{{url_for('home.about')}}">Learn more</a></div>
+	</div>
+	{% endcall %}
+	{# <div id="data-visualizer">
+		<button id="visualize-collected-data" class="btn btn-lg btn-cta">{{_("Visualize Collected Data Sample")}}</button>
+	</div> #}
+</div>
+{% endblock %}
 
 
 {% block body_content %}
-{% call bootstrap.row(row_id="welcome-jumbotron") %}
-<div>
-	<h1 id="welcome-to-brand">Welcome to {{brand}}</h1>
-	<h2 id="brand-tagline">Volunteer and help plan an emergency response.</h2>
-	<p id="brand-info" class="text-center">{{brand}} is a research project that aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
-	<div><a id="learn-more" href="{{url_for('home.about')}}">Learn more</a></div>
-	{# <div><button id="visualize-collected-data" class="btn btn-lg btn-cta">{{_("Visualize Collected Data Sample")}}</button></div> #}
-</div>
-{% endcall %}
-
 {% if featured_projects %}
-{% call bootstrap.row(row_id="featured-projects") %}
 <header id="featured-projects-header">
 	<h1>Featured Projects</h1>
 </header>
-<div>
+<div id="featured-projects">
 	<p class="text-center">Get involved! There are no particular skills required to contribute to any one of our projects.</p>
 	<div id="featured-projects-grid">{{render_grid(featured_projects, current_user)}}</div>
 	<div id="explore-projects" class="text-center">
-		<p class="text-center">{{_("Explore more of our projects ranging from a variety of topics.")}}</p>
+		<p class="text-center">{{_("Explore more projects ranging from a variety of topics.")}}</p>
 		<a class="btn btn-lg btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
 	</div>
 </div>
-{% endcall %}
 {% endif %}
 
 {#
