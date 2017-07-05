@@ -31,9 +31,6 @@
 		<link rel="stylesheet" href="{{css}}/theme.min.css">
 		{%- block stylesheet %}{% endblock -%}
 
-		<!--[if lt IE 9]>
-		<script src="{{js}}/ie-compatibility.min.js"></script>
-		<![endif]-->
 		{% include "_gcs.html" ignore missing %}
 
 		<title>{{brand}}{% if brand != title %}&nbsp;&middot;&nbsp;{{title|safe}}{% endif %}</title>

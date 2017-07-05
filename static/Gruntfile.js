@@ -36,14 +36,9 @@ module.exports = function(grunt){
             },
             js: {
                 files: {
-                    "<%= dir.js %>/ie-compatibility.min.js": [
-                        "<%= dir.vendor %>/html5shiv/dist/html5shiv.min.js",
-                        "<%= dir.vendor %>/respond/dest/respond.min.js",
-                    ],
                     "<%= dir.js %>/base.min.js": [
                         "<%= dir.vendor %>/jquery/dist/jquery.min.js",
                         "<%= dir.vendor %>/bootstrap/dist/js/bootstrap.min.js",
-                        "<%= dir.vendor %>/jquery-smooth-scroll/jquery.smooth-scroll.min.js",
                         "<%= dir.js %>/base/ccl-tracker/analytics.min.js",
                         "<%= dir.js %>/base.min.js",
                     ],

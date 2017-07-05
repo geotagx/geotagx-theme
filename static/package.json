@@ -14,16 +14,12 @@
     "bootstrap-toggle": "^2.2.2",
     "codemirror": "^5.23.0",
     "font-awesome": "^4.7.0",
-    "html5shiv": "^3.7.3",
+    "grunt-cli": "^1.2.0",
     "isotope-layout": "^3.0.2",
-    "jquery": "1.12.4",
-    "jquery-smooth-scroll": "^2.1.2",
-    "jquery-ui": "^1.12.1",
+    "jquery": "^3.2.1",
     "marked": "^0.3.6",
     "mixitup": "^3.1.7",
-    "modernizr": "^3.3.1",
-    "respond.js": "^1.4.2",
     "slick-carousel": "^1.6.0",
-    "vue": "^2.1.10"
+    "vue": "^2.3.4"
   }
 }
