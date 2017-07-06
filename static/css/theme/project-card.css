@@ -126,6 +126,7 @@
 	color:#FFF;
 	font-size:1em;
 	font-weight:700;
+	letter-spacing:1px;
 	transform:translateY(-100%);
 	-o-transform:translateY(-100%);
 	-ms-transform:translateY(-100%);
@@ -133,19 +134,19 @@
 	-webkit-transform:translateY(-100%);
 }
 .project-card > figure.cover > figcaption > .caption-body > .description {
-	font-size:0.95em;
+	font-size:1em;
 }
 .project-card > figure.cover > figcaption > .caption-body > .description > a {
-	font-weight:700;
+	font-weight:400;
 }
 .project-card > figure.cover > figcaption > .caption-body > hr {
 	margin:0 0 0.5em;
 }
 .project-card > figure.cover > figcaption > .caption-body > footer {
-	font-size:0.7em;
+	font-size:0.65em;
 	font-weight:700;
-	letter-spacing:1px;
 	text-align:center;
+	letter-spacing:1px;
 }
 .project-card > figure.cover > img,
 .project-card > figure.cover > .overlay,
