@@ -2,47 +2,50 @@
 {% set page_id = "home" %}
 {% set page_title = _("Home") %}
 {% set page_subtitle = _("Welcome to GeoTag-X.") %}
-{% set featured_projects = categories_projects["featured"] %}
 {% from "_helpers/project.html" import render_grid %}
 
 {% block stylesheet %}
 <style>
+#page-header,
+#page-body {
+	font-family:Roboto;
+	font-size:1.05em;
+}
 #page-body {
 	background:#EEF2F5;
-	padding-top:0;
-	padding-bottom:0;
+	padding-top:0.5em;
+	padding-bottom:2em;
 }
-#home-page-header {
+#page-header {
 	border-bottom:1px solid #DDD;
 }
 #welcome-jumbotron {
 	padding-top:0.75em;
 	padding-bottom:2em;
-	text-align:center;
 }
 #welcome-to-brand {
-	font-size:3em;
-	font-weight:900;
+	font:900 3em Lato;
+	padding:0;
 	letter-spacing:2px;
-	padding-top:0;
-	padding-bottom:0;
 }
 #brand-tagline {
 	font-size:1.5em;
-	color:#666;
-	padding-bottom:0.8em;
-}
-#brand-info,
-#learn-more {
-	font-size:1.05em;
-}
-#learn-more {
-	font-weight:700;
+	font-weight:300;
 	letter-spacing:1px;
+	margin:0;
+}
+#brand-info {
+	font-weight:400;
+	line-height:1.25;
+	padding:1em 0;
+	color:#555;
+}
+#getting-started,
+#browse-projects {
+	font-family:Lato;
 	text-transform:uppercase;
 }
 #data-visualizer {
-	text-align:center;
 }
 #data-visualizer.active {
 	text-align:default;
@@ -55,23 +58,20 @@
 #visualize-collected-data {
 	margin-bottom:2em;
 }
-#featured-projects {
-	font-size:1.05em;
-}
 #featured-projects-header {
-	text-align:center;
-	padding-top:1.2em;
+	margin-top:0;
+	padding-top:0;
+	padding-bottom:1em;
 }
 #featured-projects-header h1 {
+	font-family:Lato;
 	font-size:1.8em;
 	font-weight:900;
 	letter-spacing:2px;
 }
-#featured-projects-grid {
-	margin-top:2em;
+#featured-projects {
 }
-#explore-projects {
-	margin:0 0 2.5em;
+#featured-projects-grid {
 }
 #page-footer {
 }
@@ -84,13 +84,16 @@
 
 
 {% block header %}
-<div id="home-page-header">
+<div id="page-header" class="text-center">
 	{% call bootstrap.render_container(row_id="welcome-jumbotron") %}
 	<div>
 		<h1 id="welcome-to-brand">Welcome to {{brand}}</h1>
 		<h2 id="brand-tagline">Volunteer and help plan an emergency response.</h2>
-		<p id="brand-info" class="text-center">{{brand}} is a research project that aims to help disaster relief efforts on the ground to plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
-		<div><a id="learn-more" href="{{url_for('home.about')}}">Learn more</a></div>
+		<div id="brand-info">
+			<p>{{brand}} is a crowdsourcing research project set up by the <a href="https://www.unitar.org/unosat/" target="_blank" rel="noopener noreferrer">United Nations Institute for Training and Research’s Operational Satellite Applications Programme (UNITAR-UNOSAT)</a> as part of the <a href="http://www.citizencyberlab.org/" target="_blank" rel="noopener noreferrer">Citizen Cyberlab</a> initiative.</p>
+			<p>It aims to help disaster relief efforts on the ground plan a response by asking volunteers to analyse media&mdash;such as photos or videos&mdash;taken in disaster-affected areas.</p>
+		</div>
+		<a id="getting-started" class="btn btn-cta" href="{{url_for('geotagx-faq.index')}}#getting-started">How can I get started?</a>
 	</div>
 	{% endcall %}
 	{# <div id="data-visualizer">
@@ -101,17 +104,13 @@
 
 
 {% block body_content %}
+{% set featured_projects = categories_projects["featured"] %}
 {% if featured_projects %}
-<header id="featured-projects-header">
-	<h1>Featured Projects</h1>
-</header>
-<div id="featured-projects">
-	<p class="text-center">Get involved! There are no particular skills required to contribute to any one of our projects.</p>
+<header id="featured-projects-header" class="text-center"><h1>Featured Projects</h1></header>
+<div id="featured-projects" class="text-center">
 	<div id="featured-projects-grid">{{render_grid(featured_projects, current_user)}}</div>
-	<div id="explore-projects" class="text-center">
-		<p class="text-center">{{_("Explore more projects ranging from a variety of topics.")}}</p>
-		<a class="btn btn-lg btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
-	</div>
+	<p>{{_("Explore more projects ranging from a variety of topics.")}}</p>
+	<a id="browse-projects" class="btn btn-cta" href="{{url_for('geotagx-project-browser.index')}}">{{_("Browse Projects")}}</a>
 </div>
 {% endif %}
 
