@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% set page_id = "faq" %}
+{% set page_title = _("FAQ") %}
+{% set page_subtitle = _("Frequently Asked Questions") %}
+
+{% block stylesheet %}
+<style>
+#page-header {
+	position:relative;
+	background:#333 url("{{img}}/faq/wordle.png") no-repeat;
+	background-position:50% 50%;
+	background-size:cover;
+}
+#page-header-overlay {
+	position:absolute;
+	z-index:0;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background:rgba(0, 0, 0, 0.65);
+}
+#page-header-content {
+	padding-top:3.5em;
+	padding-bottom:3.5em;
+	color:#FFF;
+	font-size:2.5em;
+	font-weight:900;
+	letter-spacing:1px;
+}
+#page-body {
+	padding:2em 0;
+	font-family:Roboto;
+	font-size:1.05em;
+}
+#side-nav {
+	list-style:none;
+}
+#side-nav.affix {
+	top:5em;
+}
+#side-nav > li > a {
+}
+#side-nav > li > a {
+	font-weight:400;
+	font-size:0.85em;
+	color:#999;
+}
+#side-nav > li.active > a,
+#side-nav > li > a:hover {
+	color:#563D7C;
+	background:transparent;
+}
+#faq-intro {
+	margin:0;
+	padding:0;
+	font-weight:300;
+	font-size:1.25em;
+	line-height:1.4;
+	color:#222;
+}
+.faq-section {
+	margin:3em 0 0;
+	line-height:1.5;
+}
+.faq-section > header > h1 {
+	margin:0 0 0.5em 0;
+	font-weight:300;
+	font-size:2.5em;
+}
+.faq-question {
+}
+.faq-question > header {
+	font-weight:300;
+	font-size:1.25em;
+	margin:1.5em 0 0;
+}
+.faq-question:first-child > header {
+	margin:0;
+}
+</style>
+{% endblock %}
+
+
+{% block header %}
+<div id="page-header">
+	<div id="page-header-overlay"></div>
+	{% call bootstrap.render_container(id="page-header-content", col_classes="text-center col-xs-12") %}{{page_subtitle}}{% endcall %}
+</div>
+{% endblock %}
+
+
+{% block body_content %}
+<div class="row">
+	<div class="col-xs-8">
+		<p id="faq-intro">GeoTag-X is a research project set up by the <a href="https://unitar.org/unosat/" target="_blank" rel="noopener noreferrer">United Nations Institute for Training and Research’s Operational Satellite Applications Programme (UNITAR/UNOSAT)</a> as part of the <a href="http://www.citizencyberlab.org/" target="_blank" rel="noopener noreferrer">Citizen Cyberlab</a> initiative. It aims to help relief efforts on the ground plan a response by asking volunteers to analyse different forms of media—such as photos or videos—taken in disaster-stricken areas.</p>
+		{% include "faq/_getting_started.html" %}
+		{% include "faq/_accessing_data.html" %}
+		{% include "faq/_account_management.html" %}
+		{% include "faq/_contact_us.html" %}
+	</div>
+	<nav id="sidebar" class="col-xs-4">
+		<ul id="side-nav" class="nav">
+			<li><a href="#getting-started">Getting Started</a></li>
+{#
+			<li><a href="#accessing-data">Accessing Collected Data</a></li>
+			<li><a href="#account-management">Account Management</a></li>
+#}
+			<li><a href="#contact-us">Contact Us</a></li>
+		</ul>
+	</nav>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+"use strict";
+$("body").scrollspy({target: "#sidebar"});
+$("#side-nav").affix({
+	offset: {
+		top: $("#page-header").outerHeight(true),
+		//bottom: $("#page-footer").outerHeight(true) // Setting this breaks Affix. See https://github.com/twbs/bootstrap/issues/16045
+	}
+});
+</script>
+{% endblock %}

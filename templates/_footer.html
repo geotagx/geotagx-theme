@@ -1,19 +1,16 @@
 <div id="footer-information" class="row">
 	<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 		<div class="row">
-			<section class="col-xs-12 col-md-5">
-				<ul class="subsection">
-					<li role="header">{{_("About")}}</li>
-					<li><p>{{_("GeoTag-X is a research project that will assess if we can teach you, our volunteers, to recognise the important information in different forms of media and create relevant, structured datasets used to the benefit of disaster response teams.")}}</p></li>
-				</ul>
+			<section class="col-xs-12 col-md-3">
 				<ul class="subsection">
 					<li role="header">{{_("Partners")}}</li>
 					<li><a target="_blank" rel="noopener noreferrer" href="https://www.unitar.org/">UNITAR</a></li>
 					<li><a target="_blank" rel="noopener noreferrer" href="http://www.citizencyberlab.org/">Citizen Cyberlab</a></li>
 					<li><a target="_blank" rel="noopener noreferrer" href="https://cordis.europa.eu/fp7/home_en.html">European Commission</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://home.cern/">CERN</a></li>
 				</ul>
 			</section>
-			<section class="col-xs-12 col-md-4">
+			<section class="col-xs-12 col-md-3">
 				<ul class="subsection">
 					<li role="header">{{_("Legal")}}</li>
 					<li><a href="{{url_for('help.tos')}}">{{_("Terms of Service")}}</a></li>
@@ -21,17 +18,16 @@
 					<li><a href="{{url_for('help.license')}}">{{_("Licenses")}}</a></li>
 				</ul>
 				<ul class="subsection">
-					<li role="header">{{_("Help")}}</li>
-					<li><a href="/about#image_anchor">{{_("Getting Started")}}</a></li>
-					<li><a href="{{url_for('help.api')}}">{{_("Using the API")}}</a></li>
-					<li><a href="mailto:geotag-x@cern.ch">{{_("Contact Us")}}</a></li>
+					{% set faq_page = url_for("geotagx-faq.index") %}
+					<li role="header">{{_("FAQ")}}</li>
+					<li><a href="{{faq_page}}#getting-started">{{_("Getting Started")}}</a></li>
+					<li><a href="{{faq_page}}#contact-us">{{_("Contact Us")}}</a></li>
 				</ul>
 			</section>
 			<section class="col-xs-12 col-md-3">
 				<ul class="subsection">
 					<li role="header">{{_("Resources")}}</li>
 					<li><a href="/stats/">{{_("General Statistics")}}</a></li>
-					<li><a href="{{url_for('geotagx-blog.index')}}">{{_("Blog")}}</a></li>
 					<li><a href="/newsletter/">{{_("Newsletter")}}</a></li>
 					<li><a href="https://github.com/geotagx">{{_("Open Source")}}</a></li>
 				</ul>
@@ -42,6 +38,14 @@
 					<li><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.epicollect.net/">EpiCollect</a></li>
 				</ul>
 			</section>
+
+			<section class="col-xs-12 col-md-3">
+				<ul class="subsection">
+					<li role="header">{{_("Help")}}</li>
+					<li><a href="{{url_for('help.api')}}">{{_("Using the API")}}</a></li>
+				</ul>
+			</section>
+
 		</div>
 	</div>
 </div>
